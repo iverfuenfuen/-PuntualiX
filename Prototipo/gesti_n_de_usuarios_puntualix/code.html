@@ -1,0 +1,946 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>PuntualiX - Control de Asistencia y Permanencia Institucional</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-low":"#f0f3ff","on-primary":"#ffffff","surface":"#f9f9ff","on-tertiary-container":"#a5c8ff","tertiary":"#003c72","secondary-fixed":"#e8e880","status-danger":"#BE1F24","surface-card":"#FFFFFF","secondary":"#626201","status-success":"#2E7D32","border-soft":"#E2E8F0","surface-container-lowest":"#ffffff","surface-bright":"#f9f9ff","on-error":"#ffffff","tertiary-container":"#00539a","outline-variant":"#c3c8be","secondary-fixed-dim":"#cccb67","on-tertiary":"#ffffff","text-muted":"#64748B","on-surface-variant":"#434841","error-container":"#ffdad6","surface-container":"#e7eeff","surface-variant":"#d8e3fb","on-surface":"#111c2d","on-secondary-fixed":"#1d1d00","on-primary-fixed":"#06210a","on-secondary-fixed-variant":"#494900","surface-dim":"#cfdaf2","inverse-primary":"#afcfac","tertiary-fixed":"#d4e3ff","on-error-container":"#93000a","on-primary-fixed-variant":"#324d32","on-tertiary-fixed":"#001c3a","outline":"#737970","primary-fixed-dim":"#afcfac","tertiary-fixed-dim":"#a5c8ff","status-info":"#1976D2","primary-container":"#3d593d","primary":"#264127","surface-tint":"#496548","surface-bg":"#F8FAFC","primary-fixed":"#cbebc6","on-background":"#111c2d","surface-container-high":"#dee8ff","background":"#f9f9ff","inverse-on-surface":"#ecf1ff","on-secondary-container":"#686808","on-secondary":"#ffffff","on-primary-container":"#aeceab","on-tertiary-fixed-variant":"#004786","status-danger-alt":"#FF0000","surface-container-highest":"#d8e3fb","secondary-container":"#e8e880","status-warning":"#F9A825","inverse-surface":"#263143","error":"#ba1a1a"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"margin-mobile":"1rem","space-xs":"0.25rem","space-sm":"0.5rem","space-2xl":"3rem","space-lg":"1.5rem",gutter:"1.5rem",margin:"2rem","space-xl":"2rem","gutter-mobile":"0.75rem","space-md":"1rem"},fontFamily:{"metric-stat":["Nunito Sans"],"headline-sm":["Nunito Sans"],"label-lg":["Nunito Sans"],"body-md":["Nunito Sans"],"body-sm":["Nunito Sans"],"body-lg":["Nunito Sans"],"label-md":["Nunito Sans"],"headline-lg":["Nunito Sans"],"display-hero":["Nunito Sans"],"headline-md":["Nunito Sans"],"display-hero-mobile":["Nunito Sans"],"label-sm":["Nunito Sans"]},fontSize:{"metric-stat":["30px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-sm":["18px",{lineHeight:"24px",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"700"}],"headline-lg":["24px",{lineHeight:"32px",fontWeight:"700"}],"display-hero":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"700"}],"display-hero-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"800"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.02em",fontWeight:"600"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 z-50 bg-[#384E38] shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-6 md:px-8 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center" href="#"><img alt="PuntualiX" class="h-7 md:h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ"></a><nav class="hidden lg:flex items-center gap-space-xs"><a class="px-space-md py-space-xs text-white/90 hover:text-white hover:bg-white/10 transition-colors font-label-lg text-label-lg rounded-lg" href="#">Dashboard</a><a class="px-space-md py-space-xs text-white/90 hover:text-white hover:bg-white/10 transition-colors font-label-lg text-label-lg rounded-lg" href="#">Fichas</a><a class="px-space-md py-space-xs text-white/90 hover:text-white hover:bg-white/10 transition-colors font-label-lg text-label-lg rounded-lg" href="#">Instructores</a><a class="px-space-md py-space-xs text-white/90 hover:text-white hover:bg-white/10 transition-colors font-label-lg text-label-lg rounded-lg" href="#">Bitácora</a><a class="px-space-md py-space-xs text-white/90 hover:text-white hover:bg-white/10 transition-colors font-label-lg text-label-lg rounded-lg" href="#">Estadísticas</a><a class="px-space-md py-space-xs text-white/90 hover:text-white hover:bg-white/10 transition-colors font-label-lg text-label-lg rounded-lg" href="#">Reportes</a></nav></div><div class="flex items-center gap-space-sm sm:gap-space-md"><button aria-label="Notificaciones y alertas" class="w-10 h-10 rounded-full flex items-center justify-center text-white/90 hover:text-white hover:bg-white/10 transition-colors relative" type="button"><span class="material-symbols-outlined text-headline-sm">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-status-danger"></span></button><div class="w-[1px] h-6 bg-white/20 hidden sm:block"></div><div class="flex items-center gap-space-sm bg-white text-on-surface pl-1.5 py-1 pr-3 rounded-full shadow-sm cursor-pointer select-none"><div class="w-8 h-8 rounded-full bg-[#384E38] text-white flex items-center justify-center font-bold text-label-md">AR</div><div class="hidden sm:flex flex-col text-left"><span class="font-label-md text-label-md leading-tight text-[#111c2d]">Andres Ramirez</span><span class="font-label-sm text-label-sm text-text-muted leading-none">Administrador</span></div><span class="material-symbols-outlined text-text-muted text-body-md">expand_more</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Dynamic Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="toast-notification">
+<div class="bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-xl shadow-xl flex items-center gap-space-sm text-body-md font-body-md">
+<span class="material-symbols-outlined text-status-success text-headline-sm" id="toast-icon">check_circle</span>
+<span id="toast-text" class="">Estado de usuario actualizado correctamente</span>
+</div>
+</div>
+<div class="w-full max-w-[1440px] mx-auto px-margin py-space-xl flex flex-col gap-space-lg">
+<!-- 1. Header & Breadcrumbs & Action Toolbar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<nav aria-label="Migas de pan" class="flex items-center gap-space-xs text-text-muted text-body-sm font-body-sm">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-body-md">home</span>
+            Inicio
+          </a>
+<span class="material-symbols-outlined text-outline-variant text-[16px]">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Configuración</span>
+<span class="material-symbols-outlined text-outline-variant text-[16px]">chevron_right</span>
+<span class="text-on-surface font-label-md">Gestión de Usuarios</span>
+</nav>
+<div class="flex flex-col mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Gestión y Administración de Usuarios</h1>
+<p class="font-body-md text-body-md text-text-muted mt-0.5">
+            Administra cuentas, roles institucionales y permisos de acceso para instructores, aprendices y directivos en PuntualiX.
+          </p>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-card hover:bg-surface-container text-on-surface shadow-sm transition-all flex items-center gap-2 font-label-lg text-label-lg" onclick="exportData()" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">download</span>
+          Exportar Listado
+        </button>
+<button class="px-space-md py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary shadow-sm hover:shadow-md transition-all flex items-center gap-2 font-label-lg text-label-lg" onclick="openNewUserModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+          + Registrar Nuevo Usuario
+        </button>
+</div>
+</div>
+<!-- 2. KPI / Metrics Bar (Refined & Clean) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1: Total Users -->
+<div class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Usuarios Registrados</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-headline-sm">group</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-space-xs">
+<span class="font-metric-stat text-metric-stat text-on-surface">312</span>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface-variant font-semibold">Base consolidada</span>
+</div>
+<div class="mt-2 text-label-sm font-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-status-success">verified_user</span>
+          Cuentas sincronizadas SENA Sofía Plus
+        </div>
+</div>
+<!-- Card 2: Active Users -->
+<div class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Usuarios Activos</span>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-status-success">
+<span class="material-symbols-outlined text-headline-sm">check_circle</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-space-xs">
+<span class="font-metric-stat text-metric-stat text-on-surface">287</span>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-semibold">92% habilitados</span>
+</div>
+<div class="mt-2 text-label-sm font-label-sm text-text-muted flex items-center gap-1">
+<span class="inline-block w-2 h-2 rounded-full bg-status-success"></span>
+          Con acceso a asistencia diaria
+        </div>
+</div>
+<!-- Card 3: Inactive Users -->
+<div class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Inactivos / Suspendidos</span>
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-status-danger">
+<span class="material-symbols-outlined text-headline-sm">cancel</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-space-xs">
+<span class="font-metric-stat text-metric-stat text-on-surface">25</span>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#FFEBEE] text-status-danger font-semibold">8% suspendidos</span>
+</div>
+<div class="mt-2 text-label-sm font-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-status-warning">schedule</span>
+          Desertados o cierre de ficha
+        </div>
+</div>
+<!-- Card 4: New This Month -->
+<div class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Nuevos este Mes</span>
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-headline-sm">person_add_alt</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline gap-space-xs">
+<span class="font-metric-stat text-metric-stat text-on-surface">14</span>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-tertiary font-semibold">+4.8% vs feb</span>
+</div>
+<div class="mt-2 text-label-sm font-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">trending_up</span>
+          Carga lectiva 2026-I
+        </div>
+</div>
+</div>
+<!-- 3. Central Interactive Data Canvas -->
+<div class="bg-surface-card rounded-2xl shadow-sm flex flex-col overflow-hidden">
+<!-- Top Section: Segment Tabs -->
+<div class="px-space-lg pt-space-lg pb-space-sm bg-surface-bright flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<!-- Role Filter Tabs -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1" id="role-tab-group">
+<button class="role-tab active px-3.5 py-1.5 rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary shadow-sm transition-all flex items-center gap-1.5" onclick="setRoleTab('all', this)" type="button">
+<span class="">Todos</span>
+<span class="px-1.5 py-0.2 rounded-full text-label-sm font-label-sm bg-white/20">312</span>
+</button>
+<button class="role-tab px-3.5 py-1.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container transition-all flex items-center gap-1.5" onclick="setRoleTab('admin', this)" type="button">
+<span class="">Administradores</span>
+<span class="px-1.5 py-0.2 rounded-full text-label-sm font-label-sm bg-surface-container text-text-muted">6</span>
+</button>
+<button class="role-tab px-3.5 py-1.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container transition-all flex items-center gap-1.5" onclick="setRoleTab('instructor', this)" type="button">
+<span class="">Instructores</span>
+<span class="px-1.5 py-0.2 rounded-full text-label-sm font-label-sm bg-surface-container text-text-muted">58</span>
+</button>
+<button class="role-tab px-3.5 py-1.5 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container transition-all flex items-center gap-1.5" onclick="setRoleTab('aprendiz', this)" type="button">
+<span class="">Aprendices</span>
+<span class="px-1.5 py-0.2 rounded-full text-label-sm font-label-sm bg-surface-container text-text-muted">248</span>
+</button>
+</div>
+<div class="text-label-sm font-label-sm text-text-muted flex items-center gap-2 self-end md:self-auto">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span>
+          Directorio Activo LDAP Conectado
+        </div>
+</div>
+<!-- Filter Controls Bar -->
+<div class="p-space-lg bg-surface-card flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 min-w-[280px]">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-surface-bright text-on-surface font-body-md text-body-md focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all shadow-inner" id="search-input" onkeyup="filterTable()" placeholder="Buscar por nombre, cédula o correo institucional..." type="text">
+<button class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-on-surface" id="clear-search-btn" onclick="clearSearch()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Dropdowns row -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Role selector -->
+<div class="relative min-w-[140px]">
+<select class="w-full appearance-none bg-surface-bright font-label-lg text-label-lg text-on-surface px-3 py-2.5 pr-8 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-container/20 cursor-pointer" id="role-select" onchange="filterTable()">
+<option value="">Rol: Todos</option>
+<option value="Administrador">Administrador</option>
+<option value="Instructor">Instructor</option>
+<option value="Aprendiz">Aprendiz</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[18px]">arrow_drop_down</span>
+</div>
+<!-- State selector -->
+<div class="relative min-w-[140px]">
+<select class="w-full appearance-none bg-surface-bright font-label-lg text-label-lg text-on-surface px-3 py-2.5 pr-8 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-container/20 cursor-pointer" id="status-select" onchange="filterTable()">
+<option value="">Estado: Todos</option>
+<option value="Activo">Activos</option>
+<option value="Inactivo">Inactivos</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[18px]">arrow_drop_down</span>
+</div>
+<!-- Sede selector -->
+<div class="relative min-w-[170px]">
+<select class="w-full appearance-none bg-surface-bright font-label-lg text-label-lg text-on-surface px-3 py-2.5 pr-8 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-container/20 cursor-pointer" id="sede-select" onchange="filterTable()">
+<option value="">Sede: Todas</option>
+<option value="Casa de la Convención">Casa de la Convención</option>
+<option value="CIAA">CIAA</option>
+<option value="Ficha 301002">Ficha 301002</option>
+<option value="Ficha 301005">Ficha 301005</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[18px]">arrow_drop_down</span>
+</div>
+<!-- Reset Button -->
+<button class="px-3 py-2.5 text-text-muted hover:text-on-surface hover:bg-surface-container rounded-xl transition-colors font-label-lg text-label-lg flex items-center gap-1.5" onclick="resetFilters()" title="Restablecer filtros" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span class="hidden sm:inline">Limpiar filtros</span>
+</button>
+</div>
+</div>
+<!-- 4. Data Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left" id="users-table">
+<thead>
+<tr class="bg-surface-bright text-text-muted font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3.5 px-space-lg" scope="col">Usuario &amp; Correo</th>
+<th class="py-3.5 px-space-md" scope="col">Documento de Identidad</th>
+<th class="py-3.5 px-space-md" scope="col">Rol Institucional</th>
+<th class="py-3.5 px-space-md" scope="col">Sede / Ubicación</th>
+<th class="py-3.5 px-space-md" scope="col">Estado</th>
+<th class="py-3.5 px-space-lg text-right" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y-0" id="users-table-body">
+<!-- Row 1: Andres Ramirez (Admin Actual) -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row" data-role="Administrador" data-sede="Casa de la Convención" data-status="Activo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary font-headline-sm flex items-center justify-center shrink-0 shadow-sm">
+                    AR
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Andrés Felipe Ramírez</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">aramirez@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.024.556.789</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-primary-container/15 text-primary font-bold">
+<span class="material-symbols-outlined text-[14px]">shield_person</span>
+                  Administrador
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">domain</span>
+                  Sede Casa de la Convención
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Andrés Felipe Ramírez', 'Administrador', '1.024.556.789', 'aramirez@sena.edu.co', 'Sede Casa de la Convención')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<span class="text-label-sm font-label-sm text-text-muted px-2.5 py-1 bg-surface-bright rounded-lg italic">Cuenta propia</span>
+</div>
+</td>
+</tr>
+<!-- Row 2: Maria Torres -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row" data-role="Instructor" data-sede="Casa de la Convención" data-status="Activo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed text-tertiary font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    MT
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">María Fernanda Torres</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">mtorres@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.032.445.566</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-tertiary font-bold">
+<span class="material-symbols-outlined text-[14px]">school</span>
+                  Instructor Líder
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">domain</span>
+                  Sede Casa de la Convención
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('María Fernanda Torres', 'Instructor Líder', '1.032.445.566', 'mtorres@sena.edu.co', 'Sede Casa de la Convención')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-danger/10 text-status-danger hover:bg-status-danger hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'María Fernanda Torres')" type="button">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                    Desactivar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Jorge Castro -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row" data-role="Instructor" data-sede="CIAA" data-status="Activo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container text-primary font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    JC
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Jorge Eliécer Castro</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">jcastro@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.045.678.901</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-tertiary font-bold">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+                  Instructor
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">location_city</span>
+                  Sede CIAA
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Jorge Eliécer Castro', 'Instructor', '1.045.678.901', 'jcastro@sena.edu.co', 'Sede CIAA')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-danger/10 text-status-danger hover:bg-status-danger hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'Jorge Eliécer Castro')" type="button">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                    Desactivar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Carlos Gomez (Inactivo) -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row opacity-80" data-role="Instructor" data-sede="Casa de la Convención" data-status="Inactivo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-text-muted font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    CG
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Carlos Mario Gómez</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">cgomez@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.056.789.012</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-tertiary font-bold">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+                  Instructor
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">domain</span>
+                  Sede Casa de la Convención
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#FFEBEE] text-status-danger font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-danger"></span>
+                  Inactivo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Carlos Mario Gómez', 'Instructor', '1.056.789.012', 'cgomez@sena.edu.co', 'Sede Casa de la Convención')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-success/15 text-status-success hover:bg-status-success hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'Carlos Mario Gómez')" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                    Activar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Mariana Rios -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row" data-role="Instructor" data-sede="Casa de la Convención" data-status="Activo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container text-primary font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    MR
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Mariana Ríos Cadavid</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">mrios@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.067.890.123</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-tertiary font-bold">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+                  Instructor
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">domain</span>
+                  Sede Casa de la Convención
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Mariana Ríos Cadavid', 'Instructor', '1.067.890.123', 'mrios@sena.edu.co', 'Sede Casa de la Convención')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-danger/10 text-status-danger hover:bg-status-danger hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'Mariana Ríos Cadavid')" type="button">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                    Desactivar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Luisa Martinez (Aprendiz Vocero) -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row" data-role="Aprendiz" data-sede="Ficha 301002" data-status="Activo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/40 text-secondary font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    LM
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Luisa Fernanda Martínez</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">lmartinez@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.005.234.567</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface-variant font-semibold">
+<span class="material-symbols-outlined text-[14px] text-secondary">campaign</span>
+                  Aprendiz (Vocero)
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">badge</span>
+                  Ficha 301002 (ADSO)
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Luisa Fernanda Martínez', 'Aprendiz (Vocero)', '1.005.234.567', 'lmartinez@sena.edu.co', 'Ficha 301002')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-danger/10 text-status-danger hover:bg-status-danger hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'Luisa Fernanda Martínez')" type="button">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                    Desactivar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 7: Ana Gomez -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row" data-role="Aprendiz" data-sede="Ficha 301002" data-status="Activo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    AG
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Ana Sofía Gómez</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">agomez@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">T.I. 1.012.345.678</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface-variant font-semibold">
+<span class="material-symbols-outlined text-[14px]">school</span>
+                  Aprendiz
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">badge</span>
+                  Ficha 301002 (ADSO)
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Ana Sofía Gómez', 'Aprendiz', '1.012.345.678', 'agomez@sena.edu.co', 'Ficha 301002')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-danger/10 text-status-danger hover:bg-status-danger hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'Ana Sofía Gómez')" type="button">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                    Desactivar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 8: Luis Rodriguez (Inactivo) -->
+<tr class="hover:bg-surface-bright/70 transition-colors user-row opacity-80" data-role="Aprendiz" data-sede="Ficha 301005" data-status="Inactivo">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-text-muted font-headline-sm flex items-center justify-center shrink-0 shadow-sm font-bold">
+                    LR
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface truncate font-bold">Luis Alberto Rodríguez</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">lrodriguez@sena.edu.co</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-label-md text-label-md text-on-surface tracking-wide">C.C. 1.056.789.345</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface-variant font-semibold">
+<span class="material-symbols-outlined text-[14px]">school</span>
+                  Aprendiz
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-muted text-[16px]">badge</span>
+                  Ficha 301005 (TPS)
+                </div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#FFEBEE] text-status-danger font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-danger"></span>
+                  Inactivo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right">
+<div class="inline-flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1" onclick="viewDetail('Luis Alberto Rodríguez', 'Aprendiz', '1.056.789.345', 'lrodriguez@sena.edu.co', 'Ficha 301005')" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Ver detalle
+                  </button>
+<button class="px-3 py-1.5 rounded-lg bg-status-success/15 text-status-success hover:bg-status-success hover:text-white font-label-md text-label-md transition-all flex items-center gap-1" onclick="toggleUserStatus(this, 'Luis Alberto Rodríguez')" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                    Activar
+                  </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Empty State (Hidden by default) -->
+<div class="hidden p-space-2xl flex-col items-center justify-center text-center" id="no-results">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-text-muted mb-3">
+<span class="material-symbols-outlined text-3xl">search_off</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface">No se encontraron usuarios coincidentes</p>
+<p class="font-body-md text-body-md text-text-muted mt-1 max-w-md">Prueba a cambiar los criterios de búsqueda, ajustar el rol seleccionado o limpiar los filtros activos.</p>
+<button class="mt-4 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md" onclick="resetFilters()" type="button">
+            Restablecer todos los filtros
+          </button>
+</div>
+</div>
+<!-- 5. Pagination Footer -->
+<div class="p-space-lg bg-surface-bright flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<span class="font-body-sm text-body-sm text-text-muted" id="pagination-label">
+          Mostrando <span class="font-bold text-on-surface">8</span> de <span class="font-bold text-on-surface">312</span> usuarios registrados
+        </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-card hover:bg-surface-container flex items-center justify-center text-text-muted transition-colors disabled:opacity-40" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm" type="button">
+            1
+          </button>
+<button class="w-8 h-8 rounded-lg bg-surface-card hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" type="button">
+            2
+          </button>
+<button class="w-8 h-8 rounded-lg bg-surface-card hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" type="button">
+            3
+          </button>
+<span class="text-text-muted px-1 text-body-sm">...</span>
+<button class="w-8 h-8 rounded-lg bg-surface-card hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors" type="button">
+            39
+          </button>
+<button class="w-8 h-8 rounded-lg bg-surface-card hover:bg-surface-container flex items-center justify-center text-text-muted transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 6. Institutional Security Note -->
+<div class="bg-surface-container/60 rounded-xl p-space-md flex items-start gap-space-sm text-text-muted">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+<strong>Políticas de Acceso Institucional:</strong> Los cambios en los roles y estados de los usuarios quedan registrados en la <a class="text-primary font-semibold hover:underline" href="#">Bitácora de Auditoría</a>. La suspensión temporal bloquea de forma inmediata el inicio de sesión del usuario en todas las terminales biométricas y la aplicación móvil de PuntualiX.
+      </p>
+</div>
+</div>
+<!-- Detail Modal -->
+<div class="fixed inset-0 z-50 bg-[#0F170F]/50 backdrop-blur-sm hidden items-center justify-center p-4" id="user-modal">
+<div class="bg-surface-card rounded-2xl max-w-md w-full shadow-2xl overflow-hidden transform transition-all">
+<div class="p-space-lg bg-surface-bright flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Ficha del Usuario</h3>
+</div>
+<button class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center text-text-muted" onclick="closeUserModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary flex items-center justify-center text-headline-md font-bold" id="modal-avatar">
+            AR
+          </div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface" id="modal-name">Andrés Felipe Ramírez</h4>
+<p class="font-body-sm text-body-sm text-text-muted" id="modal-email">aramirez@sena.edu.co</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm bg-surface-bright p-space-md rounded-xl">
+<div>
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Rol Actual</span>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold" id="modal-role">Administrador</p>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Documento</span>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold" id="modal-doc">C.C. 1.024.556.789</p>
+</div>
+<div class="col-span-2 pt-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Sede Asignada</span>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold" id="modal-sede">Sede Casa de la Convención</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<label class="font-label-sm text-label-sm text-text-muted">Actualizar Permisos de Nivel</label>
+<select class="w-full bg-surface-bright p-2.5 rounded-lg text-body-md text-on-surface focus:outline-none">
+<option>Acceso Total (Superadministrador)</option>
+<option>Gestión de Fichas e Instructores</option>
+<option>Solo Reportes y Asistencias</option>
+</select>
+</div>
+</div>
+<div class="p-space-lg bg-surface-bright flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-2 rounded-lg bg-surface-card hover:bg-surface-container text-on-surface font-label-lg text-label-lg" onclick="closeUserModal()" type="button">
+          Cerrar
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg" onclick="saveUserModal()" type="button">
+          Guardar Cambios
+        </button>
+</div>
+</div>
+</div>
+<!-- New User Registration Modal -->
+<div class="fixed inset-0 z-50 bg-[#0F170F]/50 backdrop-blur-sm hidden items-center justify-center p-4" id="new-user-modal">
+<div class="bg-surface-card rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden transform transition-all">
+<div class="p-space-lg bg-surface-bright flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person_add</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Registrar Nuevo Usuario</h3>
+</div>
+<button class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center text-text-muted" onclick="closeNewUserModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="p-space-lg flex flex-col gap-space-sm" id="new-user-form" onsubmit="handleNewUser(event)">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Nombres Completos</label>
+<input class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/20 focus:outline-none" placeholder="Ej: Diana Marcela" required="" type="text">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Apellidos</label>
+<input class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/20 focus:outline-none" placeholder="Ej: Ortiz Morales" required="" type="text">
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Tipo de Documento</label>
+<select class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:outline-none">
+<option>Cédula de Ciudadanía (C.C.)</option>
+<option>Tarjeta de Identidad (T.I.)</option>
+<option>Cédula de Extranjería (C.E.)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Número de Documento</label>
+<input class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/20 focus:outline-none" placeholder="1.098.765.432" required="" type="text">
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Correo Institucional (@sena.edu.co)</label>
+<input class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:ring-2 focus:ring-primary-container/20 focus:outline-none" placeholder="diana.ortiz@sena.edu.co" required="" type="email">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Rol Asignado</label>
+<select class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:outline-none">
+<option>Instructor</option>
+<option>Aprendiz</option>
+<option>Administrador</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-muted mb-1">Sede / Ubicación</label>
+<select class="w-full p-2.5 rounded-lg bg-surface-bright text-body-md text-on-surface focus:outline-none">
+<option>Sede Casa de la Convención</option>
+<option>Sede CIAA</option>
+<option>Ficha 301002 (ADSO)</option>
+<option>Ficha 301005 (TPS)</option>
+</select>
+</div>
+</div>
+<div class="p-space-lg -mx-space-lg -mb-space-lg mt-4 bg-surface-bright flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-2 rounded-lg bg-surface-card hover:bg-surface-container text-on-surface font-label-lg text-label-lg" onclick="closeNewUserModal()" type="button">
+            Cancelar
+          </button>
+<button class="px-space-md py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg" type="submit">
+            Registrar Usuario
+          </button>
+</div>
+</form>
+</div>
+</div>
+<script>
+    // Tab switching for Roles
+    function setRoleTab(role, btn) {
+      document.querySelectorAll('.role-tab').forEach(b => {
+        b.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+        b.classList.add('text-on-surface-variant', 'hover:bg-surface-container');
+      });
+      btn.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+      btn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container');
+
+      const roleSelect = document.getElementById('role-select');
+      if (role === 'all') {
+        roleSelect.value = '';
+      } else if (role === 'admin') {
+        roleSelect.value = 'Administrador';
+      } else if (role === 'instructor') {
+        roleSelect.value = 'Instructor';
+      } else if (role === 'aprendiz') {
+        roleSelect.value = 'Aprendiz';
+      }
+      filterTable();
+    }
+
+    // Interactive Filtering
+    function filterTable() {
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
+      const roleFilter = document.getElementById('role-select').value;
+      const statusFilter = document.getElementById('status-select').value;
+      const sedeFilter = document.getElementById('sede-select').value;
+      const clearBtn = document.getElementById('clear-search-btn');
+
+      if (query.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      const rows = document.querySelectorAll('#users-table-body tr.user-row');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const role = row.getAttribute('data-role');
+        const status = row.getAttribute('data-status');
+        const sede = row.getAttribute('data-sede');
+
+        const matchesQuery = !query || text.includes(query);
+        const matchesRole = !roleFilter || (role && role.includes(roleFilter));
+        const matchesStatus = !statusFilter || status === statusFilter;
+        const matchesSede = !sedeFilter || (sede && sede.includes(sedeFilter));
+
+        if (matchesQuery && matchesRole && matchesStatus && matchesSede) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      const noResults = document.getElementById('no-results');
+      const table = document.getElementById('users-table');
+      const paginationLabel = document.getElementById('pagination-label');
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        noResults.classList.add('flex');
+        table.classList.add('hidden');
+        paginationLabel.innerHTML = 'Mostrando <span class="font-bold text-on-surface">0</span> usuarios';
+      } else {
+        noResults.classList.add('hidden');
+        noResults.classList.remove('flex');
+        table.classList.remove('hidden');
+        paginationLabel.innerHTML = `Mostrando <span class="font-bold text-on-surface">${visibleCount}</span> de <span class="font-bold text-on-surface">312</span> usuarios registrados`;
+      }
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      filterTable();
+    }
+
+    function resetFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      document.getElementById('role-select').value = '';
+      document.getElementById('status-select').value = '';
+      document.getElementById('sede-select').value = '';
+
+      // Reset Tab
+      const firstTab = document.querySelector('#role-tab-group button:first-child');
+      if (firstTab) setRoleTab('all', firstTab);
+      filterTable();
+    }
+
+    // Toggle User Status (Activar / Desactivar)
+    function toggleUserStatus(button, userName) {
+      const row = button.closest('tr');
+      const currentStatus = row.getAttribute('data-status');
+      const statusBadge = row.querySelector('.status-badge');
+
+      if (currentStatus === 'Activo') {
+        row.setAttribute('data-status', 'Inactivo');
+        row.classList.add('opacity-80');
+        statusBadge.className = 'status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#FFEBEE] text-status-danger font-bold';
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-status-danger"></span>Inactivo';
+
+        button.className = 'px-3 py-1.5 rounded-lg bg-status-success/15 text-status-success hover:bg-status-success hover:text-white font-label-md text-label-md transition-all flex items-center gap-1';
+        button.innerHTML = '<span class="material-symbols-outlined text-[16px]">check_circle</span>Activar';
+
+        showToast(`Usuario "${userName}" ha sido desactivado`);
+      } else {
+        row.setAttribute('data-status', 'Activo');
+        row.classList.remove('opacity-80');
+        statusBadge.className = 'status-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#E8F5E9] text-status-success font-bold';
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span>Activo';
+
+        button.className = 'px-3 py-1.5 rounded-lg bg-status-danger/10 text-status-danger hover:bg-status-danger hover:text-white font-label-md text-label-md transition-all flex items-center gap-1';
+        button.innerHTML = '<span class="material-symbols-outlined text-[16px]">block</span>Desactivar';
+
+        showToast(`Usuario "${userName}" reactivado correctamente`);
+      }
+    }
+
+    // Detail Modal actions
+    function viewDetail(name, role, doc, email, sede) {
+      document.getElementById('modal-name').innerText = name;
+      document.getElementById('modal-email').innerText = email;
+      document.getElementById('modal-role').innerText = role;
+      document.getElementById('modal-doc').innerText = doc;
+      document.getElementById('modal-sede').innerText = sede;
+
+      const initials = name.split(' ').map(n => n[0]).slice(0, 2).join('');
+      document.getElementById('modal-avatar').innerText = initials;
+
+      const modal = document.getElementById('user-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeUserModal() {
+      const modal = document.getElementById('user-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveUserModal() {
+      closeUserModal();
+      showToast('Información de usuario y permisos actualizados');
+    }
+
+    // New User Modal actions
+    function openNewUserModal() {
+      const modal = document.getElementById('new-user-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeNewUserModal() {
+      const modal = document.getElementById('new-user-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleNewUser(e) {
+      e.preventDefault();
+      closeNewUserModal();
+      showToast('Nuevo usuario institucional creado con éxito');
+    }
+
+    function exportData() {
+      showToast('Generando reporte CSV de usuarios registrados...');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const text = document.getElementById('toast-text');
+      text.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+  </script>
+</div></main><footer class="w-full bg-[#384E38] text-white py-4 px-6 md:px-8 border-t border-white/10 shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs"><div class="flex items-center gap-2"><img alt="PuntualiX" class="h-5 w-auto object-contain mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ"><span class="text-white/80">PuntualiX SENA · Control de Asistencia y Permanencia Institucional © 2026. Todos los derechos reservados.</span></div><div class="flex items-center text-white/80"><img alt="SENA" class="w-6 h-6 object-contain mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA5jwuvp6Xx9JvjeENsBxM0Es5ZoAJfZMQ_Sq9pQMLxay0aWe0hRKJ5GKkQTFxCxLnn330vSAnhQsb3Pty3yKIEmHueTYv6RMegE33719xEy65BTFW-fg9duQditx3Z1VP7O46tMx3MpZVMy5KnOtKQm0KJPlUuB0z_tiZuDsGdveplgga6tJTKSSVukB7V96dfHVBFwfT4b9UaVjzA5avTQz-43Nymcwaod_M74ARH7xFhKMnjj4"><span class="">Centro de Servicios y Gestión Empresarial</span><div class="w-[1px] h-6 bg-white/25 mx-3"></div><span class="">Programa: Análisis y desarrollo de Software</span><div class="w-[1px] h-6 bg-white/25 mx-3"></div><span class="font-semibold text-white">Ficha: 3267541</span></div></div></footer>
+
+
+</body></html>

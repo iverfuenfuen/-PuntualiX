@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-[#f4f7f5] text-slate-800 antialiased min-h-screen flex flex-col font-sans"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PuntualiX - Directorio General de Fichas</title>
+<!-- Google Fonts: Inter & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#1e3322',
+              primary: '#2d4732',
+              surface: '#345239',
+              accent: '#39a900',
+              light: '#f2f6f3',
+              border: '#dbe5dc'
+            },
+            status: {
+              success: '#16a34a',
+              warning: '#d97706',
+              danger: '#dc2626',
+              info: '#2563eb'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<style data-purpose="component-enhancements">
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .indicator-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+  </style>
+<!-- END: Custom Styles -->
+<meta content="web_standard" name="shell-type"/>
+<!-- BEGIN: MainHeader -->
+<!-- Encabezado Institucional Principal con Navegación y Perfil de Usuario -->
+<header class="bg-[#213824] text-white border-b border-[#2d4b31] sticky top-0 z-50 shadow-md">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Lado Izquierdo: Logotipo Corporativo -->
+<div class="flex items-center space-x-6">
+<a class="flex items-center space-x-3 group" href="#" title="PuntualiX SENA">
+<div class="h-9 w-20 overflow-hidden rounded bg-[#2e4a32] flex items-center justify-center p-0.5 border border-[#3b5d3f]">
+<img alt="PuntualiX Logo" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZI8xkoFasM6kago7FjJMoAmwiWzlo7e5kmyXZYYKo__Op21X5bs-gqivHGwLhHjYQVEGvvF5TWCvK10o2QOnvBcoxFF66BoJ-ktYxFzGEyDQZHcTPlFioxM-utpZopTETU3zjrk-5FFbc4ukZkykzhf076BExZN8qt2O0beBNYh_3jz-V_yaew7aqfDpbwE-gsOWSmhzXy3Pv4ABihbvwjBrpisVy3IjTKMjAXViwQk9FQdNfIs"/>
+</div>
+<div class="flex flex-col border-l border-[#3a583e] pl-3">
+<span class="text-xs font-bold tracking-widest text-emerald-300 uppercase leading-none">SENA</span>
+<span class="text-[10px] text-slate-300 font-medium tracking-wide">GESTIÓN ACADÉMICA</span>
+</div>
+</a>
+<!-- Menú de Navegación Horizontal -->
+<nav class="hidden md:flex items-center space-x-1.5 ml-4">
+<!-- Item: Dashboard -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Dashboard</span>
+</a>
+<!-- Item: Fichas (ACTIVO según canonical UI) -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-[#1e3322] shadow-sm flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4 text-[#2d4732]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Fichas</span>
+</a>
+<!-- Item: Instructores -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Instructores</span>
+</a>
+<!-- Item: Bitácora -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Bitácora</span>
+</a>
+<!-- Item: Estadísticas -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Estadísticas</span>
+</a>
+<!-- Item: Reportes -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Reportes</span>
+</a>
+</nav>
+</div>
+<!-- Lado Derecho: Alertas y Usuario Activo -->
+<div class="flex items-center space-x-4">
+<!-- Notificaciones -->
+<button aria-label="Notificaciones del sistema" class="relative p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 focus:outline-none">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-[#213824]"></span>
+</button>
+<div class="h-6 w-px bg-[#39563c]"></div>
+<!-- Perfil Administrador -->
+<div class="flex items-center space-x-2.5 cursor-pointer pl-1 group">
+<div class="w-9 h-9 rounded-full bg-[#18281b] border border-emerald-500/40 flex items-center justify-center font-bold text-xs text-emerald-400">
+            AR
+          </div>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-xs font-semibold leading-tight text-white group-hover:text-emerald-300 transition-colors">Andres Ramirez</span>
+<span class="text-[10px] text-slate-300 font-medium">Administrador</span>
+</div>
+<svg class="w-4 h-4 text-slate-400 ml-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 flex-1 w-full space-y-6"><div class="flex flex-col w-full relative">
+<!-- Fondo de Detalle de Ficha 301002 (Capa subyacente para dar fidelidad de contexto real) -->
+<div class="w-full space-y-6 filter blur-[2px] opacity-75 select-none pointer-events-none transition-all">
+<!-- Migas de pan y cabecera de ficha -->
+<div class="flex items-center justify-between">
+<div class="space-y-1">
+<div class="flex items-center space-x-2 text-xs text-slate-500 font-medium">
+<span>Inicio</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Fichas</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-800 font-semibold">Detalles de Ficha</span>
+</div>
+<div class="flex items-center space-x-3 pt-1">
+<h1 class="text-2xl font-bold text-slate-900 tracking-tight">Ficha 301002</h1>
+<span class="badge-pill bg-emerald-100 text-emerald-800">
+<span class="indicator-dot bg-emerald-600"></span>Activa
+          </span>
+<span class="text-xs text-slate-500 font-mono">ADSO - Diurna</span>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="px-4 py-2 rounded-xl bg-white text-slate-700 shadow-sm flex items-center space-x-2 text-xs font-semibold">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Generar Reporte</span>
+</div>
+<div class="px-4 py-2 rounded-xl bg-[#2d4732] text-white shadow-sm flex items-center space-x-2 text-xs font-semibold">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Actualizar Ficha</span>
+</div>
+</div>
+</div>
+<!-- Banner Métricas Resumen -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="p-4 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl">
+<span class="material-symbols-outlined text-2xl">groups</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500">Aprendices Activos</p>
+<p class="text-2xl font-bold text-slate-900">24 <span class="text-xs font-normal text-emerald-600">de 26</span></p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-sky-50 text-sky-700 rounded-xl">
+<span class="material-symbols-outlined text-2xl">event_available</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500">Asistencia Promedio</p>
+<p class="text-2xl font-bold text-slate-900">84% <span class="text-xs font-normal text-slate-400">meta 80%</span></p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-amber-50 text-amber-700 rounded-xl">
+<span class="material-symbols-outlined text-2xl">warning</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500">Riesgo Moderado</p>
+<p class="text-2xl font-bold text-slate-900">5 <span class="text-xs font-normal text-amber-600">aprendices</span></p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white shadow-sm flex items-center space-x-4">
+<div class="p-3 bg-rose-50 text-rose-700 rounded-xl">
+<span class="material-symbols-outlined text-2xl">crisis_alert</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-500">Riesgo Crítico</p>
+<p class="text-2xl font-bold text-slate-900">2 <span class="text-xs font-normal text-rose-600">inminente</span></p>
+</div>
+</div>
+</div>
+<!-- Pestañas simuladas de la cohorte -->
+<div class="bg-white rounded-xl p-6 shadow-sm min-h-[380px]">
+<div class="flex items-center space-x-6 pb-4">
+<span class="text-sm font-bold text-emerald-800 pb-1">Información General</span>
+<span class="text-sm font-medium text-slate-500">Competencias e Instructores</span>
+<span class="text-sm font-medium text-slate-500">Listado de Aprendices (24)</span>
+<span class="text-sm font-medium text-slate-500">Historial de Novedades</span>
+</div>
+<div class="grid grid-cols-3 gap-6 pt-4 text-xs text-slate-600">
+<div class="bg-slate-50 p-4 rounded-lg space-y-2">
+<span class="font-bold text-slate-800">Programa Académico</span>
+<p>Análisis y Desarrollo de Software (ADSO)</p>
+<span class="font-bold text-slate-800 block pt-2">Centro de Formación</span>
+<p>CIAA - Complejo Tecnológico SENA</p>
+</div>
+<div class="bg-slate-50 p-4 rounded-lg space-y-2">
+<span class="font-bold text-slate-800">Instructor Técnico Líder</span>
+<p>Ing. Andrés Ramírez</p>
+<span class="font-bold text-slate-800 block pt-2">Vocera Titular</span>
+<p>Luisa Martínez Cadavid</p>
+</div>
+<div class="bg-slate-50 p-4 rounded-lg space-y-2">
+<span class="font-bold text-slate-800">Periodo Lectivo</span>
+<p>26 Jul 2026 - 30 Nov 2027</p>
+<span class="font-bold text-slate-800 block pt-2">Jornada / Modalidad</span>
+<p>Diurna / Presencial</p>
+</div>
+</div>
+</div>
+</div>
+<!-- OVERLAY MODAL INTERACTIVO HU10.2 / HU10.3 -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-sm transition-all duration-300" id="modalOverlay">
+<!-- Modal Window Container -->
+<div class="relative w-full max-w-3xl my-8 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col transform transition-all animate-in fade-in zoom-in-95 duration-200">
+<!-- Modal Header -->
+<div class="bg-gradient-to-r from-[#213824] to-[#2d4732] px-6 py-5 text-white flex items-start justify-between">
+<div class="space-y-1">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-emerald-400 text-xl">app_registration</span>
+<h2 class="text-lg font-bold tracking-tight">Actualizar Ficha de Formación</h2>
+<span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase">HU10.2</span>
+</div>
+<p class="text-xs text-slate-300">
+            Edición de parámetros administrativos, cronograma y responsables clave de la cohorte académica.
+          </p>
+</div>
+<button aria-label="Cerrar modal" class="p-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors" id="closeModalBtn" type="button">
+<span class="material-symbols-outlined text-xl leading-none">close</span>
+</button>
+</div>
+<!-- Modal Body (Formulario Estructurado) -->
+<form class="p-6 md:p-8 space-y-6 overflow-y-auto max-h-[calc(85vh-160px)]" id="updateFichaForm">
+<!-- Grid de Campos Principales (2 Columnas) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+<!-- Campo 1: Número de Ficha (Solo Lectura) -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="fichaNumber">
+<span>Número de Ficha</span>
+<span class="text-rose-500">*</span>
+</label>
+<span class="text-[10px] text-slate-400 font-medium flex items-center space-x-0.5">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span>Bloqueado</span>
+</span>
+</div>
+<div class="relative">
+<input class="w-full pl-3.5 pr-9 py-2.5 bg-slate-100/90 text-slate-600 rounded-xl text-xs font-mono font-semibold cursor-not-allowed shadow-inner focus:outline-none" id="fichaNumber" readonly="" type="text" value="248273392993"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">pin</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Identificador institucional único no editable para preservar la integridad del historial.</p>
+</div>
+<!-- Campo 2: Nombre del Programa -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="programName">
+<span>Programa de Formación</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-medium shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30" id="programName" type="text" value="Análisis y Desarrollo de Software"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">school</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Titulación técnica o tecnológica asociada a la cohorte.</p>
+</div>
+<!-- Campo 3: Sede de Formación -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="trainingCenter">
+<span>Sede de Formación</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3.5 pr-8 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-medium shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30 appearance-none" id="trainingCenter">
+<option selected="" value="ciaa">CIAA - Sede Principal Complejo Tecnológico</option>
+<option value="casa_convencion">Casa de la Convención - Rionegro</option>
+<option value="subsede_norte">Subsede Regional Norte</option>
+<option value="nodo_innovacion">Nodo de Innovación Tecnológica</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">location_city</span>
+</div>
+</div>
+</div>
+<!-- Campo 4: Estado de la Ficha -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="fichaStatus">
+<span>Estado Actual de Cohorte</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3.5 pr-8 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-semibold shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30 appearance-none" id="fichaStatus">
+<option selected="" value="activa">● Activa (Lectiva en curso)</option>
+<option value="practica">● En Etapa Productiva / Práctica</option>
+<option value="suspendida">● Suspendida temporalmente</option>
+<option value="inactiva">● Inactiva / Clausurada</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Campo 5: Fecha de Inicio -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="startDate">
+<span>Fecha de Inicio</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-medium shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30" id="startDate" type="date" value="2026-07-26"/>
+</div>
+<p class="text-[10px] text-slate-400">Apertura formal del proceso formativo.</p>
+</div>
+<!-- Campo 6: Fecha de Fin -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="endDate">
+<span>Fecha Estimada de Cierre</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-medium shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30" id="endDate" type="date" value="2027-11-30"/>
+</div>
+<p class="text-[10px] text-slate-400">Culminación reglamentaria de la etapa formativa.</p>
+</div>
+<!-- Campo 7: Modalidad de Formación -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="modality">
+<span>Modalidad de Impartición</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3.5 pr-8 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-medium shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30 appearance-none" id="modality">
+<option selected="" value="presencial">Presencial (Sede Física)</option>
+<option value="virtual">100% Virtual (LMS SENA)</option>
+<option value="mixta">Híbrida / Desescolarizada</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">laptop_mac</span>
+</div>
+</div>
+</div>
+<!-- Campo 8: Líder de Ficha (Instructor Asignado) -->
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="leadInstructor">
+<span>Instructor Líder Asignado</span>
+<span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<select class="w-full pl-3.5 pr-8 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-semibold shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30 appearance-none" id="leadInstructor">
+<option selected="" value="andres_ramirez">Andrés Ramírez (CC 102049281)</option>
+<option value="maria_torres">María Torres (CC 43902182)</option>
+<option value="jorge_castro">Jorge Castro (CC 98452109)</option>
+<option value="carlos_ruiz">Carlos Ruiz (CC 71203948)</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">badge</span>
+</div>
+</div>
+</div>
+<!-- Campo 9: Vocero de Ficha (Full Width) -->
+<div class="md:col-span-2 space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center space-x-1" for="studentRepresentative">
+<span>Vocero de Ficha (Aprendiz Titular)</span>
+<span class="text-rose-500">*</span>
+</label>
+<span class="text-[10px] text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-full">Activo en Representación</span>
+</div>
+<div class="relative">
+<input class="w-full pl-10 pr-4 py-2.5 bg-slate-50 hover:bg-white text-slate-800 rounded-xl text-xs font-medium shadow-sm transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2d4732]/30" id="studentRepresentative" type="text" value="Luisa Martínez Cadavid - TI 1032849182"/>
+<div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+<span class="material-symbols-outlined text-sm">how_to_reg</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Canal formal de comunicación entre la administración, instructores y aprendices de la cohorte.</p>
+</div>
+</div>
+<!-- SECCIÓN HU10.3: Zona de Gestión Crítica (Desactivación de Cohorte) -->
+<div class="rounded-xl bg-rose-50/70 p-4.5 transition-all">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-start space-x-3">
+<div class="p-2 rounded-lg bg-rose-100 text-rose-700 shrink-0">
+<span class="material-symbols-outlined text-lg">crisis_alert</span>
+</div>
+<div class="space-y-0.5">
+<div class="flex items-center space-x-2">
+<h4 class="text-xs font-bold text-rose-900 uppercase tracking-wide">Acción Administrativa HU10.3</h4>
+<span class="text-[10px] font-semibold bg-rose-200/70 text-rose-800 px-1.5 py-0.2 rounded">Zona de Control</span>
+</div>
+<p class="text-xs text-rose-700 leading-relaxed">
+                  Desactivar cohorte: suspenderá nuevos registros y firmas biométricas, manteniendo intacta la trazabilidad histórica.
+                </p>
+</div>
+</div>
+<button class="shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold text-rose-700 bg-white hover:bg-rose-600 hover:text-white shadow-sm transition-all duration-150 flex items-center justify-center space-x-1.5 active:scale-95" id="deactivateFichaBtn" type="button">
+<span class="material-symbols-outlined text-sm">block</span>
+<span>Desactivar Ficha</span>
+</button>
+</div>
+</div>
+</form>
+<!-- Modal Footer (Barra de Acciones Principales) -->
+<div class="px-6 py-4 bg-slate-50 flex items-center justify-between">
+<div class="hidden sm:flex items-center space-x-1.5 text-slate-400 text-xs">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Auditoría registrada bajo usuario: <strong>Andrés Ramírez</strong></span>
+</div>
+<div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+<button class="w-1/2 sm:w-auto px-4 py-2.5 rounded-xl bg-white text-slate-700 hover:bg-slate-100 text-xs font-semibold shadow-sm transition-all active:scale-95" id="cancelModalBtn" type="button">
+            Cancelar
+          </button>
+<button class="w-1/2 sm:w-auto px-6 py-2.5 rounded-xl bg-[#2d4732] hover:bg-[#213824] text-white text-xs font-bold shadow-md shadow-[#2d4732]/25 transition-all flex items-center justify-center space-x-1.5 active:scale-95" id="saveChangesBtn" type="button">
+<span class="material-symbols-outlined text-sm">save</span>
+<span>Guardar cambios</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Notificación Toast Dinámica (Micro-interacción) -->
+<div class="fixed bottom-6 right-6 z-[80] translate-y-24 opacity-0 pointer-events-none transition-all duration-300 max-w-sm w-full bg-white shadow-xl rounded-xl p-4 flex items-start space-x-3" id="toastNotification">
+<div class="p-2 rounded-lg bg-emerald-100 text-emerald-700 shrink-0" id="toastIconContainer">
+<span class="material-symbols-outlined text-base" id="toastIcon">check</span>
+</div>
+<div class="flex-1">
+<h5 class="text-xs font-bold text-slate-900" id="toastTitle">Operación exitosa</h5>
+<p class="text-xs text-slate-600 mt-0.5" id="toastMessage">Los cambios en la ficha 301002 han sido guardados satisfactoriamente.</p>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const modal = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelModalBtn');
+    const saveBtn = document.getElementById('saveChangesBtn');
+    const deactivateBtn = document.getElementById('deactivateFichaBtn');
+    const toast = document.getElementById('toastNotification');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+    const toastIconContainer = document.getElementById('toastIconContainer');
+
+    function showToast(title, message, isDanger = false) {
+      if (!toast) return;
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+      if (isDanger) {
+        toastIcon.textContent = 'warning';
+        toastIconContainer.className = 'p-2 rounded-lg bg-rose-100 text-rose-700 shrink-0';
+      } else {
+        toastIcon.textContent = 'check';
+        toastIconContainer.className = 'p-2 rounded-lg bg-emerald-100 text-emerald-700 shrink-0';
+      }
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 250);
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    // Guardar Cambios (HU10.2)
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        saveBtn.disabled = true;
+        const originalText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">refresh</span><span>Guardando...</span>';
+        
+        setTimeout(() => {
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = originalText;
+          closeModal();
+          showToast('Ficha Actualizada (HU10.2)', 'Parámetros institucionales sincronizados correctamente.');
+        }, 800);
+      });
+    }
+
+    // Desactivar Ficha (HU10.3)
+    if (deactivateBtn) {
+      deactivateBtn.addEventListener('click', () => {
+        const confirmed = confirm('¿Está seguro de desactivar la Ficha 301002? Esta acción suspenderá nuevos registros de asistencia pero preservará todo el histórico de aprendices.');
+        if (confirmed) {
+          const statusSelect = document.getElementById('fichaStatus');
+          if (statusSelect) {
+            statusSelect.value = 'inactiva';
+          }
+          showToast('Ficha Desactivada (HU10.3)', 'La cohorte ha cambiado al estado Inactiva.', true);
+        }
+      });
+    }
+
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && modal.style.display !== 'none') {
+        closeModal();
+      }
+    });
+  })();
+</script></main>
+<!-- END: MainContent -->
+<!-- BEGIN: InstitutionalFooter -->
+<!-- Footer Institucional Idéntico a canonical UI -->
+<footer class="bg-[#1b2d1d] text-white border-t border-[#263e29] mt-auto">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<!-- Lado Izquierdo: Brand e Información Legal -->
+<div class="flex items-center space-x-3 text-center md:text-left">
+<div class="h-6 w-14 overflow-hidden rounded bg-[#29422c] flex items-center justify-center p-0.5 border border-[#3b5d3f]/60 shrink-0">
+<img alt="PuntualiX SENA" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZI8xkoFasM6kago7FjJMoAmwiWzlo7e5kmyXZYYKo__Op21X5bs-gqivHGwLhHjYQVEGvvF5TWCvK10o2QOnvBcoxFF66BoJ-ktYxFzGEyDQZHcTPlFioxM-utpZopTETU3zjrk-5FFbc4ukZkykzhf076BExZN8qt2O0beBNYh_3jz-V_yaew7aqfDpbwE-gsOWSmhzXy3Pv4ABihbvwjBrpisVy3IjTKMjAXViwQk9FQdNfIs"/>
+</div>
+<div class="text-slate-300">
+<p class="font-medium">PuntualiX SENA - Plataforma de Control Asistencia &amp; Gestión Académica</p>
+<p class="text-[11px] text-slate-400">Derechos reservados © 2026 Servicio Nacional de Aprendizaje SENA</p>
+</div>
+</div>
+<!-- Lado Derecho: Centro Regional & Subsede -->
+<div class="flex items-center space-x-2 text-slate-400 text-center md:text-right">
+<div>
+<p class="font-medium text-slate-200">Centro de Formación Regional SENA</p>
+<p class="text-[11px]">Subsede Gestión Educativa y Control de Asistencia</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 hidden sm:block"></div>
+</div>
+</div>
+</footer>
+<!-- END: InstitutionalFooter -->
+</body></html>

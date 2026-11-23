@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PuntualiX - Directorio General de Fichas</title>
+<!-- Google Fonts: Inter & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#1e3322',
+              primary: '#2d4732',
+              surface: '#345239',
+              accent: '#39a900',
+              light: '#f2f6f3',
+              border: '#dbe5dc'
+            },
+            status: {
+              success: '#16a34a',
+              warning: '#d97706',
+              danger: '#dc2626',
+              info: '#2563eb'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<style data-purpose="component-enhancements">
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .indicator-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="bg-[#f4f7f5] text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<!-- BEGIN: MainHeader -->
+<!-- Encabezado Institucional Principal con Navegación y Perfil de Usuario -->
+<header class="bg-[#213824] text-white border-b border-[#2d4b31] sticky top-0 z-50 shadow-md">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Lado Izquierdo: Logotipo Corporativo -->
+<div class="flex items-center space-x-6">
+<a class="flex items-center space-x-3 group" href="#" title="PuntualiX SENA">
+<div class="h-9 w-20 overflow-hidden rounded bg-[#2e4a32] flex items-center justify-center p-0.5 border border-[#3b5d3f]">
+<img alt="PuntualiX Logo" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZI8xkoFasM6kago7FjJMoAmwiWzlo7e5kmyXZYYKo__Op21X5bs-gqivHGwLhHjYQVEGvvF5TWCvK10o2QOnvBcoxFF66BoJ-ktYxFzGEyDQZHcTPlFioxM-utpZopTETU3zjrk-5FFbc4ukZkykzhf076BExZN8qt2O0beBNYh_3jz-V_yaew7aqfDpbwE-gsOWSmhzXy3Pv4ABihbvwjBrpisVy3IjTKMjAXViwQk9FQdNfIs"/>
+</div>
+<div class="flex flex-col border-l border-[#3a583e] pl-3">
+<span class="text-xs font-bold tracking-widest text-emerald-300 uppercase leading-none">SENA</span>
+<span class="text-[10px] text-slate-300 font-medium tracking-wide">GESTIÓN ACADÉMICA</span>
+</div>
+</a>
+<!-- Menú de Navegación Horizontal -->
+<nav class="hidden md:flex items-center space-x-1.5 ml-4">
+<!-- Item: Dashboard -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Dashboard</span>
+</a>
+<!-- Item: Fichas (ACTIVO según canonical UI) -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-[#1e3322] shadow-sm flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4 text-[#2d4732]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Fichas</span>
+</a>
+<!-- Item: Instructores -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Instructores</span>
+</a>
+<!-- Item: Bitácora -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Bitácora</span>
+</a>
+<!-- Item: Estadísticas -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Estadísticas</span>
+</a>
+<!-- Item: Reportes -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Reportes</span>
+</a>
+</nav>
+</div>
+<!-- Lado Derecho: Alertas y Usuario Activo -->
+<div class="flex items-center space-x-4">
+<!-- Notificaciones -->
+<button aria-label="Notificaciones del sistema" class="relative p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 focus:outline-none">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-[#213824]"></span>
+</button>
+<div class="h-6 w-px bg-[#39563c]"></div>
+<!-- Perfil Administrador -->
+<div class="flex items-center space-x-2.5 cursor-pointer pl-1 group">
+<div class="w-9 h-9 rounded-full bg-[#18281b] border border-emerald-500/40 flex items-center justify-center font-bold text-xs text-emerald-400">
+            AR
+          </div>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-xs font-semibold leading-tight text-white group-hover:text-emerald-300 transition-colors">Andres Ramirez</span>
+<span class="text-[10px] text-slate-300 font-medium">Administrador</span>
+</div>
+<svg class="w-4 h-4 text-slate-400 ml-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 flex-1 w-full space-y-6">
+<!-- BEGIN: ContextBanner -->
+<!-- Banner de Encabezado de Contexto idéntico al estilo Canónico -->
+<section class="bg-[#2d4732] rounded-2xl p-6 sm:p-7 text-white shadow-sm border border-[#3b5b40] flex flex-col md:flex-row md:items-center md:justify-between gap-6 relative overflow-hidden" data-purpose="banner-header">
+<!-- Decoración sutil de fondo -->
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-emerald-500/5 rounded-full pointer-events-none blur-2xl"></div>
+<!-- Información Principal -->
+<div class="flex items-start space-x-4 z-10">
+<div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 text-emerald-300">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<div class="flex items-center flex-wrap gap-2.5">
+<h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">Gestión y Monitoreo de Fichas</h1>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+              54 Fichas Totales
+            </span>
+</div>
+<p class="mt-1 text-xs sm:text-sm text-slate-200 max-w-2xl leading-relaxed">
+            Administración integral de cohortes académicas, seguimiento de permanencia, estados y asignaciones de formación SENA.
+          </p>
+</div>
+</div>
+<!-- Acciones de Cabecera -->
+<div class="flex items-center gap-3 z-10"><!-- Selector Período / Sede -->
+<div class="relative">
+<select class="bg-black/20 text-xs font-medium text-white border border-white/20 rounded-lg pl-3 pr-8 py-2.5 hover:bg-black/30 focus:ring-1 focus:ring-emerald-400 cursor-pointer outline-none appearance-none">
+<option class="bg-slate-800 text-white" value="convencion">Sede: Casa de la Convención</option>
+<option class="bg-slate-800 text-white" value="ciaa">Sede: Complejo CIAA</option>
+<option class="bg-slate-800 text-white" value="todas">Todas las Sedes</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-300">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Botón Registrar Nueva Ficha -->
+<button class="inline-flex items-center space-x-2 bg-emerald-100 text-[#1e3322] ring-2 ring-emerald-400 font-bold px-4 py-2.5 rounded-lg shadow-sm text-xs transition duration-150 whitespace-nowrap" type="button">
+<svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+<span class="">Registrar Nueva Ficha</span>
+</button></div>
+</section>
+<!-- END: ContextBanner -->
+<!-- BEGIN: KPIStats -->
+<!-- 4 Métricas de alto impacto estilo canónico -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-purpose="executive-kpis">
+<!-- KPI 1: Registradas -->
+<div class="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-slate-500 mb-2 font-medium">
+<span class="">Fichas Registradas</span>
+<span class="p-1.5 bg-emerald-50 text-emerald-700 rounded-md">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="flex items-baseline space-x-2">
+<span class="text-2xl font-bold text-slate-900 tracking-tight">54</span>
+<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">+3 este trimestre</span>
+</div>
+<div class="mt-3 text-[11px] text-slate-400 font-medium">
+          Cohortes activas y pasadas en sistema
+        </div>
+</div>
+<!-- KPI 2: Activas con barra -->
+<div class="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-slate-500 mb-2 font-medium">
+<span class="">Fichas Activas</span>
+<span class="p-1.5 bg-blue-50 text-blue-600 rounded-md">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="flex items-baseline space-x-2">
+<span class="text-2xl font-bold text-slate-900 tracking-tight">39</span>
+<span class="text-[11px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">72% del total</span>
+</div>
+<div class="mt-2.5">
+<div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-[#2d4732] h-1.5 rounded-full" style="width: 72%"></div>
+</div>
+<span class="mt-1 block text-[11px] text-slate-400">En etapa lectiva regular</span>
+</div>
+</div>
+<!-- KPI 3: Inactivas / Etapa Productiva -->
+<div class="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-slate-500 mb-2 font-medium">
+<span class="">Fichas Inactivas / Productiva</span>
+<span class="p-1.5 bg-amber-50 text-amber-600 rounded-md">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="flex items-baseline space-x-2">
+<span class="text-2xl font-bold text-slate-900 tracking-tight">15</span>
+<span class="text-[11px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">28% cerradas</span>
+</div>
+<div class="mt-3 text-[11px] text-slate-400 font-medium">
+          Práctica, certificadas o archivadas
+        </div>
+</div>
+<!-- KPI 4: Alertas de Deserción -->
+<div class="bg-white rounded-xl p-5 border border-rose-100 shadow-[0_1px_3px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-rose-800 mb-2 font-medium">
+<span class="font-semibold text-rose-700">Alertas de Deserción</span>
+<span class="p-1.5 bg-rose-50 text-rose-600 rounded-md">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+</div>
+<div class="flex items-baseline space-x-2">
+<span class="text-2xl font-bold text-rose-600 tracking-tight">6</span>
+<span class="text-[11px] font-medium text-slate-500">fichas con riesgo</span>
+</div>
+<div class="mt-3 flex items-center space-x-2">
+<span class="text-[10px] font-bold bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full">Críticas: 2</span>
+<span class="text-[10px] font-semibold bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Moderadas: 4</span>
+</div>
+</div>
+</section>
+<!-- END: KPIStats -->
+<!-- BEGIN: MainTableSection -->
+<!-- Contenedor Maestro: Tabla de Gestión con Filtros -->
+<section class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden" data-purpose="table-container">
+<!-- Encabezado del Directorio y Pestañas Rápidas -->
+<div class="p-5 sm:p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div>
+<h2 class="text-lg font-bold text-slate-800">Directorio de Fichas de Formación</h2>
+<p class="text-xs text-slate-500 mt-0.5">Consulta, filtra y gestiona el estado operativo y asignaciones de cada grupo formativo.</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<!-- Filtros de Pestañas (Pill Tabs) -->
+<div class="inline-flex p-1 bg-slate-100/80 rounded-xl space-x-1 text-xs">
+<button class="px-3 py-1.5 font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200/50">Todas (54)</button>
+<button class="px-3 py-1.5 font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-colors">Activas (39)</button>
+<button class="px-3 py-1.5 font-medium rounded-lg text-rose-700 hover:bg-rose-50 transition-colors">En Riesgo (6)</button>
+<button class="px-3 py-1.5 font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-white/50 transition-colors">Inactivas (15)</button>
+</div>
+<!-- Botón de Exportación -->
+<button class="inline-flex items-center space-x-1.5 px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 transition" type="button">
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Exportar Listado</span>
+</button>
+</div>
+</div>
+<!-- Barra de Filtros Avanzados -->
+<div class="bg-[#fafbfb] px-5 sm:px-6 py-4 border-b border-slate-100">
+<form class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center" onsubmit="event.preventDefault();">
+<!-- Buscador Textual -->
+<div class="lg:col-span-4 relative">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<input class="w-full text-xs pl-9 pr-3 py-2.5 rounded-lg border-slate-200 bg-white placeholder-slate-400 focus:border-[#2d4732] focus:ring-[#2d4732] shadow-sm" placeholder="Buscar por número de ficha, programa o código..." type="text"/>
+</div>
+<!-- Selector de Sede -->
+<div class="lg:col-span-2">
+<select class="w-full text-xs py-2.5 px-3 rounded-lg border-slate-200 bg-white text-slate-700 focus:border-[#2d4732] focus:ring-[#2d4732] shadow-sm">
+<option value="">Sede: Todas</option>
+<option value="convencion">Casa Convención</option>
+<option value="ciaa">Complejo CIAA</option>
+</select>
+</div>
+<!-- Selector de Programa -->
+<div class="lg:col-span-3">
+<select class="w-full text-xs py-2.5 px-3 rounded-lg border-slate-200 bg-white text-slate-700 focus:border-[#2d4732] focus:ring-[#2d4732] shadow-sm">
+<option value="">Programa: Todos</option>
+<option value="adso">Análisis y Desarrollo de Software</option>
+<option value="ga">Gestión Administrativa</option>
+<option value="redes">Redes y Telecomunicaciones</option>
+<option value="electro">Electromecánica</option>
+<option value="mercadeo">Mercadeo Digital</option>
+</select>
+</div>
+<!-- Selector de Jornada -->
+<div class="lg:col-span-2">
+<select class="w-full text-xs py-2.5 px-3 rounded-lg border-slate-200 bg-white text-slate-700 focus:border-[#2d4732] focus:ring-[#2d4732] shadow-sm">
+<option value="">Jornada: Todas</option>
+<option value="manana">Mañana</option>
+<option value="tarde">Tarde</option>
+<option value="noche">Noche</option>
+</select>
+</div>
+<!-- Botón Limpiar Filtros -->
+<div class="lg:col-span-1 flex justify-end">
+<button class="w-full sm:w-auto p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition flex items-center justify-center" title="Limpiar filtros" type="reset">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</form>
+</div>
+<!-- Tabla Responsive -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/70 border-b border-slate-200/80 text-[11px] uppercase tracking-wider text-slate-500 font-bold">
+<th class="py-3.5 px-5" scope="col">Ficha &amp; Código</th>
+<th class="py-3.5 px-5" scope="col">Programa de Formación</th>
+<th class="py-3.5 px-4" scope="col">Jornada &amp; Sede</th>
+<th class="py-3.5 px-4 text-center" scope="col">Aprendices</th>
+<th class="py-3.5 px-5" scope="col">Asistencia Promedio</th>
+<th class="py-3.5 px-4" scope="col">Estado / Riesgo</th>
+<th class="py-3.5 px-5 text-right" scope="col">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-xs">
+<!-- Fila 1: 301002 ADSO -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">301002</span>
+<span class="badge-pill bg-emerald-100 text-emerald-800 font-medium">Tecnólogo</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                Análisis y Desarrollo de Software (ADSO)
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Mañana</span> · Convención
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-800 whitespace-nowrap">
+                24
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-emerald-600 h-2 rounded-full" style="width: 90%"></div>
+</div>
+<span class="font-bold text-slate-800 text-[11px]">90%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="indicator-dot bg-emerald-500"></span>
+                  Activo · Óptimo
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#2d4732] hover:bg-[#213824] text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 2: 301003 Gestión Administrativa -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">301003</span>
+<span class="badge-pill bg-slate-100 text-slate-700 font-medium">Técnico</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                Gestión Administrativa
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Mañana</span> · Convención
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-800 whitespace-nowrap">
+                12
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-emerald-500 h-2 rounded-full" style="width: 85%"></div>
+</div>
+<span class="font-bold text-slate-800 text-[11px]">85%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-amber-50 text-amber-700 border border-amber-200">
+<span class="indicator-dot bg-amber-500"></span>
+                  Activo · Moderado
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#2d4732] hover:bg-[#213824] text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 3: 301004 ADSO Nocturno -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">301004</span>
+<span class="badge-pill bg-emerald-100 text-emerald-800 font-medium">Tecnólogo</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                ADSO Nocturno
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Noche</span> · CIAA
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-800 whitespace-nowrap">
+                16
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-amber-400 h-2 rounded-full" style="width: 78%"></div>
+</div>
+<span class="font-bold text-slate-800 text-[11px]">78%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-amber-50 text-amber-700 border border-amber-200">
+<span class="indicator-dot bg-amber-500"></span>
+                  Activo · Moderado
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#2d4732] hover:bg-[#213824] text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 4: 301005 Redes y Telecomunicaciones -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">301005</span>
+<span class="badge-pill bg-slate-100 text-slate-700 font-medium">Técnico</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                Redes y Telecomunicaciones
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Tarde</span> · Convención
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-800 whitespace-nowrap">
+                17
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
+</div>
+<span class="font-bold text-slate-800 text-[11px]">65%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-orange-50 text-orange-700 border border-orange-200">
+<span class="indicator-dot bg-orange-500"></span>
+                  Alerta Alta
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#2d4732] hover:bg-[#213824] text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 5: 301006 Redes y Telecomunicaciones II -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">301006</span>
+<span class="badge-pill bg-slate-100 text-slate-700 font-medium">Técnico</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                Redes y Telecomunicaciones II
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Tarde</span> · Convención
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-800 whitespace-nowrap">
+                21
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
+</div>
+<span class="font-bold text-slate-800 text-[11px]">65%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-orange-50 text-orange-700 border border-orange-200">
+<span class="indicator-dot bg-orange-500"></span>
+                  Alerta Alta
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#2d4732] hover:bg-[#213824] text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 6: 301007 Mercadeo Digital -->
+<tr class="hover:bg-rose-50/40 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">301007</span>
+<span class="badge-pill bg-rose-100 text-rose-800 font-medium">Técnico</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                Mercadeo Digital
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Mañana</span> · CIAA
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-rose-700 whitespace-nowrap">
+                10
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-rose-600 h-2 rounded-full" style="width: 52%"></div>
+</div>
+<span class="font-bold text-rose-700 text-[11px]">52%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-rose-50 text-rose-700 border border-rose-200">
+<span class="indicator-dot bg-rose-600"></span>
+                  Crítico (Deserción)
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-rose-700 hover:bg-rose-800 text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 7: 246801 Automatización Industrial -->
+<tr class="hover:bg-slate-50/80 transition-colors group">
+<td class="py-3.5 px-5 font-semibold text-slate-800 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-900">246801</span>
+<span class="badge-pill bg-emerald-100 text-emerald-800 font-medium">Tecnólogo</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-700 whitespace-nowrap">
+                Automatización Industrial
+              </td>
+<td class="py-3.5 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-medium text-slate-800">Noche</span> · Convención
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-800 whitespace-nowrap">
+                18
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap">
+<div class="flex items-center space-x-3">
+<div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden">
+<div class="bg-emerald-600 h-2 rounded-full" style="width: 88%"></div>
+</div>
+<span class="font-bold text-slate-800 text-[11px]">88%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="indicator-dot bg-emerald-500"></span>
+                  Activo · Óptimo
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#2d4732] hover:bg-[#213824] text-white font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+<!-- Fila 8: 364433 Gestión Empresarial (Inactiva / Práctica) -->
+<tr class="hover:bg-slate-50/80 transition-colors group bg-slate-50/30">
+<td class="py-3.5 px-5 font-semibold text-slate-600 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-bold text-slate-700">364433</span>
+<span class="badge-pill bg-slate-100 text-slate-600 font-medium">Tecnólogo</span>
+</div>
+</td>
+<td class="py-3.5 px-5 font-medium text-slate-600 whitespace-nowrap">
+                Gestión Empresarial
+              </td>
+<td class="py-3.5 px-4 text-slate-500 whitespace-nowrap">
+<span class="font-medium text-slate-700">Mañana</span> · Convención
+              </td>
+<td class="py-3.5 px-4 text-center font-bold text-slate-600 whitespace-nowrap">
+                20
+              </td>
+<td class="py-3.5 px-5 whitespace-nowrap text-slate-400 font-mono text-xs">
+                — Etapa Práctica —
+              </td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="badge-pill bg-slate-100 text-slate-600 border border-slate-200">
+<span class="indicator-dot bg-slate-400"></span>
+                  Inactiva (Cierre)
+                </span>
+</td>
+<td class="py-3.5 px-5 text-right whitespace-nowrap">
+<button class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium text-xs shadow-xs transition" type="button">
+<span class="">Ver Ficha</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación y Resumen Inferior de Tabla -->
+<div class="px-5 sm:px-6 py-4 bg-white border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+<div>
+<span class="">Mostrando <span class="font-semibold text-slate-800">8</span> de <span class="font-semibold text-slate-800">54</span> fichas formativas registradas</span>
+</div>
+<!-- Controles de Paginación -->
+<nav aria-label="Paginación de resultados" class="inline-flex items-center space-x-1">
+<button class="px-2.5 py-1.5 rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled="">
+            Anterior
+          </button>
+<button class="w-8 h-8 rounded-md bg-[#2d4732] text-white font-bold flex items-center justify-center">
+            1
+          </button>
+<button class="w-8 h-8 rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-medium flex items-center justify-center">
+            2
+          </button>
+<button class="w-8 h-8 rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-medium flex items-center justify-center">
+            3
+          </button>
+<span class="px-1 text-slate-400">...</span>
+<button class="w-8 h-8 rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-medium flex items-center justify-center">
+            7
+          </button>
+<button class="px-2.5 py-1.5 rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
+            Siguiente
+          </button>
+</nav>
+</div>
+</section>
+<!-- END: MainTableSection -->
+<!-- BEGIN: ModalOverlay HU10.1 Registrar Nueva Ficha -->
+<div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-sm overflow-y-auto" id="modal-registrar-ficha" role="dialog">
+<div class="bg-white rounded-2xl shadow-2xl border border-slate-100 w-full max-w-5xl overflow-hidden my-auto transform transition-all animate-in fade-in zoom-in-95 duration-200">
+<!-- Encabezado del Modal -->
+<div class="px-6 py-5 bg-[#2d4732] text-white flex items-center justify-between border-b border-[#3b5d3f]">
+<div class="flex items-center space-x-3.5">
+<div class="w-11 h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-emerald-300 shadow-inner shrink-0">
+<span class="material-symbols-outlined text-2xl">post_add</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-lg sm:text-xl font-bold tracking-tight text-white" id="modal-title">Registrar Nueva Ficha de Formación</h2>
+<span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/30">HU10.1</span>
+</div>
+<p class="text-xs text-slate-200 mt-0.5">Diligencia los datos requeridos para aperturar una nueva cohorte académica en el sistema PuntualiX.</p>
+</div>
+</div>
+<button aria-label="Cerrar modal" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white flex items-center justify-center transition focus:outline-none" type="button">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- Cuerpo del Modal en 2 Columnas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-slate-100 max-h-[calc(85vh-130px)] overflow-y-auto">
+<!-- Columna Principal: Formulario (~65%) -->
+<div class="lg:col-span-8 p-6 sm:p-7 bg-white">
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Número de Ficha -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
+<span>Número de Ficha <span class="text-rose-500">*</span></span>
+<span class="text-[11px] font-normal text-slate-400 font-mono">6 - 8 dígitos</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">tag</span>
+</span>
+<input class="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-800 placeholder-slate-400 shadow-xs font-mono font-medium" placeholder="Ej: 301009" required="" type="text"/>
+</div>
+</div>
+<!-- Sede de Formación -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Sede de Formación <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">apartment</span>
+</span>
+<select class="w-full pl-9 pr-8 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs appearance-none bg-white cursor-pointer" required="">
+<option value="">Seleccionar Sede...</option>
+<option selected="" value="convencion">Sede Casa de la Convención</option>
+<option value="ciaa">Sede CIAA - Calle 52</option>
+<option value="agro">Sede Centro Agroempresarial</option>
+</select>
+<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-slate-400">
+<span class="material-symbols-outlined text-base">expand_more</span>
+</span>
+</div>
+</div>
+<!-- Programa de Formación (Full width de la subcuadrícula) -->
+<div class="sm:col-span-2">
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Programa de Formación <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">school</span>
+</span>
+<select class="w-full pl-9 pr-8 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs appearance-none bg-white cursor-pointer" required="">
+<option value="">Seleccionar Programa de Formación...</option>
+<option selected="" value="adso">Análisis y Desarrollo de Software (ADSO) - Código 228106</option>
+<option value="ga">Gestión Administrativa - Código 122115</option>
+<option value="redes">Redes y Telecomunicaciones - Código 224201</option>
+<option value="electro">Electromecánica Industrial - Código 223201</option>
+<option value="mercadeo">Mercadeo Digital y Comercio Electrónico - Código 621113</option>
+</select>
+<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-slate-400">
+<span class="material-symbols-outlined text-base">expand_more</span>
+</span>
+</div>
+</div>
+<!-- Nivel / Modalidad -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Nivel / Modalidad <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">workspace_premium</span>
+</span>
+<select class="w-full pl-9 pr-8 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs appearance-none bg-white cursor-pointer" required="">
+<option selected="" value="tecnologo">Tecnólogo — Presencial</option>
+<option value="tecnico">Técnico — Presencial</option>
+<option value="especializacion">Especialización Técnica — Híbrida</option>
+<option value="virtual">Tecnólogo — Virtual / Distancia</option>
+</select>
+<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-slate-400">
+<span class="material-symbols-outlined text-base">expand_more</span>
+</span>
+</div>
+</div>
+<!-- Jornada -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Jornada Horaria <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">schedule</span>
+</span>
+<select class="w-full pl-9 pr-8 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs appearance-none bg-white cursor-pointer" required="">
+<option selected="" value="diurna">Diurna / Mañana (06:00 - 12:00)</option>
+<option value="tarde">Tarde (12:00 - 18:00)</option>
+<option value="nocturna">Nocturna (18:00 - 22:00)</option>
+<option value="mixta">Mixta / Fines de Semana</option>
+</select>
+<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-slate-400">
+<span class="material-symbols-outlined text-base">expand_more</span>
+</span>
+</div>
+</div>
+<!-- Fecha de Inicio -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Fecha de Inicio <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs font-medium cursor-pointer" required="" type="date" value="2026-04-15"/>
+</div>
+</div>
+<!-- Fecha de Finalización Estimada -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Fecha de Finalización Estimada <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<input class="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs font-medium cursor-pointer" required="" type="date" value="2028-04-14"/>
+</div>
+</div>
+<!-- Estado Inicial -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">
+                Estado Inicial de Ficha <span class="text-rose-500">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">flag</span>
+</span>
+<select class="w-full pl-9 pr-8 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-700 shadow-xs appearance-none bg-white cursor-pointer">
+<option selected="" value="activa">Activa (En formación regular)</option>
+<option value="pendiente">Pendiente de inicio (Próxima apertura)</option>
+</select>
+<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-slate-400">
+<span class="material-symbols-outlined text-base">expand_more</span>
+</span>
+</div>
+</div>
+<!-- Cupo Máximo Aprendices Estimado -->
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
+<span>Cupo Máximo Aprendices</span>
+<span class="text-[11px] text-slate-400 font-normal">Capacidad aula</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-lg">group</span>
+</span>
+<input class="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] text-slate-800 shadow-xs font-medium" max="50" min="1" type="number" value="30"/>
+</div>
+</div>
+</div>
+</form>
+</div>
+<!-- Columna Lateral: Panel de Acompañamiento y Reglas (~35%) -->
+<div class="lg:col-span-4 p-6 sm:p-7 bg-[#fafbfb] flex flex-col justify-between space-y-5">
+<div>
+<div class="flex items-center space-x-2.5 mb-4">
+<div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Antes de registrar</h3>
+<span class="text-[11px] text-slate-500">Criterios de validación institucional</span>
+</div>
+</div>
+<div class="bg-white rounded-xl p-4 border border-emerald-100 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-3">
+<div class="flex items-start space-x-2.5 text-xs text-slate-700">
+<span class="material-symbols-outlined text-emerald-600 text-base shrink-0 mt-0.5">check_circle</span>
+<p class="leading-relaxed text-[11px]"><strong class="text-slate-800 font-semibold">Unicidad de Ficha:</strong> El número ingresado debe ser único en el sistema de gestión SENA.</p>
+</div>
+<div class="flex items-start space-x-2.5 text-xs text-slate-700">
+<span class="material-symbols-outlined text-emerald-600 text-base shrink-0 mt-0.5">check_circle</span>
+<p class="leading-relaxed text-[11px]"><strong class="text-slate-800 font-semibold">Diseño Curricular:</strong> Verifica que el programa corresponda a la versión curricular vigente.</p>
+</div>
+<div class="flex items-start space-x-2.5 text-xs text-slate-700">
+<span class="material-symbols-outlined text-emerald-600 text-base shrink-0 mt-0.5">check_circle</span>
+<p class="leading-relaxed text-[11px]"><strong class="text-slate-800 font-semibold">Asignaciones Posteriores:</strong> Al registrar, podrás vincular el instructor líder y matricular el listado oficial de aprendices.</p>
+</div>
+<div class="flex items-start space-x-2.5 text-xs text-slate-700">
+<span class="material-symbols-outlined text-emerald-600 text-base shrink-0 mt-0.5">check_circle</span>
+<p class="leading-relaxed text-[11px]"><strong class="text-slate-800 font-semibold">Alertas Tempranas:</strong> Las fechas parametrizadas activan el motor de prevención de deserción de PuntualiX.</p>
+</div>
+</div>
+</div>
+<!-- Badge informativo de asistencia -->
+<div class="p-3.5 bg-emerald-50/70 border border-emerald-200/80 rounded-xl text-emerald-900 text-xs flex items-start space-x-2.5">
+<span class="material-symbols-outlined text-emerald-700 text-base shrink-0 mt-0.5">info</span>
+<div class="text-[11px] leading-relaxed">
+<span class="font-bold block text-emerald-800 mb-0.5">Control Automatizado PuntualiX</span>
+            La ficha quedará habilitada inmediatamente para generación de listas QR y reporte biométrico diario.
+          </div>
+</div>
+</div>
+</div>
+<!-- Pie del Modal (Footer de Acciones) -->
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+<div class="text-slate-500 text-[11px] flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-slate-400 text-base">help_outline</span>
+<span>Los campos marcados con (<span class="text-rose-500">*</span>) son de carácter obligatorio.</span>
+</div>
+<div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+<button class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg transition shadow-xs" type="button">
+          Cancelar / Limpiar
+        </button>
+<button class="px-5 py-2 text-xs font-bold text-white bg-[#2d4732] hover:bg-[#213824] rounded-lg shadow-sm transition flex items-center space-x-2 focus:ring-2 focus:ring-emerald-500" type="button">
+<span class="material-symbols-outlined text-base">save</span>
+<span>Registrar Ficha</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- END: ModalOverlay HU10.1 Registrar Nueva Ficha --></main>
+<!-- END: MainContent -->
+<!-- BEGIN: InstitutionalFooter -->
+<!-- Footer Institucional Idéntico a canonical UI -->
+<footer class="bg-[#1b2d1d] text-white border-t border-[#263e29] mt-auto">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<!-- Lado Izquierdo: Brand e Información Legal -->
+<div class="flex items-center space-x-3 text-center md:text-left">
+<div class="h-6 w-14 overflow-hidden rounded bg-[#29422c] flex items-center justify-center p-0.5 border border-[#3b5d3f]/60 shrink-0">
+<img alt="PuntualiX SENA" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZI8xkoFasM6kago7FjJMoAmwiWzlo7e5kmyXZYYKo__Op21X5bs-gqivHGwLhHjYQVEGvvF5TWCvK10o2QOnvBcoxFF66BoJ-ktYxFzGEyDQZHcTPlFioxM-utpZopTETU3zjrk-5FFbc4ukZkykzhf076BExZN8qt2O0beBNYh_3jz-V_yaew7aqfDpbwE-gsOWSmhzXy3Pv4ABihbvwjBrpisVy3IjTKMjAXViwQk9FQdNfIs"/>
+</div>
+<div class="text-slate-300">
+<p class="font-medium">PuntualiX SENA - Plataforma de Control Asistencia &amp; Gestión Académica</p>
+<p class="text-[11px] text-slate-400">Derechos reservados © 2026 Servicio Nacional de Aprendizaje SENA</p>
+</div>
+</div>
+<!-- Lado Derecho: Centro Regional & Subsede -->
+<div class="flex items-center space-x-2 text-slate-400 text-center md:text-right">
+<div>
+<p class="font-medium text-slate-200">Centro de Formación Regional SENA</p>
+<p class="text-[11px]">Subsede Gestión Educativa y Control de Asistencia</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 hidden sm:block"></div>
+</div>
+</div>
+</footer>
+<!-- END: InstitutionalFooter -->
+</body></html>

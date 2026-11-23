@@ -1,0 +1,404 @@
+<!DOCTYPE html><html class="h-full bg-slate-50" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PuntualiX - Bitácora de Actividades (Auditoría)</title>
+<!-- Google Fonts: Poppins & Nunito -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&amp;family=Poppins:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#3D593D',
+              dark: '#2d432d',
+              light: '#4d6f4d',
+              accent: '#e9f1e9',
+              subtle: '#f4f7f4'
+            }
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            sans: ['Nunito', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="min-h-full flex flex-col text-slate-800 bg-slate-100/60 antialiased relative">
+<!-- BEGIN: MainHeader -->
+<header class="bg-[#3D593D] text-white sticky top-0 z-20 shadow-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo PuntualiX -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white font-bold text-lg font-heading tracking-tight shadow-sm">
+            PX
+          </div>
+<div class="flex flex-col">
+<span class="text-xl font-bold tracking-tight font-heading leading-none text-white">
+              Puntual<span class="text-emerald-300">iX</span>
+</span>
+<span class="text-[10px] uppercase font-semibold text-white/70 tracking-widest mt-0.5">Control Académico</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-1 lg:gap-2">
+<a class="px-3.5 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#">
+<i class="fa-solid fa-house text-xs opacity-70"></i>
+<span class="">Dashboard</span>
+</a>
+<a class="px-3.5 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#">
+<i class="fa-solid fa-folder-open text-xs opacity-70"></i>
+<span class="">Fichas</span>
+</a>
+<a class="px-3.5 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#">
+<i class="fa-solid fa-user-tie text-xs opacity-70"></i>
+<span class="">Instructores</span>
+</a>
+<a class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-white/20 text-white border-b-2 border-emerald-300 shadow-sm flex items-center gap-2" href="#">
+<i class="fa-solid fa-clock-rotate-left text-xs text-emerald-300"></i>
+<span class="">Bitácora</span>
+</a>
+<a class="px-3.5 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#">
+<i class="fa-solid fa-chart-pie text-xs opacity-70"></i>
+<span class="">Estadísticas</span>
+</a>
+<a class="px-3.5 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#">
+<i class="fa-solid fa-file-invoice text-xs opacity-70"></i>
+<span class="">Reportes</span>
+</a>
+</nav>
+<!-- Right Side: Notifications & User Profile -->
+<div class="flex items-center gap-3">
+<!-- Notification Bell -->
+<button class="relative p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 focus:outline-none transition-colors" type="button">
+<i class="fa-regular fa-bell text-lg"></i>
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-[#3D593D]"></span>
+</button>
+<!-- Vertical Divider -->
+<div class="h-6 w-px bg-white/20 hidden sm:block"></div>
+<!-- User Pill Button -->
+<div class="relative">
+<button class="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 transition-all text-left">
+<div class="w-8 h-8 rounded-full bg-emerald-100 text-[#3D593D] flex items-center justify-center font-bold text-xs ring-2 ring-emerald-300/40">
+                AR
+              </div>
+<div class="hidden sm:block text-xs">
+<p class="font-bold text-white leading-tight">Andres Ramirez</p>
+<p class="text-white/70 text-[11px] font-normal leading-none">Administrador</p>
+</div>
+<i class="fa-solid fa-chevron-down text-white/70 text-[10px] ml-0.5"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: Background Content (Bitácora View) -->
+<main aria-hidden="true" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-7">
+<!-- Breadcrumb & Page Title -->
+<div class="mb-6">
+<div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-2">
+<a class="hover:text-slate-800 transition-colors" href="#">Inicio</a>
+<i class="fa-solid fa-chevron-right text-[10px]"></i>
+<span class="text-[#3D593D]">Bitácora de Auditoría</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div>
+<h1 class="text-2xl sm:text-3xl font-bold text-slate-800 font-heading">Bitácora de Actividades</h1>
+<p class="text-sm text-slate-500 mt-0.5">Trazabilidad operativa e histórica de eventos en tiempo real.</p>
+</div>
+</div>
+</div>
+<!-- Stat Metrics Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<!-- Total Registros -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-4 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center text-xl shadow-inner">
+<i class="fa-solid fa-list-check"></i>
+</div>
+<div>
+<p class="text-2xl font-bold text-slate-800 font-heading">238</p>
+<p class="text-xs font-semibold text-slate-500">Eventos registrados</p>
+</div>
+</div>
+<!-- Éxitos -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-4 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl shadow-inner">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+<div>
+<p class="text-2xl font-bold text-slate-800 font-heading">211</p>
+<p class="text-xs font-semibold text-slate-500">Operaciones con éxito</p>
+</div>
+</div>
+<!-- Alertas -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-4 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl shadow-inner">
+<i class="fa-solid fa-triangle-exclamation"></i>
+</div>
+<div>
+<p class="text-2xl font-bold text-slate-800 font-heading">19</p>
+<p class="text-xs font-semibold text-slate-500">Alertas de advertencia</p>
+</div>
+</div>
+<!-- Errores -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-4 shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center text-xl shadow-inner">
+<i class="fa-solid fa-circle-xmark"></i>
+</div>
+<div>
+<p class="text-2xl font-bold text-slate-800 font-heading">8</p>
+<p class="text-xs font-semibold text-slate-500">Errores reportados</p>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+<!-- Filters Row -->
+<div class="p-4 border-b border-slate-100 bg-slate-50/50 flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-2.5">
+<select class="text-xs rounded-lg border-slate-300 text-slate-700 focus:ring-[#3D593D] focus:border-[#3D593D] py-1.5 px-3">
+<option>Todas las sedes</option>
+</select>
+<select class="text-xs rounded-lg border-slate-300 text-slate-700 focus:ring-[#3D593D] focus:border-[#3D593D] py-1.5 px-3">
+<option>Todos los módulos</option>
+</select>
+<button class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 flex items-center gap-1.5 shadow-sm">
+<i class="fa-solid fa-sliders text-slate-400"></i> Filtros
+          </button>
+</div>
+<div class="w-full sm:w-72 relative">
+<i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-400"></i>
+<input class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border-slate-300 focus:ring-[#3D593D] focus:border-[#3D593D]" placeholder="Buscar por usuario o acción..." type="text">
+</div>
+</div>
+<!-- Mocked Row (Underneath) -->
+<div class="divide-y divide-slate-100 text-xs">
+<div class="p-4 bg-emerald-50/40 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="font-mono text-slate-500">20/08/2026 08:15</span>
+<span class="font-bold text-slate-800">Jorge Perez</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-200 text-slate-700">Instructor</span>
+<span class="text-slate-600">Registro de asistencia · Ficha 301004</span>
+</div>
+<span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded font-semibold text-[11px]">Éxito</span>
+</div>
+</div>
+</div>
+</main>
+<!-- END: Background Content -->
+<!-- BEGIN: Modal BackDrop & Overlay (Active HU11.3) -->
+<div class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/60 backdrop-blur-[3px] flex items-center justify-center p-3 sm:p-5" data-purpose="modal-container">
+<!-- Modal Card Refactorizado PuntualiX -->
+<div class="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
+<!-- Top Decorative Color Strip -->
+<div class="h-1.5 w-full bg-[#3D593D]"></div>
+<!-- BEGIN: ModalHeader -->
+<div class="px-6 py-5 bg-gradient-to-b from-[#f4f7f4] to-white border-b border-slate-200 flex items-start justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<!-- Icon Badge Institucional -->
+<div class="w-11 h-11 rounded-xl bg-[#3D593D] text-white flex items-center justify-center shadow-md shadow-[#3D593D]/25 ring-4 ring-[#e9f1e9]">
+<i class="fa-solid fa-clipboard-check text-lg"></i>
+</div>
+<div>
+<div class="flex items-center gap-2.5 flex-wrap">
+<h2 class="text-lg font-bold text-slate-900 font-heading tracking-tight">
+                Detalle del Evento de Auditoría
+              </h2>
+<!-- Unique Event ID Pill -->
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#3D593D]/10 text-[#3D593D] border border-[#3D593D]/20">
+<i class="fa-solid fa-fingerprint text-[10px] mr-1.5 opacity-70"></i>EVT-100522
+              </span>
+</div>
+<!-- Subtítulo / Miga Clara -->
+<p class="text-xs text-slate-600 mt-1 flex items-center gap-1.5 font-medium">
+<span class="text-[#3D593D] font-semibold"><i class="fa-solid fa-layer-group text-[10px] mr-1"></i>Módulo: Control de Asistencias</span>
+<span class="text-slate-400">•</span>
+<span class="text-slate-700">Acción: Registro Diario</span>
+</p>
+</div>
+</div>
+<!-- Botón Cerrar (X) -->
+<button aria-label="Cerrar modal" class="text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg p-1.5 transition-colors focus:outline-none" type="button">
+<i class="fa-solid fa-xmark text-lg leading-none"></i>
+</button>
+</div>
+<!-- END: ModalHeader -->
+<!-- BEGIN: ModalBody -->
+<div class="p-6 space-y-5 max-h-[calc(100vh-14rem)] overflow-y-auto">
+<!-- Banner de Estado de la Operación -->
+<div class="rounded-xl border border-emerald-200 bg-emerald-50/70 p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm shadow-sm">
+<i class="fa-solid fa-check"></i>
+</span>
+<div>
+<p class="text-xs font-bold text-emerald-950 uppercase tracking-wide">Resultado de la Operación</p>
+<p class="text-sm font-semibold text-emerald-800">Completado con Éxito</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-white text-emerald-800 border border-emerald-200/80 shadow-xs">
+            Severidad: Informativa / Rutinaria
+          </span>
+</div>
+<!-- SECCIÓN 1: Responsable & Contexto de Ejecución -->
+<div class="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
+<div class="flex items-center gap-2 border-b border-slate-100 pb-2.5 mb-3">
+<i class="fa-solid fa-user-shield text-[#3D593D] text-xs"></i>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 font-heading">
+              1. Responsable &amp; Contexto de Ejecución
+            </h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3.5 gap-x-4 text-xs">
+<!-- Usuario -->
+<div>
+<span class="text-slate-500 font-medium block mb-0.5">Usuario Responsable</span>
+<div class="flex items-center gap-2">
+<span class="font-bold text-slate-800">Jorge Pérez</span>
+<span class="text-slate-500 font-mono text-[11px]">(C.C. 1.024.331.890)</span>
+</div>
+<span class="inline-block mt-0.5 text-[11px] font-semibold text-[#3D593D]">Rol: Instructor Técnico</span>
+</div>
+<!-- Fecha y Hora -->
+<div>
+<span class="text-slate-500 font-medium block mb-0.5">Fecha y Hora Exacta</span>
+<p class="font-bold text-slate-800 flex items-center gap-1.5">
+<i class="fa-regular fa-calendar-days text-slate-400 text-[11px]"></i>
+                20 de Agosto de 2026
+              </p>
+<p class="text-[11px] text-slate-600 font-mono mt-0.5">08:15:03 COT (UTC-5)</p>
+</div>
+<!-- Dirección IP & Sede -->
+<div>
+<span class="text-slate-500 font-medium block mb-0.5">Dirección IP de Origen</span>
+<p class="font-mono font-bold text-slate-800 flex items-center gap-1.5">
+<i class="fa-solid fa-network-wired text-slate-400 text-[11px]"></i>
+                190.85.14.09
+              </p>
+<p class="text-[11px] text-slate-600 mt-0.5 font-medium">Sede Casa de la Convención (Red Interna SENA)</p>
+</div>
+<!-- Dispositivo / Navegador -->
+<div>
+<span class="text-slate-500 font-medium block mb-0.5">Navegador &amp; Entorno</span>
+<p class="font-bold text-slate-800 flex items-center gap-1.5">
+<i class="fa-brands fa-chrome text-slate-400 text-[11px]"></i>
+                Google Chrome 127.0
+              </p>
+<p class="text-[11px] text-slate-600 mt-0.5">Sistema: Windows 11 / Android WebView</p>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 2: Entidad Afectada y Parámetros Operativos -->
+<div class="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs">
+<div class="flex items-center gap-2 border-b border-slate-100 pb-2.5 mb-3">
+<i class="fa-solid fa-database text-[#3D593D] text-xs"></i>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 font-heading">
+              2. Parámetros de la Operación y Entidad Afectada
+            </h3>
+</div>
+<div class="space-y-3 text-xs">
+<!-- Ficha y Competencia -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-slate-100">
+<div>
+<span class="text-slate-500 font-medium block mb-0.5">Ficha del Programa</span>
+<p class="font-bold text-slate-900">Ficha 301004</p>
+<p class="text-[11px] text-slate-600">Análisis y Desarrollo de Software (ADSO)</p>
+</div>
+<div>
+<span class="text-slate-500 font-medium block mb-0.5">Competencia Impartida</span>
+<p class="font-bold text-slate-900">Norma 220501096</p>
+<p class="text-[11px] text-slate-600 italic">"Análisis y especificación de requisitos de software"</p>
+</div>
+</div>
+<!-- Resumen de Registro de Asistencia -->
+<div>
+<span class="text-slate-500 font-medium block mb-1.5">Resumen de Asistencia Procesada</span>
+<div class="p-3 bg-slate-50 rounded-lg border border-slate-200/70 flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+<span class="font-bold text-slate-800">28 aprendices gestionados</span>
+</div>
+<div class="flex items-center gap-3 text-[11px]">
+<span class="text-emerald-700 font-semibold bg-emerald-100/70 px-2 py-0.5 rounded">25 Presentes</span>
+<span class="text-amber-700 font-semibold bg-amber-100/70 px-2 py-0.5 rounded">2 Justificados</span>
+<span class="text-rose-700 font-semibold bg-rose-100/70 px-2 py-0.5 rounded">1 Inasistencia</span>
+</div>
+</div>
+</div>
+<!-- Trazabilidad Criptográfica de Auditoría -->
+<div class="pt-2 border-t border-slate-100"><div class="flex items-center gap-1.5 mb-2.5"><i class="fa-solid fa-clipboard-check text-[#3D593D] text-[11px]"></i><span class="font-bold text-slate-800 text-xs font-heading">Detalles y Observaciones del Registro</span></div><div class="space-y-2.5 text-xs"><div class="p-3 bg-slate-50 rounded-lg border border-slate-200/70"><div class="flex items-center gap-1.5 text-slate-500 font-medium mb-1"><i class="fa-solid fa-triangle-exclamation text-amber-700 text-[10px]"></i><span class="">Observaciones / Novedad Registrada</span></div><p class="text-slate-700 text-[11px] leading-relaxed">Toma de asistencia presencial completada dentro del horario reglamentario (08:15 AM). Se registró 1 inasistencia no justificada (<span class="font-semibold text-slate-800">Aprendiz: Juan David Gómez</span>) con notificación automática enviada al correo del acudiente y aprendiz.</p></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]"><div class="p-2.5 bg-slate-50/70 rounded-lg border border-slate-200/60"><span class="text-slate-500 font-medium block mb-0.5">Horas Formativas Acreditadas</span><p class="font-semibold text-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-clock-rotate-left text-slate-400 text-[10px]"></i>6 horas lectivas (Jornada Mañana - Aula 204)</p></div><div class="p-2.5 bg-slate-50/70 rounded-lg border border-slate-200/60"><span class="text-slate-500 font-medium block mb-0.5">Método de Validación</span><p class="font-semibold text-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-network-wired text-slate-400 text-[10px]"></i>Registro manual en terminal de aula sincronizado en tiempo real con servidor central</p></div></div></div></div>
+</div>
+</div>
+</div>
+<!-- END: ModalBody -->
+<!-- BEGIN: ModalFooter -->
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-col-reverse sm:flex-row items-center justify-between gap-3">
+<!-- PDF Audit Download -->
+<button class="w-full sm:w-auto px-4 py-2 text-xs font-semibold rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 shadow-xs flex items-center justify-center gap-2 transition-all" type="button">
+<i class="fa-regular fa-file-pdf text-rose-600"></i>
+          Descargar Comprobante (PDF)
+        </button>
+<!-- Primary Action Close -->
+<button class="w-full sm:w-auto px-6 py-2 text-xs font-bold rounded-lg bg-[#3D593D] hover:bg-[#2d432d] text-white shadow-sm flex items-center justify-center gap-2 transition-all" type="button">
+<i class="fa-solid fa-check"></i>
+          Cerrar Ventana
+        </button>
+</div>
+<!-- END: ModalFooter -->
+</div>
+</div>
+<!-- END: Modal BackDrop & Overlay -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-[#1b2b1b] text-slate-300 text-xs py-4 px-4 sm:px-8 border-t border-emerald-950 mt-auto">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+<div class="flex items-center gap-3">
+<span class="font-bold text-white tracking-wide">PuntualiX</span>
+<span class="text-white/40">|</span>
+<span class="text-white/70">Desarrollado en el marco del proyecto de formación SENA · 2026</span>
+</div>
+<div class="text-white/60 flex items-center gap-2">
+<i class="fa-solid fa-code text-[11px] text-emerald-400"></i>
+<span class="">Programa ADSO · Ficha: 3267541</span>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+
+
+</body></html>

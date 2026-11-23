@@ -1,0 +1,664 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Perfil Detallado de Instructor — PuntualiX SENA</title>
+<!-- Google Fonts: Inter & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sena: {
+              primary: '#3D593D',     /* Verde institucional superior/pie */
+              hover: '#2F462F',       /* Tono hover oscuro */
+              dark: '#253825',        /* Tono activo o profundo */
+              success: '#2E7D32',     /* Verde de aprobación/éxito */
+              accent: '#39A900',      /* Verde característico SENA */
+              warning: '#F9A825',     /* Naranja/Amarillo de advertencia */
+              danger: '#D32F2F',      /* Rojo alerta */
+              surface: '#F4F6F4',     /* Fondo general de aplicación */
+              card: '#FFFFFF'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+<!-- Styles for Chart and Donut Visualization -->
+<style data-purpose="custom-visualizations">
+    /* Gradiente cónico para el gráfico de dona de desempeño */
+    .donut-chart {
+      background: conic-gradient(
+        #2E7D32 0% 75%,
+        #F9A825 75% 91%,
+        #D32F2F 91% 100%
+      );
+    }
+  </style>
+</head>
+<body class="bg-[#F3F5F3] text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+<!-- BEGIN: MainHeader -->
+<header class="bg-[#384E38] text-white shadow-md sticky top-0 z-50 px-6 md:px-8">
+  <div class="max-w-7xl mx-auto flex items-center justify-between h-16">
+    <!-- Logo Izquierda -->
+    <div class="flex items-center">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ" alt="PuntualiX" class="h-7 md:h-8 w-auto object-contain">
+    </div>
+
+    <!-- Centro / Navegación Principal -->
+    <nav class="hidden md:flex items-center space-x-1 text-sm font-medium">
+      <a class="px-3 py-2 rounded-md text-green-100 hover:text-white hover:bg-white/10 transition-colors" href="#">Dashboard</a>
+      <a class="px-3 py-2 rounded-md text-green-100 hover:text-white hover:bg-white/10 transition-colors" href="#">Fichas</a>
+      <a class="px-3 py-2 rounded-md bg-white/20 text-white font-semibold transition-colors flex items-center gap-1.5" href="#">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        Instructores
+      </a>
+      <a class="px-3 py-2 rounded-md text-green-100 hover:text-white hover:bg-white/10 transition-colors" href="#">Bitácora</a>
+      <a class="px-3 py-2 rounded-md text-green-100 hover:text-white hover:bg-white/10 transition-colors" href="#">Estadísticas</a>
+      <a class="px-3 py-2 rounded-md text-green-100 hover:text-white hover:bg-white/10 transition-colors" href="#">Reportes</a>
+    </nav>
+
+    <!-- Derecha: Campana, Divisor y Cápsula de Usuario -->
+    <div class="flex items-center space-x-3.5">
+      <button class="relative p-1.5 text-green-100 hover:text-white hover:bg-white/10 rounded-full transition-colors" title="Notificaciones" type="button">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+        </svg>
+        <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-[#384E38]"></span>
+      </button>
+      <div class="w-[1px] h-6 bg-white/20"></div>
+      <div class="flex items-center bg-white text-gray-800 rounded-full py-1 pl-1 pr-3 shadow-sm space-x-2 border border-white/40">
+        <div class="w-7 h-7 rounded-full bg-[#384E38] text-white font-bold text-xs flex items-center justify-center">
+          AR
+        </div>
+        <div class="text-left leading-tight">
+          <p class="font-bold text-xs text-gray-800 leading-none">Andrés Ramírez</p>
+          <p class="text-[10px] text-gray-500 font-medium leading-none mt-0.5">Administrador</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
+<!-- Breadcrumbs -->
+<nav class="flex items-center text-xs text-gray-500 font-medium mb-4 space-x-2">
+<a class="hover:text-[#3D593D] transition-colors" href="#">Inicio</a>
+<span class="">›</span>
+<a class="hover:text-[#3D593D] transition-colors" href="#">Instructores</a>
+<span class="">›</span>
+<span class="text-gray-800 font-semibold">Perfil de Instructor</span>
+</nav>
+<!-- Encabezado con título de la vista y acciones primarias -->
+<section class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-gray-200 gap-4 mb-6">
+<div>
+<div class="flex items-center space-x-3">
+<h1 class="text-2xl font-bold font-display text-gray-900 tracking-tight">Perfil de Instructor — Andrés Ramírez</h1>
+<span class="bg-green-100 text-[#2E7D32] text-xs font-semibold px-2.5 py-0.5 rounded-full border border-green-200 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E7D32]"></span>
+            Activo Institucional
+          </span>
+</div>
+<p class="text-sm text-gray-500 mt-1">Gestión individualizada, trazabilidad de fichas asignadas y cumplimiento de asistencia.</p>
+</div>
+<!-- Botones de Acción -->
+<div class="flex flex-wrap items-center gap-2.5">
+<button class="px-3.5 py-2 text-xs font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 shadow-sm transition flex items-center gap-1.5" type="button">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Descargar Ficha Técnica
+        </button>
+<button class="px-3.5 py-2 text-xs font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 shadow-sm transition flex items-center gap-1.5" type="button">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Historial de Novedades
+        </button>
+<button class="px-4 py-2 text-xs font-semibold text-white bg-[#3D593D] hover:bg-[#2F462F] rounded-lg shadow-sm transition flex items-center gap-1.5" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Generar Reporte Individual
+        </button>
+</div>
+</section>
+<!-- BEGIN: TopSectionGrid -->
+<!-- Grid superior: Información del docente (1/3) + Desempeño y fichas (2/3) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+<!-- Columna Izquierda: Tarjeta de Información Personal y Laboral -->
+<section class="lg:col-span-4 bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between" data-purpose="personal-info-card">
+<div>
+<!-- Cabecera de Identificación -->
+<div class="flex items-center space-x-4 pb-5 border-b border-gray-100">
+<div class="w-16 h-16 rounded-full bg-[#2F462F] text-white flex items-center justify-center font-display font-bold text-xl shadow-inner border-2 border-green-100 ring-2 ring-gray-100">
+              AR
+            </div>
+<div>
+<h2 class="text-lg font-bold text-gray-900 leading-snug">Andrés Ramírez</h2>
+<p class="text-xs font-medium text-gray-500">Instructor de Planta</p>
+<span class="inline-block mt-1 text-[11px] font-semibold text-[#2E7D32] bg-green-50 px-2 py-0.5 rounded border border-green-200">
+                Área de Sistemas / ADSO
+              </span>
+</div>
+</div>
+<!-- Campos de Información Detallada -->
+<div class="mt-4 space-y-3.5 text-xs">
+<div class="flex items-start space-x-3">
+<div class="p-1.5 bg-gray-50 rounded text-gray-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<span class="text-gray-400 block font-medium">Cédula de Ciudadanía</span>
+<span class="text-gray-800 font-semibold text-sm">1.024.556.789</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="p-1.5 bg-gray-50 rounded text-gray-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<span class="text-gray-400 block font-medium">Correo Electrónico Institucional</span>
+<a class="text-[#3D593D] hover:underline font-medium" href="mailto:aramirez@sena.edu.co">aramirez@sena.edu.co</a>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="p-1.5 bg-gray-50 rounded text-gray-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<span class="text-gray-400 block font-medium">Teléfono de Contacto</span>
+<span class="text-gray-800 font-medium">+57 310 555 8877</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="p-1.5 bg-gray-50 rounded text-gray-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<span class="text-gray-400 block font-medium">Antigüedad en el Centro</span>
+<span class="text-gray-800 font-medium">Desde 2022 (4 años continuos)</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="p-1.5 bg-gray-50 rounded text-gray-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<span class="text-gray-400 block font-medium">Sede Operativa</span>
+<span class="text-gray-800 font-medium">Casa de la Convención</span>
+</div>
+</div>
+<div class="flex items-start space-x-3">
+<div class="p-1.5 bg-gray-50 rounded text-gray-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<span class="text-gray-400 block font-medium">Carga Asignada</span>
+<span class="text-gray-800 font-medium">40 horas semanales / Tiempo Completo</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Rol asignado con selector funcional -->
+<div class="mt-5 pt-4 border-t border-gray-100 bg-gray-50 -mx-5 -mb-5 p-5 rounded-b-xl">
+<label class="block text-xs font-semibold text-gray-700 mb-1.5" for="rol-select">Rol de Sistema Asignado</label>
+<div class="flex gap-2">
+<select class="block w-full text-xs rounded-lg border-gray-300 shadow-sm focus:border-[#3D593D] focus:ring focus:ring-green-200 py-1.5 px-2 bg-white" id="rol-select">
+<option selected="" value="instructor">Instructor / Docente</option>
+<option value="coordinador">Coordinador Académico</option>
+<option value="apoyo">Instructor de Apoyo / Suplente</option>
+</select>
+<button class="px-3 py-1.5 bg-[#3D593D] hover:bg-[#2F462F] text-white text-xs font-medium rounded-lg shadow-sm transition" type="button">
+              Guardar
+            </button>
+</div>
+</div>
+</section>
+<!-- Columna Derecha: Métricas y Fichas Asignadas -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Tarjeta de Resumen General de Desempeño -->
+<section class="bg-white rounded-xl shadow-sm border border-gray-200 p-5" data-purpose="performance-summary">
+<div class="flex items-center justify-between pb-3 border-b border-gray-100">
+<h3 class="font-bold text-gray-900 text-sm flex items-center gap-2">
+<svg class="w-4 h-4 text-[#2E7D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              Resumen General de Desempeño y Cumplimiento
+            </h3>
+<span class="text-xs text-gray-400">Corte Ciclo Actual 2026-II</span>
+</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+<!-- Gráfica Circular de Dona -->
+<div class="md:col-span-4 flex flex-col items-center justify-center">
+<div class="relative w-32 h-32 rounded-full donut-chart flex items-center justify-center shadow-inner">
+<!-- Círculo interior blanco para formar la dona -->
+<div class="w-24 h-24 bg-white rounded-full flex flex-col items-center justify-center shadow-sm">
+<span class="text-2xl font-bold font-display text-gray-900">96%</span>
+<span class="text-[10px] uppercase font-bold text-[#2E7D32] tracking-wider">Cumplimiento</span>
+</div>
+</div>
+</div>
+<!-- Leyenda de Categorías de Desempeño -->
+<div class="md:col-span-4 space-y-2.5 text-xs">
+<div class="flex items-center justify-between p-2 rounded bg-gray-50 border border-gray-100">
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 rounded-full bg-[#2E7D32]"></span>
+<span class="font-medium text-gray-700">Alto desempeño (&gt;80%)</span>
+</div>
+<span class="font-bold text-gray-900">75%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-gray-50 border border-gray-100">
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 rounded-full bg-[#F9A825]"></span>
+<span class="font-medium text-gray-700">Rendimiento medio (60-79%)</span>
+</div>
+<span class="font-bold text-gray-900">16%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-gray-50 border border-gray-100">
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 rounded-full bg-[#D32F2F]"></span>
+<span class="font-medium text-gray-700">Rendimiento bajo (&lt;60%)</span>
+</div>
+<span class="font-bold text-gray-900">9%</span>
+</div>
+</div>
+<!-- Indicadores Clave del Resumen -->
+<div class="md:col-span-4 grid grid-cols-2 gap-2 text-center">
+<div class="p-2.5 bg-green-50/60 rounded-lg border border-green-100">
+<p class="text-lg font-bold text-[#2E7D32]">96%</p>
+<p class="text-[11px] text-gray-600 leading-tight">Cumplimiento asistencias</p>
+</div>
+<div class="p-2.5 bg-blue-50/60 rounded-lg border border-blue-100">
+<p class="text-lg font-bold text-blue-700">91%</p>
+<p class="text-[11px] text-gray-600 leading-tight">Asistencia aprendices</p>
+</div>
+<div class="p-2.5 bg-gray-50 rounded-lg border border-gray-200">
+<p class="text-lg font-bold text-gray-800">2</p>
+<p class="text-[11px] text-gray-600 leading-tight">Fichas activas</p>
+</div>
+<div class="p-2.5 bg-gray-50 rounded-lg border border-gray-200">
+<p class="text-lg font-bold text-gray-800">0</p>
+<p class="text-[11px] text-gray-600 leading-tight">Alertas o novedades</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Tarjeta de Fichas Asignadas -->
+<section class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm" data-purpose="assigned-cohorts">
+<div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+<h3 class="font-bold text-gray-900 text-sm flex items-center gap-2">
+<svg class="w-4 h-4 text-[#3D593D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              Fichas Técnicas Asignadas
+            </h3>
+<span class="text-xs text-gray-500 font-medium">Total: 2 fichas vigentes</span>
+</div>
+<div class="space-y-4">
+<!-- Ficha 1 -->
+<div class="p-3.5 bg-gray-50 rounded-lg border border-gray-200/80">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+<div>
+<div class="flex items-center space-x-2">
+<span class="font-bold text-gray-900 text-sm">Ficha 301002</span>
+<span class="text-gray-400">·</span>
+<span class="text-xs font-semibold text-gray-700">ADSO (Análisis y Desarrollo de Software)</span>
+</div>
+<p class="text-[11px] text-gray-500">Jornada Diurna · Modalidad Presencial</p>
+</div>
+<div class="mt-2 sm:mt-0 flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-[#2E7D32] border border-green-200">
+                    Al día
+                  </span>
+<span class="text-xs font-bold text-gray-800">98% Docente</span>
+</div>
+</div>
+<!-- Barras de métricas ficha 1 -->
+<div class="space-y-2 mt-2">
+<div>
+<div class="flex justify-between text-[11px] text-gray-600 mb-0.5">
+<span class="">Tasa de cumplimiento docente en sistema</span>
+<span class="font-semibold text-[#2E7D32]">98%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+<div class="bg-[#2E7D32] h-2 rounded-full" style="width: 98%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] text-gray-600 mb-0.5">
+<span class="">Tasa de aprendices que asisten</span>
+<span class="font-semibold text-gray-700">93%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+<div class="bg-[#3D593D] h-1.5 rounded-full" style="width: 93%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ficha 2 -->
+<div class="p-3.5 bg-gray-50 rounded-lg border border-gray-200/80">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+<div>
+<div class="flex items-center space-x-2">
+<span class="font-bold text-gray-900 text-sm">Ficha 301010</span>
+<span class="text-gray-400">·</span>
+<span class="text-xs font-semibold text-gray-700">Gestión Administrativa y Procesos</span>
+</div>
+<p class="text-[11px] text-gray-500">Jornada Mixta · Modalidad Dual</p>
+</div>
+<div class="mt-2 sm:mt-0 flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-[#2E7D32] border border-green-200">
+                    Al día
+                  </span>
+<span class="text-xs font-bold text-gray-800">94% Docente</span>
+</div>
+</div>
+<!-- Barras de métricas ficha 2 -->
+<div class="space-y-2 mt-2">
+<div>
+<div class="flex justify-between text-[11px] text-gray-600 mb-0.5">
+<span class="">Tasa de cumplimiento docente en sistema</span>
+<span class="font-semibold text-[#2E7D32]">94%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+<div class="bg-[#2E7D32] h-2 rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] text-gray-600 mb-0.5">
+<span class="">Tasa de aprendices que asisten</span>
+<span class="font-semibold text-gray-700">89%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+<div class="bg-[#3D593D] h-1.5 rounded-full" style="width: 89%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- END: TopSectionGrid -->
+<!-- BEGIN: TrendChartSection -->
+<!-- Gráfico SVG Limpio: Cumplimiento Mes a Mes (Tendencia Histórica) -->
+<section class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm mb-6" data-purpose="monthly-trend-section">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-gray-100 mb-4 gap-2">
+<div>
+<h3 class="font-bold text-gray-900 text-sm">Cumplimiento Mes a Mes (Tendencia Histórica 2026)</h3>
+<p class="text-xs text-gray-500">Comportamiento del reporte oportuno de asistencia en relación a la meta institucional</p>
+</div>
+<div class="flex items-center space-x-4 text-xs font-medium">
+<div class="flex items-center space-x-1.5">
+<span class="w-3 h-0.5 bg-[#3D593D]"></span>
+<span class="w-2 h-2 rounded-full bg-[#3D593D]"></span>
+<span class="text-gray-600">% Cumplimiento Real</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<span class="w-4 h-0.5 border-t border-dashed border-[#F9A825]"></span>
+<span class="text-gray-500">Meta SENA (80%)</span>
+</div>
+</div>
+</div>
+<!-- Contenedor del Gráfico Vectorial -->
+<div class="w-full overflow-x-auto">
+<div class="min-w-[650px] h-64 relative py-2">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 240">
+<!-- Líneas de Guía Horizontales (Eje Y) -->
+<!-- 100% (Y = 20) -->
+<line stroke="#E5E7EB" stroke-dasharray="3,3" stroke-width="1" x1="45" x2="780" y1="20" y2="20"></line>
+<text fill="#9CA3AF" font-size="10" text-anchor="end" x="35" y="24">100%</text>
+<!-- 80% (Y = 60) -> Meta SENA -->
+<line stroke="#F9A825" stroke-dasharray="4,4" stroke-width="1.5" x1="45" x2="780" y1="60" y2="60"></line>
+<text fill="#D97706" font-size="10" font-weight="600" text-anchor="end" x="35" y="64">80%</text>
+<!-- 75% (Y = 70) -->
+<line stroke="#E5E7EB" stroke-dasharray="3,3" stroke-width="1" x1="45" x2="780" y1="70" y2="70"></line>
+<text fill="#9CA3AF" font-size="10" text-anchor="end" x="35" y="74">75%</text>
+<!-- 50% (Y = 120) -->
+<line stroke="#E5E7EB" stroke-dasharray="3,3" stroke-width="1" x1="45" x2="780" y1="120" y2="120"></line>
+<text fill="#9CA3AF" font-size="10" text-anchor="end" x="35" y="124">50%</text>
+<!-- 25% (Y = 170) -->
+<line stroke="#E5E7EB" stroke-dasharray="3,3" stroke-width="1" x1="45" x2="780" y1="170" y2="170"></line>
+<text fill="#9CA3AF" font-size="10" text-anchor="end" x="35" y="174">25%</text>
+<!-- 0% (Eje X base, Y = 220) -->
+<line stroke="#9CA3AF" stroke-width="1.5" x1="45" x2="780" y1="220" y2="220"></line>
+<text fill="#9CA3AF" font-size="10" text-anchor="end" x="35" y="223">0%</text>
+<!-- Área bajo la curva (Gradiente sutil institucional) -->
+<defs>
+<linearGradient id="senaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3D593D" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#3D593D" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<!-- Puntos de la curva calculados:
+                 Ene: x=75, y=64 (78%)
+                 Feb: x=175, y=56 (82%)
+                 Mar: x=275, y=52 (84%)
+                 Abr: x=375, y=60 (80%)
+                 May: x=475, y=48 (86%)
+                 Jun: x=575, y=40 (90%)
+                 Jul: x=675, y=36 (92%)
+                 Ago: x=755, y=28 (96%) -->
+<polygon fill="url(#senaGradient)" points="75,64 175,56 275,52 375,60 475,48 575,40 675,36 755,28 755,220 75,220"></polygon>
+<!-- Línea de tendencia -->
+<polyline fill="none" points="75,64 175,56 275,52 375,60 475,48 575,40 675,36 755,28" stroke="#3D593D" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
+<!-- Nodos con tooltip visual de datos -->
+<!-- Ene: 78% -->
+<circle cx="75" cy="64" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="75" y="52">78%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="75" y="235">Ene</text>
+<!-- Feb: 82% -->
+<circle cx="175" cy="56" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="175" y="44">82%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="175" y="235">Feb</text>
+<!-- Mar: 84% -->
+<circle cx="275" cy="52" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="275" y="40">84%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="275" y="235">Mar</text>
+<!-- Abr: 80% -->
+<circle cx="375" cy="60" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="375" y="48">80%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="375" y="235">Abr</text>
+<!-- May: 86% -->
+<circle cx="475" cy="48" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="475" y="36">86%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="475" y="235">May</text>
+<!-- Jun: 90% -->
+<circle cx="575" cy="40" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="575" y="28">90%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="575" y="235">Jun</text>
+<!-- Jul: 92% -->
+<circle cx="675" cy="36" fill="#3D593D" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text fill="#253825" font-size="9" font-weight="600" text-anchor="middle" x="675" y="24">92%</text>
+<text fill="#4B5563" font-size="11" font-weight="500" text-anchor="middle" x="675" y="235">Jul</text>
+<!-- Ago: 96% (Mes en curso) -->
+<circle cx="755" cy="28" fill="#2E7D32" r="6" stroke="#FFFFFF" stroke-width="2.5"></circle>
+<text fill="#2E7D32" font-size="10" font-weight="700" text-anchor="middle" x="755" y="16">96%</text>
+<text fill="#2E7D32" font-size="11" font-weight="700" text-anchor="middle" x="755" y="235">Ago (Act)</text>
+</svg>
+</div>
+</div>
+<p class="text-center text-xs font-semibold text-gray-500 mt-2">Meses Evaluados — Período Académico 2026</p>
+</section>
+<!-- END: TrendChartSection -->
+<!-- BEGIN: AttendanceHistoryTable -->
+<!-- Sección Inferior: Historial de Reportes y Registros de Asistencia -->
+<section class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-6" data-purpose="reports-history">
+<div class="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gray-50/50">
+<div>
+<h3 class="font-bold text-gray-900 text-sm">Historial de Reportes y Registros de Asistencia</h3>
+<p class="text-xs text-gray-500">Últimas actividades registradas en plataforma por el instructor</p>
+</div>
+<div class="flex items-center space-x-2">
+<input class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#3D593D]" placeholder="Filtrar por ficha o tipo..." type="text">
+<button class="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50" type="button">
+            Exportar CSV
+          </button>
+</div>
+</div>
+<!-- Tabla de Datos -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-gray-100/75 text-gray-600 font-semibold uppercase tracking-wider text-[11px] border-b border-gray-200">
+<tr>
+<th class="py-3 px-4" scope="col">Fecha</th>
+<th class="py-3 px-4" scope="col">Ficha</th>
+<th class="py-3 px-4" scope="col">Tipo de Reporte / Actividad</th>
+<th class="py-3 px-4" scope="col">Horario / Jornada</th>
+<th class="py-3 px-4 text-center" scope="col">Estado</th>
+<th class="py-3 px-4 text-right" scope="col">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<!-- Fila 1 -->
+<tr class="hover:bg-gray-50/80 transition-colors">
+<td class="py-3.5 px-4 font-medium text-gray-900 whitespace-nowrap">18/08/2026</td>
+<td class="py-3.5 px-4 font-semibold text-gray-800">
+<span class="bg-gray-100 px-2 py-0.5 rounded border border-gray-200">301002</span>
+</td>
+<td class="py-3.5 px-4 text-gray-700">Registro de asistencia diaria presencial</td>
+<td class="py-3.5 px-4 text-gray-500">07:00 - 13:00 (Mañana)</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-green-100 text-[#2E7D32]">
+                  Al día
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="text-[#3D593D] hover:text-[#253825] font-semibold hover:underline" type="button">Ver detalle</button>
+</td>
+</tr>
+<!-- Fila 2 -->
+<tr class="hover:bg-gray-50/80 transition-colors">
+<td class="py-3.5 px-4 font-medium text-gray-900 whitespace-nowrap">17/08/2026</td>
+<td class="py-3.5 px-4 font-semibold text-gray-800">
+<span class="bg-gray-100 px-2 py-0.5 rounded border border-gray-200">301010</span>
+</td>
+<td class="py-3.5 px-4 text-gray-700">Registro de asistencia diaria presencial</td>
+<td class="py-3.5 px-4 text-gray-500">14:00 - 18:00 (Tarde)</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-green-100 text-[#2E7D32]">
+                  Al día
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="text-[#3D593D] hover:text-[#253825] font-semibold hover:underline" type="button">Ver detalle</button>
+</td>
+</tr>
+<!-- Fila 3 -->
+<tr class="hover:bg-gray-50/80 transition-colors">
+<td class="py-3.5 px-4 font-medium text-gray-900 whitespace-nowrap">16/08/2026</td>
+<td class="py-3.5 px-4 font-semibold text-gray-800">
+<span class="bg-gray-100 px-2 py-0.5 rounded border border-gray-200">301002</span>
+</td>
+<td class="py-3.5 px-4 text-gray-700">Justificación médica de ausencias (3 aprendices)</td>
+<td class="py-3.5 px-4 text-gray-500">07:00 - 13:00 (Mañana)</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-[#B45309]">
+                  Pendiente validación
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="text-[#3D593D] hover:text-[#253825] font-semibold hover:underline" type="button">Gestionar</button>
+</td>
+</tr>
+<!-- Fila 4 -->
+<tr class="hover:bg-gray-50/80 transition-colors">
+<td class="py-3.5 px-4 font-medium text-gray-900 whitespace-nowrap">15/08/2026</td>
+<td class="py-3.5 px-4 font-semibold text-gray-800">
+<span class="bg-gray-100 px-2 py-0.5 rounded border border-gray-200">301010</span>
+</td>
+<td class="py-3.5 px-4 text-gray-700">Registro de asistencia sesión sincrónica virtual</td>
+<td class="py-3.5 px-4 text-gray-500">14:00 - 18:00 (Tarde)</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-green-100 text-[#2E7D32]">
+                  Al día
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="text-[#3D593D] hover:text-[#253825] font-semibold hover:underline" type="button">Ver detalle</button>
+</td>
+</tr>
+<!-- Fila 5 -->
+<tr class="hover:bg-gray-50/80 transition-colors">
+<td class="py-3.5 px-4 font-medium text-gray-900 whitespace-nowrap">14/08/2026</td>
+<td class="py-3.5 px-4 font-semibold text-gray-800">
+<span class="bg-gray-100 px-2 py-0.5 rounded border border-gray-200">301002</span>
+</td>
+<td class="py-3.5 px-4 text-gray-700">Reporte quincenal de novedades formativas</td>
+<td class="py-3.5 px-4 text-gray-500">Jornada Administrativa</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-green-100 text-[#2E7D32]">
+                  Al día
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="text-[#3D593D] hover:text-[#253825] font-semibold hover:underline" type="button">Ver detalle</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación de Tabla -->
+<div class="px-4 py-3 bg-white border-t border-gray-200 flex items-center justify-between">
+<span class="text-xs text-gray-500">Mostrando 5 de 48 registros</span>
+<div class="flex items-center space-x-1">
+<button class="px-2.5 py-1 text-xs border border-gray-200 rounded text-gray-500 hover:bg-gray-50" type="button">Anterior</button>
+<button class="px-2.5 py-1 text-xs bg-[#3D593D] text-white font-semibold rounded" type="button">1</button>
+<button class="px-2.5 py-1 text-xs border border-gray-200 rounded text-gray-600 hover:bg-gray-50" type="button">2</button>
+<button class="px-2.5 py-1 text-xs border border-gray-200 rounded text-gray-600 hover:bg-gray-50" type="button">3</button>
+<button class="px-2.5 py-1 text-xs border border-gray-200 rounded text-gray-500 hover:bg-gray-50" type="button">Siguiente</button>
+</div>
+</div>
+</section>
+<!-- END: AttendanceHistoryTable -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="bg-[#384E38] text-white text-xs border-t border-black/10 py-4 px-6 md:px-8">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+    <!-- Izquierda: Logo PuntualiX y Texto legal -->
+    <div class="flex items-center space-x-3 text-center md:text-left">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ" alt="PuntualiX" class="h-5 w-auto object-contain mr-1">
+      <span class="text-green-100 font-normal">Centro de Formación Regional SENA · 2026. Todos los derechos reservados.</span>
+    </div>
+
+    <!-- Derecha: Logo SENA, separador y datos de programa/ficha -->
+    <div class="flex items-center text-green-100 text-center md:text-right">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA5jwuvp6Xx9JvjeENsBxM0Es5ZoAJfZMQ_Sq9pQMLxay0aWe0hRKJ5GKkQTFxCxLnn330vSAnhQsb3Pty3yKIEmHueTYv6RMegE33719xEy65BTFW-fg9duQditx3Z1VP7O46tMx3MpZVMy5KnOtKQm0KJPlUuB0z_tiZuDsGdveplgga6tJTKSSVukB7V96dfHVBFwfT4b9UaVjzA5avTQz-43Nymcwaod_M74ARH7xFhKMnjj4" alt="SENA" class="w-6 h-6 object-contain mr-2">
+      <span class="">Programa: <strong class="text-white font-semibold">Análisis y desarrollo de Software</strong></span>
+      <div class="w-[1px] h-4 bg-white/25 mx-3 inline-block"></div>
+      <span class="">Ficha: <strong class="text-white font-semibold">3267541</strong></span>
+    </div>
+  </div>
+</footer>
+<!-- END: MainFooter -->
+
+
+</body></html>

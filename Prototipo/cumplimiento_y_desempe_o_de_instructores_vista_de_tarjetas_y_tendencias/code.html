@@ -1,0 +1,651 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>PuntualiX - SENA</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-low":"#eff4ff","on-error-container":"#93000a","state-success":"#2E7D32","border-subtle":"#E5EAE5","inverse-surface":"#27313f","outline":"#737970","primary-fixed-dim":"#afcfac","surface-card":"#FFFFFF","on-tertiary-container":"#ffb2ab","text-muted":"#64748B","on-primary-fixed-variant":"#324d32","error-container":"#ffdad6","surface-container-high":"#dee9fc","surface-tint":"#496548","surface-container-highest":"#d9e3f6","on-tertiary-fixed":"#410003","surface-bright":"#f8f9ff","outline-variant":"#c3c8be","secondary-container":"#e8e880","on-primary":"#ffffff","tertiary-fixed":"#ffdad6","secondary-fixed":"#e8e880","state-critical":"#DC2626","inverse-primary":"#afcfac","on-primary-container":"#aeceab","primary":"#264127","tertiary-container":"#a70717","on-surface":"#121c2a","surface-dim":"#d0dbed","state-info":"#1976D2","on-tertiary":"#ffffff","tertiary":"#7d000c","state-warning":"#F9A825","tertiary-fixed-dim":"#ffb3ad","on-secondary":"#ffffff","background":"#f8f9ff","surface-variant":"#d9e3f6","on-secondary-fixed":"#1d1d00","surface-container":"#e6eeff","secondary-fixed-dim":"#cccb67","on-primary-fixed":"#06210a","error":"#ba1a1a","on-tertiary-fixed-variant":"#930011","secondary":"#626201","on-error":"#ffffff","inverse-on-surface":"#eaf1ff","primary-fixed":"#cbebc6","surface-container-lowest":"#ffffff","surface":"#f8f9ff","on-secondary-fixed-variant":"#494900","primary-container":"#3d593d","surface-canvas":"#F4F6F4","on-background":"#121c2a","on-secondary-container":"#686808","on-surface-variant":"#434841"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-md":"1rem","space-lg":"1.5rem","space-xl":"2rem",margin:"2rem","space-xs":"0.25rem",gutter:"1.5rem","margin-sm":"1rem","gutter-sm":"1rem","space-sm":"0.5rem"},fontFamily:{"label-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-md":["Nunito Sans"],"title-sm":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Nunito Sans"],"body-lg":["Nunito Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"]},fontSize:{"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg-mobile":["24px",{lineHeight:"32px",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",fontWeight:"600"}],"display-lg":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"title-sm":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}]}}}};</script></head><body class="bg-surface-canvas text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-[#384E38] shadow-[0_1px_8px_rgba(0,0,0,0.06)] h-16"><div class="h-full w-full px-6 md:px-8 flex items-center justify-between gap-4"><div class="flex items-center shrink-0"><a class="flex items-center focus:outline-none" href="#"><img alt="PuntualiX" class="h-7 md:h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ"></a></div><nav class="hidden xl:flex items-center gap-1.5 p-1 bg-black/10 rounded-full"><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150" href="#">Dashboard</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150" href="#">Fichas</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/20 text-white shadow-sm flex items-center gap-1.5" href="#"><span class="material-symbols-outlined text-[16px]">groups</span><span class="">Instructores</span></a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150" href="#">Bitácora</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150" href="#">Estadísticas</a><a class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150" href="#">Reportes</a></nav><div class="flex items-center gap-3 shrink-0"><button aria-label="Notificaciones" class="relative p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-[#DC2626] rounded-full ring-2 ring-[#384E38]"></span></button><div class="hidden sm:block w-[1px] h-6 bg-white/20"></div><div class="flex items-center gap-2 pl-1 py-1 pr-2.5 bg-white text-on-surface hover:bg-white/95 rounded-full cursor-pointer transition-colors shadow-sm"><div class="w-7 h-7 rounded-full bg-[#384E38] text-white flex items-center justify-center text-xs font-bold shrink-0">AR</div><div class="hidden md:flex flex-col text-left"><span class="text-xs font-semibold text-on-surface leading-tight">Andres Ramirez</span><span class="text-[10px] text-text-muted leading-tight">Administrador</span></div><span class="material-symbols-outlined text-text-muted text-[18px]">expand_more</span></div></div></div></header><main class="w-full pt-16 bg-surface-canvas flex-1"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+<!-- Migas de Pan y Encabezado de Página -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-sm text-text-muted mb-1.5">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span class="">Inicio</span>
+</a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary transition-colors" href="#">Instructores</a>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Cumplimiento y Desempeño Mensual</span>
+</nav>
+<h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-on-surface">Cumplimiento y Desempeño de Instructores</h1>
+<p class="text-sm text-text-muted mt-0.5">Monitoreo continuo de registro oportuno de asistencias, tendencias mensuales y porcentaje de asistencia de aprendices por docente.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-card text-on-surface hover:bg-surface-container-low text-sm font-semibold shadow-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">table_rows</span>
+<span class="hidden sm:inline">Ver tabla completa</span>
+</a>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container text-sm font-semibold shadow-sm transition-colors shadow-primary/20" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span class="">Registrar Nuevo Instructor</span>
+</button>
+</div>
+</div>
+<!-- 4 Tarjetas de Métricas Resumen (KPIs) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-surface-card p-5 rounded-xl shadow-sm flex items-center gap-4 transition-transform hover:-translate-y-0.5 duration-200">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[26px]">groups</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">24</span>
+<span class="text-xs font-semibold text-state-success bg-state-success/10 px-1.5 py-0.5 rounded">100% activo</span>
+</div>
+<span class="text-xs font-medium text-text-muted block truncate mt-0.5">Instructores en ejercicio lectivo</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-card p-5 rounded-xl shadow-sm flex items-center gap-4 transition-transform hover:-translate-y-0.5 duration-200">
+<div class="w-12 h-12 rounded-xl bg-primary-container/15 flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[26px]">trending_up</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">75%</span>
+<span class="text-xs font-semibold text-state-success bg-state-success/10 px-1.5 py-0.5 rounded">+5% vs mes ant.</span>
+</div>
+<span class="text-xs font-medium text-text-muted block truncate mt-0.5">Cumplimiento promedio global</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-card p-5 rounded-xl shadow-sm flex items-center gap-4 transition-transform hover:-translate-y-0.5 duration-200">
+<div class="w-12 h-12 rounded-xl bg-state-critical/10 flex items-center justify-center text-state-critical shrink-0">
+<span class="material-symbols-outlined text-[26px]">flip_camera_ios</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-state-critical">3</span>
+<span class="text-xs font-semibold text-state-critical bg-state-critical/10 px-1.5 py-0.5 rounded">Prioridad Alta</span>
+</div>
+<span class="text-xs font-medium text-text-muted block truncate mt-0.5">Requieren seguimiento urgente</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-card p-5 rounded-xl shadow-sm flex items-center gap-4 transition-transform hover:-translate-y-0.5 duration-200">
+<div class="w-12 h-12 rounded-xl bg-secondary/15 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[26px]">location_on</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-on-surface">3</span>
+<span class="text-xs font-medium text-text-muted">Sedes</span>
+</div>
+<span class="text-xs font-medium text-text-muted block truncate mt-0.5" title="Casa de la Convención, CIAA, Yamboró">Convención, CIAA, Yamboró</span>
+</div>
+</div>
+</div>
+<!-- Panel de Filtros & Controles Operativos -->
+<div class="bg-surface-card p-4 sm:p-5 rounded-xl shadow-sm space-y-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 items-end">
+<!-- Filtro: Sede -->
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider" for="filtro-sede">Sede</label>
+<div class="relative">
+<select class="w-full bg-surface text-on-surface text-xs font-medium rounded-lg px-3 py-2 pr-8 focus:ring-2 focus:ring-primary focus:outline-none appearance-none cursor-pointer" id="filtro-sede">
+<option value="">Todas las sedes</option>
+<option value="convencion">Casa de la Convención</option>
+<option value="ciaa">CIAA</option>
+<option value="yamboro">Yamboró</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Filtro: Área / Especialidad -->
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider" for="filtro-area">Área / Especialidad</label>
+<div class="relative">
+<select class="w-full bg-surface text-on-surface text-xs font-medium rounded-lg px-3 py-2 pr-8 focus:ring-2 focus:ring-primary focus:outline-none appearance-none cursor-pointer" id="filtro-area">
+<option value="">Todas las áreas</option>
+<option value="adso">Desarrollo Software (ADSO)</option>
+<option value="admin">Gestión Administrativa</option>
+<option value="redes">Redes &amp; Telecomunicaciones</option>
+<option value="mercadeo">Mercadeo &amp; Comercial</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Filtro: Ficha -->
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider" for="filtro-ficha">Filtrar por Ficha</label>
+<div class="relative">
+<select class="w-full bg-surface text-on-surface text-xs font-medium rounded-lg px-3 py-2 pr-8 focus:ring-2 focus:ring-primary focus:outline-none appearance-none cursor-pointer" id="filtro-ficha">
+<option value="">Todas las fichas</option>
+<option value="301002">Ficha 301002</option>
+<option value="301003">Ficha 301003</option>
+<option value="301004">Ficha 301004</option>
+<option value="301005">Ficha 301005</option>
+<option value="301006">Ficha 301006</option>
+<option value="301007">Ficha 301007</option>
+<option value="301008">Ficha 301008</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Filtro: Nivel Cumplimiento -->
+<div class="space-y-1">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider" for="filtro-cumplimiento">Nivel Cumplimiento</label>
+<div class="relative">
+<select class="w-full bg-surface text-on-surface text-xs font-medium rounded-lg px-3 py-2 pr-8 focus:ring-2 focus:ring-primary focus:outline-none appearance-none cursor-pointer" id="filtro-cumplimiento">
+<option value="">Todos los niveles</option>
+<option value="optimo">Óptimo (&gt;80%)</option>
+<option value="medio">Medio (60% - 79%)</option>
+<option value="critico">Crítico (&lt;60%)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Buscador de Instructor -->
+<div class="space-y-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider" for="buscar-instructor">Buscar Instructor</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-muted text-[18px]">search</span>
+<input class="w-full bg-surface text-on-surface text-xs font-medium rounded-lg pl-9 pr-3 py-2 focus:ring-2 focus:ring-primary focus:outline-none placeholder:text-text-muted/60" id="buscar-instructor" placeholder="Buscar por nombre o cédula..." type="text">
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1 flex-wrap gap-2">
+<button class="inline-flex items-center gap-1.5 text-xs font-semibold text-text-muted hover:text-primary transition-colors py-1" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span class="">Limpiar filtros</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-text-muted">Vista:</span>
+<div class="inline-flex p-0.5 bg-surface rounded-lg">
+<button aria-label="Vista cuadrícula activa" class="p-1.5 rounded-md bg-surface-card text-primary shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px] block">grid_view</span>
+</button>
+<button aria-label="Cambiar a vista tabla" class="p-1.5 rounded-md text-text-muted hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px] block">format_list_bulleted</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cuadrícula Canónica de Tarjetas de Instructores (8 Instructores) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+<!-- Card 1: Andrés Ramírez (96% Óptimo) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                AR
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Andrés Ramírez</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301002 · ADSO</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-success/10 text-state-success">
+              96%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: 78% -> 96%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-green-1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#2E7D32" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#2E7D32" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 35 Q 40 32, 80 24 T 160 16 T 240 8 L 240 60 L 0 60 Z" fill="url(#grad-green-1)"></path>
+<path d="M 0 35 Q 40 32, 80 24 T 160 16 T 240 8" fill="none" stroke="#2E7D32" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="8" fill="#2E7D32" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (78%)</span>
+<span class="text-state-success font-semibold">Tendencia +18%</span>
+<span class="">Ago (96%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">93%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Registros a tiempo:</span>
+<span class="font-bold text-state-success">98%</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 2: María Gonzáles (62% Medio) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                MG
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">María Gonzáles</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301003 · Gestión Admin.</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-warning/15 text-secondary">
+              62%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Oscilante 65% -> 62%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-yellow-2" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#F9A825" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#F9A825" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 25 Q 60 40, 120 28 T 180 34 T 240 32 L 240 60 L 0 60 Z" fill="url(#grad-yellow-2)"></path>
+<path d="M 0 25 Q 60 40, 120 28 T 180 34 T 240 32" fill="none" stroke="#F9A825" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="32" fill="#F9A825" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (65%)</span>
+<span class="text-secondary font-semibold">Inestable</span>
+<span class="">Ago (62%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">79%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Registros a tiempo:</span>
+<span class="font-bold text-secondary">68%</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 3: Jorge Pérez (58% Crítico) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-state-critical text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                JP
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Jorge Pérez</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301004 · ADSO Nocturno</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-critical/10 text-state-critical">
+              58%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Decadencia a 58%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-red-3" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#DC2626" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#DC2626" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 24 Q 60 28, 120 36 T 180 40 T 240 44 L 240 60 L 0 60 Z" fill="url(#grad-red-3)"></path>
+<path d="M 0 24 Q 60 28, 120 36 T 180 40 T 240 44" fill="none" stroke="#DC2626" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="44" fill="#DC2626" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (68%)</span>
+<span class="text-state-critical font-semibold">Descenso -10%</span>
+<span class="">Ago (58%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">70%</span>
+</div>
+<div class="flex justify-between items-center text-state-critical font-semibold">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                Alerta:
+              </span>
+<span class="">3 faltas sin registrar</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 4: Pedro Ramírez (40% Crítico) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-state-critical text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                PR
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Pedro Ramírez</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301005 · Redes y Telecom.</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-critical/10 text-state-critical">
+              40%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Marcada a la baja 40%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-red-4" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#DC2626" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#DC2626" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 20 Q 50 25, 100 38 T 170 48 T 240 52 L 240 60 L 0 60 Z" fill="url(#grad-red-4)"></path>
+<path d="M 0 20 Q 50 25, 100 38 T 170 48 T 240 52" fill="none" stroke="#DC2626" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="52" fill="#DC2626" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (60%)</span>
+<span class="text-state-critical font-semibold">Crítico -20%</span>
+<span class="">Ago (40%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">65%</span>
+</div>
+<div class="flex justify-between items-center text-state-critical font-bold">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">report</span>
+                Sin justificar:
+              </span>
+<span class="">2 semanas</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 5: Laura Torres (74% Medio) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs flex items-center justify-center shrink-0">
+                LT
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Laura Torres</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301006 · Redes II</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-warning/15 text-secondary">
+              74%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Estable 74%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-yellow-5" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#F9A825" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#F9A825" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 30 Q 60 28, 120 26 T 180 27 T 240 26 L 240 60 L 0 60 Z" fill="url(#grad-yellow-5)"></path>
+<path d="M 0 30 Q 60 28, 120 26 T 180 27 T 240 26" fill="none" stroke="#F9A825" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="26" fill="#F9A825" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (72%)</span>
+<span class="text-secondary font-semibold">Estable</span>
+<span class="">Ago (74%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">82%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Registros a tiempo:</span>
+<span class="font-bold text-on-surface">78%</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 6: Carlos Ruiz (52% Crítico) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-state-critical text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                CR
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Carlos Ruiz</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301007 · Mercadeo Digital</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-critical/10 text-state-critical">
+              52%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Oscilante bajo a 52%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-red-6" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#DC2626" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#DC2626" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 35 Q 40 46, 80 32 T 160 48 T 240 45 L 240 60 L 0 60 Z" fill="url(#grad-red-6)"></path>
+<path d="M 0 35 Q 40 46, 80 32 T 160 48 T 240 45" fill="none" stroke="#DC2626" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="45" fill="#DC2626" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (55%)</span>
+<span class="text-state-critical font-semibold">Crítico</span>
+<span class="">Ago (52%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">68%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Registros a tiempo:</span>
+<span class="font-bold text-state-critical">56%</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 7: Sofía Vargas (88% Óptimo) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                SV
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Sofía Vargas</h2>
+<p class="text-xs text-text-muted truncate">Ficha 301008 · Mercadeo Promocional</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-success/10 text-state-success">
+              88%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Ascendente a 88%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-green-7" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#2E7D32" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#2E7D32" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 42 Q 60 38, 120 28 T 180 20 T 240 14 L 240 60 L 0 60 Z" fill="url(#grad-green-7)"></path>
+<path d="M 0 42 Q 60 38, 120 28 T 180 20 T 240 14" fill="none" stroke="#2E7D32" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="14" fill="#2E7D32" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (70%)</span>
+<span class="text-state-success font-semibold">Ascenso +18%</span>
+<span class="">Ago (88%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">89%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Registros a tiempo:</span>
+<span class="font-bold text-state-success">92%</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 8: Ricardo Álvarez (85% Óptimo) -->
+<div class="bg-surface-card rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center shrink-0">
+                RA
+              </div>
+<div class="min-w-0">
+<h2 class="text-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Ricardo Álvarez</h2>
+<p class="text-xs text-text-muted truncate">Ficha 246801 · Automatización Ind.</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-state-success/10 text-state-success">
+              85%
+            </span>
+</div>
+<!-- Mini Gráfico de Tendencia SVG (Ene - Ago: Estable en 85%) -->
+<div class="mt-4 pt-2">
+<div class="h-16 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 240 60">
+<defs>
+<linearGradient id="grad-green-8" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#2E7D32" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#2E7D32" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<path d="M 0 26 Q 60 22, 120 20 T 180 21 T 240 18 L 240 60 L 0 60 Z" fill="url(#grad-green-8)"></path>
+<path d="M 0 26 Q 60 22, 120 20 T 180 21 T 240 18" fill="none" stroke="#2E7D32" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="240" cy="18" fill="#2E7D32" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] text-text-muted font-medium mt-1">
+<span class="">Ene (82%)</span>
+<span class="text-state-success font-semibold">Consolidado</span>
+<span class="">Ago (85%)</span>
+</div>
+</div>
+<!-- Métricas del Instructor -->
+<div class="mt-4 space-y-1.5 pt-3 bg-surface/50 p-2.5 rounded-lg text-xs">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Asistencia aprendices:</span>
+<span class="font-bold text-on-surface">91%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">Registros a tiempo:</span>
+<span class="font-bold text-state-success">94%</span>
+</div>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center justify-between w-full pt-3 text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+<span class="">Ver perfil del instructor</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Paginación Inferior Canónica -->
+<div class="bg-surface-card px-5 py-3.5 rounded-xl shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+<div class="text-xs font-medium text-text-muted">
+        Mostrando <span class="font-bold text-on-surface">8</span> de <span class="font-bold text-on-surface">24</span> instructores registrados
+      </div>
+<div class="flex items-center space-x-1.5">
+<button class="px-3 py-1.5 text-xs font-semibold text-text-muted/60 bg-surface rounded-lg cursor-not-allowed" type="button">
+          Anterior
+        </button>
+<button class="w-8 h-8 flex items-center justify-center text-xs font-bold rounded-lg bg-primary text-on-primary shadow-xs" type="button">
+          1
+        </button>
+<button class="w-8 h-8 flex items-center justify-center text-xs font-semibold rounded-lg text-on-surface hover:bg-surface-container-low transition-colors" type="button">
+          2
+        </button>
+<button class="w-8 h-8 flex items-center justify-center text-xs font-semibold rounded-lg text-on-surface hover:bg-surface-container-low transition-colors" type="button">
+          3
+        </button>
+<button class="px-3 py-1.5 text-xs font-semibold text-primary hover:bg-surface-container-low bg-surface rounded-lg transition-colors" type="button">
+          Siguiente
+        </button>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-[#384E38] text-white shadow-[0_-1px_6px_rgba(0,0,0,0.04)] py-4 px-6 md:px-8 text-xs"><div class="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left"><div class="flex items-center gap-3 flex-wrap justify-center md:justify-start"><img alt="PuntualiX" class="h-5 w-auto object-contain mr-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ"><span class="text-white/80">Sistema Integrado de Control Asistencia &amp; Gestión Académica SENA · 2026</span><span class="hidden lg:inline text-white/50">•</span><span class="hidden lg:inline text-white/70">Todos los derechos reservados</span></div><div class="flex items-center gap-2 flex-wrap justify-center md:justify-end text-white/85"><img alt="SENA" class="w-6 h-6 object-contain mr-1 brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA5jwuvp6Xx9JvjeENsBxM0Es5ZoAJfZMQ_Sq9pQMLxay0aWe0hRKJ5GKkQTFxCxLnn330vSAnhQsb3Pty3yKIEmHueTYv6RMegE33719xEy65BTFW-fg9duQditx3Z1VP7O46tMx3MpZVMy5KnOtKQm0KJPlUuB0z_tiZuDsGdveplgga6tJTKSSVukB7V96dfHVBFwfT4b9UaVjzA5avTQz-43Nymcwaod_M74ARH7xFhKMnjj4"><div class="hidden sm:block w-[1px] h-4 bg-white/25 mx-2"></div><span class="">Programa: Análisis y desarrollo de Software</span><span class="text-white/50">|</span><span class="">Ficha: 3267541</span></div></div></footer>
+
+
+</body></html>

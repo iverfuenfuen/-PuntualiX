@@ -1,0 +1,672 @@
+<!DOCTYPE html><html class="h-full bg-slate-50" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PuntualiX SENA - Bitácora y Auditoría de Actividades</title>
+<!-- Google Fonts: Poppins (Titulares) y Nunito (Cuerpo e Interfaz) -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;family=Poppins:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN con plugins oficiales -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Configuración de Tema Personalizado PuntualiX -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#253825',       // Verde SENA footer / fondo profundo
+              primary: '#3D593D',    // Verde institucional canónico PuntualiX
+              medium: '#4D6E4D',     // Verde secundario interactivo
+              light: '#EBF2EB',      // Verde fondo sutil
+              accent: '#39A900',     // Verde brillante SENA oficial
+            }
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Estilos Específicos para Tipografía y Suavizado -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: #1e293b;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+<!-- Estilos para Elementos de Interfaz y Scroll -->
+<style data-purpose="component-styling">
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-[#F6F8F6] text-slate-800">
+<!-- BEGIN: MainHeader -->
+<!-- Encabezado canónico superior PuntualiX con verde institucional #3D593D -->
+<header class="bg-[#384E38] text-white shadow-md sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Izquierda: Logo negativo PuntualiX -->
+      <div class="flex items-center space-x-3">
+        <img alt="PuntualiX" class="h-7 md:h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ">
+      </div>
+      <!-- Centro / Navegación -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 font-medium text-sm">
+        <a class="px-3 py-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center space-x-1.5" href="#">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="">Dashboard</span>
+        </a>
+        <a class="px-3 py-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center space-x-1.5" href="#">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="">Fichas</span>
+        </a>
+        <a class="px-3 py-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center space-x-1.5" href="#">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="">Instructores</span>
+        </a>
+        <a class="px-3.5 py-1.5 rounded-lg bg-white/20 text-white font-semibold shadow-inner border border-white/15 flex items-center space-x-1.5" href="#">
+          <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="">Bitácora</span>
+        </a>
+        <a class="px-3 py-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center space-x-1.5" href="#">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="">Estadísticas</span>
+        </a>
+        <a class="px-3 py-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors flex items-center space-x-1.5" href="#">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="">Reportes</span>
+        </a>
+      </nav>
+      <!-- Derecha: Campana, divisor y cápsula blanca de usuario -->
+      <div class="flex items-center space-x-3">
+        <button class="p-2 text-white/80 hover:text-white rounded-full hover:bg-white/10 relative focus:outline-none focus:ring-2 focus:ring-white/40" title="Notificaciones" type="button">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-[#384E38]"></span>
+        </button>
+        <div class="w-[1px] h-6 bg-white/20"></div>
+        <div class="flex items-center space-x-2.5 bg-white text-slate-800 rounded-full pl-1.5 pr-3 py-1 shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-[#384E38] text-white flex items-center justify-center text-xs font-bold">
+            AR
+          </div>
+          <div class="hidden sm:block text-left leading-tight pr-1">
+            <p class="text-xs font-bold text-slate-900 leading-none">Andrés Ramírez</p>
+            <p class="text-[10px] text-slate-500 font-medium leading-tight mt-0.5">Administrador</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: MainHeader -->
+<!-- Contenedor Principal de la Aplicación -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-7 space-y-6">
+<!-- BEGIN: HeroSection -->
+<!-- Breadcrumb y Cabecera de Página con Exportación Rápida -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2 border-b border-slate-200">
+<div>
+<nav aria-label="Breadcrumb" class="flex items-center text-xs text-slate-500 mb-2 space-x-2 font-medium">
+<a class="hover:text-emerald-800 flex items-center gap-1" href="#">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Inicio</span>
+</a>
+<span class="">/</span>
+<span class="text-slate-800 font-semibold text-emerald-900">Bitácora y Auditoría Institucional</span>
+</nav>
+<h1 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900 tracking-tight">
+          Bitácora de Actividades y Auditoría
+        </h1>
+<p class="text-sm text-slate-600 mt-1 max-w-2xl">
+          Trazabilidad centralizada de eventos, modificaciones de datos y operaciones en tiempo real del sistema SENA.
+        </p>
+</div>
+<!-- Acciones Principales -->
+<div class="flex items-center space-x-2.5">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 hover:text-slate-900 shadow-sm transition" type="button">
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Exportar CSV / Excel
+        </button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-white bg-[#3D593D] hover:bg-[#324a32] rounded-lg shadow-sm transition" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Actualizar Registro
+        </button>
+</div>
+</div>
+<!-- END: HeroSection -->
+<!-- BEGIN: MetricsCards -->
+<!-- Resumen analítico de eventos registrados -->
+<section aria-label="Métricas de eventos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1: Total Eventos -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+<div class="space-y-1">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Eventos</span>
+<div class="text-2xl sm:text-3xl font-heading font-extrabold text-slate-800">238</div>
+<span class="text-[11px] text-slate-500 font-medium">Registrados en el ciclo lectivo</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Card 2: Operaciones Exitosas -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+<div class="space-y-1">
+<span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Operaciones Exitosas</span>
+<div class="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-700">211</div>
+<span class="text-[11px] text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full inline-block">88.6% de efectividad</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Card 3: Advertencias / Alertas -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-amber-100 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+<div class="space-y-1">
+<span class="text-xs font-bold uppercase tracking-wider text-amber-800">Alertas Preventivas</span>
+<div class="text-2xl sm:text-3xl font-heading font-extrabold text-amber-600">19</div>
+<span class="text-[11px] text-amber-600 font-semibold bg-amber-50 px-2 py-0.5 rounded-full inline-block">Requieren seguimiento</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Card 4: Errores / Incidentes -->
+<div class="bg-white p-4 sm:p-5 rounded-xl border border-rose-100 shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+<div class="space-y-1">
+<span class="text-xs font-bold uppercase tracking-wider text-rose-800">Errores / Incidentes</span>
+<div class="text-2xl sm:text-3xl font-heading font-extrabold text-rose-600">8</div>
+<span class="text-[11px] text-rose-600 font-semibold bg-rose-50 px-2 py-0.5 rounded-full inline-block">3.3% tasa de fallas</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</section>
+<!-- END: MetricsCards -->
+<!-- BEGIN: FilterAndSearchSection -->
+<!-- Controles de filtrado contextual sin redundancia de interfaz -->
+<section class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-sm space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
+<!-- Búsqueda Universal -->
+<div class="md:col-span-5 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<input class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs sm:text-sm focus:ring-2 focus:ring-[#3D593D] focus:border-transparent transition-all placeholder:text-slate-400" placeholder="Buscar por responsable, ficha, acción o detalle..." type="text">
+</div>
+<!-- Filtro Sede -->
+<div class="md:col-span-2">
+<label class="sr-only">Sede</label>
+<select class="w-full py-2 pl-3 pr-8 bg-slate-50 border border-slate-300 rounded-lg text-xs sm:text-sm focus:ring-2 focus:ring-[#3D593D] focus:border-transparent text-slate-700">
+<option value="">Sede: Todas</option>
+<option value="1">Casa de la Convención</option>
+<option value="2">CIAA Agroindustrial</option>
+<option value="3">Campus Yamboró</option>
+</select>
+</div>
+<!-- Filtro Módulo -->
+<div class="md:col-span-2">
+<label class="sr-only">Módulo</label>
+<select class="w-full py-2 pl-3 pr-8 bg-slate-50 border border-slate-300 rounded-lg text-xs sm:text-sm focus:ring-2 focus:ring-[#3D593D] focus:border-transparent text-slate-700">
+<option value="">Módulo: Todos</option>
+<option value="asistencias">Asistencias</option>
+<option value="fichas">Gestión de Fichas</option>
+<option value="instructores">Instructores</option>
+<option value="reportes">Reportes y Descargas</option>
+<option value="seguridad">Seguridad / Auth</option>
+</select>
+</div>
+<!-- Filtro Estado/Resultado -->
+<div class="md:col-span-2">
+<label class="sr-only">Resultado</label>
+<select class="w-full py-2 pl-3 pr-8 bg-slate-50 border border-slate-300 rounded-lg text-xs sm:text-sm focus:ring-2 focus:ring-[#3D593D] focus:border-transparent text-slate-700">
+<option value="">Estado: Todos</option>
+<option value="exito">Solo Éxitos</option>
+<option value="alerta">Solo Alertas</option>
+<option value="error">Solo Errores</option>
+</select>
+</div>
+<!-- Botón Limpiar Filtros -->
+<div class="md:col-span-1 flex justify-end">
+<button class="w-full py-2 px-2 text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 rounded-lg transition-colors flex items-center justify-center gap-1" title="Restablecer filtros" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="md:hidden lg:inline">Limpiar</span>
+</button>
+</div>
+</div>
+<!-- Filtros Rápidos / Pills de Estado -->
+<div class="flex flex-wrap items-center justify-between pt-2 border-t border-slate-100 gap-2">
+<div class="flex items-center space-x-1.5 text-xs text-slate-500">
+<span class="font-medium mr-1">Vistas rápidas:</span>
+<button class="px-2.5 py-1 rounded-md bg-[#3D593D] text-white font-semibold">Todas (238)</button>
+<button class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">Solo Asistencias (142)</button>
+<button class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">Incidentes (8)</button>
+<button class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">Hoy</button>
+</div>
+<div class="text-xs text-slate-500 font-medium">
+          Rango activo: <span class="text-slate-800 font-semibold">20 Ago 2026</span>
+</div>
+</div>
+</section>
+<!-- END: FilterAndSearchSection -->
+<!-- BEGIN: AuditLogTable -->
+<!-- Tabla de auditoría optimizada: sin textos repetidos, jerarquía visual limpia -->
+<section class="bg-white rounded-xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse text-slate-700">
+<!-- Cabecera de la Tabla -->
+<thead>
+<tr class="bg-slate-50/90 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+<th class="py-3 px-4 w-40" scope="col">Fecha y Hora</th>
+<th class="py-3 px-4 w-52" scope="col">Usuario Responsable</th>
+<th class="py-3 px-4 w-60" scope="col">Módulo y Acción</th>
+<th class="py-3 px-4" scope="col">Detalle Operacional</th>
+<th class="py-3 px-4 text-center w-28" scope="col">Resultado</th>
+<th class="py-3 px-4 text-center w-20" scope="col">Acción</th>
+</tr>
+</thead>
+<!-- Filas de Registros de Auditoría -->
+<tbody class="divide-y divide-slate-100 text-xs sm:text-[13px]">
+<!-- Fila 1: Asistencia Jorge Pérez -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">08:15:22 AM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold text-[11px] flex items-center justify-center border border-slate-200">
+                    JP
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Jorge Pérez</p>
+<span class="inline-block text-[11px] text-slate-500">Instructor ADSO</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200/60">
+                    Asistencias
+                  </span>
+<p class="font-medium text-slate-800">Toma de asistencia técnica</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">Ficha 301004 <span class="text-slate-400 font-normal">|</span> Análisis y desarrollo</p>
+<p class="text-[11px] text-slate-500">Competencia: "Análisis de requisitos del cliente" · 24 aprendices evaluados</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Éxito
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 2: Registro de Instructor Diego Medina -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">09:20:05 AM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#3D593D]/10 text-[#3D593D] font-bold text-[11px] flex items-center justify-center border border-[#3D593D]/30">
+                    AR
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Andrés Ramírez</p>
+<span class="inline-block text-[11px] text-emerald-800 font-semibold">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-50 text-purple-700 border border-purple-200/60">
+                    Instructores
+                  </span>
+<p class="font-medium text-slate-800">Alta de usuario docente</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">Docente: Diego Medina <span class="text-slate-400 font-normal">|</span> CC. 1083892***</p>
+<p class="text-[11px] text-slate-500">Perfil asignado: Instructor Técnico en Redes y Telecomunicaciones</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Éxito
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 3: Asignación a Carlos Ruiz -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">10:12:44 AM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#3D593D]/10 text-[#3D593D] font-bold text-[11px] flex items-center justify-center border border-[#3D593D]/30">
+                    AR
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Andrés Ramírez</p>
+<span class="inline-block text-[11px] text-emerald-800 font-semibold">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                    Fichas
+                  </span>
+<p class="font-medium text-slate-800">Asignación de instructor</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">Carlos Ruiz asignado a Ficha 301007</p>
+<p class="text-[11px] text-slate-500">Módulo: "Mercadeo Digital" · Jornada Diurna (Sede Convención)</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Éxito
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 4: Laura Torres material de apoyo -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">10:34:10 AM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold text-[11px] flex items-center justify-center border border-slate-200">
+                    LT
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Laura Torres</p>
+<span class="inline-block text-[11px] text-slate-500">Instructora Bases de Datos</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200/60">
+                    Material
+                  </span>
+<p class="font-medium text-slate-800">Publicación de guía pedagógica</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">Guía: "Fundamentos de bases de datos relacionales"</p>
+<p class="text-[11px] text-slate-500">Vinculado a Ficha 301006 · Documento PDF 4.2 MB</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Éxito
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 5: Incidente / Fallo Reporte Paula Castro -->
+<tr class="hover:bg-rose-50/40 bg-rose-50/20 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-rose-500 font-semibold">11:28:19 AM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-rose-100 text-rose-700 font-bold text-[11px] flex items-center justify-center border border-rose-200">
+                    PC
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Paula Castro</p>
+<span class="inline-block text-[11px] text-slate-500">Instructora Gestión</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-100 text-rose-800 border border-rose-200">
+                    Reportes
+                  </span>
+<p class="font-medium text-slate-800">Generación consolidado mensual</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-rose-900 font-semibold">Fallo en pipeline de consolidación · Ficha 301012</p>
+<p class="text-[11px] text-rose-700">Tiempo de espera agotado al consultar registros de inasistencias acumuladas</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-700 border border-rose-300">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse"></span>
+                  Error
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-rose-600 hover:text-rose-800 hover:bg-rose-100 rounded-lg transition" title="Ver log de excepción" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 6: Natalia Moreno Modificación / Alerta Justificación -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">12:05:51 PM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 font-bold text-[11px] flex items-center justify-center border border-slate-200">
+                    NM
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Natalia Moreno</p>
+<span class="inline-block text-[11px] text-slate-500">Instructora</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
+                    Asistencias
+                  </span>
+<p class="font-medium text-slate-800">Modificación justificada de inasistencia</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">Aprendiz: Juan Camilo Parra <span class="text-slate-400 font-normal">|</span> Ficha 301010</p>
+<p class="text-[11px] text-slate-500">Estado modificado de "Inasistencia injustificada" a "Incapacidad médica EPS"</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                  Alerta
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 7: Alta de Nueva Ficha -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">12:47:30 PM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#3D593D]/10 text-[#3D593D] font-bold text-[11px] flex items-center justify-center border border-[#3D593D]/30">
+                    AR
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Andrés Ramírez</p>
+<span class="inline-block text-[11px] text-emerald-800 font-semibold">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                    Fichas
+                  </span>
+<p class="font-medium text-slate-800">Creación de grupo lectivo</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">Ficha 301240 <span class="text-slate-400 font-normal">·</span> ADSO Tecnólogo Nocturno</p>
+<p class="text-[11px] text-slate-500">Capacidad: 30 cupos · Centro de Gestión y Desarrollo Agroindustrial</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Éxito
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+<!-- Fila 8: Rol de Instructor Líder -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="py-3 px-4 text-slate-600 font-medium whitespace-nowrap">
+<span class="block text-slate-900 font-semibold">20 Ago 2026</span>
+<span class="text-[11px] text-slate-400">01:58:15 PM</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#3D593D]/10 text-[#3D593D] font-bold text-[11px] flex items-center justify-center border border-[#3D593D]/30">
+                    AR
+                  </div>
+<div class="leading-tight">
+<p class="font-bold text-slate-900">Andrés Ramírez</p>
+<span class="inline-block text-[11px] text-emerald-800 font-semibold">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="space-y-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-50 text-cyan-800 border border-cyan-200/60">
+                    Seguridad / Roles
+                  </span>
+<p class="font-medium text-slate-800">Ascenso de permisos de coordinación</p>
+</div>
+</td>
+<td class="py-3 px-4 text-slate-600">
+<p class="text-slate-800 font-medium">María Gonzales asignada como Instructora Líder</p>
+<p class="text-[11px] text-slate-500">Ficha 301003 · Asignación de permisos de validación de quórum</p>
+</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Éxito
+                </span>
+</td>
+<td class="py-3 px-4 text-center">
+<button class="p-1.5 text-slate-400 hover:text-[#3D593D] hover:bg-slate-100 rounded-lg transition" title="Ver detalles técnicos" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Barra Inferior de Paginación y Estado -->
+<div class="px-4 py-3.5 bg-slate-50/80 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-600">
+<div class="flex items-center space-x-2">
+<span class="">Mostrando registros</span>
+<span class="font-bold text-slate-900">1 al 8</span>
+<span class="">de</span>
+<span class="font-bold text-slate-900">238</span>
+<span class="hidden sm:inline text-slate-400">|</span>
+<span class="hidden sm:inline text-slate-500">Filtrado por sincronización de servidor</span>
+</div>
+<!-- Botonera de Navegación Numérica -->
+<div class="flex items-center space-x-1 self-center sm:self-auto">
+<button class="px-2.5 py-1.5 rounded border border-slate-300 bg-white text-slate-400 hover:bg-slate-100 transition disabled:opacity-50" disabled="" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="px-3 py-1.5 rounded bg-[#3D593D] text-white font-bold shadow-xs" type="button">1</button>
+<button class="px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 font-medium transition" type="button">2</button>
+<button class="px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 font-medium transition" type="button">3</button>
+<span class="px-1 text-slate-400">...</span>
+<button class="px-3 py-1.5 rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 font-medium transition" type="button">24</button>
+<button class="px-2.5 py-1.5 rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</section>
+<!-- END: AuditLogTable -->
+</main>
+<!-- BEGIN: MainFooter -->
+<!-- Footer Institucional PuntualiX / SENA canónico -->
+<footer class="bg-[#384E38] text-white text-xs py-4 px-6 md:px-8 mt-12 border-t border-white/10">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+    <!-- Izquierda: Logo PuntualiX negativo y textos legales -->
+    <div class="flex items-center space-x-3">
+      <img alt="PuntualiX" class="h-5 w-auto object-contain mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ">
+      <div>
+        <p class="font-medium text-white">Desarrollado en el marco del proyecto de formación SENA · 2026</p>
+        <p class="text-white/70 text-[11px]">© 2026 PuntualiX SENA. Todos los derechos reservados · Plataforma de Control Asistencia &amp; Gestión Académica</p>
+      </div>
+    </div>
+    <!-- Derecha: Logo SENA, divisor y metadatos del programa -->
+    <div class="flex items-center border-t md:border-t-0 border-white/10 pt-3 md:pt-0">
+      <img alt="SENA" class="w-6 h-6 object-contain mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA5jwuvp6Xx9JvjeENsBxM0Es5ZoAJfZMQ_Sq9pQMLxay0aWe0hRKJ5GKkQTFxCxLnn330vSAnhQsb3Pty3yKIEmHueTYv6RMegE33719xEy65BTFW-fg9duQditx3Z1VP7O46tMx3MpZVMy5KnOtKQm0KJPlUuB0z_tiZuDsGdveplgga6tJTKSSVukB7V96dfHVBFwfT4b9UaVjzA5avTQz-43Nymcwaod_M74ARH7xFhKMnjj4">
+      <span class="text-white/90">Programa: <strong class="text-white font-semibold">Análisis y desarrollo de Software</strong></span>
+      <div class="w-[1px] h-6 bg-white/25 mx-3"></div>
+      <div class="bg-white/10 px-2.5 py-1 rounded text-[11px] font-mono text-white">
+        Ficha: 3267541
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END: MainFooter -->
+
+
+</body></html>

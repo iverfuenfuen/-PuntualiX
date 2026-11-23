@@ -1,0 +1,761 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>PuntualiX - SENA</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-low":"#eff4ff","on-error-container":"#93000a","state-success":"#2E7D32","border-subtle":"#E5EAE5","inverse-surface":"#27313f","outline":"#737970","primary-fixed-dim":"#afcfac","surface-card":"#FFFFFF","on-tertiary-container":"#ffb2ab","text-muted":"#64748B","on-primary-fixed-variant":"#324d32","error-container":"#ffdad6","surface-container-high":"#dee9fc","surface-tint":"#496548","surface-container-highest":"#d9e3f6","on-tertiary-fixed":"#410003","surface-bright":"#f8f9ff","outline-variant":"#c3c8be","secondary-container":"#e8e880","on-primary":"#ffffff","tertiary-fixed":"#ffdad6","secondary-fixed":"#e8e880","state-critical":"#DC2626","inverse-primary":"#afcfac","on-primary-container":"#aeceab","primary":"#264127","tertiary-container":"#a70717","on-surface":"#121c2a","surface-dim":"#d0dbed","state-info":"#1976D2","on-tertiary":"#ffffff","tertiary":"#7d000c","state-warning":"#F9A825","tertiary-fixed-dim":"#ffb3ad","on-secondary":"#ffffff","background":"#f8f9ff","surface-variant":"#d9e3f6","on-secondary-fixed":"#1d1d00","surface-container":"#e6eeff","secondary-fixed-dim":"#cccb67","on-primary-fixed":"#06210a","error":"#ba1a1a","on-tertiary-fixed-variant":"#930011","secondary":"#626201","on-error":"#ffffff","inverse-on-surface":"#eaf1ff","primary-fixed":"#cbebc6","surface-container-lowest":"#ffffff","surface":"#f8f9ff","on-secondary-fixed-variant":"#494900","primary-container":"#3d593d","surface-canvas":"#F4F6F4","on-background":"#121c2a","on-secondary-container":"#686808","on-surface-variant":"#434841"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-md":"1rem","space-lg":"1.5rem","space-xl":"2rem",margin:"2rem","space-xs":"0.25rem",gutter:"1.5rem","margin-sm":"1rem","gutter-sm":"1rem","space-sm":"0.5rem"},fontFamily:{"label-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-md":["Nunito Sans"],"title-sm":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Nunito Sans"],"body-lg":["Nunito Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"]},fontSize:{"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg-mobile":["24px",{lineHeight:"32px",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",fontWeight:"600"}],"display-lg":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"title-sm":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}]}}}};</script></head><body class="bg-surface-canvas text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-[#384E38] shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="h-16 w-full px-6 md:px-8 flex items-center justify-between gap-4"><div class="flex items-center shrink-0"><img alt="PuntualiX" class="h-7 md:h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ"></div><nav class="hidden xl:flex items-center gap-1 text-white/80"><a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:text-white hover:bg-white/10 transition-colors" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Dashboard</span></a><a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:text-white hover:bg-white/10 transition-colors" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Fichas</span></a><a aria-current="page" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/20 text-white shadow-sm" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Instructores</span></a><a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:text-white hover:bg-white/10 transition-colors" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Bitácora</span></a><a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:text-white hover:bg-white/10 transition-colors" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Estadísticas</span></a><a class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:text-white hover:bg-white/10 transition-colors" href="#"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Reportes</span></a></nav><div class="flex items-center gap-4 shrink-0"><div class="w-[1px] h-6 bg-white/20"></div><button aria-label="Notificaciones" class="relative text-white/80 hover:text-white transition-colors" type="button"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full ring-2 ring-[#384E38]"></span></button><div class="bg-white rounded-full px-3.5 py-1.5 flex items-center gap-2.5 shadow-sm text-gray-800 cursor-pointer"><div class="w-7 h-7 rounded-full bg-slate-200 flex items-center justify-center font-bold text-xs text-gray-700">AR</div><div class="hidden md:flex flex-col text-left"><span class="font-semibold text-xs text-gray-900 leading-tight">Andres Ramirez</span><span class="text-[10px] text-gray-500 leading-tight">Administrador</span></div><svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div></div></div></header><main class="w-full pt-16 bg-surface-canvas flex-1"><div class="flex flex-col w-full px-margin py-space-md gap-space-lg">
+<!-- Top Breadcrumb & Institutional Forest Green Banner -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant text-label-sm font-label-sm">
+<a class="hover:text-primary transition-colors" href="#">Inicio</a>
+<span class="text-outline-variant font-normal">/</span>
+<span class="text-on-surface font-semibold">Instructores</span>
+</div>
+<div class="w-full bg-primary text-on-primary rounded-xl p-space-lg shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-primary-fixed text-28px">school</span>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h1 class="font-headline-md text-headline-md tracking-tight text-on-primary">Gestión y Monitoreo de Instructores</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container text-primary-fixed text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-state-success animate-pulse"></span>
+              Período 2026-II Activo
+            </span>
+</div>
+<p class="font-body-md text-body-md text-on-primary/80 mt-0.5">Control de cumplimiento en registro de asistencia docente y novedades académicas SENA en tiempo real.</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm self-start lg:self-center">
+<div class="relative">
+<button class="flex items-center gap-2 px-space-md py-2 rounded-lg bg-primary-container/80 hover:bg-primary-container text-on-primary text-title-sm font-title-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="">Agosto 2026</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-space-md py-2 rounded-lg bg-surface-card text-primary hover:bg-surface-container-low text-title-sm font-title-sm transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">person_add</span>
+<span class="">Registrar Novedad Docente</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Row 1: KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Cumplimiento Docente General</span>
+<div class="w-7 h-7 rounded-lg bg-surface-canvas flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">assignment_turned_in</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-headline-lg font-bold text-on-surface">75%</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-label-sm font-label-sm bg-state-success/10 text-state-success font-semibold">
+          +8% vs mes ant.
+        </span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-text-muted">
+<span class="">156 planificadas</span>
+<span class="font-semibold text-on-surface">117 ejecutadas</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Instructores Activos</span>
+<div class="w-7 h-7 rounded-lg bg-surface-canvas flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-headline-lg font-bold text-on-surface">24</span>
+<span class="text-body-sm font-body-sm text-text-muted">total planta y contrato</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="w-full bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-success h-full rounded-full" style="width: 75%;"></div>
+</div>
+<span class="text-label-sm font-label-sm text-text-muted text-right">18 al día en asistencias (75%)</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Asistencia Promedio Aprendices</span>
+<div class="w-7 h-7 rounded-lg bg-surface-canvas flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">pie_chart</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-headline-lg font-bold text-on-surface">84.2%</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-label-sm font-label-sm bg-state-success/10 text-state-success font-semibold">
+          +2% meta superada
+        </span>
+</div>
+<div class="text-body-sm font-body-sm text-text-muted">
+        54 fichas bajo supervisión académica
+      </div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Atención Prioritaria</span>
+<div class="w-7 h-7 rounded-lg bg-error-container/40 flex items-center justify-center text-state-critical">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-headline-lg font-bold text-state-critical">3</span>
+<span class="text-body-sm font-body-sm text-text-muted">casos detectados</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="flex-1 text-center py-0.5 px-2 rounded font-label-sm text-label-sm bg-error-container/60 text-state-critical font-bold">
+          Críticos: 3
+        </span>
+<span class="flex-1 text-center py-0.5 px-2 rounded font-label-sm text-label-sm bg-secondary-container/40 text-secondary font-bold">
+          Seguimiento: 2
+        </span>
+</div>
+</div>
+</div>
+<!-- Central Supervision Section (65% Left / 35% Right) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Master Table & Filters (approx 65% -> 8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col gap-space-md">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<h2 class="font-title-md text-title-md font-bold text-on-surface">Plantilla Docente y Cumplimiento</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Supervisión de registro de asistencias, fichas a cargo y estados de riesgo.</p>
+</div>
+<!-- Filter Badges -->
+<div class="flex flex-wrap items-center gap-1.5" id="statusFilterBar">
+<button class="filter-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-primary text-on-primary font-semibold shadow-xs" data-status="all" type="button">Todos (24)</button>
+<button class="filter-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-canvas text-on-surface-variant hover:bg-surface-container font-semibold transition-colors" data-status="on-time" type="button">Al día (18)</button>
+<button class="filter-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-canvas text-on-surface-variant hover:bg-surface-container font-semibold transition-colors" data-status="warning" type="button">En seguimiento (3)</button>
+<button class="filter-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-canvas text-on-surface-variant hover:bg-surface-container font-semibold transition-colors" data-status="critical" type="button">Crítico (3)</button>
+</div>
+</div>
+<!-- Search & Dropdown Filters Bar -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm">
+<div class="md:col-span-6 relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-muted text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-canvas rounded-lg text-body-sm font-body-sm border border-border-subtle focus:outline-none focus:border-primary placeholder:text-text-muted/70 text-on-surface" id="instructorSearchInput" placeholder="Buscar por instructor, documento o ficha..." type="text">
+</div>
+<div class="md:col-span-3">
+<select class="w-full px-3 py-2 bg-surface-canvas rounded-lg text-body-sm font-body-sm border border-border-subtle focus:outline-none focus:border-primary text-on-surface cursor-pointer">
+<option value="">Todas las sedes</option>
+<option value="convencion">Casa de la Convención</option>
+<option value="ciaa">CIAA La Angostura</option>
+<option value="complejo">Complejo Sur</option>
+</select>
+</div>
+<div class="md:col-span-3 flex items-center gap-2">
+<select class="w-full px-3 py-2 bg-surface-canvas rounded-lg text-body-sm font-body-sm border border-border-subtle focus:outline-none focus:border-primary text-on-surface cursor-pointer">
+<option value="">Todas las áreas</option>
+<option value="tic">Sistemas y TIC</option>
+<option value="diseno">Diseño Gráfico</option>
+<option value="admin">Administrativa</option>
+<option value="metal">Metalmecánica</option>
+</select>
+<button class="p-2 rounded-lg bg-surface-canvas hover:bg-surface-container text-text-muted transition-colors border border-border-subtle" title="Restablecer Filtros" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Data Table Responsive Wrapper -->
+<div class="overflow-x-auto rounded-lg border border-border-subtle">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-canvas text-text-muted text-label-sm font-label-sm uppercase tracking-wider border-b border-border-subtle">
+<th class="py-2.5 px-4 font-semibold">Instructor &amp; CC</th>
+<th class="py-2.5 px-4 font-semibold">Ficha &amp; Programa</th>
+<th class="py-2.5 px-4 font-semibold">Cumplimiento Docente</th>
+<th class="py-2.5 px-4 font-semibold">Asistencia Apr.</th>
+<th class="py-2.5 px-4 font-semibold text-center">Estado</th>
+<th class="py-2.5 px-4 font-semibold text-center">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle text-body-sm font-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Andrés Ramírez</span>
+<span class="text-text-muted text-label-sm">CC 1.094.238.901</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301002 - ADSO</span>
+<span class="text-text-muted text-label-sm">Desarrollo de Software</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-success h-full rounded-full" style="width: 96%;"></div>
+</div>
+<span class="font-semibold text-state-success text-label-sm">96%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">93%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-state-success/10 text-state-success font-semibold">Al día</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Andrés Ramírez" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Sofía Vargas</span>
+<span class="text-text-muted text-label-sm">CC 1.098.441.200</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301008 - Mercadeo Técnico</span>
+<span class="text-text-muted text-label-sm">Comercio y Ventas</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-success h-full rounded-full" style="width: 88%;"></div>
+</div>
+<span class="font-semibold text-state-success text-label-sm">88%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">89%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-state-success/10 text-state-success font-semibold">Al día</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Sofía Vargas" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Ricardo Álvarez</span>
+<span class="text-text-muted text-label-sm">CC 79.812.905</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301011 - Electromecánica</span>
+<span class="text-text-muted text-label-sm">Mantenimiento Industrial</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-success h-full rounded-full" style="width: 83%;"></div>
+</div>
+<span class="font-semibold text-state-success text-label-sm">83%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">85%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-state-success/10 text-state-success font-semibold">Al día</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Ricardo Álvarez" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Laura Torres</span>
+<span class="text-text-muted text-label-sm">CC 52.887.319</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301006 - Redes y Telecom.</span>
+<span class="text-text-muted text-label-sm">Infraestructura TI</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-warning h-full rounded-full" style="width: 74%;"></div>
+</div>
+<span class="font-semibold text-secondary text-label-sm">74%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">82%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-container/50 text-secondary font-semibold">En seguimiento</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Laura Torres" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Natalia Moreno</span>
+<span class="text-text-muted text-label-sm">CC 1.014.289.442</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301010 - Gestión Adm.</span>
+<span class="text-text-muted text-label-sm">Procesos Empresariales</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-warning h-full rounded-full" style="width: 66%;"></div>
+</div>
+<span class="font-semibold text-secondary text-label-sm">66%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">71%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-container/50 text-secondary font-semibold">En seguimiento</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Natalia Moreno" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Jorge Pérez</span>
+<span class="text-text-muted text-label-sm">CC 80.123.490</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301004 - ADSO Nocturno</span>
+<span class="text-text-muted text-label-sm">Desarrollo Software II</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-critical h-full rounded-full" style="width: 58%;"></div>
+</div>
+<span class="font-semibold text-state-critical text-label-sm">58%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">70%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container/60 text-state-critical font-bold">Crítico</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Jorge Pérez" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Carlos Ruiz</span>
+<span class="text-text-muted text-label-sm">CC 91.450.118</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301007 - Mercadeo Digital</span>
+<span class="text-text-muted text-label-sm">Técnico Comercial</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-critical h-full rounded-full" style="width: 52%;"></div>
+</div>
+<span class="font-semibold text-state-critical text-label-sm">52%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">68%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container/60 text-state-critical font-bold">Crítico</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Carlos Ruiz" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-surface-canvas/60 transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Pedro Ramírez</span>
+<span class="text-text-muted text-label-sm">CC 71.902.134</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">301005 - Redes y Telecom.</span>
+<span class="text-text-muted text-label-sm">Infraestructura TI</span>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-surface-canvas rounded-full h-1.5 overflow-hidden">
+<div class="bg-state-critical h-full rounded-full" style="width: 40%;"></div>
+</div>
+<span class="font-semibold text-state-critical text-label-sm">40%</span>
+</div>
+</td>
+<td class="py-3 px-4 font-semibold text-on-surface">65%</td>
+<td class="py-3 px-4 text-center">
+<span class="inline-flex px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container/60 text-state-critical font-bold">Crítico</span>
+</td>
+<td class="py-3 px-4 text-center">
+<button aria-label="Ver detalles Pedro Ramírez" class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Counter -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-xs text-body-sm font-body-sm text-text-muted">
+<span class="">Mostrando 8 de 24 instructores registrados</span>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1 rounded bg-surface-canvas hover:bg-surface-container text-on-surface transition-colors font-semibold disabled:opacity-50" type="button">Anterior</button>
+<button class="w-7 h-7 rounded bg-primary text-on-primary font-bold text-center" type="button">1</button>
+<button class="w-7 h-7 rounded bg-surface-canvas hover:bg-surface-container text-on-surface transition-colors" type="button">2</button>
+<button class="w-7 h-7 rounded bg-surface-canvas hover:bg-surface-container text-on-surface transition-colors" type="button">3</button>
+<button class="px-3 py-1 rounded bg-surface-canvas hover:bg-surface-container text-on-surface transition-colors font-semibold" type="button">Siguiente</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Critical Alerts & Global Donut Widget (approx 35% -> 4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card: Novedades de Instructores -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Novedades de Instructores</h3>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-state-critical text-label-sm font-label-sm font-bold">3 Nuevas</span>
+</div>
+<span class="material-symbols-outlined text-state-critical text-[20px]">notifications_active</span>
+</div>
+<div class="flex flex-col gap-space-sm mt-1">
+<!-- Alerta 1: Crítica -->
+<div class="p-space-sm rounded-lg bg-error-container/20 border-l-4 border-state-critical flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-state-critical font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">error</span>
+                Incumplimiento crítico de registro
+              </span>
+<span class="text-label-sm text-text-muted">Hace 15 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface">
+              Instructor <strong>Pedro Ramírez</strong> acumula <strong>4 días consecutivos</strong> sin reporte de asistencia en la <strong>Ficha 301005</strong>.
+            </p>
+<div class="flex justify-end gap-2 mt-0.5">
+<button class="px-3 py-1 rounded bg-state-critical text-on-primary text-label-sm font-label-sm font-semibold hover:opacity-95 transition-opacity" type="button">
+                Notificar Instructor
+              </button>
+</div>
+</div>
+<!-- Alerta 2: Advertencia -->
+<div class="p-space-sm rounded-lg bg-secondary-container/20 border-l-4 border-state-warning flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                Retraso en cierre semanal
+              </span>
+<span class="text-label-sm text-text-muted">Hace 45 min</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface">
+              Instructor <strong>Jorge Pérez</strong> no ha validado 3 asistencias pendientes correspondientes a la jornada nocturna.
+            </p>
+<div class="flex justify-end gap-2 mt-0.5">
+<button class="px-3 py-1 rounded bg-secondary text-on-primary text-label-sm font-label-sm font-semibold hover:opacity-95 transition-opacity" type="button">
+                Enviar Recordatorio
+              </button>
+</div>
+</div>
+<!-- Alerta 3: Sin asignación -->
+<div class="p-space-sm rounded-lg bg-surface-container-high/40 border-l-4 border-state-info flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-state-info font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">info</span>
+                Instructor sin asignación de aula
+              </span>
+<span class="text-label-sm text-text-muted">Hace 2 horas</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface">
+              Ficha <strong>301009</strong> no cuenta con instructor suplente registrado tras incapacidad médica programada.
+            </p>
+<div class="flex justify-end gap-2 mt-0.5">
+<button class="px-3 py-1 rounded bg-primary text-on-primary text-label-sm font-label-sm font-semibold hover:opacity-95 transition-opacity" type="button">
+                Reasignar Ahora
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Desempeño Global de la Planta -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Desempeño Global de la Planta</h3>
+<span class="text-label-sm text-text-muted">Consolidado 24 instructores</span>
+</div>
+<span class="material-symbols-outlined text-text-muted text-[20px]">donut_large</span>
+</div>
+<!-- Gauge SVG Visualisation -->
+<div class="relative flex items-center justify-center py-3 my-1"><svg class="w-52 h-52 -rotate-90" viewBox="0 0 200 200"><circle cx="100" cy="100" r="76" fill="none" stroke="#E5EAE5" stroke-width="18"></circle><circle cx="100" cy="100" r="76" fill="none" stroke="#2E7D32" stroke-width="18" stroke-dasharray="358 478" stroke-dashoffset="0"></circle><circle cx="100" cy="100" r="76" fill="none" stroke="#F9A825" stroke-width="18" stroke-dasharray="76 478" stroke-dashoffset="-362"></circle><circle cx="100" cy="100" r="76" fill="none" stroke="#DC2626" stroke-width="18" stroke-dasharray="44 478" stroke-dashoffset="-440"></circle></svg><div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"><span class="font-display-lg text-headline-lg font-bold text-on-surface leading-none">75%</span><span class="text-label-sm font-label-sm text-text-muted uppercase tracking-wider font-semibold mt-1">Cumplimiento</span></div></div>
+<!-- Legend breakdown -->
+<div class="flex flex-col gap-2 mt-2 pt-2 border-t border-border-subtle text-body-sm font-body-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-state-success"></span>
+<span class="text-on-surface">Alto Desempeño (&gt;80%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted text-label-sm">(18)</span>
+<span class="font-bold text-on-surface">75%</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-state-warning"></span>
+<span class="text-on-surface">Rendimiento Medio (60-79%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted text-label-sm">(4)</span>
+<span class="font-bold text-on-surface">16%</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-state-critical"></span>
+<span class="text-on-surface">Rendimiento Bajo (&lt;60%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted text-label-sm">(2)</span>
+<span class="font-bold text-on-surface">9%</span>
+</div>
+</div>
+</div>
+<div class="mt-1 pt-2 bg-surface-canvas rounded-lg px-3 py-2 text-center text-label-sm font-label-sm text-on-surface">
+          Índice de oportunidad en el registro: <strong class="text-state-success font-bold">91.5% Conforme</strong>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Section: Analytics & Activity (3-Card Bento Row) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Block 1: Registro y Carga de Sesiones Docentes -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Carga de Sesiones Docentes</h3>
+<span class="text-label-sm text-text-muted">Ciclo Lectivo Actual</span>
+</div>
+<div class="w-8 h-8 rounded-lg bg-surface-canvas flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+</div>
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Sesiones Planificadas:</span>
+<span class="font-bold text-on-surface">156</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm p-1.5 rounded bg-surface-canvas">
+<span class="text-state-success font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-state-success"></span> Sesiones Dictadas:
+          </span>
+<span class="font-bold text-state-success">117</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm p-1.5 rounded bg-surface-canvas">
+<span class="text-secondary font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-state-warning"></span> Sesiones Pendientes:
+          </span>
+<span class="font-bold text-secondary">29</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm p-1.5 rounded bg-surface-canvas">
+<span class="text-text-muted font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-text-muted"></span> Reprogramadas:
+          </span>
+<span class="font-bold text-on-surface">10</span>
+</div>
+</div>
+<div class="text-label-sm text-text-muted text-center pt-1 border-t border-border-subtle">
+        Consolidado del período lectivo en curso
+      </div>
+</div>
+<!-- Block 2: Evolución Semanal de Cumplimiento Docente -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Evolución Semanal</h3>
+<span class="text-label-sm text-text-muted">Tendencia de registro de asistencia</span>
+</div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-label-sm font-label-sm bg-state-success/10 text-state-success font-semibold">
+          +8%
+        </span>
+</div>
+<!-- Sparkline / Trend visualization -->
+<div class="flex flex-col gap-2">
+<div class="h-28 w-full flex items-end justify-between gap-3 pt-4 px-2">
+<!-- Week 1 -->
+<div class="flex-1 flex flex-col items-center gap-1">
+<span class="text-label-sm font-label-sm text-text-muted font-semibold">70%</span>
+<div class="w-full bg-surface-canvas rounded-t-lg overflow-hidden h-20 flex items-end">
+<div class="w-full bg-primary/70 rounded-t-lg transition-all duration-300 hover:bg-primary" style="height: 70%;"></div>
+</div>
+<span class="text-label-sm text-text-muted">Sem 1</span>
+</div>
+<!-- Week 2 -->
+<div class="flex-1 flex flex-col items-center gap-1">
+<span class="text-label-sm font-label-sm text-text-muted font-semibold">68%</span>
+<div class="w-full bg-surface-canvas rounded-t-lg overflow-hidden h-20 flex items-end">
+<div class="w-full bg-primary/70 rounded-t-lg transition-all duration-300 hover:bg-primary" style="height: 68%;"></div>
+</div>
+<span class="text-label-sm text-text-muted">Sem 2</span>
+</div>
+<!-- Week 3 -->
+<div class="flex-1 flex flex-col items-center gap-1">
+<span class="text-label-sm font-label-sm text-text-muted font-semibold">72%</span>
+<div class="w-full bg-surface-canvas rounded-t-lg overflow-hidden h-20 flex items-end">
+<div class="w-full bg-primary/80 rounded-t-lg transition-all duration-300 hover:bg-primary" style="height: 72%;"></div>
+</div>
+<span class="text-label-sm text-text-muted">Sem 3</span>
+</div>
+<!-- Week 4 Act -->
+<div class="flex-1 flex flex-col items-center gap-1">
+<span class="text-label-sm font-label-sm text-state-success font-bold">75%</span>
+<div class="w-full bg-surface-canvas rounded-t-lg overflow-hidden h-20 flex items-end">
+<div class="w-full bg-state-success rounded-t-lg transition-all duration-300 hover:opacity-90" style="height: 75%;"></div>
+</div>
+<span class="text-label-sm text-state-success font-bold">Sem 4 (Act)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-text-muted pt-2 border-t border-border-subtle">
+<span class="flex items-center gap-1">
+<span class="w-2.5 h-0.5 bg-state-success"></span> Meta SENA: 80%
+          </span>
+<span class="text-state-success font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> Incremento continuo
+          </span>
+</div>
+</div>
+<div class="text-label-sm text-text-muted text-center">
+        Promedio acumulado agosto: 71.25%
+      </div>
+</div>
+<!-- Block 3: Bitácora de Novedades Docentes -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Bitácora de Novedades</h3>
+<span class="text-label-sm text-text-muted">Últimos eventos registrados</span>
+</div>
+<a class="text-primary hover:underline text-label-sm font-label-sm font-bold" href="#">Historial</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-surface-canvas text-primary flex items-center justify-center shrink-0 text-[16px]">
+<span class="material-symbols-outlined text-[16px]">person</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-body-sm font-body-sm text-on-surface leading-tight">
+<strong>Carlos Ruiz</strong> asignó justificación médica a <strong>Ficha 301007</strong>
+</p>
+<span class="text-label-sm text-text-muted mt-0.5">Hace 10 min</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-surface-canvas text-state-info flex items-center justify-center shrink-0 text-[16px]">
+<span class="material-symbols-outlined text-[16px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-body-sm font-body-sm text-on-surface leading-tight">
+<strong>Sofía Vargas</strong> completó reporte mensual de asistencia
+            </p>
+<span class="text-label-sm text-text-muted mt-0.5">Hace 35 min</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-surface-canvas text-state-warning flex items-center justify-center shrink-0 text-[16px]">
+<span class="material-symbols-outlined text-[16px]">notification_important</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-body-sm font-body-sm text-on-surface leading-tight">
+              Notificación preventiva enviada a <strong>Pedro Ramírez</strong>
+</p>
+<span class="text-label-sm text-text-muted mt-0.5">Hace 1 hora</span>
+</div>
+</div>
+</div>
+<div class="pt-2 border-t border-border-subtle">
+<a class="inline-flex items-center gap-1 text-primary hover:text-primary-container font-title-sm text-title-sm font-semibold transition-colors" href="#">
+<span class="">Ver historial completo de novedades</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for status filter pills
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterPills = document.querySelectorAll('#statusFilterBar .filter-pill');
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => {
+          p.classList.remove('bg-primary', 'text-on-primary', 'shadow-xs');
+          p.classList.add('bg-surface-canvas', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-canvas', 'text-on-surface-variant');
+        pill.classList.add('bg-primary', 'text-on-primary', 'shadow-xs');
+      });
+    });
+
+    // Real-time table filter simulation
+    const searchInput = document.getElementById('instructorSearchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        tableRows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          row.style.display = text.includes(val) ? '' : 'none';
+        });
+      });
+    }
+  });
+</script></main><footer class="w-full bg-[#384E38] py-4 px-6 md:px-8 text-white text-xs"><div class="w-full flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center text-center md:text-left"><img alt="PuntualiX" class="h-5 w-auto object-contain mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviYRI2iVjwVyhtqpogQ6uazBkOj4NWEhvjCqJB0vPr-UrHpsyadHVGl1iR-eBxlZA5heYWAvQJ4hJByiMJgkQK6vc4niVqMJaRy18UsiZoE3Q1g_fd1UQXjteTaDv6ZTUHba3VttS7vpduWbIg_2orumvhjuEBZbgFJODDPpYnpYMTfZ0bVm1pa5Qgr20Xa1Bc0RXp79Eg-nGSHsHEsxVgbTgsDkwj9pfI6AUSQoKIpHpf1dxuPQ"><div class="flex flex-col"><span class="text-white/90 leading-tight">Desarrollado en el marco del proyecto de formación SENA · 2026</span><span class="text-white/60 text-[11px] leading-tight">© 2026 Puntualix. Todos los derechos reservados</span></div></div><div class="flex items-center text-right"><img alt="SENA" class="w-6 h-6 object-contain mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA5jwuvp6Xx9JvjeENsBxM0Es5ZoAJfZMQ_Sq9pQMLxay0aWe0hRKJ5GKkQTFxCxLnn330vSAnhQsb3Pty3yKIEmHueTYv6RMegE33719xEy65BTFW-fg9duQditx3Z1VP7O46tMx3MpZVMy5KnOtKQm0KJPlUuB0z_tiZuDsGdveplgga6tJTKSSVukB7V96dfHVBFwfT4b9UaVjzA5avTQz-43Nymcwaod_M74ARH7xFhKMnjj4"><div class="w-[1px] h-6 bg-white/25 mx-3"></div><div class="flex flex-col text-left md:text-right"><span class="text-white/90 font-medium leading-tight">Programa: Análisis y desarrollo de Software</span><span class="text-white/70 text-[11px] leading-tight">Ficha: 3267541</span></div></div></div></footer>
+
+
+
+</body></html>

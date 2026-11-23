@@ -1,0 +1,21 @@
+# Credenciales y variables de entorno (NUNCA subir)
+.env
+.env.*
+!.env.example
+*.local
+
+# Dependencias y compilados
+node_modules/
+dist/
+dist-ssr/
+
+# Archivos temporales de Office (documento abierto en Word)
+~$*
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.log

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-[#f4f7f5] text-slate-800 antialiased min-h-screen flex flex-col font-sans"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PuntualiX - Directorio General de Fichas</title>
+<!-- Google Fonts: Inter & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#1e3322',
+              primary: '#2d4732',
+              surface: '#345239',
+              accent: '#39a900',
+              light: '#f2f6f3',
+              border: '#dbe5dc'
+            },
+            status: {
+              success: '#16a34a',
+              warning: '#d97706',
+              danger: '#dc2626',
+              info: '#2563eb'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<style data-purpose="component-enhancements">
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .indicator-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+  </style>
+<!-- END: Custom Styles -->
+<meta content="web_standard" name="shell-type"/>
+<!-- BEGIN: MainHeader -->
+<!-- Encabezado Institucional Principal con Navegación y Perfil de Usuario -->
+<header class="bg-[#213824] text-white border-b border-[#2d4b31] sticky top-0 z-50 shadow-md">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Lado Izquierdo: Logotipo Corporativo -->
+<div class="flex items-center space-x-6">
+<a class="flex items-center space-x-3 group" href="#" title="PuntualiX SENA">
+<div class="h-9 w-20 overflow-hidden rounded bg-[#2e4a32] flex items-center justify-center p-0.5 border border-[#3b5d3f]">
+<img alt="PuntualiX Logo" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZI8xkoFasM6kago7FjJMoAmwiWzlo7e5kmyXZYYKo__Op21X5bs-gqivHGwLhHjYQVEGvvF5TWCvK10o2QOnvBcoxFF66BoJ-ktYxFzGEyDQZHcTPlFioxM-utpZopTETU3zjrk-5FFbc4ukZkykzhf076BExZN8qt2O0beBNYh_3jz-V_yaew7aqfDpbwE-gsOWSmhzXy3Pv4ABihbvwjBrpisVy3IjTKMjAXViwQk9FQdNfIs"/>
+</div>
+<div class="flex flex-col border-l border-[#3a583e] pl-3">
+<span class="text-xs font-bold tracking-widest text-emerald-300 uppercase leading-none">SENA</span>
+<span class="text-[10px] text-slate-300 font-medium tracking-wide">GESTIÓN ACADÉMICA</span>
+</div>
+</a>
+<!-- Menú de Navegación Horizontal -->
+<nav class="hidden md:flex items-center space-x-1.5 ml-4">
+<!-- Item: Dashboard -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Dashboard</span>
+</a>
+<!-- Item: Fichas (ACTIVO según canonical UI) -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-[#1e3322] shadow-sm flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4 text-[#2d4732]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Fichas</span>
+</a>
+<!-- Item: Instructores -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Instructores</span>
+</a>
+<!-- Item: Bitácora -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Bitácora</span>
+</a>
+<!-- Item: Estadísticas -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Estadísticas</span>
+</a>
+<!-- Item: Reportes -->
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-1.5" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="">Reportes</span>
+</a>
+</nav>
+</div>
+<!-- Lado Derecho: Alertas y Usuario Activo -->
+<div class="flex items-center space-x-4">
+<!-- Notificaciones -->
+<button aria-label="Notificaciones del sistema" class="relative p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 focus:outline-none">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-[#213824]"></span>
+</button>
+<div class="h-6 w-px bg-[#39563c]"></div>
+<!-- Perfil Administrador -->
+<div class="flex items-center space-x-2.5 cursor-pointer pl-1 group">
+<div class="w-9 h-9 rounded-full bg-[#18281b] border border-emerald-500/40 flex items-center justify-center font-bold text-xs text-emerald-400">
+            AR
+          </div>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-xs font-semibold leading-tight text-white group-hover:text-emerald-300 transition-colors">Andres Ramirez</span>
+<span class="text-[10px] text-slate-300 font-medium">Administrador</span>
+</div>
+<svg class="w-4 h-4 text-slate-400 ml-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 flex-1 w-full space-y-6"><div class="flex flex-col w-full space-y-6">
+<!-- Migas de Pan Institucionales -->
+<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-xs text-slate-500 font-medium">
+<a class="hover:text-emerald-800 transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">home</span>
+<span>Inicio</span>
+</a>
+<span class="text-slate-400">/</span>
+<a class="hover:text-emerald-800 transition-colors" href="#">Fichas de Caracterización</a>
+<span class="text-slate-400">/</span>
+<a class="hover:text-emerald-800 transition-colors" href="#">Ficha 301002 (ADSO)</a>
+<span class="text-slate-400">/</span>
+<span class="text-slate-700 font-semibold">Historial de Reportes</span>
+</nav>
+<!-- Encabezado de Página con Metadatos Rápidos -->
+<div class="bg-white rounded-xl shadow-sm p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-3 flex-wrap">
+<h1 class="text-xl md:text-2xl font-bold text-[#1e3322] tracking-tight">
+          Historial de Reportes — Ficha 301002
+        </h1>
+<span class="bg-[#345239]/10 text-[#2d4732] text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">
+          ADSO · Jornada Diurna
+        </span>
+</div>
+<p class="text-sm text-slate-500 max-w-3xl">
+        Consulta, genera y descarga los reportes ejecutivos de asistencia, permanencia y cumplimiento formativo generados para esta cohorte.
+      </p>
+</div>
+<!-- Quick Stat Chips -->
+<div class="flex items-center gap-3 shrink-0">
+<div class="bg-[#f2f6f3] px-3.5 py-2 rounded-lg flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#39a900] text-xl">description</span>
+<div class="text-left">
+<p class="text-[10px] uppercase font-bold text-slate-400 leading-tight">Total Emitidos</p>
+<p class="text-sm font-bold text-[#1e3322]">3 Reportes</p>
+</div>
+</div>
+<div class="bg-[#f2f6f3] px-3.5 py-2 rounded-lg flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#2563eb] text-xl">verified_user</span>
+<div class="text-left">
+<p class="text-[10px] uppercase font-bold text-slate-400 leading-tight">Estado Cohorte</p>
+<p class="text-sm font-bold text-[#1e3322]">90% Asistencia</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sección de Generación de Reportes (HU05.1 / Modal Contextual Integrado) -->
+<div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-[#2d4732] text-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-lg">post_add</span>
+</div>
+<div>
+<h2 class="text-sm font-bold text-[#1e3322]">Generar Nuevo Reporte de Ficha</h2>
+<p class="text-xs text-slate-500">Configura el período temporal y tipo de consolidado para exportar datos en tiempo real.</p>
+</div>
+</div>
+<span class="text-[11px] font-medium text-slate-400 self-start sm:self-center">
+        Última actualización: Hoy, 09:42 AM
+      </span>
+</div>
+<form class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-1" id="report-generation-form" onsubmit="event.preventDefault(); window.simularGeneracion();">
+<!-- Rango Desde -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-slate-700" for="fecha-desde">
+          Desde
+        </label>
+<div class="relative">
+<input class="w-full text-xs rounded-lg border-slate-200 bg-slate-50/50 py-2.5 px-3 text-slate-700 focus:bg-white focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] transition-all" id="fecha-desde" type="date" value="2026-08-01"/>
+</div>
+</div>
+<!-- Rango Hasta -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-slate-700" for="fecha-hasta">
+          Hasta
+        </label>
+<div class="relative">
+<input class="w-full text-xs rounded-lg border-slate-200 bg-slate-50/50 py-2.5 px-3 text-slate-700 focus:bg-white focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] transition-all" id="fecha-hasta" type="date" value="2026-08-21"/>
+</div>
+</div>
+<!-- Tipo de Reporte -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-slate-700" for="tipo-reporte">
+          Tipo de Reporte
+        </label>
+<select class="w-full text-xs rounded-lg border-slate-200 bg-slate-50/50 py-2.5 px-3 text-slate-700 focus:bg-white focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] transition-all" id="tipo-reporte">
+<option value="consolidado">Reporte Consolidado de Asistencia</option>
+<option value="desercion">Reporte de Alertas de Deserción</option>
+<option value="competencias">Reporte por Competencia Curricular</option>
+<option value="novedades">Bitácora de Novedades y Fallas</option>
+</select>
+</div>
+<!-- Formato de Salida -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-slate-700" for="formato-reporte">
+          Formato de Salida
+        </label>
+<select class="w-full text-xs rounded-lg border-slate-200 bg-slate-50/50 py-2.5 px-3 text-slate-700 focus:bg-white focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] transition-all" id="formato-reporte">
+<option value="pdf">PDF Institucional (.pdf)</option>
+<option value="excel">Matriz Excel (.xlsx)</option>
+<option value="csv">Datos Planos (.csv)</option>
+</select>
+</div>
+<!-- Acción Generar -->
+<div class="flex items-end">
+<button class="w-full h-[42px] bg-[#2d4732] hover:bg-[#1e3322] active:scale-[0.98] text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-2 shadow-sm transition-all" id="btn-generar" type="submit">
+<span class="material-symbols-outlined text-base">description</span>
+<span>Generar Reporte</span>
+</button>
+</div>
+</form>
+<!-- Feedback Toast Integrado Temporal (Oculto por defecto) -->
+<div class="hidden bg-emerald-50 text-emerald-900 text-xs px-4 py-2.5 rounded-lg flex items-center justify-between" id="generacion-feedback">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-sm">check_circle</span>
+<span>Solicitud de generación completada con éxito. El informe fue añadido al historial.</span>
+</div>
+<button class="text-emerald-700 hover:text-emerald-900 font-bold" onclick="this.parentElement.classList.add('hidden')">
+        ×
+      </button>
+</div>
+</div>
+<!-- Filtros Rápidos de la Tabla y Búsqueda -->
+<div class="bg-white rounded-xl shadow-sm p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+<!-- Buscador Integrado -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-base">
+        search
+      </span>
+<input class="w-full pl-9 pr-4 py-2 text-xs rounded-lg border-slate-200 bg-slate-50/50 text-slate-700 placeholder-slate-400 focus:bg-white focus:border-[#2d4732] focus:ring-1 focus:ring-[#2d4732] transition-all" id="buscador-reportes" oninput="window.filtrarTabla(this.value)" placeholder="Buscar reporte por nombre o usuario..." type="text"/>
+</div>
+<!-- Filtros y Limpieza -->
+<div class="flex items-center gap-3 flex-wrap">
+<div class="flex items-center gap-1.5 text-xs text-slate-600">
+<span class="font-medium text-slate-400">Filtrar:</span>
+<button class="px-2.5 py-1 rounded-md text-xs font-semibold bg-[#2d4732] text-white transition-colors" id="filtro-todos" onclick="window.filtrarPorTipo('todos')">
+          Todos (3)
+        </button>
+<button class="px-2.5 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors" id="filtro-pdf" onclick="window.filtrarPorTipo('PDF')">
+          PDFs
+        </button>
+<button class="px-2.5 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors" id="filtro-xlsx" onclick="window.filtrarPorTipo('XLSX')">
+          Excels
+        </button>
+</div>
+<div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+<button class="text-xs font-semibold text-slate-600 hover:text-emerald-800 flex items-center gap-1 transition-colors px-2 py-1 rounded hover:bg-slate-50" onclick="window.limpiarFiltros()">
+<span class="material-symbols-outlined text-sm">cleaning_services</span>
+<span>Limpiar filtros</span>
+</button>
+</div>
+</div>
+<!-- Tabla Principal de Historial de Reportes (HU05.3 / HU06.1) -->
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs text-slate-600" id="tabla-reportes">
+<thead class="bg-slate-50/80 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-100">
+<tr>
+<th class="py-3.5 px-4 lg:px-6" scope="col">Tipo / Nombre del Reporte</th>
+<th class="py-3.5 px-4" scope="col">Periodo Evaluado</th>
+<th class="py-3.5 px-4" scope="col">Fecha de Generación</th>
+<th class="py-3.5 px-4" scope="col">Generado Por</th>
+<th class="py-3.5 px-4 text-center" scope="col">Formato</th>
+<th class="py-3.5 px-4 text-center" scope="col">Estado</th>
+<th class="py-3.5 px-4 lg:px-6 text-right" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 font-normal" id="cuerpo-tabla">
+<!-- Fila 1: Reporte Reciente -->
+<tr class="hover:bg-slate-50/60 transition-colors group" data-format="PDF" data-search="Reporte Consolidado Quincenal Andres Ramirez">
+<td class="py-4 px-4 lg:px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+</div>
+<div>
+<span class="font-bold text-[#1e3322] block">Reporte Consolidado Quincenal</span>
+<span class="text-[11px] text-slate-400">ID: REP-301002-2026-08B</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 font-medium text-slate-700 whitespace-nowrap">
+              01/08/2026 — 20/08/2026
+            </td>
+<td class="py-4 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-semibold text-slate-800">20/08/2026</span>
+<span class="text-[11px] text-slate-400 block">09:15 AM</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 text-[10px] font-bold flex items-center justify-center">
+                  AR
+                </div>
+<div>
+<span class="font-medium text-slate-800 block text-xs">Andres Ramirez</span>
+<span class="text-[10px] text-slate-400">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="bg-rose-50 text-rose-700 text-[11px] font-semibold px-2 py-0.5 rounded">
+                PDF · 2.4 MB
+              </span>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Disponible
+              </span>
+</td>
+<td class="py-4 px-4 lg:px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg text-slate-500 hover:text-[#2d4732] hover:bg-[#2d4732]/10 transition-colors" onclick="window.abrirModalPreview('Reporte Consolidado Quincenal', '20/08/2026 09:15', 'Andres Ramirez')" title="Ver Vista Previa">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<a class="p-1.5 rounded-lg text-[#2d4732] hover:text-white hover:bg-[#2d4732] bg-[#f2f6f3] transition-colors" download="Reporte-Ficha-301002-20082026.pdf" href="#" title="Descargar Reporte">
+<span class="material-symbols-outlined text-lg">download</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Fila 2: Reporte Alertas Deserción -->
+<tr class="hover:bg-slate-50/60 transition-colors group" data-format="XLSX" data-search="Informe de Alertas Preventivas y Desercion Andres Ramirez">
+<td class="py-4 px-4 lg:px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">table_chart</span>
+</div>
+<div>
+<span class="font-bold text-[#1e3322] block">Informe de Alertas Preventivas</span>
+<span class="text-[11px] text-slate-400">ID: REP-301002-2026-08A</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 font-medium text-slate-700 whitespace-nowrap">
+              01/08/2026 — 05/08/2026
+            </td>
+<td class="py-4 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-semibold text-slate-800">05/08/2026</span>
+<span class="text-[11px] text-slate-400 block">08:30 AM</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 text-[10px] font-bold flex items-center justify-center">
+                  AR
+                </div>
+<div>
+<span class="font-medium text-slate-800 block text-xs">Andres Ramirez</span>
+<span class="text-[10px] text-slate-400">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="bg-emerald-50 text-emerald-800 text-[11px] font-semibold px-2 py-0.5 rounded">
+                XLSX · 840 KB
+              </span>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Disponible
+              </span>
+</td>
+<td class="py-4 px-4 lg:px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg text-slate-500 hover:text-[#2d4732] hover:bg-[#2d4732]/10 transition-colors" onclick="window.abrirModalPreview('Informe de Alertas Preventivas', '05/08/2026 08:30', 'Andres Ramirez')" title="Ver Vista Previa">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<a class="p-1.5 rounded-lg text-[#2d4732] hover:text-white hover:bg-[#2d4732] bg-[#f2f6f3] transition-colors" download="Alertas-Ficha-301002-05082026.xlsx" href="#" title="Descargar Reporte">
+<span class="material-symbols-outlined text-lg">download</span>
+</a>
+</div>
+</td>
+</tr>
+<!-- Fila 3: Reporte Mensual Anterior -->
+<tr class="hover:bg-slate-50/60 transition-colors group" data-format="PDF" data-search="Reporte Mensual Julio-Agosto Andres Ramirez">
+<td class="py-4 px-4 lg:px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+</div>
+<div>
+<span class="font-bold text-[#1e3322] block">Reporte Mensual General</span>
+<span class="text-[11px] text-slate-400">ID: REP-301002-2026-07M</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 font-medium text-slate-700 whitespace-nowrap">
+              01/07/2026 — 22/07/2026
+            </td>
+<td class="py-4 px-4 text-slate-600 whitespace-nowrap">
+<span class="font-semibold text-slate-800">22/07/2026</span>
+<span class="text-[11px] text-slate-400 block">14:10 PM</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 text-[10px] font-bold flex items-center justify-center">
+                  AR
+                </div>
+<div>
+<span class="font-medium text-slate-800 block text-xs">Andres Ramirez</span>
+<span class="text-[10px] text-slate-400">Administrador</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="bg-rose-50 text-rose-700 text-[11px] font-semibold px-2 py-0.5 rounded">
+                PDF · 3.1 MB
+              </span>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Disponible
+              </span>
+</td>
+<td class="py-4 px-4 lg:px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg text-slate-500 hover:text-[#2d4732] hover:bg-[#2d4732]/10 transition-colors" onclick="window.abrirModalPreview('Reporte Mensual General', '22/07/2026 14:10', 'Andres Ramirez')" title="Ver Vista Previa">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<a class="p-1.5 rounded-lg text-[#2d4732] hover:text-white hover:bg-[#2d4732] bg-[#f2f6f3] transition-colors" download="Reporte-General-Ficha-301002-22072026.pdf" href="#" title="Descargar Reporte">
+<span class="material-symbols-outlined text-lg">download</span>
+</a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación y Resumen -->
+<div class="px-6 py-4 bg-slate-50/60 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+<span id="indicador-conteo">Mostrando 3 reportes de 3 generados</span>
+<div class="flex items-center space-x-1">
+<button class="px-2.5 py-1 rounded border border-slate-200 bg-white text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled="">
+          Anterior
+        </button>
+<span class="px-3 py-1 rounded bg-[#2d4732] text-white font-semibold">1</span>
+<button class="px-2.5 py-1 rounded border border-slate-200 bg-white text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled="">
+          Siguiente
+        </button>
+</div>
+</div>
+</div>
+<!-- Modal Interactivo: Vista Previa del Reporte (HU06.1) -->
+<div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4" id="modal-preview">
+<div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="bg-[#213824] text-white p-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-400 text-xl">description</span>
+<div>
+<h3 class="text-sm font-bold text-white" id="modal-title">Vista Previa del Documento</h3>
+<p class="text-[11px] text-slate-300">PuntualiX SENA · Certificación Académica</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-white transition-colors" onclick="window.cerrarModalPreview()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-4">
+<!-- Visualizador Simulado del Documento SENA -->
+<div class="bg-slate-50 rounded-xl p-5 border border-slate-200/80 space-y-4">
+<div class="flex justify-between items-start border-b border-slate-200 pb-3">
+<div>
+<p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">SERVICIO NACIONAL DE APRENDIZAJE - SENA</p>
+<p class="text-[11px] text-slate-500">Centro de Formación Regional · Subsede Gestión Educativa</p>
+<h4 class="text-base font-bold text-slate-800 mt-1" id="modal-doc-title">Reporte Consolidado</h4>
+</div>
+<div class="text-right">
+<span class="inline-block bg-[#39a900]/10 text-[#2d4732] text-[10px] font-bold px-2 py-0.5 rounded">
+                OFICIAL
+              </span>
+<p class="text-[10px] text-slate-400 mt-1" id="modal-doc-date">Fecha: 20/08/2026</p>
+</div>
+</div>
+<!-- Muestra de métricas del informe -->
+<div class="grid grid-cols-3 gap-3 text-center py-2">
+<div class="bg-white p-2.5 rounded-lg shadow-sm">
+<span class="text-[10px] text-slate-400 uppercase font-semibold">Total Aprendices</span>
+<p class="text-sm font-bold text-slate-800">24 Matriculados</p>
+</div>
+<div class="bg-white p-2.5 rounded-lg shadow-sm">
+<span class="text-[10px] text-slate-400 uppercase font-semibold">Asistencia Media</span>
+<p class="text-sm font-bold text-emerald-700">90.4%</p>
+</div>
+<div class="bg-white p-2.5 rounded-lg shadow-sm">
+<span class="text-[10px] text-slate-400 uppercase font-semibold">Alertas Críticas</span>
+<p class="text-sm font-bold text-slate-800">0 Casos</p>
+</div>
+</div>
+<!-- Visual Placeholder Representing the Report Body -->
+<div class="space-y-2 text-xs text-slate-600 bg-white p-3.5 rounded-lg shadow-sm">
+<div class="h-2.5 bg-slate-200 rounded w-3/4"></div>
+<div class="h-2.5 bg-slate-200 rounded w-full"></div>
+<div class="h-2.5 bg-slate-200 rounded w-5/6"></div>
+<p class="text-[11px] text-slate-400 italic pt-2">
+              Generado y firmado electrónicamente por: <span class="font-medium text-slate-600" id="modal-doc-author">Andres Ramirez</span>.
+            </p>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 px-6 py-3.5 border-t border-slate-100 flex items-center justify-between">
+<span class="text-xs text-slate-400">Verificado con firma institucional SHA-256</span>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-200 transition-colors" onclick="window.cerrarModalPreview()">
+            Cerrar
+          </button>
+<button class="px-4 py-1.5 text-xs font-semibold text-white bg-[#2d4732] hover:bg-[#1e3322] rounded-lg shadow-sm flex items-center gap-1.5 transition-all" onclick="window.cerrarModalPreview()">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Descargar Archivo</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side Logic for Table Filtering, Real-time Simulation & Modals -->
+<script>
+  window.simularGeneracion = function() {
+    const btn = document.getElementById('btn-generar');
+    const toast = document.getElementById('generacion-feedback');
+    const originalContent = btn.innerHTML;
+
+    btn.disabled = true;
+    btn.innerHTML = `
+      <span class="material-symbols-outlined animate-spin text-base">sync</span>
+      <span>Generando...</span>
+    `;
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = originalContent;
+      toast.classList.remove('hidden');
+
+      // Scroll to notification if needed
+      toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 900);
+  };
+
+  window.abrirModalPreview = function(titulo, fecha, autor) {
+    document.getElementById('modal-title').textContent = titulo;
+    document.getElementById('modal-doc-title').textContent = titulo;
+    document.getElementById('modal-doc-date').textContent = 'Fecha: ' + fecha;
+    document.getElementById('modal-doc-author').textContent = autor;
+    document.getElementById('modal-preview').classList.remove('hidden');
+  };
+
+  window.cerrarModalPreview = function() {
+    document.getElementById('modal-preview').classList.add('hidden');
+  };
+
+  window.filtrarTabla = function(query) {
+    const q = query.toLowerCase();
+    const rows = document.querySelectorAll('#cuerpo-tabla tr');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const searchData = (row.getAttribute('data-search') || '').toLowerCase();
+      if (searchData.includes(q)) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    actualizarConteo(visibleCount);
+  };
+
+  window.filtrarPorTipo = function(formato) {
+    const rows = document.querySelectorAll('#cuerpo-tabla tr');
+    let visibleCount = 0;
+
+    // Reset button states
+    ['filtro-todos', 'filtro-pdf', 'filtro-xlsx'].forEach(id => {
+      const el = document.getElementById(id);
+      el.className = 'px-2.5 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors';
+    });
+
+    if (formato === 'todos') {
+      document.getElementById('filtro-todos').className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-[#2d4732] text-white transition-colors';
+    } else if (formato === 'PDF') {
+      document.getElementById('filtro-pdf').className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-[#2d4732] text-white transition-colors';
+    } else if (formato === 'XLSX') {
+      document.getElementById('filtro-xlsx').className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-[#2d4732] text-white transition-colors';
+    }
+
+    rows.forEach(row => {
+      const rowFormat = row.getAttribute('data-format');
+      if (formato === 'todos' || rowFormat === formato) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    actualizarConteo(visibleCount);
+  };
+
+  window.limpiarFiltros = function() {
+    document.getElementById('buscador-reportes').value = '';
+    window.filtrarPorTipo('todos');
+    const toast = document.getElementById('generacion-feedback');
+    if (toast) toast.classList.add('hidden');
+  };
+
+  function actualizarConteo(count) {
+    const contador = document.getElementById('indicador-conteo');
+    if (contador) {
+      contador.textContent = `Mostrando ${count} de 3 reportes generados`;
+    }
+  }
+
+  // Cerrar modal al hacer click fuera
+  document.getElementById('modal-preview')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+      window.cerrarModalPreview();
+    }
+  });
+</script></main>
+<!-- END: MainContent -->
+<!-- BEGIN: InstitutionalFooter -->
+<!-- Footer Institucional Idéntico a canonical UI -->
+<footer class="bg-[#1b2d1d] text-white border-t border-[#263e29] mt-auto">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<!-- Lado Izquierdo: Brand e Información Legal -->
+<div class="flex items-center space-x-3 text-center md:text-left">
+<div class="h-6 w-14 overflow-hidden rounded bg-[#29422c] flex items-center justify-center p-0.5 border border-[#3b5d3f]/60 shrink-0">
+<img alt="PuntualiX SENA" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZI8xkoFasM6kago7FjJMoAmwiWzlo7e5kmyXZYYKo__Op21X5bs-gqivHGwLhHjYQVEGvvF5TWCvK10o2QOnvBcoxFF66BoJ-ktYxFzGEyDQZHcTPlFioxM-utpZopTETU3zjrk-5FFbc4ukZkykzhf076BExZN8qt2O0beBNYh_3jz-V_yaew7aqfDpbwE-gsOWSmhzXy3Pv4ABihbvwjBrpisVy3IjTKMjAXViwQk9FQdNfIs"/>
+</div>
+<div class="text-slate-300">
+<p class="font-medium">PuntualiX SENA - Plataforma de Control Asistencia &amp; Gestión Académica</p>
+<p class="text-[11px] text-slate-400">Derechos reservados © 2026 Servicio Nacional de Aprendizaje SENA</p>
+</div>
+</div>
+<!-- Lado Derecho: Centro Regional & Subsede -->
+<div class="flex items-center space-x-2 text-slate-400 text-center md:text-right">
+<div>
+<p class="font-medium text-slate-200">Centro de Formación Regional SENA</p>
+<p class="text-[11px]">Subsede Gestión Educativa y Control de Asistencia</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 hidden sm:block"></div>
+</div>
+</div>
+</footer>
+<!-- END: InstitutionalFooter -->
+</body></html>
