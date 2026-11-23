@@ -147,3 +147,39 @@ El `project-id` es la parte `xxxxxxxx` de la Project URL. Repite este comando ca
 npm run test:db            # ejecuta todas las migraciones en una base local y prueba 38 reglas por rol
 npm run docs:diccionario   # regenera DICCIONARIO_DATOS.md desde el esquema
 ```
+
+---
+
+## Edge Function `invitar-usuario` (Etapa 3: registrar usuarios)
+
+Crear cuentas necesita la llave `service_role`, que **nunca** puede estar en el navegador. Por eso el registro de
+instructores, aprendices y administradores pasa por esta función, que corre en los servidores de Supabase:
+`supabase/functions/invitar-usuario/index.ts`.
+
+**Qué hace:** comprueba que quien llama es un administrador activo, valida los datos, verifica que el correo y el
+documento no existan, envía la **invitación por correo**, asigna el rol (y los datos de instructor) y lo registra en
+la bitácora. Si algo falla después de crear la cuenta, la elimina para no dejar cuentas a medias.
+
+### Desplegarla (una sola vez, y cada vez que cambie el archivo)
+
+Desde la carpeta `front-end/`:
+
+```bash
+npx supabase login                      # abre el navegador para autorizar (solo la primera vez)
+npx supabase functions deploy invitar-usuario --project-ref TU-ID-DE-PROYECTO
+```
+
+`TU-ID-DE-PROYECTO` es el código de 20 letras de la Project URL (`https://ESTE-CODIGO.supabase.co`).
+No hay que configurar variables: Supabase entrega a la función `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY`.
+
+Mientras no esté desplegada, la app muestra: *"El servicio de invitaciones no está disponible…"*.
+
+### El correo de invitación
+
+1. **Redirect URLs** (Authentication → URL Configuration): debe incluir `http://localhost:5173/**` (y la URL de
+   Vercel cuando se publique). El correo lleva a `/restablecer?invitacion=1`, donde el usuario crea su contraseña.
+2. **Límite del correo de Supabase:** el servidor de correo incluido solo envía unos pocos mensajes por hora y,
+   en proyectos nuevos, **solo a correos de miembros del equipo del proyecto**. Para invitar a instructores y
+   aprendices reales configure un SMTP propio en **Authentication → Emails → SMTP Settings** (por ejemplo Gmail con
+   contraseña de aplicación, Resend o Brevo).
+3. Opcional: personalice la plantilla **Invite user** en **Authentication → Emails → Templates** (en español).

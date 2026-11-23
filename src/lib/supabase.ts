@@ -25,8 +25,14 @@ if (!supabaseConfigurado) {
  */
 const urlInicial = new URL(window.location.href)
 const parametrosHash = new URLSearchParams(urlInicial.hash.replace(/^#/, ''))
+/** Invitación a una cuenta nueva (HU02.1): el usuario llega a /restablecer?invitacion=1 para crear su contraseña */
+const esInvitacion =
+  urlInicial.pathname === '/restablecer' && (urlInicial.searchParams.has('invitacion') || parametrosHash.get('type') === 'invite')
 export const enlaceInicial = {
-  esRecuperacion: urlInicial.pathname === '/restablecer' && (urlInicial.searchParams.has('code') || parametrosHash.get('type') === 'recovery'),
+  esRecuperacion:
+    esInvitacion ||
+    (urlInicial.pathname === '/restablecer' && (urlInicial.searchParams.has('code') || parametrosHash.get('type') === 'recovery')),
+  esInvitacion,
   error: urlInicial.searchParams.get('error_code') ?? parametrosHash.get('error_code'),
 }
 

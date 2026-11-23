@@ -16,8 +16,8 @@ import { SesionSupabaseProvider } from './SesionSupabaseProvider'
  * Al construir una pantalla se agrega a PANTALLAS y deja de mostrarse <EnConstruccion>.
  */
 const ETAPA_POR_RUTA: Record<string, number> = {
-  '/admin': 4, '/admin/instructores': 3, '/admin/bitacora': 4, '/admin/estadisticas': 5,
-  '/admin/reportes': 5, '/admin/alertas': 4, '/admin/alertas/umbrales': 4, '/admin/usuarios': 3,
+  '/admin': 4, '/admin/bitacora': 4, '/admin/estadisticas': 5,
+  '/admin/reportes': 5, '/admin/alertas': 4, '/admin/alertas/umbrales': 4,
 }
 const ETAPA_POR_ROL: Record<Rol, number> = { administrador: 4, instructor: 6, aprendiz: 7 }
 
@@ -27,6 +27,9 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
   '/admin/perfil': cargarPerfil,
   '/instructor/perfil': cargarPerfil,
   '/aprendiz/perfil': cargarPerfil,
+  // Etapa 3 — Instructores y Usuarios (Admin)
+  '/admin/instructores': async () => ({ Component: (await import('@/features/instructores/PaginaInstructores')).PaginaInstructores }),
+  '/admin/usuarios': async () => ({ Component: (await import('@/features/usuarios/PaginaUsuarios')).PaginaUsuarios }),
   // Etapa 2 — Fichas (Admin)
   '/admin/fichas': async () => ({ Component: (await import('@/features/fichas/PaginaFichas')).PaginaFichas }),
 }
@@ -35,6 +38,7 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
 const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
   administrador: [
     { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/features/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
+    { path: 'instructores/:id', lazy: async () => ({ Component: (await import('@/features/instructores/PaginaPerfilInstructor')).PaginaPerfilInstructor }) },
   ],
   instructor: [],
   aprendiz: [],
