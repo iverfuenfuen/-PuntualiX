@@ -167,6 +167,26 @@ front-end/
 - `docs/RF.docx`: anexo "Estado de implementación" (RF01–RF21). `docs/RNF.docx`: anexo "Verificación de
   cumplimiento" (RNF1, 2, 3, 6 y 7).
 
+**Eliminación de información repetida (error grave de VersionAntigua)**
+- *Problema original:* los datos estaban escritos a mano en varios lugares y las copias se contradecían. Los 17
+  "Ver más" abrían la misma página. Las pestañas Instructores y Competencias listaban equipos distintos (solo 2
+  de 7 coincidían). Las 4 tarjetas de métricas estaban duplicadas dentro de "Actualizar ficha". "5 de 24 = 4.8 %"
+  cuando es 20,8 %. El título decía 301002 y el formulario 248273392993.
+- *Cómo lo resuelve el Prototipo:* una ruta por ficha, métricas una sola vez bajo el encabezado, pestañas con
+  contadores, modal de actualizar sin métricas y competencias ligadas a la asignación del instructor.
+- *Versión nueva:* cada dato existe una vez en la BD y todo se calcula a partir de ahí. Instructores y
+  Competencias leen la misma tabla, y los porcentajes los calcula la vista. Además, cada dato tiene **un solo
+  lugar en pantalla**:
+  - Encabezado = identidad (estado, sede, número, programa) + jornada, modalidad, ciclo e instructor líder.
+  - Tarjetas KPI = cifras (matriculados/cupo, asistencia y meta, riesgos). Se quitó el anillo de asistencia
+    que repetía el porcentaje.
+  - Información general = solo lo que no está arriba: código del programa, área, ambiente, cupo, duración y
+    fecha de registro.
+  - Vocería = panel lateral (más la insignia en la lista). Los títulos de las tarjetas ya no repiten los
+    contadores de las pestañas.
+  - Listado: se quitó la insignia "N fichas totales" del banner (la tarjeta "Fichas registradas" ya lo dice).
+  - Corregido: la sede aparecía dos veces en el encabezado.
+
 **Decisiones y pendientes (coordinar con back-end)**
 - **Cupo de la ficha** = capacidad del ambiente asignado; la tabla `fichas` no tiene columna de cupo. Si la
   matrícula supera el cupo se avisa pero no se bloquea.

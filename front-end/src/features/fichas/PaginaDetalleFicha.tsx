@@ -144,7 +144,7 @@ export function PaginaDetalleFicha() {
         <Aviso tipo="error">Esta ficha está inactiva: no admite nuevas asignaciones ni matrículas. Su información histórica se conserva.</Aviso>
       )}
 
-      <EncabezadoFicha detalle={d} matriculados={matriculados.length} />
+      <EncabezadoFicha detalle={d} />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <KpiCard
@@ -264,82 +264,42 @@ export function PaginaDetalleFicha() {
   )
 }
 
-/** Banner de la ficha: estado, programa, jornada, modalidad, cupo, ciclo y asistencia general */
-function EncabezadoFicha({ detalle, matriculados }: { detalle: DetalleFicha; matriculados: number }) {
-  const { ficha, codigoPrograma, capacidadAmbiente } = detalle
+/**
+ * Banner de la ficha: SOLO su identidad (estado, sede, número, programa) y los 4 datos de contexto.
+ * Cada dato tiene un único lugar: los indicadores van en las tarjetas KPI y los datos administrativos
+ * en la pestaña Información general (evita la repetición que tenía VersionAntigua).
+ */
+function EncabezadoFicha({ detalle }: { detalle: DetalleFicha }) {
+  const { ficha } = detalle
   const estado = estadoVisualFicha(ficha)
-  const asistencia = ficha.porcentajeAsistencia
   const chips: Array<[string, string]> = [
     ['Jornada', ETIQUETA_JORNADA[ficha.jornada]],
     ['Modalidad', `${ETIQUETA_NIVEL[ficha.nivel]} ${ETIQUETA_MODALIDAD[ficha.modalidad].toLowerCase()}`],
-    ['Cupo / ocupación', capacidadAmbiente ? `${matriculados} / ${capacidadAmbiente} aprendices (${porcentaje((matriculados / capacidadAmbiente) * 100)})` : `${matriculados} aprendices`],
     ['Ciclo lectivo', `${fechaISOaTexto(ficha.fechaInicio)} – ${fechaISOaTexto(ficha.fechaFin)}`],
+    ['Instructor líder', ficha.instructorLider ?? 'Sin asignar'],
   ]
 
   return (
-    <section className="relative flex flex-col gap-6 overflow-hidden rounded-2xl bg-primario-oscuro p-6 text-white shadow-sm sm:p-7 lg:flex-row lg:items-center lg:justify-between">
+    <section className="relative space-y-3 overflow-hidden rounded-2xl bg-primario-oscuro p-6 text-white shadow-sm sm:p-7">
       <div className="pointer-events-none absolute -top-16 -right-16 size-72 rounded-full bg-white/5 blur-2xl" aria-hidden />
-      <div className="relative min-w-0 space-y-3">
-        <div className="flex flex-wrap items-center gap-2 text-xs">
-          <Badge tono={estado.tono} punto className="bg-white/90">
-            {estado.texto}
-          </Badge>
-          <span className="text-white/80">Código del programa: {codigoPrograma}</span>
-          <span className="rounded-md bg-black/20 px-2 py-0.5 font-semibold">{ficha.sede}</span>
-        </div>
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">
-          Ficha {ficha.numero} · {ficha.programa}
-        </h1>
-        <p className="text-sm text-white/85">
-          {ETIQUETA_NIVEL[ficha.nivel]} · Área {ficha.area} · Sede {ficha.sede}
-          {ficha.ambiente ? ` · ${ficha.ambiente}` : ''}
-        </p>
-        <dl className="grid gap-2 pt-1 sm:grid-cols-2 xl:grid-cols-4">
-          {chips.map(([etiqueta, valor]) => (
-            <div key={etiqueta} className="rounded-lg border border-white/15 bg-white/10 px-3 py-2">
-              <dt className="text-[11px] font-semibold tracking-wide text-white/70 uppercase">{etiqueta}</dt>
-              <dd className="text-sm font-semibold text-white">{valor}</dd>
-            </div>
-          ))}
-        </dl>
+      <div className="relative flex flex-wrap items-center gap-2 text-xs">
+        <Badge tono={estado.tono} punto className="bg-white/90">
+          {estado.texto}
+        </Badge>
+        <span className="rounded-md bg-black/20 px-2 py-0.5 font-semibold">Sede {ficha.sede}</span>
       </div>
-
-      <div className="relative flex shrink-0 flex-col items-center gap-2 rounded-2xl border border-white/10 bg-black/15 px-8 py-5 text-center">
-        <AnilloAsistencia valor={asistencia} />
-        <p className="font-titulos text-sm font-semibold text-white">
-          {asistencia == null ? 'Sin registros de asistencia' : asistencia >= 80 ? 'Salud formativa: óptima' : asistencia >= 70 ? 'Salud formativa: moderada' : 'Salud formativa: en riesgo'}
-        </p>
-        <p className="text-xs text-white/75">Meta institucional: 80 % de asistencia</p>
-      </div>
+      <h1 className="relative text-2xl font-bold text-white sm:text-3xl">
+        Ficha {ficha.numero} · {ficha.programa}
+      </h1>
+      <dl className="relative grid gap-2 pt-1 sm:grid-cols-2 xl:grid-cols-4">
+        {chips.map(([etiqueta, valor]) => (
+          <div key={etiqueta} className="rounded-lg border border-white/15 bg-white/10 px-3 py-2">
+            <dt className="text-[11px] font-semibold tracking-wide text-white/70 uppercase">{etiqueta}</dt>
+            <dd className="text-sm font-semibold text-white">{valor}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
-  )
-}
-
-function AnilloAsistencia({ valor }: { valor: number | null }) {
-  const radio = 34
-  const circunferencia = 2 * Math.PI * radio
-  const avance = valor == null ? 0 : Math.max(0, Math.min(100, valor)) / 100
-  return (
-    <div className="relative size-24" role="img" aria-label={valor == null ? 'Sin asistencia registrada' : `Asistencia general ${porcentaje(valor)}`}>
-      <svg viewBox="0 0 80 80" className="size-24 -rotate-90" aria-hidden>
-        <circle cx="40" cy="40" r={radio} fill="none" strokeWidth="8" className="stroke-white/15" />
-        <circle
-          cx="40"
-          cy="40"
-          r={radio}
-          fill="none"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeDasharray={circunferencia}
-          strokeDashoffset={circunferencia * (1 - avance)}
-          className="stroke-white transition-[stroke-dashoffset]"
-        />
-      </svg>
-      <span className="absolute inset-0 flex flex-col items-center justify-center font-titulos font-bold text-white">
-        <span className="text-xl">{valor == null ? '—' : porcentaje(valor)}</span>
-        <span className="text-[10px] tracking-wide text-white/75 uppercase">General</span>
-      </span>
-    </div>
   )
 }
 

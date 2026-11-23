@@ -143,7 +143,6 @@ export function PaginaFichas() {
       <PageHeader
         titulo="Gestión y monitoreo de fichas"
         icono={FileText}
-        insignia={fichas.datos ? `${todas.length} fichas totales` : undefined}
         descripcion="Administración de las fichas de formación: seguimiento de permanencia, estados y asignaciones."
         acciones={
           <Button variante="sobreOscuro" icono={<FilePlus2 className="size-4" aria-hidden />} onClick={() => setRegistrando(true)} disabled={!catalogos.datos}>
