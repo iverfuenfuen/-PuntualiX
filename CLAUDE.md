@@ -78,8 +78,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 0 | Entorno, tokens, BD, layout y 15 componentes UI | ✅ |
 | 1 | Login multi-rol, recuperar/restablecer contraseña, rutas por rol, Mi perfil con cambio de contraseña | ✅ |
 | 2 | Fichas (Admin): `/admin/fichas` y `/admin/fichas/:id` con registrar, actualizar, desactivar, asignar instructor y matricular | ✅ código · ⏳ prueba manual del usuario |
-| 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ código · ⏳ desplegar la función y prueba manual |
-| 4 | Dashboard, alertas con umbrales, bitácora | ⏳ siguiente |
+| 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ función desplegada (2026-11-23) e invitación probada de punta a punta |
+| 4 | Dashboard (`/admin`), alertas con umbrales (`/admin/alertas`, `/admin/alertas/umbrales`), bitácora (`/admin/bitacora`) | ⏳ siguiente: empezar aquí |
 | 5 | Estadísticas, reportes e historial | ⏳ |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
@@ -93,8 +93,15 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   con relaciones se convierten con `as unknown as Fila[]`. Generarlo requiere `npx supabase login`.
 - Etapa 2 dejó para el back-end (migración 09 propuesta): `ficha_instructores.rol` (técnico/transversal),
   dedicación semanal y `fichas.descripcion`. El cupo se toma de `ambientes.capacidad`.
-- La Edge Function `supabase/functions/invitar-usuario` se despliega con `npx supabase functions deploy` (ver
-  `front-end/supabase/README.md`). Sin SMTP propio, Supabase solo envía correos a miembros del equipo del proyecto.
+- La Edge Function `supabase/functions/invitar-usuario` YA está desplegada (CLI con sesión iniciada en el equipo
+  del usuario). Si se modifica, redesplegar desde `front-end/` con
+  `npx supabase functions deploy invitar-usuario --project-ref ckppdfnzgbnwrnqrzkdx` (el aviso de Docker no importa).
+- Aún sin SMTP propio: Supabase solo envía correos a miembros del equipo de la organización (pocos por hora).
+  Pendiente del usuario: configurar SMTP (Gmail con contraseña de aplicación) para invitar a cualquier correo.
+- Usuarios de prueba (ya existen, no se invitan): `admin@puntualix.com`, `carlos.perez@puntualix.com` (instructor),
+  `juan.perez@puntualix.com` (aprendiz). Sus correos no son reales.
+- **Forma de trabajo:** las conversaciones de desarrollo son solo para código. Las tareas operativas (desplegar,
+  configurar Supabase/SMTP, claves, pruebas manuales guiadas) se hacen en otro chat para ahorrar tokens.
 - Pendiente: carga masiva de aprendices (Excel/CSV) reutilizando `invitar-usuario`. Etapa 3 también propone para la
   migración 09: rol formativo del instructor, tipo de contrato y dedicación semanal.
 - Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
