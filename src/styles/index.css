@@ -1,0 +1,94 @@
+/*
+ * PuntualiX — Estilos globales
+ * Los valores de color y tipografía provienen del Manual de Identidad
+ * (VersionAntigua/src/styles/tokens.css). No modificar sin validar con el manual.
+ */
+@import 'tailwindcss';
+@import './fonts.css';
+
+/* ------------------------------------------------------------------
+ * TOKENS DE DISEÑO (Tailwind v4)
+ * Cada variable --color-* genera utilidades: bg-primario, text-primario,
+ * border-borde, etc. Los nombres se mantienen en español como en el original.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Marca */
+  /* Verde institucional del Prototipo (decisión del equipo, 2026-11-23).
+     El Manual de Identidad define #3D593D; actualizar el manual para que coincidan. */
+  --color-primario: #384e38; /* Navbar, footer, botones primarios, acentos de marca */
+  --color-primario-oscuro: #2d4732; /* Banner de encabezado (PageHeader) y hover de botones */
+  --color-estado-activo: #808000; /* Verde oliva: estados activos, presencia */
+
+  /* Estados de apoyo */
+  --color-confirmacion: #2e7d32; /* Confirmaciones, aprobados */
+  --color-advertencia: #f9a825; /* Advertencias, pendientes */
+  --color-informacion: #1976d2; /* Información, enlaces secundarios */
+  --color-error: #ff0000; /* Errores del sistema (uso restrictivo) */
+  --color-alerta-critica: #be1f24; /* Rojo institucional del Manual: alertas críticas, riesgo de deserción
+                                      (tokens.css antiguo usaba #D32F2F) */
+
+  /* Fondos */
+  --color-fondo-principal: #ffffff;
+  --color-fondo-tarjeta: #ffffff;
+  --color-fondo-seccion-alterna: #f8f9fa;
+  --color-fondo-tarjeta-suave: #e9ecef;
+
+  /* Bordes */
+  --color-borde: #dee2e6;
+
+  /* Texto */
+  --color-texto-principal: #212529;
+  --color-texto-cuerpo: #343a40;
+  --color-texto-apoyo: #495057;
+  --color-texto-secundario: #6c757d;
+  --color-texto-deshabilitado: #adb5bd;
+
+  /* Familias: font-titulos / font-contenido */
+  --font-titulos: 'Poppins', sans-serif;
+  --font-contenido: 'Nunito', sans-serif;
+
+  /* Tamaños del manual (text-h1, text-h2, text-h3, text-metrica) */
+  --text-h1: 56px;
+  --text-h2: 36px;
+  --text-h3: 24px;
+  --text-metrica: 64px;
+}
+
+/* ------------------------------------------------------------------
+ * BASE — equivalente a VersionAntigua/src/styles/base.css
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: var(--font-contenido);
+    color: var(--color-texto-cuerpo);
+    background-color: var(--color-fondo-seccion-alterna);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    color: var(--color-texto-principal);
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* Foco visible y consistente para navegación con teclado (accesibilidad) */
+  :focus-visible {
+    outline: 2px solid var(--color-primario);
+    outline-offset: 2px;
+  }
+}
