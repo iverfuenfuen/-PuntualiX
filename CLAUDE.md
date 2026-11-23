@@ -79,8 +79,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 1 | Login multi-rol, recuperar/restablecer contraseña, rutas por rol, Mi perfil con cambio de contraseña | ✅ |
 | 2 | Fichas (Admin): `/admin/fichas` y `/admin/fichas/:id` con registrar, actualizar, desactivar, asignar instructor y matricular | ✅ código · ⏳ prueba manual del usuario |
 | 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ función desplegada (2026-11-23) e invitación probada de punta a punta |
-| 4 | Dashboard (`/admin`), alertas con umbrales (`/admin/alertas`, `/admin/alertas/umbrales`), bitácora (`/admin/bitacora`) | ⏳ siguiente: empezar aquí |
-| 5 | Estadísticas, reportes e historial | ⏳ |
+| 4 | Dashboard (`/admin`), alertas con umbrales (`/admin/alertas`, `/admin/alertas/umbrales`), bitácora (`/admin/bitacora`) | ✅ código · ⏳ prueba manual del usuario |
+| 5 | Estadísticas (`/admin/estadisticas`), reportes e historial (`/admin/reportes`) | ⏳ siguiente: empezar aquí |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
 | 8 | Página pública (RF01), accesibilidad, responsive, despliegue | ⏳ |
@@ -103,7 +103,12 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 - **Forma de trabajo:** las conversaciones de desarrollo son solo para código. Las tareas operativas (desplegar,
   configurar Supabase/SMTP, claves, pruebas manuales guiadas) se hacen en otro chat para ahorrar tokens.
 - Pendiente: carga masiva de aprendices (Excel/CSV) reutilizando `invitar-usuario`. Etapa 3 también propone para la
-  migración 09: rol formativo del instructor, tipo de contrato y dedicación semanal.
+  migración 09: rol formativo del instructor, tipo de contrato y dedicación semanal. Etapa 4 propone `bitacora.ip` y
+  `bitacora.agente_usuario` (el Prototipo muestra IP y navegador en el detalle del evento).
+- Etapa 4: la bitácora se filtra y pagina en el servidor (`servicioBitacora.consulta`, síncrona a propósito: el
+  constructor de supabase-js es *thenable* y una función async lo ejecutaría). `bitacora/presentacion.ts` traduce los
+  eventos técnicos a texto. El dashboard reutiliza los servicios de cada módulo; Etapa 5 debe llevar las
+  "Estadísticas generales" y la "Tendencia de asistencia" del dashboard antiguo, y el comprobante PDF del evento.
 - Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
   modales sin métricas). El rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`.
 - En Bash, NO usar comillas invertidas dentro de `node -e "..."`: bash las ejecuta como comandos. Para editar

@@ -105,6 +105,57 @@ export const ETIQUETA_TIPO_DOCUMENTO: Record<TipoDocumento, string> = {
   PPT: 'P.P.T. — Permiso por protección temporal',
 }
 
+// ---------------------------------------------------------------------
+// Alertas y bitácora (Etapa 4) — mismos valores que los enum de la BD
+// ---------------------------------------------------------------------
+export type EstadoAlerta = 'nueva' | 'en_seguimiento' | 'atendida' | 'descartada'
+export type TipoAlerta = 'inasistencia_aprendiz' | 'riesgo_ficha' | 'ficha_sin_lider' | 'sesion_sin_registro'
+export type ModuloSistema =
+  | 'autenticacion' | 'usuarios' | 'fichas' | 'instructores' | 'asistencias'
+  | 'justificaciones' | 'alertas' | 'material' | 'reportes' | 'configuracion'
+export type AccionBitacora = 'acceso' | 'registro' | 'modificacion' | 'eliminacion' | 'consulta' | 'descarga'
+export type ResultadoBitacora = 'exito' | 'alerta' | 'error'
+
+export const ETIQUETA_PRIORIDAD: Record<PrioridadAlerta, string> = { alta: 'Alta', media: 'Media', baja: 'Baja' }
+
+export const ETIQUETA_ESTADO_ALERTA: Record<EstadoAlerta, string> = {
+  nueva: 'Nueva',
+  en_seguimiento: 'En seguimiento',
+  atendida: 'Atendida',
+  descartada: 'Descartada',
+}
+
+export const ETIQUETA_TIPO_ALERTA: Record<TipoAlerta, string> = {
+  inasistencia_aprendiz: 'Inasistencia de aprendiz',
+  riesgo_ficha: 'Inasistencia de la ficha',
+  ficha_sin_lider: 'Ficha sin instructor líder',
+  sesion_sin_registro: 'Sesión sin registro de asistencia',
+}
+
+export const ETIQUETA_MODULO: Record<ModuloSistema, string> = {
+  autenticacion: 'Acceso y autenticación',
+  usuarios: 'Gestión de usuarios',
+  fichas: 'Fichas',
+  instructores: 'Instructores',
+  asistencias: 'Asistencias',
+  justificaciones: 'Justificaciones',
+  alertas: 'Alertas',
+  material: 'Material de apoyo',
+  reportes: 'Reportes y descargas',
+  configuracion: 'Configuración',
+}
+
+export const ETIQUETA_ACCION: Record<AccionBitacora, string> = {
+  acceso: 'Acceso',
+  registro: 'Registro',
+  modificacion: 'Modificación',
+  eliminacion: 'Eliminación',
+  consulta: 'Consulta',
+  descarga: 'Descarga',
+}
+
+export const ETIQUETA_RESULTADO: Record<ResultadoBitacora, string> = { exito: 'Éxito', alerta: 'Alerta', error: 'Error' }
+
 /** Convierte un Record de etiquetas en opciones para <Select> */
 export function opcionesDe<T extends string>(etiquetas: Record<T, string>): Array<{ valor: T; etiqueta: string }> {
   return (Object.entries(etiquetas) as Array<[T, string]>).map(([valor, etiqueta]) => ({ valor, etiqueta }))

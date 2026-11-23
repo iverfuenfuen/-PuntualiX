@@ -16,8 +16,7 @@ import { SesionSupabaseProvider } from './SesionSupabaseProvider'
  * Al construir una pantalla se agrega a PANTALLAS y deja de mostrarse <EnConstruccion>.
  */
 const ETAPA_POR_RUTA: Record<string, number> = {
-  '/admin': 4, '/admin/bitacora': 4, '/admin/estadisticas': 5,
-  '/admin/reportes': 5, '/admin/alertas': 4, '/admin/alertas/umbrales': 4,
+  '/admin/estadisticas': 5, '/admin/reportes': 5,
 }
 const ETAPA_POR_ROL: Record<Rol, number> = { administrador: 4, instructor: 6, aprendiz: 7 }
 
@@ -30,6 +29,11 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
   // Etapa 3 — Instructores y Usuarios (Admin)
   '/admin/instructores': async () => ({ Component: (await import('@/features/instructores/PaginaInstructores')).PaginaInstructores }),
   '/admin/usuarios': async () => ({ Component: (await import('@/features/usuarios/PaginaUsuarios')).PaginaUsuarios }),
+  // Etapa 4 — Dashboard, alertas con umbrales y bitácora (Admin)
+  '/admin': async () => ({ Component: (await import('@/features/dashboard/PaginaDashboard')).PaginaDashboard }),
+  '/admin/alertas': async () => ({ Component: (await import('@/features/alertas/PaginaAlertas')).PaginaAlertas }),
+  '/admin/alertas/umbrales': async () => ({ Component: (await import('@/features/alertas/PaginaUmbrales')).PaginaUmbrales }),
+  '/admin/bitacora': async () => ({ Component: (await import('@/features/bitacora/PaginaBitacora')).PaginaBitacora }),
   // Etapa 2 — Fichas (Admin)
   '/admin/fichas': async () => ({ Component: (await import('@/features/fichas/PaginaFichas')).PaginaFichas }),
 }

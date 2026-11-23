@@ -73,6 +73,9 @@ front-end/
 │   │   ├── fichas/         listado, detalle, registrar/actualizar, asignar, matricular [Etapa 2]
 │   │   ├── instructores/   panel (tabla/tarjetas), perfil, cumplimiento mes a mes     [Etapa 3]
 │   │   ├── usuarios/       gestión de usuarios, registro por invitación, roles        [Etapa 3]
+│   │   ├── dashboard/      resumen del administrador (reutiliza los demás servicios)  [Etapa 4]
+│   │   ├── alertas/        centro de alertas, seguimiento y umbrales (RF16, RF17)     [Etapa 4]
+│   │   ├── bitacora/       auditoría con filtros en servidor, detalle y exportación   [Etapa 4]
 │   │   └── catalogos/      sedes, áreas, ambientes y programas (compartido)
 │   ├── lib/                supabase.ts (cliente único) · utilidades.ts · resultado.ts (errores de BD)
 │   │                       · useCarga.ts (cargando/error/recargar) · csv.ts (exportar)
@@ -109,8 +112,8 @@ front-end/
 | 0 | Entorno, tokens, base de datos y guía Supabase · layout y componentes UI | ✅ Completa |
 | 1 | Autenticación: login multi-rol, recuperar y cambiar contraseña, rutas por rol | ✅ Completa |
 | 2 | Fichas (Admin): listado, detalle con pestañas, registrar, actualizar, asignar instructor, matricular | ✅ Lista para pruebas |
-| 3 | Usuarios e instructores (Admin): panel, perfil, registro, cumplimiento | ✅ Lista para pruebas (falta desplegar la Edge Function) |
-| 4 | Dashboard, alertas con umbrales y bitácora | ⏳ |
+| 3 | Usuarios e instructores (Admin): panel, perfil, registro, cumplimiento | ✅ Completa (Edge Function desplegada e invitación probada) |
+| 4 | Dashboard, alertas con umbrales y bitácora (Admin) | ✅ Lista para pruebas |
 | 5 | Estadísticas, reportes e historial | ⏳ |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
@@ -119,6 +122,53 @@ front-end/
 ---
 
 ## Registro de Cambios (Changelog)
+
+### [0.5.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 4 — Dashboard, alertas y bitácora
+
+**Tomado de `Prototipo/`**
+- *Bitácora de actividades y auditoría*: KPI (total, exitosas con % de efectividad, alertas preventivas, errores con
+  % de fallas), búsqueda, filtros, "vistas rápidas", tabla con fecha y hora, responsable con avatar, módulo y acción,
+  detalle y resultado, fila resaltada en los errores, exportación y botón "Actualizar".
+- *Detalle del evento de auditoría (HU11.3)*: banda de resultado, "Responsable y contexto" y "Operación y registro
+  afectado".
+
+**Rescatado de `VersionAntigua/`** (el Prototipo no tiene dashboard ni alertas)
+- *Dashboard*: saludo, KPI de fichas, asistencia, cumplimiento de instructores y alertas por prioridad, "Alertas
+  recientes", fichas con su riesgo y "Actividad reciente" con enlaces a cada módulo.
+- *Alertas*: KPI por prioridad, filtros por sede, prioridad y ficha, tabla con prioridad, descripción, instructor
+  líder y fecha, y el panel de detalle con límite configurado y porcentaje detectado.
+- *Bitácora*: filtros por módulo, rol, resultado y rango de fechas; detalle con id de evento.
+
+**Nuevo y mejoras**
+- **Seguimiento de alertas**: iniciar seguimiento, marcar como atendida o descartar; queda registrado quién la cerró y
+  cuándo. Las alertas de "ficha sin líder" llevan directo a asignar el instructor.
+- **Umbrales (RF17)**: edición de las tres prioridades con validación (0 < % ≤ 100 y baja < media < alta entre los
+  activos), escala visual y vista previa de cuántas fichas quedarían en cada nivel antes de guardar.
+- Al abrir el centro de alertas, las notificaciones propias se marcan como leídas y la campana se actualiza.
+- **Bitácora legible**: el evento técnico (tabla + JSON antes/después) se traduce a "Modificación · Ficha" con el
+  registro afectado ("Ficha 301002") y los campos que cambiaron; el detalle muestra la tabla Campo / Antes / Después.
+- La bitácora filtra y pagina **en el servidor** (puede crecer sin límite); la búsqueda encuentra también por nombre
+  del responsable y espera 400 ms a que se deje de escribir. La exportación CSV (hasta 3.000 eventos) queda
+  registrada como descarga (RF19).
+- El dashboard **no tiene consultas propias**: reutiliza los servicios de Fichas, Instructores, Alertas y Bitácora,
+  así cada cifra se calcula igual que en su pantalla.
+
+**Información repetida corregida (regla "un solo lugar por dato")**
+- Bitácora del Prototipo: los mismos conteos aparecían en los KPI, en los chips de "vistas rápidas" (Incidentes (8))
+  y en el selector de estado. Ahora los KPI son la única cifra; las vistas rápidas son solo rangos de fecha.
+- Alertas de VersionAntigua: "Alertas activas 34" repetía la suma de las prioridades. Ahora los KPI cuentan las
+  alertas abiertas **por prioridad** y las pestañas, **por estado**.
+- Dashboard de VersionAntigua: dos tarjetas de alertas (media y alta) más el panel de alertas con su insignia.
+  Ahora hay una sola tarjeta con el desglose y el panel lista cuáles son, sin volver a contarlas.
+- "Estadísticas generales" y "Tendencia de asistencia" del dashboard antiguo pasan al módulo de Estadísticas
+  (Etapa 5), para no tener dos versiones de las mismas cifras.
+
+**Decisiones y pendientes**
+- El detalle del evento no muestra dirección IP, navegador ni sistema operativo (Prototipo): la tabla `bitacora` no
+  los guarda. Propuesta para el back-end (migración 09): columnas `ip` y `agente_usuario`.
+- Los eventos automáticos guardan un detalle técnico ("update en fichas"); la interfaz lo traduce a partir de los
+  datos. "Descargar comprobante (PDF)" queda para la Etapa 5 (reportes).
+- Las alertas cerradas no se reabren: si la situación se repite, la BD genera una alerta nueva.
 
 ### [0.4.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 3 — Instructores y Usuarios
 
