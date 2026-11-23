@@ -16,7 +16,7 @@ import { SesionSupabaseProvider } from './SesionSupabaseProvider'
  * Al construir una pantalla se agrega a PANTALLAS y deja de mostrarse <EnConstruccion>.
  */
 const ETAPA_POR_RUTA: Record<string, number> = {
-  '/admin': 4, '/admin/fichas': 2, '/admin/instructores': 3, '/admin/bitacora': 4, '/admin/estadisticas': 5,
+  '/admin': 4, '/admin/instructores': 3, '/admin/bitacora': 4, '/admin/estadisticas': 5,
   '/admin/reportes': 5, '/admin/alertas': 4, '/admin/alertas/umbrales': 4, '/admin/usuarios': 3,
 }
 const ETAPA_POR_ROL: Record<Rol, number> = { administrador: 4, instructor: 6, aprendiz: 7 }
@@ -27,6 +27,17 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
   '/admin/perfil': cargarPerfil,
   '/instructor/perfil': cargarPerfil,
   '/aprendiz/perfil': cargarPerfil,
+  // Etapa 2 — Fichas (Admin)
+  '/admin/fichas': async () => ({ Component: (await import('@/features/fichas/PaginaFichas')).PaginaFichas }),
+}
+
+/** Pantallas que no aparecen en el menú (detalles, formularios). La ruta es relativa a la del rol. */
+const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
+  administrador: [
+    { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/features/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
+  ],
+  instructor: [],
+  aprendiz: [],
 }
 
 function rutasDeRol(rol: Rol): RouteObject {
@@ -44,12 +55,15 @@ function rutasDeRol(rol: Rol): RouteObject {
     children: [
       {
         element: <AppLayout />,
-        children: unicos.map(({ etiqueta, ruta, icono }) => {
-          const ubicacion = ruta === base ? { index: true as const } : { path: ruta.slice(base.length + 1) }
-          const lazy = PANTALLAS[ruta]
-          if (lazy) return { ...ubicacion, lazy }
-          return { ...ubicacion, element: <EnConstruccion titulo={etiqueta} icono={icono} etapa={ETAPA_POR_RUTA[ruta] ?? ETAPA_POR_ROL[rol]} /> }
-        }),
+        children: [
+          ...unicos.map(({ etiqueta, ruta, icono }): RouteObject => {
+            const ubicacion = ruta === base ? { index: true as const } : { path: ruta.slice(base.length + 1) }
+            const lazy = PANTALLAS[ruta]
+            if (lazy) return { ...ubicacion, lazy }
+            return { ...ubicacion, element: <EnConstruccion titulo={etiqueta} icono={icono} etapa={ETAPA_POR_RUTA[ruta] ?? ETAPA_POR_ROL[rol]} /> }
+          }),
+          ...RUTAS_ADICIONALES[rol],
+        ],
       },
     ],
   }
