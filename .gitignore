@@ -26,3 +26,6 @@ dist-ssr
 # Credenciales locales
 .env
 .env.local
+
+# Archivos locales de la CLI de Supabase (sesión y proyecto vinculado)
+supabase/.temp/
