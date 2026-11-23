@@ -49,8 +49,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   **Prohibido** escribir colores hex o fuentes sueltas en los componentes: usar `bg-primario`,
   `text-alerta-critica`, `font-titulos`, etc.
 - Poppins (500–800) para títulos y métricas; Nunito (400, 600) para contenido. Fuentes alojadas localmente.
-- Verde institucional: por decisión del equipo (2026-11-23) se usa el del Prototipo en `--color-primario`
-  `#384E38` y `--color-primario-oscuro` `#2D4732` (el Manual dice `#3D593D`). **Pendiente** actualizar el Manual.
+- Verde institucional DEFINITIVO (confirmado por el usuario, no cambiar): el del Prototipo en `--color-primario`
+  `#384E38` y `--color-primario-oscuro` `#2D4732` (el Manual dice `#3D593D`; es el Manual el que debe actualizarse).
 - `--color-alerta-critica` es `#BE1F24` (rojo del Manual).
 - Logotipos en `src/assets/img/` (positivo, negativo, monocromático, favicons). Respetar la zona de respeto y el
   ancho mínimo de 120 px; no deformar, rotar ni aplicar sombras o efectos.
