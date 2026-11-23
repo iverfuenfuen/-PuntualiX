@@ -2,8 +2,9 @@ import { supabase } from '@/lib/supabase'
 import type { Rol, UsuarioSesion } from '@/types/dominio'
 import { MENSAJES, traducirErrorAuth } from './mensajes'
 
-/** Resultado uniforme de las operaciones: ok o un mensaje listo para mostrar */
-export type Resultado<T = void> = { ok: true; datos: T } | { ok: false; mensaje: string; codigo?: 'cuenta_desactivada' }
+import type { Resultado } from '@/lib/resultado'
+
+export type { Resultado }
 
 interface FilaPerfil {
   id: string
