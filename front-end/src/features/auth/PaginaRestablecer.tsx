@@ -18,6 +18,7 @@ import { establecerContrasena } from './servicioAuth'
 
 /**
  * HU01.3 — Establecer nueva contraseña (Estado 5 de olvidoContraseña.html).
+ * HU02.1 — También recibe la invitación de una cuenta nueva: el usuario crea aquí su primera contraseña.
  * Se llega desde el enlace del correo; Supabase crea una sesión temporal de recuperación.
  * Si el enlace venció o es inválido se muestra el Estado 4 (solicitar uno nuevo).
  */
@@ -64,18 +65,25 @@ export function PaginaRestablecer() {
     if (!r.ok) return setError(r.mensaje)
     // Se cierra la sesión temporal y se pide iniciar sesión con la nueva contraseña
     await supabase.auth.signOut()
-    navegar('/login', { replace: true, state: { mensajeExito: 'Contraseña actualizada. Inicia sesión con tu nueva contraseña.' } })
+    const mensajeExito = enlaceInicial.esInvitacion
+      ? 'Tu cuenta está activa. Inicia sesión con tu correo y la contraseña que acabas de crear.'
+      : 'Contraseña actualizada. Inicia sesión con tu nueva contraseña.'
+    navegar('/login', { replace: true, state: { mensajeExito } })
   }
 
   return (
-    <AuthLayout titulo="Establecer nueva contraseña" descripcion={`Cuenta: ${usuario.correo}`} icono={ShieldCheck}>
+    <AuthLayout
+      titulo={enlaceInicial.esInvitacion ? 'Bienvenido a PuntualiX: crea tu contraseña' : 'Establecer nueva contraseña'}
+      descripcion={`Cuenta: ${usuario.correo}`}
+      icono={ShieldCheck}
+    >
       <form onSubmit={handleSubmit(alEnviar)} noValidate className="space-y-4">
         {error && <Aviso tipo="error">{error}</Aviso>}
         <CampoContrasena etiqueta="Nueva contraseña" autoComplete="new-password" error={errors.contrasena?.message} {...register('contrasena')} />
         <RequisitosContrasena valor={contrasenaEscrita} />
         <CampoContrasena etiqueta="Confirmar contraseña" autoComplete="new-password" error={errors.confirmacion?.message} {...register('confirmacion')} />
         <Button type="submit" className="w-full" cargando={isSubmitting}>
-          Establecer contraseña
+          {enlaceInicial.esInvitacion ? 'Crear contraseña y activar cuenta' : 'Establecer contraseña'}
         </Button>
       </form>
     </AuthLayout>

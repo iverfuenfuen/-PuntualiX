@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CircleCheck, IdCard, SearchCheck, UserPlus, UsersRound } from 'lucide-react'
 import { AvatarIniciales, Button, Input, Modal, ProgressBar, Select } from '@/components/ui'
 import { Aviso } from '@/features/auth/Aviso'
+import { ModalRegistrarUsuario } from '@/features/usuarios/ModalRegistrarUsuario'
 import { ETIQUETA_TIPO_DOCUMENTO, ETIQUETA_VOCERO, opcionesDe, type TipoDocumento, type TipoVocero } from '@/types/dominio'
 import { esquemaBusquedaAprendiz, type FormularioBusquedaAprendiz } from './esquemas'
 import { hoyISO } from './presentacion'
@@ -18,7 +19,8 @@ interface PropsMatricular {
 /**
  * HU02.2 — Matricular un aprendiz en la ficha.
  * Paso 1: se busca por documento entre los usuarios con rol aprendiz. Paso 2: fecha y vocería.
- * Crear la cuenta del aprendiz corresponde a Gestión de usuarios (requiere una Edge Function, Etapa 3).
+ * Si el documento no tiene cuenta, se registra aquí mismo con invitación por correo (Edge Function, Etapa 3)
+ * y se vuelve a buscar automáticamente.
  */
 export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: PropsMatricular) {
   const { ficha, aprendices, capacidadAmbiente } = detalle
@@ -29,10 +31,14 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: Props
   const [vocero, setVocero] = useState<TipoVocero>('ninguno')
   const [errorServidor, setErrorServidor] = useState<string | null>(null)
   const [guardando, setGuardando] = useState(false)
+  /** Documento buscado que no tiene cuenta: se ofrece registrar al aprendiz con invitación (HU02.2) */
+  const [noRegistrado, setNoRegistrado] = useState<{ tipo: TipoDocumento; numero: string } | null>(null)
+  const [registrando, setRegistrando] = useState(false)
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<FormularioBusquedaAprendiz>({
     resolver: zodResolver(esquemaBusquedaAprendiz),
@@ -58,10 +64,11 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: Props
   async function consultar(v: FormularioBusquedaAprendiz) {
     setEncontrado(null)
     setMensajeBusqueda(null)
+    setNoRegistrado(null)
     setErrorServidor(null)
     const r = await buscarAprendiz(v.tipoDocumento as TipoDocumento, v.numeroDocumento, ficha.id)
     if (!r.ok) return setMensajeBusqueda(r.mensaje)
-    if (!r.datos) return setMensajeBusqueda('No hay un aprendiz registrado con ese documento. Primero debe crearse su cuenta en Gestión de usuarios.')
+    if (!r.datos) return setNoRegistrado({ tipo: v.tipoDocumento as TipoDocumento, numero: v.numeroDocumento.trim() })
     setEncontrado(r.datos)
   }
 
@@ -134,6 +141,17 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: Props
             </Button>
           </div>
           {mensajeBusqueda && <Aviso tipo="error">{mensajeBusqueda}</Aviso>}
+          {noRegistrado && (
+            <div className="flex flex-col gap-3 rounded-xl border border-informacion/25 bg-informacion/5 p-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-texto-apoyo">
+                No hay un aprendiz registrado con el documento <strong className="text-texto-principal">{noRegistrado.numero}</strong>. Puede registrarlo ahora: recibirá
+                una invitación por correo para crear su contraseña.
+              </p>
+              <Button variante="secundario" icono={<UserPlus className="size-4" aria-hidden />} onClick={() => setRegistrando(true)} className="shrink-0">
+                Registrar aprendiz
+              </Button>
+            </div>
+          )}
         </form>
 
         {/* Paso 2 */}
@@ -175,6 +193,19 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: Props
           </section>
         )}
       </div>
+      {registrando && noRegistrado && (
+        <ModalRegistrarUsuario
+          rolInicial="aprendiz"
+          rolFijo
+          documentoInicial={noRegistrado}
+          onCerrar={() => setRegistrando(false)}
+          onRegistrado={() => {
+            setRegistrando(false)
+            // La cuenta ya existe: se busca de nuevo para pasar al paso 2 (datos de la matrícula)
+            void consultar(getValues())
+          }}
+        />
+      )}
     </Modal>
   )
 }
