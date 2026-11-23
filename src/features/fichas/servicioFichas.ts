@@ -129,6 +129,7 @@ export interface DetalleFicha {
   ficha: FichaResumen
   codigoPrograma: string
   capacidadAmbiente: number | null
+  creadaEn: string
   actualizadaEn: string
   instructores: AsignacionInstructor[]
   aprendices: AprendizFicha[]
@@ -272,13 +273,13 @@ export async function listarFichas(): Promise<Resultado<FichaResumen[]>> {
 export async function obtenerDetalleFicha(id: number): Promise<Resultado<DetalleFicha | null>> {
   const [resumen, base] = await Promise.all([
     supabase.from('v_fichas_resumen').select('*').eq('id', id).maybeSingle(),
-    supabase.from('fichas').select('updated_at, programas(codigo), ambientes(capacidad)').eq('id', id).maybeSingle(),
+    supabase.from('fichas').select('created_at, updated_at, programas(codigo), ambientes(capacidad)').eq('id', id).maybeSingle(),
   ])
   if (resumen.error || base.error) return { ok: false, mensaje: traducirErrorBD(resumen.error ?? base.error) }
   if (!resumen.data || !base.data) return { ok: true, datos: null }
 
   const ficha = aResumen(resumen.data as FilaResumen)
-  const filaBase = base.data as unknown as { updated_at: string; programas: { codigo: string } | null; ambientes: { capacidad: number | null } | null }
+  const filaBase = base.data as unknown as { created_at: string; updated_at: string; programas: { codigo: string } | null; ambientes: { capacidad: number | null } | null }
 
   const [asignaciones, matriculas, asistenciaAprendiz, competencias, asistenciaCompetencia, umbrales] = await Promise.all([
     supabase
@@ -372,6 +373,7 @@ export async function obtenerDetalleFicha(id: number): Promise<Resultado<Detalle
       ficha,
       codigoPrograma: filaBase.programas?.codigo ?? '',
       capacidadAmbiente: filaBase.ambientes?.capacidad ?? null,
+      creadaEn: filaBase.created_at,
       actualizadaEn: filaBase.updated_at,
       instructores,
       aprendices,

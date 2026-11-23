@@ -4,11 +4,7 @@ import { AvatarIniciales, Badge, Button, Card, CardHeader, EmptyState, Input, Pr
 import { ETIQUETA_DOCUMENTO } from '@/features/perfil/servicioPerfil'
 import { cn, porcentaje, tiempoRelativo } from '@/lib/utilidades'
 import {
-  ETIQUETA_ESTADO_FICHA,
   ETIQUETA_ESTADO_MATRICULA,
-  ETIQUETA_JORNADA,
-  ETIQUETA_MODALIDAD,
-  ETIQUETA_NIVEL,
   ETIQUETA_VOCERO,
   type EstadoMatricula,
   type Tono,
@@ -31,23 +27,15 @@ const TONO_MATRICULA: Record<EstadoMatricula, Tono> = {
 // ---------------------------------------------------------------------
 
 export function InformacionGeneral({ detalle }: { detalle: DetalleFicha }) {
+  // Solo datos que NO aparecen en el encabezado, las tarjetas ni el panel lateral (un único lugar por dato)
   const { ficha, codigoPrograma, capacidadAmbiente } = detalle
-  const titular = detalle.aprendices.find((a) => a.vocero === 'titular')
   const datos: Array<[string, ReactNode]> = [
-    ['Número de ficha', ficha.numero],
-    ['Estado', ETIQUETA_ESTADO_FICHA[ficha.estado]],
-    ['Programa de formación', `${ficha.programa} (código ${codigoPrograma})`],
-    ['Nivel de formación', ETIQUETA_NIVEL[ficha.nivel]],
+    ['Código del programa', codigoPrograma || '—'],
     ['Área', ficha.area],
-    ['Sede', ficha.sede],
-    ['Ambiente de aprendizaje', ficha.ambiente ? `${ficha.ambiente}${capacidadAmbiente ? ` · capacidad ${capacidadAmbiente}` : ''}` : 'Sin asignar'],
-    ['Jornada', ETIQUETA_JORNADA[ficha.jornada]],
-    ['Modalidad', ETIQUETA_MODALIDAD[ficha.modalidad]],
-    ['Fecha de inicio', fechaISOaTexto(ficha.fechaInicio)],
-    ['Fecha de finalización', fechaISOaTexto(ficha.fechaFin)],
+    ['Ambiente de aprendizaje', ficha.ambiente ?? 'Sin asignar'],
+    ['Capacidad del ambiente (cupo)', capacidadAmbiente ? `${capacidadAmbiente} aprendices` : 'Sin definir'],
     ['Duración', `${duracionMeses(ficha.fechaInicio, ficha.fechaFin)} meses`],
-    ['Instructor líder', ficha.instructorLider ?? 'Sin asignar'],
-    ['Vocero titular', titular ? `${titular.nombres} ${titular.apellidos}` : 'Sin asignar'],
+    ['Fecha de registro', fechaISOaTexto(detalle.creadaEn)],
   ]
   return (
     <Card>
@@ -88,7 +76,7 @@ export function ListaInstructores({ detalle, onAsignar, onQuitar, editable }: Pr
   return (
     <Card>
       <CardHeader
-        titulo={`Instructores asignados (${porInstructor.length})`}
+        titulo="Instructores asignados"
         descripcion="Equipo docente de la ficha y competencias a cargo."
         acciones={
           editable && (
@@ -173,12 +161,11 @@ export function ListaAprendices({ detalle, onMatricular, onCambiarEstado, editab
     )
     // Primero los matriculados, luego los demás estados
     .sort((x, y) => Number(x.estado !== 'matriculado') - Number(y.estado !== 'matriculado'))
-  const matriculados = detalle.aprendices.filter((a) => a.estado === 'matriculado').length
 
   return (
     <Card>
       <CardHeader
-        titulo={`Directorio de aprendices (${matriculados} matriculados)`}
+        titulo="Directorio de aprendices"
         descripcion="Asistencia individual, vocería y estado de permanencia."
         acciones={
           editable && (
@@ -276,7 +263,7 @@ export function ListaAprendices({ detalle, onMatricular, onCambiarEstado, editab
 export function ListaCompetencias({ detalle }: { detalle: DetalleFicha }) {
   return (
     <Card>
-      <CardHeader titulo={`Competencias del programa (${detalle.competencias.length})`} descripcion="Instructores a cargo y asistencia registrada por competencia." />
+      <CardHeader titulo="Competencias del programa" descripcion="Instructores a cargo y asistencia registrada por competencia." />
       {detalle.competencias.length === 0 ? (
         <EmptyState icono={BookOpen} titulo="Sin competencias" descripcion="El programa de formación de esta ficha no tiene competencias registradas." />
       ) : (
