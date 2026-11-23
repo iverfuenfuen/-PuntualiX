@@ -70,7 +70,10 @@ front-end/
 │   │                       servicio<Modulo>.ts (ÚNICO lugar que consulta Supabase)
 │   │   ├── auth/           login, recuperar y restablecer contraseña              [Etapa 1]
 │   │   ├── perfil/         Mi perfil y cambio de contraseña                       [Etapa 1]
-│   │   └── fichas/         listado, detalle, registrar/actualizar, asignar, matricular [Etapa 2]
+│   │   ├── fichas/         listado, detalle, registrar/actualizar, asignar, matricular [Etapa 2]
+│   │   ├── instructores/   panel (tabla/tarjetas), perfil, cumplimiento mes a mes     [Etapa 3]
+│   │   ├── usuarios/       gestión de usuarios, registro por invitación, roles        [Etapa 3]
+│   │   └── catalogos/      sedes, áreas, ambientes y programas (compartido)
 │   ├── lib/                supabase.ts (cliente único) · utilidades.ts · resultado.ts (errores de BD)
 │   │                       · useCarga.ts (cargando/error/recargar) · csv.ts (exportar)
 │   ├── pages/              Inicio, Diagnóstico, EnConstruccion, NoEncontrada, dev/CatalogoComponentes
@@ -106,7 +109,7 @@ front-end/
 | 0 | Entorno, tokens, base de datos y guía Supabase · layout y componentes UI | ✅ Completa |
 | 1 | Autenticación: login multi-rol, recuperar y cambiar contraseña, rutas por rol | ✅ Completa |
 | 2 | Fichas (Admin): listado, detalle con pestañas, registrar, actualizar, asignar instructor, matricular | ✅ Lista para pruebas |
-| 3 | Usuarios e instructores (Admin): panel, perfil, registro, cumplimiento | ⏳ |
+| 3 | Usuarios e instructores (Admin): panel, perfil, registro, cumplimiento | ✅ Lista para pruebas (falta desplegar la Edge Function) |
 | 4 | Dashboard, alertas con umbrales y bitácora | ⏳ |
 | 5 | Estadísticas, reportes e historial | ⏳ |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
@@ -116,6 +119,60 @@ front-end/
 ---
 
 ## Registro de Cambios (Changelog)
+
+### [0.4.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 3 — Instructores y Usuarios
+
+**Decisión del usuario:** las cuentas nuevas se crean por **invitación por correo**: cada persona crea su propia
+contraseña y el administrador nunca la conoce.
+
+**Tomado de `Prototipo/`**
+- *Gestión y monitoreo de instructores* (tabla) y *Cumplimiento y desempeño* (tarjetas): tarjetas KPI, pestañas por
+  nivel de cumplimiento, filtros por sede, área y ficha, barra de cumplimiento y botón "Ver perfil".
+- *Perfil del instructor*: tarjeta de datos personales, fichas a cargo con barras de cumplimiento y asistencia,
+  cumplimiento mes a mes con la meta del 80 % e historial con exportación CSV.
+- *Gestión de usuarios*: KPI (registrados, activos, inactivos, nuevos del mes), pestañas por rol, tabla con
+  avatar, rol, sede o ficha, estado y acciones, "Cuenta propia" sin acciones y nota de políticas de acceso.
+- *Registrar instructor (HU02.1)*: campos y panel "Antes de registrar".
+
+**Rescatado de `VersionAntigua/`**
+- Campos de registro (nombres, apellidos, tipo y número de documento, correo, teléfono, especialidad, fecha de
+  ingreso) y la regla "documento y correo únicos".
+- Filtros de usuarios por rol y estado con "Limpiar filtros"; acciones Ver más / Activar / Desactivar.
+- Datos del perfil (documento, correo, teléfono, antigüedad, sede) e historial de registros.
+
+**Nuevo y mejoras**
+- **Edge Function `invitar-usuario`**: crea la cuenta solo si quien llama es un administrador activo, valida los
+  datos y la unicidad, envía la invitación, asigna el rol y los datos de instructor, deshace la cuenta si algo
+  falla y lo registra en la bitácora. Ver `front-end/supabase/README.md` → "Edge Function".
+- La pantalla `/restablecer` recibe la invitación: "Bienvenido a PuntualiX: crea tu contraseña".
+- **Matricular aprendiz** ahora registra e invita al aprendiz que no tiene cuenta (pendiente de la Etapa 2) y lo
+  vuelve a buscar automáticamente.
+- **HU02.3 y HU02.4** sin Edge Function: el rol efectivo se lee de `perfiles.rol` y el trigger solo deja cambiarlo
+  al administrador. Nadie puede cambiar su propio rol ni desactivarse a sí mismo.
+- Cumplimiento con los cortes del Prototipo: ≥ 80 % al día, 60–79 % en seguimiento, < 60 % crítico, sin sesiones.
+- Catálogos movidos a `features/catalogos` (los usan Fichas, Instructores y Usuarios); `servicioFichas` los
+  reexporta.
+- La librería de gráficas se descarga solo al mostrar una gráfica: el perfil pasa de 427 kB a 13 kB.
+- El listado de usuarios se lee en bloques de 1.000 (límite de Supabase) para no perder registros.
+
+**Información repetida corregida (regla "un solo lugar por dato")**
+- Prototipo y VersionAntigua tenían **2 páginas** con los mismos instructores (tabla y tarjetas): ahora es una
+  página con dos vistas.
+- La distribución por nivel aparecía en pestañas, dona y chips: queda **solo en las pestañas**.
+- El perfil individual mostraba la distribución "alto / medio / bajo desempeño" de **toda la planta** y el
+  cumplimiento dos veces (anillo y tarjeta): se quitó la distribución y el % queda en una sola tarjeta.
+- Gestión de usuarios filtraba el rol con pestañas **y** con un selector: queda solo en las pestañas.
+- El rol y el acceso se gestionan en un solo lugar (Gestión de usuarios); el perfil del instructor enlaza ahí.
+
+**Decisiones y pendientes**
+- Cumplimiento general del instructor = promedio del cumplimiento de sus fichas (la vista lo da por ficha).
+- Sin datos en la BD (propuesta para el back-end, migración 09): rol formativo (técnico, transversal, líder),
+  tipo de contrato, dedicación semanal y tendencia mensual en las tarjetas.
+- "Novedades de instructores", "Bitácora de novedades" y "Evolución semanal" del Prototipo pasan a las Etapas
+  4 (alertas y bitácora) y 5 (estadísticas).
+- Carga masiva de aprendices (Excel/CSV): queda para una iteración posterior, reutilizando la Edge Function.
+- Para invitar a personas reales hay que configurar un SMTP propio en Supabase (el correo incluido solo envía a
+  miembros del equipo del proyecto).
 
 ### [0.3.0] — 2026-11-23 · Sesión 3: Cierre de la Etapa 1 y Etapa 2 (Fichas del Administrador)
 

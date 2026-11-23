@@ -62,7 +62,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 - Esquema = contrato de datos: migraciones `01`–`08` en `front-end/supabase/migrations/` (21 tablas, 5 vistas,
   24 enums, triggers de negocio, RLS por rol, 4 buckets). Referencia rápida: `supabase/DICCIONARIO_DATOS.md`.
 - El rol se toma de `app_metadata` (no editable por el usuario). Crear usuarios desde la app requiere una
-  Edge Function (planificada para la Etapa 3).
+  Edge Function (Etapa 3). **Decisión del usuario (2026-11-23): las cuentas nuevas se crean por invitación por
+  correo** (`inviteUserByEmail`); el usuario elige su contraseña y el administrador nunca la conoce.
 - Usuarios de prueba y guía de conexión: `front-end/supabase/README.md`.
 
 ## Control de versiones
@@ -77,8 +78,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 0 | Entorno, tokens, BD, layout y 15 componentes UI | ✅ |
 | 1 | Login multi-rol, recuperar/restablecer contraseña, rutas por rol, Mi perfil con cambio de contraseña | ✅ |
 | 2 | Fichas (Admin): `/admin/fichas` y `/admin/fichas/:id` con registrar, actualizar, desactivar, asignar instructor y matricular | ✅ código · ⏳ prueba manual del usuario |
-| 3 | Usuarios e instructores (Admin) + Edge Function de creación de usuarios | ⏳ siguiente |
-| 4 | Dashboard, alertas con umbrales, bitácora | ⏳ |
+| 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ código · ⏳ desplegar la función y prueba manual |
+| 4 | Dashboard, alertas con umbrales, bitácora | ⏳ siguiente |
 | 5 | Estadísticas, reportes e historial | ⏳ |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
@@ -92,7 +93,14 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   con relaciones se convierten con `as unknown as Fila[]`. Generarlo requiere `npx supabase login`.
 - Etapa 2 dejó para el back-end (migración 09 propuesta): `ficha_instructores.rol` (técnico/transversal),
   dedicación semanal y `fichas.descripcion`. El cupo se toma de `ambientes.capacidad`.
-- Etapa 3 debe agregar: crear la cuenta del aprendiz desde "Matricular aprendiz" y carga masiva Excel/CSV.
+- La Edge Function `supabase/functions/invitar-usuario` se despliega con `npx supabase functions deploy` (ver
+  `front-end/supabase/README.md`). Sin SMTP propio, Supabase solo envía correos a miembros del equipo del proyecto.
+- Pendiente: carga masiva de aprendices (Excel/CSV) reutilizando `invitar-usuario`. Etapa 3 también propone para la
+  migración 09: rol formativo del instructor, tipo de contrato y dedicación semanal.
+- Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
+  modales sin métricas). El rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`.
+- En Bash, NO usar comillas invertidas dentro de `node -e "..."`: bash las ejecuta como comandos. Para editar
+  documentación usar la herramienta Edit, o un script escrito a un archivo.
 - Herramientas útiles: `lib/useCarga.ts` (estados de carga), `lib/resultado.ts` (`traducirErrorBD` con mensajes
   por restricción), `lib/csv.ts`, `ModalConfirmacion`, `EstadoError`, `AvatarIniciales`. Los modales con
   formulario se montan solo al abrirse (`{abierto && <Modal…/>}`) para partir de datos frescos.
