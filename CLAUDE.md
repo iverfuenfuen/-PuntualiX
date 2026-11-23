@@ -75,9 +75,9 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | Etapa | Contenido | Estado |
 |---|---|---|
 | 0 | Entorno, tokens, BD, layout y 15 componentes UI | ✅ |
-| 1 | Login multi-rol, recuperar/restablecer contraseña, rutas por rol, Mi perfil con cambio de contraseña | ✅ en código · falta prueba manual con Supabase real y entrada en el Changelog |
-| 2 | Fichas (Admin) | ⏳ siguiente |
-| 3 | Usuarios e instructores (Admin) + Edge Function de creación de usuarios | ⏳ |
+| 1 | Login multi-rol, recuperar/restablecer contraseña, rutas por rol, Mi perfil con cambio de contraseña | ✅ |
+| 2 | Fichas (Admin): `/admin/fichas` y `/admin/fichas/:id` con registrar, actualizar, desactivar, asignar instructor y matricular | ✅ código · ⏳ prueba manual del usuario |
+| 3 | Usuarios e instructores (Admin) + Edge Function de creación de usuarios | ⏳ siguiente |
 | 4 | Dashboard, alertas con umbrales, bitácora | ⏳ |
 | 5 | Estadísticas, reportes e historial | ⏳ |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
@@ -85,10 +85,19 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 8 | Página pública (RF01), accesibilidad, responsive, despliegue | ⏳ |
 
 ## Pendientes conocidos
-- Paquete JS principal de ~703 kB: las páginas de auth y el layout aún se cargan de forma directa. Pasarlas a `lazy`.
+- Paquete JS principal de ~715 kB: las páginas de auth y el layout aún se cargan de forma directa. Pasarlas a `lazy`.
 - `vercel.json` de la raíz aún redirige a `/frontend/HTML/InicioSesion.html` (versión antigua). El despliegue
   nuevo usa `front-end/vercel.json` (Root Directory = `front-end` en Vercel). Revisar la raíz antes de desplegar.
-- El README raíz menciona `src/services/`, pero los servicios viven en `src/features/<modulo>/servicio*.ts`.
+- `src/types/database.types.ts` es un marcador (`any`): las filas se tipan a mano en cada servicio y las consultas
+  con relaciones se convierten con `as unknown as Fila[]`. Generarlo requiere `npx supabase login`.
+- Etapa 2 dejó para el back-end (migración 09 propuesta): `ficha_instructores.rol` (técnico/transversal),
+  dedicación semanal y `fichas.descripcion`. El cupo se toma de `ambientes.capacidad`.
+- Etapa 3 debe agregar: crear la cuenta del aprendiz desde "Matricular aprendiz" y carga masiva Excel/CSV.
+- Herramientas útiles: `lib/useCarga.ts` (estados de carga), `lib/resultado.ts` (`traducirErrorBD` con mensajes
+  por restricción), `lib/csv.ts`, `ModalConfirmacion`, `EstadoError`, `AvatarIniciales`. Los modales con
+  formulario se montan solo al abrirse (`{abierto && <Modal…/>}`) para partir de datos frescos.
+- Los anexos de avance de `docs/RF.docx` y `docs/RNF.docx` van entre comentarios `<!--PX-ESTADO-IMPLEMENTACION-->`
+  y `<!--PX-VERIFICACION-RNF-->` dentro de `word/document.xml`: reemplazar ese bloque en lugar de duplicarlo.
 - Mensaje único de error de login (no distinguir "usuario no existe" de "contraseña incorrecta"), ver RNF2.
 - El Manual no define Nunito 300 ni la escala de grises; los códigos de programa distintos de ADSO (228118)
   son de ejemplo.

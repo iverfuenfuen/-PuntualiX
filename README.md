@@ -63,12 +63,17 @@ front-end/
 │   ├── components/
 │   │   ├── layout/         AppLayout, Navbar, MenuUsuario, Footer, PageHeader, Breadcrumbs
 │   │   └── ui/             Button, Badge, Card, KpiCard, AlertCard, PanelAlertas, DataTable, Tabs,
-│   │                       Pagination, Modal, Input/Select/Textarea, ProgressBar, EmptyState, Spinner
+│   │                       Pagination, Modal, ModalConfirmacion, Input/Select/Textarea, ProgressBar,
+│   │                       EmptyState, EstadoError, Spinner, AvatarIniciales
 │   ├── config/navegacion.ts menú principal, campana y menú de usuario de cada rol
-│   ├── features/           un módulo por caso de uso (auth, fichas, asistencia…)        [Etapa 1+]
-│   ├── lib/                supabase.ts (cliente único) · utilidades.ts (cn, fechas, %)
+│   ├── features/           un módulo por caso de uso: páginas, modales, esquemas zod y su
+│   │                       servicio<Modulo>.ts (ÚNICO lugar que consulta Supabase)
+│   │   ├── auth/           login, recuperar y restablecer contraseña              [Etapa 1]
+│   │   ├── perfil/         Mi perfil y cambio de contraseña                       [Etapa 1]
+│   │   └── fichas/         listado, detalle, registrar/actualizar, asignar, matricular [Etapa 2]
+│   ├── lib/                supabase.ts (cliente único) · utilidades.ts · resultado.ts (errores de BD)
+│   │                       · useCarga.ts (cargando/error/recargar) · csv.ts (exportar)
 │   ├── pages/              Inicio, Diagnóstico, EnConstruccion, NoEncontrada, dev/CatalogoComponentes
-│   ├── services/           consultas a Supabase por módulo
 │   ├── styles/             index.css (tokens de identidad) y fonts.css
 │   └── types/              database.types.ts (generado desde Supabase)
 └── supabase/
@@ -99,8 +104,8 @@ front-end/
 | Etapa | Contenido | Estado |
 |---|---|---|
 | 0 | Entorno, tokens, base de datos y guía Supabase · layout y componentes UI | ✅ Completa |
-| 1 | Autenticación: login multi-rol, recuperar y cambiar contraseña, rutas por rol | ⏳ |
-| 2 | Fichas (Admin): listado, detalle con pestañas, registrar, actualizar, asignar instructor, matricular | ⏳ |
+| 1 | Autenticación: login multi-rol, recuperar y cambiar contraseña, rutas por rol | ✅ Completa |
+| 2 | Fichas (Admin): listado, detalle con pestañas, registrar, actualizar, asignar instructor, matricular | ✅ Lista para pruebas |
 | 3 | Usuarios e instructores (Admin): panel, perfil, registro, cumplimiento | ⏳ |
 | 4 | Dashboard, alertas con umbrales y bitácora | ⏳ |
 | 5 | Estadísticas, reportes e historial | ⏳ |
@@ -111,6 +116,68 @@ front-end/
 ---
 
 ## Registro de Cambios (Changelog)
+
+### [0.3.0] — 2026-11-23 · Sesión 3: Cierre de la Etapa 1 y Etapa 2 (Fichas del Administrador)
+
+**Continuidad entre computadores**
+- Nuevo `CLAUDE.md` en la raíz: stack, convenciones, reglas de identidad visual, Supabase, control de versiones,
+  estado de avance y pendientes. Permite retomar el trabajo en cualquier equipo.
+- El verde `#384E38` del Prototipo queda como **definitivo** (confirmado por el usuario).
+- Etapa 1 probada por el usuario con el proyecto Supabase real (conexión e inicio de sesión) en el segundo equipo.
+
+**Tomado de `Prototipo/`**
+- *Listado general de fichas*: banner con total de fichas, 4 tarjetas KPI (registradas, activas, inactivas y
+  alertas de deserción con chips críticas/moderadas), pestañas Todas / Activas / En riesgo / Inactivas, tabla con
+  nivel, jornada y sede, barra de asistencia, estado combinado con riesgo y botón "Ver ficha" (rojo si es crítica),
+  exportar listado.
+- *Detalle integral de la ficha*: encabezado verde con estado, código del programa, jornada, modalidad, cupo y
+  ciclo lectivo, anillo de asistencia general, 4 KPI, pestañas Información general / Instructores / Aprendices /
+  Competencias, y panel lateral de vocería, alertas de deserción temprana y trazabilidad.
+- Modales *Registrar ficha (HU10.1)* con el panel "Antes de registrar", *Actualizar ficha (HU10.2)* con número
+  bloqueado, instructor líder, vocero y zona "Desactivar ficha (HU10.3)", *Asignar instructor (HU10.4)* con
+  buscador, competencias a cargo y vigencia, y *Matricular aprendiz (HU02.2)* en 2 pasos (validación por
+  documento y datos de la matrícula) con barra de cupo.
+
+**Rescatado de `VersionAntigua/`**
+- Filtros del listado (sede, programa, jornada, estado) y el botón "Limpiar filtros".
+- Campos del registro: número, sede, programa, modalidad, fechas, jornada y estado; los mensajes del panel
+  "Antes de registrar" (número único, verificar programa, asignaciones posteriores).
+- Datos del detalle: instructor líder, vocero, área, duración en meses y lista de instructores por competencia.
+- Ficha de ejemplo 3267541 como referencia del formato de número.
+
+**Nuevo y mejoras**
+- RF05 completo: además de los filtros antiguos, filtro por **ambiente** y **área**. El ambiente se limita a la
+  sede elegida y el programa al área elegida. La búsqueda ignora mayúsculas y tildes y también encuentra por
+  código de programa.
+- Los filtros, la pestaña y la página viven en la URL: al volver del detalle se conservan.
+- Exportar listado a CSV compatible con Excel en español (separador `;` y tildes correctas).
+- Riesgo por aprendiz calculado con los **umbrales configurables** de la base (10 / 20 / 30 % de inasistencia);
+  los aprendices en riesgo se resaltan y aparecen en el panel de alertas tempranas.
+- Cambio de estado de matrícula (aplazado, retirado, desertor, certificado); quien deja de estar matriculado
+  pierde la vocería. Reactivación de matrículas previas en la misma ficha.
+- Reactivar una ficha inactiva. Una ficha inactiva no admite asignaciones ni matrículas.
+- Quitar asignaciones de instructor; si era el líder y no le quedan asignaciones, la ficha queda sin líder y la
+  base genera la alerta "ficha sin líder".
+- Errores de la base traducidos a mensajes claros por restricción (`lib/resultado.ts`): número de ficha
+  duplicado, fechas incoherentes, matrícula activa en otra ficha, vocero repetido…
+- Componentes reutilizables nuevos: `EstadoError` (con Reintentar), `ModalConfirmacion`, `AvatarIniciales`, y
+  el hook `useCarga` para los estados cargando / error / recarga de todas las pantallas.
+- Pantallas cargadas bajo demanda: listado 10,7 kB y detalle 39,6 kB (minificados).
+- Las 14 consultas del módulo se validaron contra el Supabase real (relaciones sin ambigüedad).
+- `docs/RF.docx`: anexo "Estado de implementación" (RF01–RF21). `docs/RNF.docx`: anexo "Verificación de
+  cumplimiento" (RNF1, 2, 3, 6 y 7).
+
+**Decisiones y pendientes (coordinar con back-end)**
+- **Cupo de la ficha** = capacidad del ambiente asignado; la tabla `fichas` no tiene columna de cupo. Si la
+  matrícula supera el cupo se avisa pero no se bloquea.
+- El Prototipo muestra **rol formativo** (técnico / transversal), **dedicación semanal** y la VersionAntigua una
+  **descripción** de la ficha: no existen en el esquema. Solo se guarda el instructor líder. Propuesta: columnas
+  `ficha_instructores.rol` y `fichas.descripcion` en una migración 09.
+- **Crear la cuenta del aprendiz** desde la matrícula y la **carga masiva** desde Excel/CSV necesitan la Edge
+  Function de creación de usuarios (Etapa 3). Por ahora se matricula a aprendices ya registrados.
+- Número de ficha: 6 a 8 dígitos en el registro (Prototipo); la base admite 4 a 20.
+- `src/types/database.types.ts` sigue siendo un marcador temporal; las filas se tipan a mano en cada servicio.
+  Generarlo requiere `npx supabase login` con la cuenta del proyecto.
 
 ### [0.2.0] — 2026-11-23 · Sesión 2: Conexión con Supabase y Etapa 0 (layout y componentes)
 
