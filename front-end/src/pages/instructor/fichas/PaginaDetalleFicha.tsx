@@ -20,14 +20,14 @@ type Dialogo = { tipo: 'matricular' } | { tipo: 'acceso'; aprendiz: AprendizFich
 /**
  * RF06 / RF07 — Detalle de una ficha asignada al instructor. Misma estructura del detalle del Prototipo, sin las
  * funciones del administrador (actualizar, desactivar, asignar instructores). El instructor matricula y registra
- * aprendices (HU02.2), activa o desactiva el acceso (HU02.4) y consulta el
+ * aprendices (HU02.2), activa o desactiva el acceso si es el líder (HU02.4) y consulta el
  * historial de cada aprendiz (HU03.5, HU03.6).
  */
 export function PaginaDetalleFicha() {
   const { id } = useParams()
   const fichaId = Number(id)
   const navegar = useNavigate()
-  const { refrescarNotificaciones } = useSesion()
+  const { usuario, refrescarNotificaciones } = useSesion()
   const [parametros, setParametros] = useSearchParams()
   const [dialogo, setDialogo] = useState<Dialogo>(null)
   const ubicacion = useLocation()
@@ -91,6 +91,8 @@ export function PaginaDetalleFicha() {
   const d = detalle.datos
   const { ficha } = d
   const activa = ficha.estado === 'activa'
+  // HU02.4 — Solo el instructor líder de la ficha activa o desactiva el acceso de sus aprendices
+  const esLider = !!usuario && usuario.id === ficha.instructorLiderId
   const matriculados = d.aprendices.filter((a) => a.estado === 'matriculado')
   const riesgos = matriculados.map((a) => riesgoAprendiz(a.porcentajeInasistencia, d.umbrales))
   const moderados = riesgos.filter((r) => r === 'media').length
@@ -157,7 +159,7 @@ export function PaginaDetalleFicha() {
               editable={activa}
               onMatricular={() => setDialogo({ tipo: 'matricular' })}
               onVerHistorial={(a) => navegar(`/instructor/fichas/${ficha.id}/aprendices/${a.aprendizId}`)}
-              onCambiarAcceso={(aprendiz) => setDialogo({ tipo: 'acceso', aprendiz })}
+              onCambiarAcceso={esLider ? (aprendiz) => setDialogo({ tipo: 'acceso', aprendiz }) : undefined}
             />
           )}
           {seccion === 'competencias' && <ListaCompetencias detalle={d} />}
