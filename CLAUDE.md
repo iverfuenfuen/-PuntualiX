@@ -11,7 +11,9 @@ Frontend final en React + Supabase que combine:
 - Colores, fuentes (Poppins/Nunito) y logos salen SOLO del manual. Única adición: el verde nuevo `#384E38` como token
   `--color-primario` (decisión del usuario 2026-11-23: se usa en toda la interfaz, no solo en navbar y footer).
 - No cambiar el stack, no instalar librerías nuevas, no reestructurar carpetas sin pedir permiso.
-- Todas las llamadas a Supabase van en /src/services. Nunca usar la service_role key.
+- Todas las llamadas a Supabase van en los archivos `servicio*.ts` de cada módulo (`src/features/<modulo>/`) y en
+  `src/lib/supabase.ts`; nunca en componentes (decisión del usuario 2026-11-23: no se mueven a /src/services).
+  Nunca usar la service_role key.
 - No modificar el esquema de Supabase: si falta algo, proponerlo y esperar.
 
 ## Alcance de cada tarea
