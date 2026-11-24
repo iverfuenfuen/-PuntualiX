@@ -8,7 +8,8 @@ Frontend final en React + Supabase que combine:
 
 ## Reglas estrictas
 - /prototipo y /VersionAntigua son SOLO LECTURA. Nunca editar ni borrar.
-- Colores, fuentes (Poppins/Nunito) y logos salen SOLO del manual. Única adición: el verde nuevo del navbar y footer, como token propio.
+- Colores, fuentes (Poppins/Nunito) y logos salen SOLO del manual. Única adición: el verde nuevo `#384E38` como token
+  `--color-primario` (decisión del usuario 2026-11-23: se usa en toda la interfaz, no solo en navbar y footer).
 - No cambiar el stack, no instalar librerías nuevas, no reestructurar carpetas sin pedir permiso.
 - Todas las llamadas a Supabase van en /src/services. Nunca usar la service_role key.
 - No modificar el esquema de Supabase: si falta algo, proponerlo y esperar.
@@ -144,10 +145,9 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   constructor de supabase-js es *thenable* y una función async lo ejecutaría). `bitacora/presentacion.ts` traduce los
   eventos técnicos a texto. El dashboard sigue el orden de `VersionAntigua/Admin/dashboard.html` y reutiliza los
   servicios de cada módulo. Etapa 5 debe llevar el comprobante PDF del evento de la bitácora.
-- **Pendiente de decisión del usuario:** en las Etapas 2 y 3 quedaron funciones del administrador sobre aprendices
-  (registrar aprendices en Gestión de usuarios, matricular/registrar aprendiz y estado de matrícula en el detalle de
-  la ficha). El Prototipo tiene el modal "Matricular aprendiz HU02.2" para el admin, pero el caso de uso HU02.2 es del
-  instructor. Preguntar antes de quitarlas.
+- **Decisión del usuario (2026-11-23):** se mantiene "Matricular aprendiz" en el detalle de la ficha (está en el
+  Prototipo). En Gestión de usuarios el administrador ya no puede registrar aprendices (el selector de rol no ofrece
+  "Aprendiz").
 - Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
   modales sin métricas). El rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`.
 - En Bash, NO usar comillas invertidas dentro de `node -e "..."`: bash las ejecuta como comandos. Para editar
