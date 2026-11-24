@@ -15,9 +15,7 @@ import { SesionSupabaseProvider } from './SesionSupabaseProvider'
  * Etapa del plan en la que se construye cada pantalla (ver README → Plan de migración).
  * Al construir una pantalla se agrega a PANTALLAS y deja de mostrarse <EnConstruccion>.
  */
-const ETAPA_POR_RUTA: Record<string, number> = {
-  '/admin/reportes': 5,
-}
+const ETAPA_POR_RUTA: Record<string, number> = {}
 const ETAPA_POR_ROL: Record<Rol, number> = { administrador: 4, instructor: 6, aprendiz: 7 }
 
 /** Pantallas ya construidas: se cargan bajo demanda (división del código por ruta, RNF1) */
@@ -31,6 +29,7 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
   '/admin/usuarios': async () => ({ Component: (await import('@/features/usuarios/PaginaUsuarios')).PaginaUsuarios }),
   // Etapa 5 — Estadísticas y reportes (Admin)
   '/admin/estadisticas': async () => ({ Component: (await import('@/features/estadisticas/PaginaEstadisticas')).PaginaEstadisticas }),
+  '/admin/reportes': async () => ({ Component: (await import('@/features/reportes/PaginaReportes')).PaginaReportes }),
   // Etapa 4 — Dashboard, alertas con umbrales y bitácora (Admin)
   '/admin': async () => ({ Component: (await import('@/features/dashboard/PaginaDashboard')).PaginaDashboard }),
   '/admin/alertas': async () => ({ Component: (await import('@/features/alertas/PaginaAlertas')).PaginaAlertas }),
@@ -46,6 +45,13 @@ const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
     { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/features/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
     { path: 'instructores/:id', lazy: async () => ({ Component: (await import('@/features/instructores/PaginaPerfilInstructor')).PaginaPerfilInstructor }) },
   ],
+  instructor: [],
+  aprendiz: [],
+}
+
+/** Pantallas sin navbar ni pie (hojas imprimibles). La ruta es relativa a la del rol. */
+const RUTAS_SIN_LAYOUT: Record<Rol, RouteObject[]> = {
+  administrador: [{ path: 'reportes/:id', lazy: async () => ({ Component: (await import('@/features/reportes/PaginaHojaReporte')).PaginaHojaReporte }) }],
   instructor: [],
   aprendiz: [],
 }
@@ -75,6 +81,7 @@ function rutasDeRol(rol: Rol): RouteObject {
           ...RUTAS_ADICIONALES[rol],
         ],
       },
+      ...RUTAS_SIN_LAYOUT[rol],
     ],
   }
 }
