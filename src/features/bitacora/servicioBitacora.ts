@@ -14,6 +14,8 @@ export interface FiltrosBitacora {
   accion: string
   resultado: string
   rol: string
+  /** Sede del usuario responsable (Prototipo: filtro "Sede") */
+  sede: string
   /** YYYY-MM-DD (hora de Colombia) */
   desde: string
   hasta: string
@@ -104,7 +106,14 @@ async function condicionBusqueda(q: string): Promise<string | null> {
  * Sin genéricos, para no disparar la recursión de tipos de supabase-js (TS2589).
  */
 function consulta(f: FiltrosBitacora, busqueda: string | null, columnas: string, opciones: { count?: 'exact'; head?: boolean }, sinResultado = false) {
-  let q = supabase.from('bitacora').select(columnas, opciones)
+  // La sede es del responsable: se filtra a través de su perfil (join obligatorio con !inner)
+  const seleccion = f.sede
+    ? columnas.includes('perfiles(')
+      ? columnas.replace('perfiles(nombres, apellidos)', 'perfiles!inner(nombres, apellidos, sede_id)')
+      : `${columnas}, perfiles!inner(sede_id)`
+    : columnas
+  let q = supabase.from('bitacora').select(seleccion, opciones)
+  if (f.sede) q = q.eq('perfiles.sede_id', f.sede)
   if (f.modulo) q = q.eq('modulo', f.modulo)
   if (f.accion) q = q.eq('accion', f.accion)
   if (f.rol) q = q.eq('rol', f.rol)
@@ -136,6 +145,13 @@ export async function contarResultados(f: FiltrosBitacora): Promise<Resultado<Co
   const error = respuestas.find((x) => x.error)?.error
   if (error) return { ok: false, mensaje: traducirErrorBD(error) }
   return { ok: true, datos: { exito: respuestas[0].count ?? 0, alerta: respuestas[1].count ?? 0, error: respuestas[2].count ?? 0 } }
+}
+
+/** Prototipo "Vistas rápidas · Solo asistencias (n)": eventos del módulo de asistencias con los demás filtros */
+export async function contarAsistencias(f: FiltrosBitacora): Promise<Resultado<number>> {
+  const { count, error } = await consulta({ ...f, modulo: 'asistencias' }, await condicionBusqueda(f.q), 'id', { count: 'exact', head: true })
+  if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+  return { ok: true, datos: count ?? 0 }
 }
 
 export const LIMITE_EXPORTACION = 3000

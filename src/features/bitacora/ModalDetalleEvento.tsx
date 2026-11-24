@@ -1,5 +1,5 @@
 import { CircleAlert, CircleCheck, CircleX, Database, UserRound } from 'lucide-react'
-import { Badge, Button, Modal } from '@/components/ui'
+import { Button, Modal } from '@/components/ui'
 import { cn } from '@/lib/utilidades'
 import { ETIQUETA_MODULO, ETIQUETA_RESULTADO, ETIQUETA_ROL } from '@/types/dominio'
 import { cambiosDelEvento, ETIQUETA_TABLA, fechaCompleta, identificarRegistro, tituloEvento } from './presentacion'
@@ -110,10 +110,6 @@ export function ModalDetalleEvento({ evento, onCerrar }: { evento: EventoBitacor
           )}
           {evento.accion === 'modificacion' && cambios.length === 0 && <p className="mt-3 text-xs text-texto-secundario">Solo cambiaron campos técnicos (fechas de actualización).</p>}
         </section>
-
-        <p className="text-xs text-texto-secundario">
-          <Badge tono="neutro">Solo lectura</Badge> La bitácora no se puede modificar ni eliminar, ni siquiera por un administrador.
-        </p>
       </div>
     </Modal>
   )
