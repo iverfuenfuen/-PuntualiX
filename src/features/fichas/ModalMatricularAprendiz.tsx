@@ -57,7 +57,7 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado, porInst
     ? null
     : !encontrado.activo
       ? porInstructor
-        ? 'La cuenta de este aprendiz está inactiva. Debe reactivarse antes de matricularlo: desde la ficha donde estuvo matriculado o por el administrador.'
+        ? 'La cuenta de este aprendiz está inactiva. Debe reactivarla el instructor líder de la ficha donde estuvo matriculado o el administrador.'
         : 'La cuenta de este aprendiz está inactiva. Debe reactivarse en Gestión de usuarios antes de matricularlo.'
       : encontrado.fichaActiva?.id === ficha.id
         ? 'El aprendiz ya está matriculado en esta ficha.'
