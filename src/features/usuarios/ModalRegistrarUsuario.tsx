@@ -110,7 +110,15 @@ export function ModalRegistrarUsuario({ onCerrar, onRegistrado, rolInicial = 'in
             {errorServidor && <Aviso tipo="error">{errorServidor}</Aviso>}
 
             {!rolFijo && (
-              <Select etiqueta="Rol en la plataforma" requerido opciones={opcionesDe(ETIQUETA_ROL)} error={errors.rol?.message} {...register('rol')} />
+              // Desde Gestión de usuarios el administrador no registra aprendices (HU02.2 es del instructor);
+              // el aprendiz solo se registra desde "Matricular aprendiz" de la ficha (rolFijo), como en el Prototipo
+              <Select
+                etiqueta="Rol en la plataforma"
+                requerido
+                opciones={opcionesDe(ETIQUETA_ROL).filter((o) => o.valor !== 'aprendiz')}
+                error={errors.rol?.message}
+                {...register('rol')}
+              />
             )}
             <div className="grid gap-4 sm:grid-cols-2">
               <Input etiqueta="Nombres" requerido autoComplete="off" placeholder="Ej: Juan Carlos" error={errors.nombres?.message} {...register('nombres')} />
