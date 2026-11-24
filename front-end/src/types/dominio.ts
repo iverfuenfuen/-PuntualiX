@@ -156,6 +156,24 @@ export const ETIQUETA_ACCION: Record<AccionBitacora, string> = {
 
 export const ETIQUETA_RESULTADO: Record<ResultadoBitacora, string> = { exito: 'Éxito', alerta: 'Alerta', error: 'Error' }
 
+// ---------------------------------------------------------------------
+// Reportes (Etapa 5) — mismos valores que los enum de la BD
+// ---------------------------------------------------------------------
+export type TipoReporte = 'ficha' | 'instructor' | 'aprendiz' | 'estadisticas' | 'desercion' | 'cumplimiento_instructores'
+export type FormatoReporte = 'pdf' | 'xlsx' | 'csv'
+export type EstadoReporte = 'generando' | 'listo' | 'error'
+
+export const ETIQUETA_TIPO_REPORTE: Record<TipoReporte, string> = {
+  ficha: 'Ficha',
+  instructor: 'Instructor',
+  aprendiz: 'Aprendiz',
+  estadisticas: 'Estadísticas',
+  desercion: 'Deserción',
+  cumplimiento_instructores: 'Cumplimiento',
+}
+export const ETIQUETA_FORMATO_REPORTE: Record<FormatoReporte, string> = { pdf: 'PDF', xlsx: 'Excel', csv: 'CSV' }
+export const ETIQUETA_ESTADO_REPORTE: Record<EstadoReporte, string> = { generando: 'Generando', listo: 'Disponible', error: 'Error' }
+
 /** Convierte un Record de etiquetas en opciones para <Select> */
 export function opcionesDe<T extends string>(etiquetas: Record<T, string>): Array<{ valor: T; etiqueta: string }> {
   return (Object.entries(etiquetas) as Array<[T, string]>).map(([valor, etiqueta]) => ({ valor, etiqueta }))
