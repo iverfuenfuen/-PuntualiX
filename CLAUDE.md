@@ -23,8 +23,13 @@ Frontend final en React + Supabase que combine:
 
 ## Estado
 (Actualizar al terminar cada módulo: qué está hecho, qué sigue.)
-- Hecho: Etapas 0–5 del administrador (ver tabla "Estado de avance"). Pendiente la prueba manual de las Etapas 2, 4 y 5.
-- Sigue: Etapa 6 (módulo Instructor), planificada primero en modo plan con inventario de Prototipo + VersionAntigua.
+- **Para retomar en otro chat o equipo: leer primero [CONTEXTO_NUEVO_CHAT.md](CONTEXTO_NUEVO_CHAT.md)** (todo el contexto,
+  dónde vamos, el plan del 6b y la pregunta abierta sobre el back-end).
+- Hecho: Etapas 0–5 del administrador, 6.0 (pantallas por rol) y 6a (fichas, detalle, historial y registrar aprendiz
+  del instructor), además de las mejoras de Estadísticas (comparar 5, deserción, dimensión Instructor) y la migración 09.
+  Pendiente la prueba manual de las Etapas 2, 4, 5 y 6a.
+- **En pausa:** el paso 6b (Registro de asistencia) está planificado y aprobado, pero espera la respuesta del instructor
+  del SENA sobre la carpeta `back-end/` (ver CONTEXTO_NUEVO_CHAT.md, sección 6). No empezar hasta tenerla.
 - Decisiones de la Etapa 5: sin librerías (PDF = hoja imprimible, Excel = CSV), corte semestral, solo totales por
   ficha, historial de reportes con parámetros (sin Storage).
 
@@ -104,7 +109,7 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 ## Supabase
 - El frontend usa **solo la anon key** (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` en `front-end/.env.local`).
   La `service_role` solo vive en `.env.supabase.local` para `db:aplicar`; nunca se sube.
-- Esquema = contrato de datos: migraciones `01`–`08` en `front-end/supabase/migrations/` (21 tablas, 5 vistas,
+- Esquema = contrato de datos: migraciones `01`–`09` en `front-end/supabase/migrations/` (21 tablas, 5 vistas,
   24 enums, triggers de negocio, RLS por rol, 4 buckets). Referencia rápida: `supabase/DICCIONARIO_DATOS.md`.
 - El rol se toma de `app_metadata` (no editable por el usuario). Crear usuarios desde la app requiere una
   Edge Function (Etapa 3). **Decisión del usuario (2026-11-23): las cuentas nuevas se crean por invitación por
@@ -131,7 +136,7 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ función desplegada (2026-11-23) e invitación probada de punta a punta |
 | 4 | Dashboard (`/admin`), alertas con umbrales (`/admin/alertas`, `/admin/alertas/umbrales`), bitácora (`/admin/bitacora`) | ✅ código · ⏳ prueba manual del usuario |
 | 5 | Estadísticas (`/admin/estadisticas`), reportes (`/admin/reportes`, `/admin/reportes/:id`) e historial por ficha/instructor | ✅ código · ⏳ prueba manual del usuario |
-| 6 | Módulo Instructor (11 pantallas) | ⏳ siguiente: planificar en modo plan |
+| 6 | Módulo Instructor (11 pantallas) | 🔄 6.0 y 6a ✅ · 6b ⏸️ en pausa (pregunta del back-end) · 6c–6f ⏳ |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
 | 8 | Página pública (RF01), accesibilidad, responsive, despliegue | ⏳ |
 

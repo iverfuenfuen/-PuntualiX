@@ -14,6 +14,17 @@
 
 ## Tareas, en este orden
 
+### ★ Preguntar al instructor del SENA por el back-end (bloquea el desarrollo del paso 6b)
+El SENA pide una carpeta `back-end/` escrita en un lenguaje de programación, para que la lógica no quede en el
+front-end. Hay que preguntarle:
+1. ¿Sirve Supabase como back-end? Es la base PostgreSQL con las reglas en PL/pgSQL (triggers y RLS) más funciones en
+   TypeScript, todo dentro de `back-end/`. ¿O exige una API propia?
+2. Si exige una API: ¿en qué lenguaje? Puede ser Node.js con Express, Python, Java o PHP.
+3. ¿Pide una arquitectura concreta, como MVC, REST o capas?
+
+Lleva la respuesta al chat de desarrollo. Las opciones y lo que cambia cada una están en `CONTEXTO_NUEVO_CHAT.md`,
+sección 6.
+
 ### 0. Arreglar el despliegue en Vercel (en curso: el login falla)
 Decisión del usuario (2026-11-24): el código se publica en `https://github.com/iverfuenfuen/-PuntualiX`, **solo con el
 contenido de `front-end/`** y su historial. Ya está subido en `main`. El repositorio de la organización `puntualix-design`
