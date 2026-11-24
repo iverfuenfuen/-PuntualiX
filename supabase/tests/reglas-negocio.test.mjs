@@ -58,6 +58,12 @@ check('instructor desactiva aprendiz de su ficha (HU02.4)', r.ok && r.rows.lengt
 await db.exec(`update public.perfiles set estado='activo' where id='${APR}'`)
 r = await como(OTRO, `update public.perfiles set estado='inactivo' where id='${APR}' returning id`)
 check('otro instructor NO desactiva aprendiz ajeno', !r.ok || r.rows.length === 0, JSON.stringify(r))
+// Migración 09: asignado a la ficha pero sin ser líder → tampoco puede (HU02.4 solo líder)
+await db.exec(`insert into public.ficha_instructores (ficha_id, instructor_id) select id, '${OTRO}' from public.fichas where numero = '301002'`)
+r = await como(OTRO, `update public.perfiles set estado='inactivo' where id='${APR}' returning id`)
+check('instructor asignado NO líder NO desactiva al aprendiz (09)', !r.ok, JSON.stringify(r))
+await db.exec(`delete from public.ficha_instructores where instructor_id = '${OTRO}'`)
+check('el aprendiz sigue activo', (await q(`select estado from public.perfiles where id='${APR}'`))[0].estado === 'activo')
 
 console.log('\n--- Flujo de justificación (RF10-RF12) ---')
 const aus = (await q(`select id from public.asistencias where estado='ausente' order by id limit 1`))[0].id
