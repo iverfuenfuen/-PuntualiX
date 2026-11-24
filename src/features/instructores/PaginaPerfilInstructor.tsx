@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { BriefcaseBusiness, CalendarCheck, ClipboardCheck, FileDown, FileSearch, FolderOpen, IdCard, Mail, MapPin, PencilLine, Phone, Save, Star, UserRound } from 'lucide-react'
+import { BarChart3, BriefcaseBusiness, CalendarCheck, ClipboardCheck, FileDown, FileSearch, FolderOpen, IdCard, Mail, MapPin, PencilLine, Phone, Save, Star, UserRound } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import {
   AvatarIniciales,
@@ -133,9 +133,15 @@ export function PaginaPerfilInstructor() {
           </div>
           <p className="mt-1 text-sm text-texto-secundario">Fichas a cargo, cumplimiento en el registro de asistencia e historial de sesiones.</p>
         </div>
-        <Button variante="secundario" icono={<PencilLine className="size-4" aria-hidden />} onClick={() => setEditando(true)} disabled={!catalogos.datos}>
-          Editar datos
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          {/* VersionAntigua: "Ver reportes" lleva al historial de reportes del instructor */}
+          <Link to={`/admin/instructores/${i.id}/reportes`} className={clasesBoton('secundario')}>
+            <BarChart3 className="size-4" aria-hidden /> Ver reportes
+          </Link>
+          <Button variante="secundario" icono={<PencilLine className="size-4" aria-hidden />} onClick={() => setEditando(true)} disabled={!catalogos.datos}>
+            Editar datos
+          </Button>
+        </div>
       </header>
 
       {aviso && <Aviso tipo="exito">{aviso}</Aviso>}
