@@ -4,6 +4,7 @@ import { traducirErrorBD, type Resultado } from '@/lib/resultado'
 // Los catálogos son compartidos por varios módulos: se reexportan aquí por compatibilidad
 export { obtenerCatalogos, type Catalogos } from '@/features/catalogos/servicioCatalogos'
 import type {
+  EstadoAsistencia,
   EstadoFicha,
   EstadoMatricula,
   Jornada,
@@ -99,6 +100,8 @@ export interface AprendizFicha {
   numeroDocumento: string
   correo: string
   telefono: string | null
+  /** HU02.4 — Acceso a la plataforma (perfiles.estado) */
+  cuentaActiva: boolean
   estado: EstadoMatricula
   vocero: TipoVocero
   fechaMatricula: string
@@ -248,7 +251,7 @@ export async function obtenerDetalleFicha(id: number): Promise<Resultado<Detalle
       .order('created_at'),
     supabase
       .from('matriculas')
-      .select('id, aprendiz_id, estado, vocero, fecha_matricula, perfiles(nombres, apellidos, correo, tipo_documento, numero_documento, telefono)')
+      .select('id, aprendiz_id, estado, vocero, fecha_matricula, perfiles(nombres, apellidos, correo, tipo_documento, numero_documento, telefono, estado)')
       .eq('ficha_id', id),
     supabase.from('v_asistencia_aprendiz').select('aprendiz_id, total_registros, porcentaje_asistencia, porcentaje_inasistencia').eq('ficha_id', id),
     supabase.from('competencias').select('id, codigo, nombre, horas').eq('programa_id', ficha.programaId).order('codigo'),
@@ -290,7 +293,7 @@ export async function obtenerDetalleFicha(id: number): Promise<Resultado<Detalle
     estado: EstadoMatricula
     vocero: TipoVocero
     fecha_matricula: string
-    perfiles: FilaPerfilBasico | null
+    perfiles: (FilaPerfilBasico & { estado: 'activo' | 'inactivo' }) | null
   }
   const aprendices: AprendizFicha[] = (matriculas.data as unknown as FilaMatricula[])
     .map((m) => {
@@ -304,6 +307,7 @@ export async function obtenerDetalleFicha(id: number): Promise<Resultado<Detalle
         numeroDocumento: m.perfiles?.numero_documento ?? '',
         correo: m.perfiles?.correo ?? '',
         telefono: m.perfiles?.telefono ?? null,
+        cuentaActiva: m.perfiles?.estado !== 'inactivo',
         estado: m.estado,
         vocero: m.vocero,
         fechaMatricula: m.fecha_matricula,
@@ -561,4 +565,82 @@ export async function cambiarEstadoMatricula(matriculaId: number, estado: Estado
   const { error } = await supabase.from('matriculas').update(cambios).eq('id', matriculaId)
   if (error) return { ok: false, mensaje: traducirErrorBD(error, ERRORES_MATRICULA) }
   return { ok: true, datos: undefined }
+}
+
+// ---------------------------------------------------------------------
+// HU03.5 · HU03.6 · HU04.2 · HU04.3 — Historial del aprendiz en la ficha (instructor)
+// ---------------------------------------------------------------------
+
+export interface AsistenciaCompetenciaAprendiz {
+  competenciaId: number
+  competencia: string
+  totalRegistros: number
+  presentes: number
+  ausencias: number
+  justificadas: number
+  porcentajeAsistencia: number | null
+}
+
+export interface RegistroAsistenciaAprendiz {
+  id: number
+  fecha: string
+  competencia: string
+  estado: EstadoAsistencia
+  observacion: string | null
+}
+
+export interface HistorialAprendiz {
+  competencias: AsistenciaCompetenciaAprendiz[]
+  registros: RegistroAsistenciaAprendiz[]
+}
+
+/** Asistencia del aprendiz por competencia (v_asistencia_aprendiz_competencia) y sus registros, del más reciente al más antiguo. */
+export async function obtenerHistorialAprendiz(fichaId: number, aprendizId: string): Promise<Resultado<HistorialAprendiz>> {
+  const [porCompetencia, registros] = await Promise.all([
+    supabase
+      .from('v_asistencia_aprendiz_competencia')
+      .select('competencia_id, competencia, total_registros, presentes, ausencias, justificadas, porcentaje_asistencia')
+      .eq('ficha_id', fichaId)
+      .eq('aprendiz_id', aprendizId)
+      .order('competencia'),
+    supabase
+      .from('asistencias')
+      .select('id, estado, observacion, sesiones!inner(fecha, ficha_id, competencias(nombre))')
+      .eq('aprendiz_id', aprendizId)
+      .eq('sesiones.ficha_id', fichaId)
+      .order('fecha', { referencedTable: 'sesiones', ascending: false })
+      .limit(1000),
+  ])
+  const error = porCompetencia.error ?? registros.error
+  if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+
+  type FilaCompetencia = {
+    competencia_id: number
+    competencia: string
+    total_registros: number
+    presentes: number
+    ausencias: number
+    justificadas: number
+    porcentaje_asistencia: number | null
+  }
+  type FilaRegistro = { id: number; estado: EstadoAsistencia; observacion: string | null; sesiones: { fecha: string; competencias: { nombre: string } | null } }
+
+  return {
+    ok: true,
+    datos: {
+      competencias: (porCompetencia.data as FilaCompetencia[]).map((c) => ({
+        competenciaId: c.competencia_id,
+        competencia: c.competencia,
+        totalRegistros: Number(c.total_registros),
+        presentes: Number(c.presentes),
+        ausencias: Number(c.ausencias),
+        justificadas: Number(c.justificadas),
+        porcentajeAsistencia: numero(c.porcentaje_asistencia),
+      })),
+      registros: (registros.data as unknown as FilaRegistro[])
+        .map((r) => ({ id: r.id, fecha: r.sesiones.fecha, competencia: r.sesiones.competencias?.nombre ?? '—', estado: r.estado, observacion: r.observacion }))
+        // El orden por tabla relacionada no ordena las filas principales en PostgREST: se ordena aquí
+        .sort((a, b) => b.fecha.localeCompare(a.fecha)),
+    },
+  }
 }

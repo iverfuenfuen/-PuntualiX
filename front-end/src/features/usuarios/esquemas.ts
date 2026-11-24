@@ -41,3 +41,19 @@ export const esquemaEdicionUsuario = z.object({
 })
 
 export type FormularioEdicionUsuario = z.infer<typeof esquemaEdicionUsuario>
+
+/**
+ * HU02.2 — Registro de un aprendiz por el instructor (VersionAntigua: Instructor/fichas/registrarAprendiz.html).
+ * Tipos de documento de esa pantalla: CC y TI. La ficha es obligatoria: la Edge Function lo matricula en ella.
+ */
+export const esquemaRegistroAprendiz = z.object({
+  tipoDocumento: z.enum(['CC', 'TI'], { message: 'Seleccione el tipo de documento' }),
+  numeroDocumento: z.string().trim().min(1, 'Ingrese el número de documento').regex(/^\d{5,20}$/, 'Ingrese solo números (5 a 20 dígitos)'),
+  nombres: nombre,
+  apellidos: nombre,
+  correo: z.string().trim().min(1, 'Ingrese el correo electrónico').email('Ingrese un correo electrónico válido').max(150, 'Máximo 150 caracteres'),
+  telefono,
+  fichaId: z.string().min(1, 'Seleccione la ficha a la que será asignado el aprendiz'),
+})
+
+export type FormularioRegistroAprendiz = z.infer<typeof esquemaRegistroAprendiz>

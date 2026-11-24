@@ -125,6 +125,8 @@ export interface DatosInvitacion {
   telefono: string | null
   sedeId: number | null
   instructor?: { areaId: number | null; especialidad: string | null; fechaIngreso: string | null }
+  /** HU02.2 — El instructor registra al aprendiz directamente en una de sus fichas (la función crea la matrícula) */
+  fichaId?: number
 }
 
 /**
