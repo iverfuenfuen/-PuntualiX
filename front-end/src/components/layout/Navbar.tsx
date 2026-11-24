@@ -30,7 +30,7 @@ export function Navbar({ usuario, notificacionesSinLeer = 0, onCerrarSesion }: P
 
   return (
     <header className="sticky top-0 z-40 bg-primario text-white shadow-md">
-      <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="flex h-20 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           <Link to={RUTA_INICIO_ROL[usuario.rol]} className="shrink-0" aria-label="PuntualiX — ir al inicio">
             {/* Ancho mínimo del logotipo: 120 px (Manual de Identidad, sección 5) */}
