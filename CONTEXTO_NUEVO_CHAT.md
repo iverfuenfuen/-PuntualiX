@@ -13,12 +13,12 @@
 ---
 
 ## 1. Cómo arrancar en otro computador (la institución)
-1. **Traer el código.** El trabajo completo está en la rama local `react-supabase` del computador personal.
-   - **Opción A, recomendada:** desde el computador personal, `git push origin react-supabase`. Es el repositorio
-     `iverfuenfuen/Puntualix2.0`, el único que tiene `CLAUDE.md`, `docs/`, `Prototipo/` y `VersionAntigua/`. En la
-     institución: `git clone https://github.com/iverfuenfuen/Puntualix2.0.git` y luego `git checkout react-supabase`.
-     El repositorio publicado `iverfuenfuen/-PuntualiX` solo tiene `front-end/`, no sirve para desarrollar.
-   - **Opción B:** copiar la carpeta `C:\SENA\Puntualix2.0` completa en una USB, sin `node_modules`.
+1. **Traer el código.** Se clona con `git clone -b react-supabase https://github.com/iverfuenfuen/-PuntualiX.git Puntualix2.0`.
+   - La rama `react-supabase` tiene el proyecto completo: `CLAUDE.md`, este archivo, `docs/`, `Prototipo/`,
+     `VersionAntigua/` y `front-end/`.
+   - La rama `main` tiene solo `front-end/`, para Vercel. **No** se desarrolla en `main`.
+   - Después de clonar, conviene renombrar el remoto: `git remote rename origin puntualix`, para que coincida con los
+     comandos de CLAUDE.md.
 2. **Instalar:** `cd front-end` y luego `npm install`. Requiere Node 20 o superior.
 3. **Configurar `front-end/.env.local`** (no está en git) con dos variables:
    - `VITE_SUPABASE_URL=https://ckppdfnzgbnwrnqrzkdx.supabase.co`
@@ -98,7 +98,8 @@
     servicios, librerías nuevas, funciones fuera del rol, y bloques quitados o inventados.
   - Responde con desviaciones o "sin desviaciones".
   - **No revisa** el banner `PageHeader` ni "un solo lugar por dato". Está pendiente proponer agregarlo.
-- **Commits** pequeños por paso, con el pie `Co-Authored-By: Claude …`. Rama `react-supabase`.
+- **Commits** pequeños por paso, **sin** la línea `Co-Authored-By: Claude`. Es decisión del usuario del
+  2026-11-24: no quiere que Claude figure como colaborador. Rama `react-supabase`.
   - **Nunca** push a `main` ni forzar.
   - **Publicar solo cuando el usuario lo pida** (ver la sección 8).
 - **En Bash:** no usar comillas invertidas dentro de `node -e "…"`. Para los parches grandes, escribir un script `.cjs`
@@ -307,10 +308,12 @@ El usuario aprobó el plan; falta ajustarlo según la sección 6.
     `localhost:54321`; se corrigió en otro chat.
   - Las invitaciones ya se probaron en Vercel.
 - **GitHub**
-  - Remoto `origin` = `iverfuenfuen/Puntualix2.0`: el repositorio viejo, con el proyecto completo. Está a varios
-    commits de la rama local; ver la sección 1.
-  - Remoto `puntualix` = `iverfuenfuen/-PuntualiX`: la publicación, solo con `front-end/`. Para publicar:
-    `git subtree split --prefix=front-end -b solo-front-end` y luego `git push puntualix solo-front-end:main`.
+  - Un solo repositorio: `iverfuenfuen/-PuntualiX` (remoto `puntualix`). El viejo `iverfuenfuen/Puntualix2.0`
+    fue borrado.
+    - Rama `react-supabase`: el proyecto completo. Se sube con `git push puntualix react-supabase`.
+    - Rama `main`: solo `front-end/`, para Vercel. Se publica con
+      `git subtree split --prefix=front-end -b solo-front-end react-supabase` y luego
+      `git push puntualix solo-front-end:main`.
   - La organización `puntualix-design` no se usa, porque la cuenta no tenía permiso (403).
 - **Usuarios de prueba:** `admin@puntualix.com`, `carlos.perez@puntualix.com` (instructor; es líder de 301002 y de
   la ficha demo 2901102, y está asignado sin ser líder en 2901101 y 2901203) y `juan.perez@puntualix.com` (aprendiz).

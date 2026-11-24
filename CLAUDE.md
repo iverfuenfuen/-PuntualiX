@@ -117,12 +117,15 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 - Usuarios de prueba y guía de conexión: `front-end/supabase/README.md`.
 
 ## Control de versiones
-- Rama de trabajo: `react-supabase` (remoto `origin`). Commits pequeños y descriptivos por módulo.
-- **Publicación (decisión del usuario 2026-11-24):** el repositorio que se despliega en Vercel es
-  `https://github.com/iverfuenfuen/-PuntualiX` (remoto `puntualix`), con **solo `front-end/`** en la raíz y su
-  historial. Para publicar: `git subtree split --prefix=front-end -b solo-front-end` y luego
-  `git push puntualix solo-front-end:main`. A `origin` (`iverfuenfuen/Puntualix2.0`) no se le sube nada más.
-  Publicar solo cuando el usuario lo pida.
+- Repositorio único (2026-11-24): `https://github.com/iverfuenfuen/-PuntualiX` (remoto `puntualix`). El repositorio
+  viejo `iverfuenfuen/Puntualix2.0` fue borrado por el usuario.
+  - Rama `react-supabase`: el proyecto completo (front-end, docs, Prototipo, VersionAntigua, CLAUDE.md). Es la rama de
+    trabajo: `git push puntualix react-supabase`.
+  - Rama `main`: solo `front-end/` en la raíz, que es lo que despliega Vercel.
+- Commits pequeños y descriptivos por módulo. **Decisión del usuario (2026-11-24): por ahora los commits van SIN la línea
+  `Co-Authored-By: Claude`**: el usuario no quiere que Claude figure como colaborador. Ya se quitó del historial.
+- **Publicación en Vercel (main):** `git subtree split --prefix=front-end -b solo-front-end react-supabase` y luego
+  `git push puntualix solo-front-end:main`. Publicar solo cuando el usuario lo pida.
 - **No** hacer push a `main` ni forzar cambios sin pedirlo. `Prototipo/` y `VersionAntigua/` no se modifican.
 - Al cerrar cada módulo: actualizar el Changelog del README (qué se tomó del Prototipo, qué se rescató de
   VersionAntigua, mejoras), la tabla de etapas, `docs/RF.docx` / `docs/RNF.docx` y la sección de estado de abajo.
