@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { ArrowDown, ArrowUp, Building2, CalendarDays, ChevronDown, Clock, FileDown, FileText, GraduationCap, Layers, LineChart, PieChart, Printer, UserRoundCheck, UserX } from 'lucide-react'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Card, EmptyState, EstadoError, KpiCard, ProgressBar, Spinner, clasesBoton } from '@/components/ui'
+import { Card, EmptyState, EstadoError, KpiCard, ProgressBar, Select, Spinner, Tabs, clasesBoton } from '@/components/ui'
 import type { Tono } from '@/types/dominio'
 import { registrarEvento } from '@/features/auth/servicioAuth'
 import { obtenerCatalogos } from '@/features/catalogos/servicioCatalogos'
@@ -16,11 +16,13 @@ import {
   corteAnterior,
   corteDeClave,
   cortesDisponibles,
-  desercionPorPrograma,
   distribucionInstructores,
+  elementos,
+  ETIQUETA_DIMENSION,
   resumenCorte,
   variacionTexto,
   type Corte,
+  type Dimension,
 } from '@/features/estadisticas/presentacion'
 import { SeccionComparacion } from '@/features/estadisticas/SeccionComparacion'
 import { obtenerDatosEstadisticas, type DatosEstadisticas } from '@/features/estadisticas/servicioEstadisticas'
@@ -117,8 +119,17 @@ interface PropsContenido {
   cambiar: (cambios: Record<string, string>) => void
 }
 
+type IndicadorGlobal = 'asistencia' | 'registro'
+type DimensionDesercion = Exclude<Dimension, 'competencia'>
+const DIMENSIONES_DESERCION: DimensionDesercion[] = ['ficha', 'sede', 'area', 'programa', 'jornada']
+const DIMS_GLOBAL = ['sede', 'area', 'programa', 'jornada'] as const
+const SIN_FILTROS = { sede: '', area: '', programa: '', jornada: '' }
+
 function Contenido({ datos, corte, catalogos, parametros, cambiar }: PropsContenido) {
   const hoy = hoyISO()
+  // Comparativa global: asistencia o cumplimiento (registro). Deserción: por ficha, sede, área, programa o jornada.
+  const indicador: IndicadorGlobal = parametros.get('cg') === 'registro' ? 'registro' : 'asistencia'
+  const dimDesercion = (DIMENSIONES_DESERCION as string[]).includes(parametros.get('dd') ?? '') ? (parametros.get('dd') as DimensionDesercion) : 'programa'
   const calculo = useMemo(() => {
     const actual = resumenCorte(datos, corte, hoy)
     const anterior = resumenCorte(datos, corteAnterior(corte), hoy)
@@ -127,27 +138,41 @@ function Contenido({ datos, corte, catalogos, parametros, cambiar }: PropsConten
       varAsistencia: actual.asistencia != null && anterior.asistencia != null ? actual.asistencia - anterior.asistencia : null,
       varDesercion: actual.desercion != null && anterior.desercion != null ? actual.desercion - anterior.desercion : null,
       varCumplimiento: actual.cumplimiento != null && anterior.cumplimiento != null ? actual.cumplimiento - anterior.cumplimiento : null,
-      comparativas: {
-        sede: comparativa(datos, corte, 'sede', hoy),
-        area: comparativa(datos, corte, 'area', hoy),
-        programa: comparativa(datos, corte, 'programa', hoy),
-        jornada: comparativa(datos, corte, 'jornada', hoy),
-      },
-      desercion: desercionPorPrograma(datos, corte).slice(0, 5),
+      comparativas: Object.fromEntries(DIMS_GLOBAL.map((dim) => [dim, comparativa(datos, corte, dim, hoy, indicador)])) as Record<(typeof DIMS_GLOBAL)[number], ReturnType<typeof comparativa>>,
+      desercion: elementos(datos, corte, dimDesercion, SIN_FILTROS, hoy)
+        .filter((e) => e.desercion?.tasa != null)
+        .sort((a, b) => (b.desercion?.tasa ?? 0) - (a.desercion?.tasa ?? 0))
+        .slice(0, 5),
       instructores: distribucionInstructores(datos, corte, hoy),
     }
-  }, [datos, corte, hoy])
+  }, [datos, corte, hoy, indicador, dimDesercion])
 
   const { actual } = calculo
   const activas = datos.fichas.filter((f) => f.estado === 'activa').length
   const [generadoEn] = useState(fechaGeneracion)
 
+  /** CSV con los tres indicadores por sede, área, programa y jornada */
   function exportarComparativa() {
-    const filas = (Object.entries(calculo.comparativas) as Array<[string, typeof calculo.comparativas.sede]>).flatMap(([dim, lista]) =>
-      lista.map((x) => [{ sede: 'Sede', area: 'Área', programa: 'Programa', jornada: 'Jornada' }[dim], x.nombre, x.valor?.toLocaleString('es-CO', { maximumFractionDigits: 1 }), x.tendencia?.toLocaleString('es-CO', { maximumFractionDigits: 1 })]),
+    const num = (v: number | null | undefined) => v?.toLocaleString('es-CO', { maximumFractionDigits: 1 })
+    const filas = DIMS_GLOBAL.flatMap((dim) => {
+      const cumplimiento = new Map(comparativa(datos, corte, dim, hoy, 'registro').map((x) => [x.clave, x]))
+      const desercionDim = new Map(comparativa(datos, corte, dim, hoy, 'desercion').map((x) => [x.clave, x]))
+      return comparativa(datos, corte, dim, hoy, 'asistencia').map((x) => [
+        ETIQUETA_DIMENSION[dim],
+        x.nombre,
+        num(x.valor),
+        num(x.tendencia),
+        num(cumplimiento.get(x.clave)?.valor),
+        num(cumplimiento.get(x.clave)?.tendencia),
+        num(desercionDim.get(x.clave)?.valor),
+      ])
+    })
+    descargarCSV(
+      `estadisticas-comparativa-${corte.clave}`,
+      ['Dimensión', 'Elemento', '% asistencia', 'Tendencia asistencia (pts)', '% cumplimiento', 'Tendencia cumplimiento (pts)', '% deserción'],
+      filas,
     )
-    descargarCSV(`estadisticas-comparativa-${corte.clave}`, ['Dimensión', 'Elemento', '% asistencia', 'Tendencia vs corte anterior (pts)'], filas)
-    void registrarEvento('reportes', 'descarga', `Exportó la comparativa de asistencia (corte ${corte.clave})`)
+    void registrarEvento('reportes', 'descarga', `Exportó la comparativa global (corte ${corte.clave})`)
   }
 
   const inst = calculo.instructores
@@ -222,38 +247,77 @@ function Contenido({ datos, corte, catalogos, parametros, cambiar }: PropsConten
 
       {/* 4 — Comparativa global */}
       <section className="space-y-3" aria-labelledby="titulo-comparativa">
-        <div>
-          <h2 id="titulo-comparativa" className="text-lg font-semibold">
-            Comparativa global por sedes, áreas, programas y jornadas
-          </h2>
-          <p className="text-sm text-texto-secundario">Porcentaje de asistencia del corte {corte.etiqueta} y tendencia frente al corte anterior.</p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 id="titulo-comparativa" className="text-lg font-semibold">
+              Comparativa global por sedes, áreas, programas y jornadas
+            </h2>
+            <p className="text-sm text-texto-secundario">
+              Porcentaje de {indicador === 'asistencia' ? 'asistencia' : 'cumplimiento en el registro de asistencia'} del corte {corte.etiqueta} y tendencia frente al corte anterior.
+            </p>
+          </div>
+          <Tabs
+            etiqueta="Indicador de la comparativa"
+            pestanas={[
+              { id: 'asistencia', etiqueta: 'Asistencia' },
+              { id: 'registro', etiqueta: 'Cumplimiento' },
+            ]}
+            activa={indicador}
+            onCambiar={(v) => cambiar({ cg: v === 'asistencia' ? '' : v })}
+            className="print:hidden"
+          />
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <TarjetaComparativa titulo="Por sede" icono={Building2} unidad="sedes" filas={calculo.comparativas.sede} />
-          <TarjetaComparativa titulo="Por área" icono={Layers} unidad="áreas" filas={calculo.comparativas.area} />
-          <TarjetaComparativa titulo="Por programa" icono={GraduationCap} unidad="programas" filas={calculo.comparativas.programa} />
-          <TarjetaComparativa titulo="Por jornada" icono={Clock} unidad="jornadas" filas={calculo.comparativas.jornada} />
+          <TarjetaComparativa titulo="Por sede" icono={Building2} unidad="sedes" filas={calculo.comparativas.sede} indicador={indicador} />
+          <TarjetaComparativa titulo="Por área" icono={Layers} unidad="áreas" filas={calculo.comparativas.area} indicador={indicador} />
+          <TarjetaComparativa titulo="Por programa" icono={GraduationCap} unidad="programas" filas={calculo.comparativas.programa} indicador={indicador} />
+          <TarjetaComparativa titulo="Por jornada" icono={Clock} unidad="jornadas" filas={calculo.comparativas.jornada} indicador={indicador} />
         </div>
       </section>
 
       {/* 5 — Deserción y cumplimiento */}
       <div className="grid gap-6 lg:grid-cols-2">
         <Card className="p-5">
-          <h2 className="text-base font-semibold sm:text-lg">Tasa de deserción de aprendices</h2>
-          <p className="mb-4 text-xs text-texto-secundario">Matrículas retiradas o desertoras sobre el total matriculado, por programa (meta institucional &lt; 5 %).</p>
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 className="text-base font-semibold sm:text-lg">Tasa de deserción de aprendices</h2>
+              <p className="text-xs text-texto-secundario">
+                Matrículas retiradas o desertoras sobre el total matriculado, por {ETIQUETA_DIMENSION[dimDesercion].toLowerCase()} (meta institucional &lt; 5 %). Se muestran las 5 más altas.
+              </p>
+            </div>
+            <div className="shrink-0 sm:w-44 print:hidden">
+            <Select
+              etiqueta="Ver deserción por"
+              etiquetaOculta
+              opciones={DIMENSIONES_DESERCION.map((d) => ({ valor: d, etiqueta: `Por ${ETIQUETA_DIMENSION[d].toLowerCase()}` }))}
+              value={dimDesercion}
+              onChange={(e) => cambiar({ dd: e.target.value === 'programa' ? '' : e.target.value })}
+            />
+            </div>
+          </div>
           {calculo.desercion.length === 0 ? (
             <EmptyState titulo="Sin matrículas" descripcion="No hay matrículas vigentes en el corte." compacto />
           ) : (
             <ul className="space-y-3">
-              {calculo.desercion.map((d) => (
-                <li key={d.programa} className="space-y-1">
-                  <p className="flex justify-between gap-2 text-sm">
-                    <span className="text-texto-apoyo">{d.programa}</span>
-                    <span className="font-semibold">{porcentaje(d.tasa, 1)}</span>
-                  </p>
-                  <ProgressBar valor={Math.min(100, (d.tasa ?? 0) * 5)} etiqueta={`Deserción en ${d.programa}: ${porcentaje(d.tasa, 1)}`} tono={(d.tasa ?? 0) >= 5 ? 'critico' : (d.tasa ?? 0) >= 3 ? 'advertencia' : 'exito'} mostrarValor={false} />
-                </li>
-              ))}
+              {calculo.desercion.map((e) => {
+                const tasa = e.desercion?.tasa ?? 0
+                return (
+                  <li key={e.clave} className="space-y-1">
+                    <p className="flex justify-between gap-2 text-sm">
+                      <span className="truncate text-texto-apoyo" title={e.nombre}>
+                        {e.nombre}
+                      </span>
+                      <span className="shrink-0 font-semibold">
+                        {porcentaje(tasa, 1)}
+                        <span className="ml-1 text-xs font-normal text-texto-secundario">
+                          ({e.desercion?.desertores} de {e.desercion?.base})
+                        </span>
+                      </span>
+                    </p>
+                    <ProgressBar valor={Math.min(100, tasa * 5)} etiqueta={`Deserción en ${e.nombre}: ${porcentaje(tasa, 1)}`} tono={tasa >= 5 ? 'critico' : tasa >= 3 ? 'advertencia' : 'exito'} mostrarValor={false} />
+                  </li>
+                )
+              })}
             </ul>
           )}
         </Card>
@@ -302,7 +366,19 @@ function Contenido({ datos, corte, catalogos, parametros, cambiar }: PropsConten
   )
 }
 
-function TarjetaComparativa({ titulo, icono: Icono, unidad, filas }: { titulo: string; icono: typeof Building2; unidad: string; filas: ReturnType<typeof comparativa> }) {
+function TarjetaComparativa({
+  titulo,
+  icono: Icono,
+  unidad,
+  filas,
+  indicador,
+}: {
+  titulo: string
+  icono: typeof Building2
+  unidad: string
+  filas: ReturnType<typeof comparativa>
+  indicador: IndicadorGlobal
+}) {
   return (
     <Card className="p-4">
       <header className="mb-3 flex items-center justify-between gap-2">
@@ -333,7 +409,7 @@ function TarjetaComparativa({ titulo, icono: Icono, unidad, filas }: { titulo: s
                   )}
                 </span>
               </p>
-              <ProgressBar valor={f.valor ?? 0} etiqueta={`Asistencia de ${f.nombre}`} mostrarValor={false} />
+              <ProgressBar valor={f.valor ?? 0} etiqueta={`${indicador === 'asistencia' ? 'Asistencia' : 'Cumplimiento'} de ${f.nombre}`} mostrarValor={false} />
             </li>
           ))}
         </ul>
