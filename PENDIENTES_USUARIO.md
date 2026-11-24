@@ -14,6 +14,34 @@
 
 ## Tareas, en este orden
 
+### 0. Dar permiso de escritura en el repositorio nuevo (bloquea la subida del código)
+Decisión del usuario (2026-11-24): el proyecto pasa a la organización, en `https://github.com/puntualix-design/-PuntualiX`,
+y **solo con el contenido de `front-end/`**, con su historial. El repositorio viejo `iverfuenfuen/Puntualix2.0` se deja
+como está.
+
+El código ya está preparado en la rama local `solo-front-end`, pero la subida falló con un 403: la cuenta guardada en
+este equipo es `iverfuenfuen` y no tiene permiso de escritura en ese repositorio.
+
+Para resolverlo, una de dos:
+- **Opción A (recomendada):**
+  1. En GitHub, abre la organización `puntualix-design`, luego **People** (o **Settings** del repositorio,
+     **Collaborators and teams**) y agrega a `iverfuenfuen` con rol **Write** o **Maintain**.
+  2. Acepta la invitación desde la cuenta `iverfuenfuen`.
+  3. Avísale al chat de desarrollo para que haga el push.
+- **Opción B:** súbelo tú con una cuenta que sí tenga permiso. Desde `C:\SENA\Puntualix2.0`:
+  `git push puntualix solo-front-end:main`. Si Windows pide credenciales, entra con esa cuenta.
+
+### 0b. Conectar el repositorio nuevo a Vercel (después de la tarea 0)
+1. En Vercel, **Add New**, luego **Project** e importa `puntualix-design/-PuntualiX`.
+2. **Root Directory:** déjalo en la raíz, porque ahora el repositorio es solo el front-end.
+3. **Framework:** Vite. El build y la salida se detectan solos (`npm run build`, `dist`).
+4. **Environment Variables:** `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`, con los mismos valores de
+   `front-end/.env.local`. Nunca la `service_role`.
+5. Al terminar, copia el dominio que te dé Vercel. En Supabase, abre **Authentication**, luego **URL Configuration**:
+   - pon ese dominio en **Site URL**;
+   - en **Redirect URLs**, agrega `https://<dominio>/restablecer` y `https://<dominio>/restablecer?invitacion=1`.
+   Sin esto no funcionan las invitaciones ni la recuperación de contraseña en producción.
+
 > Usuarios de prueba: `admin@puntualix.com`, `carlos.perez@puntualix.com` (instructor) y `juan.perez@puntualix.com`
 > (aprendiz). Si olvidas una contraseña, cámbiala en **Authentication → Users** (sus correos no son reales:
 > "Recuperar contraseña" no les llega). Los usuarios de las fichas demo no pueden iniciar sesión.
