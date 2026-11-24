@@ -113,6 +113,11 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 
 ## Control de versiones
 - Rama de trabajo: `react-supabase` (remoto `origin`). Commits pequeños y descriptivos por módulo.
+- **Publicación (decisión del usuario 2026-11-24):** el repositorio que se despliega en Vercel es
+  `https://github.com/iverfuenfuen/-PuntualiX` (remoto `puntualix`), con **solo `front-end/`** en la raíz y su
+  historial. Para publicar: `git subtree split --prefix=front-end -b solo-front-end` y luego
+  `git push puntualix solo-front-end:main`. A `origin` (`iverfuenfuen/Puntualix2.0`) no se le sube nada más.
+  Publicar solo cuando el usuario lo pida.
 - **No** hacer push a `main` ni forzar cambios sin pedirlo. `Prototipo/` y `VersionAntigua/` no se modifican.
 - Al cerrar cada módulo: actualizar el Changelog del README (qué se tomó del Prototipo, qué se rescató de
   VersionAntigua, mejoras), la tabla de etapas, `docs/RF.docx` / `docs/RNF.docx` y la sección de estado de abajo.

@@ -14,25 +14,12 @@
 
 ## Tareas, en este orden
 
-### 0. Dar permiso de escritura en el repositorio nuevo (bloquea la subida del código)
-Decisión del usuario (2026-11-24): el proyecto pasa a la organización, en `https://github.com/puntualix-design/-PuntualiX`,
-y **solo con el contenido de `front-end/`**, con su historial. El repositorio viejo `iverfuenfuen/Puntualix2.0` se deja
-como está.
+### 0. Conectar el repositorio nuevo a Vercel
+Decisión del usuario (2026-11-24): el código se publica en `https://github.com/iverfuenfuen/-PuntualiX`, **solo con el
+contenido de `front-end/`** y su historial. Ya está subido en `main`. El repositorio de la organización `puntualix-design`
+no se usa porque la cuenta no tenía permiso, y el viejo `iverfuenfuen/Puntualix2.0` se deja como está.
 
-El código ya está preparado en la rama local `solo-front-end`, pero la subida falló con un 403: la cuenta guardada en
-este equipo es `iverfuenfuen` y no tiene permiso de escritura en ese repositorio.
-
-Para resolverlo, una de dos:
-- **Opción A (recomendada):**
-  1. En GitHub, abre la organización `puntualix-design`, luego **People** (o **Settings** del repositorio,
-     **Collaborators and teams**) y agrega a `iverfuenfuen` con rol **Write** o **Maintain**.
-  2. Acepta la invitación desde la cuenta `iverfuenfuen`.
-  3. Avísale al chat de desarrollo para que haga el push.
-- **Opción B:** súbelo tú con una cuenta que sí tenga permiso. Desde `C:\SENA\Puntualix2.0`:
-  `git push puntualix solo-front-end:main`. Si Windows pide credenciales, entra con esa cuenta.
-
-### 0b. Conectar el repositorio nuevo a Vercel (después de la tarea 0)
-1. En Vercel, **Add New**, luego **Project** e importa `puntualix-design/-PuntualiX`.
+1. En Vercel, **Add New**, luego **Project** e importa `iverfuenfuen/-PuntualiX`.
 2. **Root Directory:** déjalo en la raíz, porque ahora el repositorio es solo el front-end.
 3. **Framework:** Vite. El build y la salida se detectan solos (`npm run build`, `dist`).
 4. **Environment Variables:** `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`, con los mismos valores de
@@ -69,13 +56,24 @@ Arranca la app con `npm run dev` y abre http://localhost:5173.
   - [ ] Ficha 2901101 (solo está asignado): el botón de acceso no debe aparecer.
   - [ ] Registrar aprendiz con un correo real tuyo, en una ficha activa.
     - Debe llegar la invitación y el aprendiz debe aparecer matriculado.
-    - Sin SMTP propio, Supabase solo envía a correos del equipo de la organización (ver tarea 3).
+    - Requiere la tarea 3 (SMTP con Brevo); usa un alias como `puntualix+aprendiz1@gmail.com`.
 - [ ] Si algo falla, anota la pantalla, qué hiciste y el mensaje, y pásalo al chat de desarrollo.
 
 ### 2. Borrar la carpeta `claude/` (sin punto) de la raíz
 Es una copia vieja del agente. El agente que se usa está en `.claude/agents/revisor-refactor.md`, que no se borra.
 
-### 3. (Cuando puedas) Configurar SMTP propio
-Para que las invitaciones lleguen a cualquier correo:
-1. En el panel, abre **Authentication**, luego **Emails** y luego **SMTP Settings**.
-2. Usa Gmail con contraseña de aplicación, Resend o Brevo.
+### 3. Configurar SMTP propio con Brevo (en curso)
+Para que las invitaciones lleguen a cualquier correo. Gmail no ofrece contraseñas de aplicación en tu cuenta, así que
+se usa Brevo (gratis, 300 correos/día).
+- [x] Cuenta de Brevo creada y remitente Gmail verificado.
+- [ ] Verificar el teléfono en Brevo (sin eso no envía).
+- [ ] Brevo → **Configuración → SMTP y API → SMTP**: copiar el **Login** y generar una **clave SMTP** (no pegarla en
+  chats ni en el código).
+- [ ] Supabase → **Authentication → Emails → SMTP Settings** → Enable Custom SMTP: Sender email = el Gmail verificado,
+  Sender name `PuntualiX`, Host `smtp-relay.brevo.com`, Port `587`, Username = Login de Brevo, Password = clave SMTP.
+- [ ] Supabase → **Authentication → Rate Limits**: subir el envío de correos a ~30 por hora.
+- [ ] Probar: registrar un aprendiz con `puntualix+aprendiz1@gmail.com`. Revisar Spam (remitente gratuito).
+
+### 4. (Opcional, Etapa 8) Dominio propio
+Comprar un dominio (p. ej. `puntualix.com`, 10–15 USD/año), conectarlo a Vercel y autenticarlo en Brevo para que los
+correos salgan de `notificaciones@<dominio>` y no caigan en spam. El dominio `*.vercel.app` no sirve para esto.
