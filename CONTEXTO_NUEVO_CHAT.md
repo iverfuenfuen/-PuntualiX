@@ -195,6 +195,34 @@ front-end**. El usuario lo va a **consultar con su instructor** antes de seguir.
 - **No mover** `front-end/supabase/` sin la decisión, porque rompería la publicación, los scripts y el despliegue de
   la función.
 
+### 6.1 También en espera de la misma respuesta (propuestas del 2026-11-24)
+**A. Rendimiento: el dashboard y las estadísticas tardan varios segundos ("Cargando el resumen…").**
+
+*Causas*
+1. El navegador descarga **todas las filas** de `asistencias` y `sesiones` (miles, con los datos demo) en bloques de
+   1000, uno tras otro, y suma en JavaScript.
+   - Archivos: `features/dashboard/servicioDashboard.ts` (`obtenerResumenActual`, `obtenerDatosPeriodo`) y
+     `features/estadisticas/servicioEstadisticas.ts`.
+2. Las políticas RLS llaman a funciones **por cada fila**, por ejemplo `fn_es_admin()` y
+   `fn_es_instructor_de_ficha(fn_ficha_de_sesion(sesion_id))` en `asistencias_ver`.
+   - Esto también afecta a la vista `v_fichas_resumen` (`security_invoker`) y a los conteos `count: 'exact'`.
+
+*Propuesta (la decidió dejar en espera el usuario)*
+1. **Migración 10 con funciones RPC de cálculo** que devuelvan los totales ya sumados en **una sola petición**: por
+   ejemplo `fn_resumen_dashboard(desde, hasta)` y `fn_estadisticas(desde, hasta)`, con totales por ficha,
+   competencia, instructor y fecha. Esto saca la lógica del front-end, que es lo que pide el SENA.
+2. **RLS optimizadas:** `(select public.fn_es_admin())` para que se evalúe una sola vez, y condiciones de conjunto
+   ("sesiones de mis fichas") en lugar de fila por fila. No cambia quién ve qué; se comprueba con `test:db`.
+3. **En pantalla:** mostrar cada bloque apenas llegue y guardar en caché lo ya cargado.
+
+**B. Seguridad: filtro armado con texto en la Edge Function.**
+- En `supabase/functions/invitar-usuario/index.ts`, línea ~129, `.or(\`correo.eq."${correo}",…\`)` construye un filtro de
+  PostgREST con el correo que escribe el usuario. El validador acepta `"`, `,` y `)`.
+- Impacto bajo: solo podría saltarse la verificación de duplicados, porque la BD tiene `unique`.
+- Arreglo: dos consultas con `.eq()` y volver a desplegar la función.
+- No hay inyección SQL clásica (PostgREST parametriza) ni XSS (React escapa). La búsqueda de la bitácora ya limpia los
+  caracteres especiales con `limpiarBusqueda`.
+
 ## 7. Plan aprobado del paso 6b: Registro de asistencia (`/instructor/asistencia`)
 El usuario aprobó el plan; falta ajustarlo según la sección 6.
 
