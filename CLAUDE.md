@@ -148,8 +148,11 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   `npx -p supabase@3.4.0 -p @supabase/cli-windows-x64@3.4.0 supabase functions deploy invitar-usuario --project-ref ckppdfnzgbnwrnqrzkdx`
   y elegir **Yes** (el aviso de Docker no importa). En Windows, `npx supabase` solo falla con "No matching Supabase CLI
   binary package found for win32-x64": npm no instala el binario opcional. Último despliegue: 2026-11-24.
-- Aún sin SMTP propio: Supabase solo envía correos a miembros del equipo de la organización (pocos por hora).
-  Pendiente del usuario: configurar SMTP (Gmail con contraseña de aplicación) para invitar a cualquier correo.
+- SMTP propio con **Brevo** (2026-11-24): las invitaciones llegan a cualquier correo; remitente Gmail verificado
+  (puede caer en Spam). Gmail no ofrecía contraseñas de aplicación en la cuenta. En Brevo hay que tener
+  **desactivado el bloqueo de IP para claves SMTP** (Seguridad → IPs autorizadas): si no, Auth falla con
+  `525 5.7.1 Unauthorized IP address` y la app muestra "Error sending invite email". El error real se ve en
+  Supabase → Logs → Auth. Pruebas: alias `puntualix+aprendizN@gmail.com`.
 - Usuarios de prueba (ya existen, no se invitan): `admin@puntualix.com`, `carlos.perez@puntualix.com` (instructor),
   `juan.perez@puntualix.com` (aprendiz). Sus correos no son reales.
 - **Forma de trabajo:** las conversaciones de desarrollo son solo para código. Las tareas operativas (desplegar,

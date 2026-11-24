@@ -74,24 +74,16 @@ Arranca la app con `npm run dev` y abre http://localhost:5173.
     - desactivar y reactivar su acceso.
   - [ ] Ficha 2901101 (solo está asignado): el botón de acceso no debe aparecer.
   - [ ] Registrar aprendiz con un correo real tuyo, en una ficha activa.
-    - Debe llegar la invitación y el aprendiz debe aparecer matriculado.
-    - Requiere la tarea 3 (SMTP con Brevo); usa un alias como `puntualix+aprendiz1@gmail.com`.
+    - [x] Llega la invitación (probado en Vercel el 2026-11-24).
+    - [ ] Abrir el enlace, crear la contraseña, entrar como el aprendiz y ver que aparece matriculado en la ficha.
 - [ ] Si algo falla, anota la pantalla, qué hiciste y el mensaje, y pásalo al chat de desarrollo.
 
 ### 2. Borrar la carpeta `claude/` (sin punto) de la raíz
 Es una copia vieja del agente. El agente que se usa está en `.claude/agents/revisor-refactor.md`, que no se borra.
 
-### 3. Configurar SMTP propio con Brevo (en curso)
-Para que las invitaciones lleguen a cualquier correo. Gmail no ofrece contraseñas de aplicación en tu cuenta, así que
-se usa Brevo (gratis, 300 correos/día).
-- [x] Cuenta de Brevo creada y remitente Gmail verificado.
-- [ ] Verificar el teléfono en Brevo (sin eso no envía).
-- [x] Brevo → **Configuración → SMTP y API → SMTP**: copiar el **Login** y generar una **clave SMTP** (no pegarla en
-  chats ni en el código).
-- [x] Supabase → **Authentication → Emails → SMTP Settings** → Enable Custom SMTP: Sender email = el Gmail verificado,
-  Sender name `PuntualiX`, Host `smtp-relay.brevo.com`, Port `587`, Username = Login de Brevo, Password = clave SMTP.
-- [ ] Supabase → **Authentication → Rate Limits**: subir el envío de correos a ~30 por hora.
-- [ ] Probar: registrar un aprendiz con `puntualix+aprendiz1@gmail.com`. Revisar Spam (remitente gratuito).
+### 3. Subir el límite de correos (si aún no lo hiciste)
+El SMTP con Brevo ya funciona (2026-11-24). Falta solo: Supabase → **Authentication → Rate Limits** → "Rate limit
+for sending emails" a ~30 por hora. No reactives en Brevo el bloqueo de IP para claves SMTP.
 
 ### 4. (Opcional, Etapa 8) Dominio propio
 Comprar un dominio (p. ej. `puntualix.com`, 10–15 USD/año), conectarlo a Vercel y autenticarlo en Brevo para que los
