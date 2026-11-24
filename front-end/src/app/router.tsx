@@ -44,6 +44,21 @@ const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
   administrador: [
     { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/features/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
     { path: 'instructores/:id', lazy: async () => ({ Component: (await import('@/features/instructores/PaginaPerfilInstructor')).PaginaPerfilInstructor }) },
+    // Etapa 5 — Historial de reportes de una ficha o de un instructor (VersionAntigua: "Ver reportes")
+    {
+      path: 'fichas/:id/reportes',
+      lazy: async () => {
+        const { PaginaHistorialReportes } = await import('@/features/reportes/PaginaHistorialReportes')
+        return { Component: () => <PaginaHistorialReportes ambito="ficha" /> }
+      },
+    },
+    {
+      path: 'instructores/:id/reportes',
+      lazy: async () => {
+        const { PaginaHistorialReportes } = await import('@/features/reportes/PaginaHistorialReportes')
+        return { Component: () => <PaginaHistorialReportes ambito="instructor" /> }
+      },
+    },
   ],
   instructor: [],
   aprendiz: [],

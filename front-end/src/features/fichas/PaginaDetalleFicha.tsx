@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router'
-import { CalendarCheck, FileSearch, PencilLine, RotateCcw, Siren, TriangleAlert, UsersRound } from 'lucide-react'
+import { BarChart3, CalendarCheck, FileSearch, PencilLine, RotateCcw, Siren, TriangleAlert, UsersRound } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { Badge, Button, Card, clasesBoton, EmptyState, EstadoError, KpiCard, ModalConfirmacion, Select, Spinner, Tabs, type Pestana } from '@/components/ui'
 import { Aviso } from '@/features/auth/Aviso'
@@ -127,6 +127,10 @@ export function PaginaDetalleFicha() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Breadcrumbs migas={migas} />
         <div className="flex flex-wrap gap-2">
+          {/* VersionAntigua: "Ver reportes" lleva al historial de reportes de la ficha */}
+          <Link to={`/admin/fichas/${ficha.id}/reportes`} className={clasesBoton('secundario')}>
+            <BarChart3 className="size-4" aria-hidden /> Ver reportes
+          </Link>
           {editable ? (
             <Button variante="secundario" icono={<PencilLine className="size-4" aria-hidden />} onClick={() => setDialogo({ tipo: 'actualizar' })} disabled={!catalogos.datos}>
               Actualizar ficha
