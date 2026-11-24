@@ -10,7 +10,7 @@ import { hoyISO } from '@/features/fichas/presentacion'
 import { descargarCSV } from '@/lib/csv'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje } from '@/lib/utilidades'
-import { Dona } from './Dona'
+import { Dona } from '@/features/estadisticas/Dona'
 import {
   comparativa,
   corteAnterior,
@@ -21,9 +21,9 @@ import {
   resumenCorte,
   variacionTexto,
   type Corte,
-} from './presentacion'
-import { SeccionComparacion } from './SeccionComparacion'
-import { obtenerDatosEstadisticas, type DatosEstadisticas } from './servicioEstadisticas'
+} from '@/features/estadisticas/presentacion'
+import { SeccionComparacion } from '@/features/estadisticas/SeccionComparacion'
+import { obtenerDatosEstadisticas, type DatosEstadisticas } from '@/features/estadisticas/servicioEstadisticas'
 
 const CORTES = cortesDisponibles()
 

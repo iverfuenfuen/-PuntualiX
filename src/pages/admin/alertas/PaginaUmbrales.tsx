@@ -6,9 +6,9 @@ import { Badge, Button, Card, CardHeader, EstadoError, Input, Spinner } from '@/
 import { Aviso } from '@/features/auth/Aviso'
 import { useCarga } from '@/lib/useCarga'
 import { ETIQUETA_PRIORIDAD } from '@/types/dominio'
-import { esquemaUmbrales, type FormularioUmbral } from './esquemas'
-import { fechaHora, TONO_PRIORIDAD } from './presentacion'
-import { guardarUmbrales, listarUmbrales, type UmbralConfigurado } from './servicioAlertas'
+import { esquemaUmbrales, type FormularioUmbral } from '@/features/alertas/esquemas'
+import { fechaHora, TONO_PRIORIDAD } from '@/features/alertas/presentacion'
+import { guardarUmbrales, listarUmbrales, type UmbralConfigurado } from '@/features/alertas/servicioAlertas'
 
 const aFormulario = (lista: UmbralConfigurado[]): FormularioUmbral[] =>
   lista.map((u) => ({ id: u.id, prioridad: u.prioridad, porcentaje: u.porcentaje, descripcion: u.descripcion ?? '', activo: u.activo }))

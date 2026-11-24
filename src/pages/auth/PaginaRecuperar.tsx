@@ -4,10 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'react-router'
 import { KeyRound, Mail, MailCheck } from 'lucide-react'
 import { Button, Input } from '@/components/ui'
-import { AuthLayout } from './AuthLayout'
-import { Aviso } from './Aviso'
-import { esquemaRecuperar, type DatosRecuperar } from './esquemas'
-import { solicitarRecuperacion } from './servicioAuth'
+import { AuthLayout } from '@/pages/auth/AuthLayout'
+import { Aviso } from '@/features/auth/Aviso'
+import { esquemaRecuperar, type DatosRecuperar } from '@/features/auth/esquemas'
+import { solicitarRecuperacion } from '@/features/auth/servicioAuth'
 
 /** Supabase permite un correo de recuperación por dirección cada 60 s */
 const ESPERA_REENVIO_S = 60

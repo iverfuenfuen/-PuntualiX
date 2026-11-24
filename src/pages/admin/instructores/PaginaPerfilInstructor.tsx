@@ -32,12 +32,12 @@ import { actualizarUsuario } from '@/features/usuarios/servicioUsuarios'
 import { descargarCSV } from '@/lib/csv'
 import { useCarga } from '@/lib/useCarga'
 import { porcentaje } from '@/lib/utilidades'
-import { antiguedad, cumplimientoMensual, estadoVisualSesion, META_CUMPLIMIENTO, NIVEL_CUMPLIMIENTO, nivelCumplimiento, tonoCumplimiento } from './presentacion'
-import { actualizarDatosInstructor, obtenerPerfilInstructor, type InstructorResumen, type SesionInstructor } from './servicioInstructores'
+import { antiguedad, cumplimientoMensual, estadoVisualSesion, META_CUMPLIMIENTO, NIVEL_CUMPLIMIENTO, nivelCumplimiento, tonoCumplimiento } from '@/features/instructores/presentacion'
+import { actualizarDatosInstructor, obtenerPerfilInstructor, type InstructorResumen, type SesionInstructor } from '@/features/instructores/servicioInstructores'
 
 const POR_PAGINA = 10
 /** La librería de gráficas (~400 kB) se descarga solo cuando se muestra la gráfica (RNF1) */
-const GraficaCumplimiento = lazy(async () => ({ default: (await import('./GraficaCumplimiento')).GraficaCumplimiento }))
+const GraficaCumplimiento = lazy(async () => ({ default: (await import('@/pages/admin/instructores/GraficaCumplimiento')).GraficaCumplimiento }))
 
 /**
  * Perfil del instructor (HU12.2). Un solo lugar por dato:

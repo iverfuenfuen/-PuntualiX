@@ -28,9 +28,9 @@ import { descargarCSV } from '@/lib/csv'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje } from '@/lib/utilidades'
 import { ETIQUETA_ROL, type Rol, type Tono } from '@/types/dominio'
-import { ModalDetalleUsuario } from './ModalDetalleUsuario'
-import { ModalRegistrarUsuario } from './ModalRegistrarUsuario'
-import { cambiarEstadoUsuario, listarUsuarios, type Usuario } from './servicioUsuarios'
+import { ModalDetalleUsuario } from '@/pages/admin/usuarios/ModalDetalleUsuario'
+import { ModalRegistrarUsuario } from '@/features/usuarios/ModalRegistrarUsuario'
+import { cambiarEstadoUsuario, listarUsuarios, type Usuario } from '@/features/usuarios/servicioUsuarios'
 
 type Vista = 'todos' | Rol
 const POR_PAGINA = 10

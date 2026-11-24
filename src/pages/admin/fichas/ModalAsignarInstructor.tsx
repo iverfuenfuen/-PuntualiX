@@ -7,8 +7,8 @@ import { Aviso } from '@/features/auth/Aviso'
 import { ETIQUETA_DOCUMENTO } from '@/features/perfil/servicioPerfil'
 import { useCarga } from '@/lib/useCarga'
 import { cn } from '@/lib/utilidades'
-import { esquemaAsignacion, type FormularioAsignacion } from './esquemas'
-import { asignarInstructor, listarInstructoresDisponibles, type DetalleFicha } from './servicioFichas'
+import { esquemaAsignacion, type FormularioAsignacion } from '@/features/fichas/esquemas'
+import { asignarInstructor, listarInstructoresDisponibles, type DetalleFicha } from '@/features/fichas/servicioFichas'
 
 interface PropsAsignar {
   detalle: DetalleFicha

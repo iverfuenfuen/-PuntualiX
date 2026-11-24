@@ -12,11 +12,11 @@ import { META_CUMPLIMIENTO } from '@/features/instructores/presentacion'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje, tiempoRelativo } from '@/lib/utilidades'
 import type { PrioridadAlerta } from '@/types/dominio'
-import { cargaSesiones, distribucion, evolucionSemanal, mesAnterior, mesDeClave, mesesDisponibles, periodoAcademico, rangoMes, type Mes } from './presentacion'
-import { obtenerDatosPeriodo, obtenerResumenActual, type DatosPeriodo, type ResumenActual } from './servicioDashboard'
+import { cargaSesiones, distribucion, evolucionSemanal, mesAnterior, mesDeClave, mesesDisponibles, periodoAcademico, rangoMes, type Mes } from '@/features/dashboard/presentacion'
+import { obtenerDatosPeriodo, obtenerResumenActual, type DatosPeriodo, type ResumenActual } from '@/features/dashboard/servicioDashboard'
 
-const GraficaRiesgoFichas = lazy(async () => ({ default: (await import('./GraficasDashboard')).GraficaRiesgoFichas }))
-const GraficaTendenciaSemanal = lazy(async () => ({ default: (await import('./GraficasDashboard')).GraficaTendenciaSemanal }))
+const GraficaRiesgoFichas = lazy(async () => ({ default: (await import('@/features/dashboard/GraficasDashboard')).GraficaRiesgoFichas }))
+const GraficaTendenciaSemanal = lazy(async () => ({ default: (await import('@/features/dashboard/GraficasDashboard')).GraficaTendenciaSemanal }))
 
 const MESES = mesesDisponibles()
 
