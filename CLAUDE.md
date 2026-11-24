@@ -140,7 +140,9 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   dedicación semanal y `fichas.descripcion`. El cupo se toma de `ambientes.capacidad`.
 - La Edge Function `supabase/functions/invitar-usuario` YA está desplegada (CLI con sesión iniciada en el equipo
   del usuario). Si se modifica, redesplegar desde `front-end/` con
-  `npx supabase functions deploy invitar-usuario --project-ref ckppdfnzgbnwrnqrzkdx` (el aviso de Docker no importa).
+  `npx -p supabase@3.4.0 -p @supabase/cli-windows-x64@3.4.0 supabase functions deploy invitar-usuario --project-ref ckppdfnzgbnwrnqrzkdx`
+  y elegir **Yes** (el aviso de Docker no importa). En Windows, `npx supabase` solo falla con "No matching Supabase CLI
+  binary package found for win32-x64": npm no instala el binario opcional. Último despliegue: 2026-11-24.
 - Aún sin SMTP propio: Supabase solo envía correos a miembros del equipo de la organización (pocos por hora).
   Pendiente del usuario: configurar SMTP (Gmail con contraseña de aplicación) para invitar a cualquier correo.
 - Usuarios de prueba (ya existen, no se invitan): `admin@puntualix.com`, `carlos.perez@puntualix.com` (instructor),
@@ -161,7 +163,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   Prototipo). En Gestión de usuarios el administrador ya no puede registrar aprendices (el selector de rol no ofrece
   "Aprendiz").
 - Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
-  modales sin métricas). En el admin, el rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`. **Decisión del usuario (2026-11-24):** HU02.4 también la tiene el instructor **líder** de la ficha, sobre sus aprendices (detalle de la ficha del instructor; la BD lo exige desde la migración `09_acceso_aprendiz_lider.sql`, que el usuario debe aplicar en Supabase).
+  modales sin métricas). En el admin, el rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`. **Decisión del usuario (2026-11-24):** HU02.4 también la tiene el instructor **líder** de la ficha, sobre sus aprendices (detalle de la ficha del instructor; la BD lo exige desde la migración `09_acceso_aprendiz_lider.sql`, aplicada en Supabase el 2026-11-24). Los datos demo
+  (`supabase/datos_demo_fichas.sql`: 10 fichas `2901xxx`) también están cargados.
 - En Bash, NO usar comillas invertidas dentro de `node -e "..."`: bash las ejecuta como comandos. Para editar
   documentación usar la herramienta Edit, o un script escrito a un archivo.
 - Herramientas útiles: `lib/useCarga.ts` (estados de carga), `lib/resultado.ts` (`traducirErrorBD` con mensajes
