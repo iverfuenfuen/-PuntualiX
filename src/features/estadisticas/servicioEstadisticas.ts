@@ -41,6 +41,8 @@ export interface DatosEstadisticas {
   matriculas: MatriculaCorte[]
   /** Nombre de cada competencia */
   competencias: Map<number, string>
+  /** Nombre de cada instructor que dictó sesiones (dimensión "Instructor") */
+  instructores: Map<string, string>
 }
 
 const BLOQUE = 1000
@@ -111,5 +113,13 @@ export async function obtenerDatosEstadisticas(desde: string, hasta: string, fil
     for (const c of data as Array<{ id: number; nombre: string }>) competencias.set(c.id, c.nombre)
   }
 
-  return { ok: true, datos: { fichas: fichas.datos, sesiones, asistencias, matriculas, competencias } }
+  const idsInstructor = [...new Set(sesiones.map((s) => s.instructorId))]
+  const instructores = new Map<string, string>()
+  if (idsInstructor.length) {
+    const { data, error } = await supabase.from('perfiles').select('id, nombres, apellidos').in('id', idsInstructor)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    for (const p of data as Array<{ id: string; nombres: string; apellidos: string }>) instructores.set(p.id, `${p.nombres} ${p.apellidos}`.trim())
+  }
+
+  return { ok: true, datos: { fichas: fichas.datos, sesiones, asistencias, matriculas, competencias, instructores } }
 }

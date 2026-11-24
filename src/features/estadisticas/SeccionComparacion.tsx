@@ -58,8 +58,8 @@ export function SeccionComparacion({ datos, corte, hoy, catalogos, parametros, c
   const modo = parametros.get('modo') === 'individual' ? 'individual' : 'comparar'
   const estParam = parametros.get('est')
   const est: Estadistica = estParam === 'registro' || estParam === 'desercion' ? estParam : 'asistencia'
-  // La deserción se mide sobre matrículas de la ficha: no aplica por competencia
-  const dimensiones = est === 'desercion' ? DIMENSIONES.filter((d) => d.valor !== 'competencia') : DIMENSIONES
+  // La deserción se mide sobre matrículas de la ficha: no aplica por competencia ni por instructor
+  const dimensiones = est === 'desercion' ? DIMENSIONES.filter((d) => d.valor !== 'competencia' && d.valor !== 'instructor') : DIMENSIONES
   const dim = (dimensiones.some((d) => d.valor === parametros.get('dim')) ? parametros.get('dim') : 'ficha') as Dimension
   const filtros: FiltrosFicha = { sede: parametros.get('sede') ?? '', area: parametros.get('area') ?? '', programa: parametros.get('programa') ?? '', jornada: parametros.get('jornada') ?? '' }
   const q = parametros.get('q') ?? ''
@@ -92,10 +92,13 @@ export function SeccionComparacion({ datos, corte, hoy, catalogos, parametros, c
     void registrarEvento('reportes', 'descarga', `Exportó estadísticas (${nombre}, corte ${corte.clave})`)
   }
 
-  /** Lista detallada del elemento: por competencia si es una ficha; por ficha en las demás dimensiones */
+  /** Lista detallada del elemento: por competencia si es una ficha; por ficha en las demás (de un instructor, solo sus sesiones) */
   function listaDetallada(e: Elemento) {
     const sinFiltros = { sede: '', area: '', programa: '', jornada: '' }
-    const sub = { ...datos, fichas: e.fichas }
+    const sub =
+      dim === 'instructor'
+        ? { ...datos, fichas: e.fichas, sesiones: datos.sesiones.filter((s) => s.instructorId === e.clave), asistencias: datos.asistencias.filter((a) => a.instructorId === e.clave) }
+        : { ...datos, fichas: e.fichas }
     const detalle = dim === 'ficha' ? elementos(sub, corte, 'competencia', sinFiltros, hoy) : elementos(sub, corte, 'ficha', sinFiltros, hoy)
     descargar(`${ETIQUETA_DIMENSION[dim].toLowerCase()}-${e.nombre.split(' — ')[0].replace(/\s+/g, '-')}`, detalle)
   }
@@ -137,7 +140,9 @@ export function SeccionComparacion({ datos, corte, hoy, catalogos, parametros, c
             etiqueta="¿Qué estadística?"
             opciones={ESTADISTICAS}
             value={est}
-            onChange={(e) => cambiar({ est: e.target.value === 'asistencia' ? '' : e.target.value, ...(e.target.value === 'desercion' && dim === 'competencia' ? { dim: '', el: '', sel: '' } : {}) })}
+            onChange={(e) =>
+              cambiar({ est: e.target.value === 'asistencia' ? '' : e.target.value, ...(e.target.value === 'desercion' && (dim === 'competencia' || dim === 'instructor') ? { dim: '', el: '', sel: '' } : {}) })
+            }
           />
           <Select
             etiqueta={modo === 'individual' ? '¿Qué quieres consultar?' : '¿Qué comparar?'}
@@ -291,7 +296,7 @@ function ResultadoIndividual({ elemento: e, dim, est, corte, onLista }: { elemen
         ['Instructor líder y sede', `${ficha.instructorLider ?? 'Sin instructor líder'} — ${ficha.sede}`],
       ]
     : [
-        ['Fichas', `${e.fichas.length} fichas`],
+        [dim === 'instructor' ? 'Fichas a cargo' : 'Fichas', `${e.fichas.length} fichas`],
         ['Aprendices matriculados', `${aprendices} aprendices`],
         ['Sesiones registradas', `${e.registro.ejecutadas} sesiones con asistencia`],
       ]
