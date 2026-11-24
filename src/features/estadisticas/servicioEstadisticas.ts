@@ -1,0 +1,105 @@
+import { supabase } from '@/lib/supabase'
+import { traducirErrorBD, type Resultado } from '@/lib/resultado'
+import { listarFichas, type FichaResumen } from '@/features/fichas/servicioFichas'
+
+/**
+ * Servicio de Estadísticas del administrador (HU04.1, RF14, RF15, RF20, RF21).
+ * Las vistas de la BD suman todo el histórico; para filtrar por corte académico (RF20) se consultan sesiones y
+ * asistencias por rango de fechas, en bloques de 1.000 (límite de Supabase). Solo datos agregados por ficha:
+ * de las matrículas se leen el estado y las fechas, nunca datos personales del aprendiz.
+ */
+
+export interface SesionCorte {
+  fecha: string
+  estado: 'programada' | 'ejecutada' | 'cancelada'
+  fichaId: number
+  instructorId: string
+  competenciaId: number
+}
+
+export interface AsistenciaCorte {
+  fecha: string
+  estado: 'presente' | 'ausente' | 'justificada'
+  fichaId: number
+  competenciaId: number
+}
+
+export interface MatriculaCorte {
+  fichaId: number
+  estado: 'matriculado' | 'aplazado' | 'retirado' | 'desertor' | 'certificado'
+  fechaMatricula: string
+  /** Fecha (YYYY-MM-DD) del último cambio de estado */
+  actualizada: string
+}
+
+export interface DatosEstadisticas {
+  fichas: FichaResumen[]
+  sesiones: SesionCorte[]
+  asistencias: AsistenciaCorte[]
+  matriculas: MatriculaCorte[]
+  /** Nombre de cada competencia */
+  competencias: Map<number, string>
+}
+
+const BLOQUE = 1000
+
+/** `desde` y `hasta` en formato YYYY-MM-DD (ambos incluidos): normalmente el corte elegido y el anterior */
+export async function obtenerDatosEstadisticas(desde: string, hasta: string): Promise<Resultado<DatosEstadisticas>> {
+  const fichas = await listarFichas()
+  if (!fichas.ok) return fichas
+
+  type FilaSesion = { id: number; fecha: string; estado: SesionCorte['estado']; ficha_id: number; instructor_id: string; competencia_id: number }
+  const sesiones: SesionCorte[] = []
+  for (let inicio = 0; ; inicio += BLOQUE) {
+    const { data, error } = await supabase
+      .from('sesiones')
+      .select('id, fecha, estado, ficha_id, instructor_id, competencia_id')
+      .gte('fecha', desde)
+      .lte('fecha', hasta)
+      .order('id')
+      .range(inicio, inicio + BLOQUE - 1)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    sesiones.push(...(data as FilaSesion[]).map((s) => ({ fecha: s.fecha, estado: s.estado, fichaId: s.ficha_id, instructorId: s.instructor_id, competenciaId: s.competencia_id })))
+    if (data.length < BLOQUE) break
+  }
+
+  type FilaAsistencia = { id: number; estado: AsistenciaCorte['estado']; sesiones: { fecha: string; ficha_id: number; competencia_id: number } }
+  const asistencias: AsistenciaCorte[] = []
+  for (let inicio = 0; ; inicio += BLOQUE) {
+    const { data, error } = await supabase
+      .from('asistencias')
+      .select('id, estado, sesiones!inner(fecha, ficha_id, competencia_id)')
+      .gte('sesiones.fecha', desde)
+      .lte('sesiones.fecha', hasta)
+      .order('id')
+      .range(inicio, inicio + BLOQUE - 1)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    asistencias.push(
+      ...(data as unknown as FilaAsistencia[]).map((a) => ({ fecha: a.sesiones.fecha, estado: a.estado, fichaId: a.sesiones.ficha_id, competenciaId: a.sesiones.competencia_id })),
+    )
+    if (data.length < BLOQUE) break
+  }
+
+  type FilaMatricula = { id: number; ficha_id: number; estado: MatriculaCorte['estado']; fecha_matricula: string; updated_at: string }
+  const matriculas: MatriculaCorte[] = []
+  for (let inicio = 0; ; inicio += BLOQUE) {
+    const { data, error } = await supabase
+      .from('matriculas')
+      .select('id, ficha_id, estado, fecha_matricula, updated_at')
+      .order('id')
+      .range(inicio, inicio + BLOQUE - 1)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    matriculas.push(...(data as FilaMatricula[]).map((m) => ({ fichaId: m.ficha_id, estado: m.estado, fechaMatricula: m.fecha_matricula, actualizada: m.updated_at.slice(0, 10) })))
+    if (data.length < BLOQUE) break
+  }
+
+  const ids = [...new Set(sesiones.map((s) => s.competenciaId))]
+  const competencias = new Map<number, string>()
+  if (ids.length) {
+    const { data, error } = await supabase.from('competencias').select('id, nombre').in('id', ids)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    for (const c of data as Array<{ id: number; nombre: string }>) competencias.set(c.id, c.nombre)
+  }
+
+  return { ok: true, datos: { fichas: fichas.datos, sesiones, asistencias, matriculas, competencias } }
+}
