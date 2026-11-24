@@ -14,17 +14,36 @@
 
 ## Tareas, en este orden
 
-### 0. Conectar el repositorio nuevo a Vercel
+### 0. Arreglar el despliegue en Vercel (en curso: el login falla)
 Decisión del usuario (2026-11-24): el código se publica en `https://github.com/iverfuenfuen/-PuntualiX`, **solo con el
 contenido de `front-end/`** y su historial. Ya está subido en `main`. El repositorio de la organización `puntualix-design`
 no se usa porque la cuenta no tenía permiso, y el viejo `iverfuenfuen/Puntualix2.0` se deja como está.
 
-1. En Vercel, **Add New**, luego **Project** e importa `iverfuenfuen/-PuntualiX`.
-2. **Root Directory:** déjalo en la raíz, porque ahora el repositorio es solo el front-end.
-3. **Framework:** Vite. El build y la salida se detectan solos (`npm run build`, `dist`).
-4. **Environment Variables:** `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`, con los mismos valores de
-   `front-end/.env.local`. Nunca la `service_role`.
-5. Al terminar, copia el dominio que te dé Vercel. En Supabase, abre **Authentication**, luego **URL Configuration**:
+**Estado (2026-11-24):** el proyecto de Vercel `puntuali-x` ya existe y despliega con el preset **Vite** (no Create
+React App). Al iniciar sesión aparece "No fue posible conectar con el servidor". En la consola del navegador se ven
+`Failed to load resource: net::ERR_CONNECTION_REFUSED` a **`localhost:54321/auth/v1/token?grant_type=password`**.
+
+**Diagnóstico:** el build de Vercel quedó con `VITE_SUPABASE_URL` apuntando a un Supabase local (`localhost:54321`),
+no al proyecto en la nube. El archivo local `front-end/.env.local` está bien y apunta a
+`https://ckppdfnzgbnwrnqrzkdx.supabase.co`. El código no se toca.
+
+**Pasos para arreglarlo:**
+1. En Vercel, abre el proyecto `puntuali-x` y ve a **Settings → Environment Variables**.
+2. Deja `VITE_SUPABASE_URL` exactamente en `https://ckppdfnzgbnwrnqrzkdx.supabase.co`, sin `/` final, sin comillas y
+   sin espacios.
+3. Comprueba que `VITE_SUPABASE_ANON_KEY` sea la misma llave de `front-end/.env.local` (empieza con `eyJ`). Nunca pongas
+   la `service_role`. En ambas variables marca Production, Preview y Development.
+4. Si hay variables que no se agregaron a mano (`SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_*`, `POSTGRES_*`), viene de la
+   integración de Supabase en Vercel. Quítala en **Settings → Integrations**: la app no la usa.
+5. Ve a **Deployments**, abre el último y elige **⋯ → Redeploy**, sin la caché de build. Hay que volver a desplegar
+   porque Vite copia las variables dentro del código al compilar.
+6. Recarga con Ctrl + F5 e inicia sesión con `admin@puntualix.com`. En la consola ya no deben salir peticiones a
+   `localhost`.
+7. Cambia la contraseña del admin, que hoy es débil (`12345678`) y la app ya es pública. Se hace en Supabase, en
+   **Authentication → Users**.
+
+**Después, conectar el dominio con Supabase:** copia el dominio que te dé Vercel (p. ej. `puntuali-x.vercel.app`). En
+Supabase, abre **Authentication**, luego **URL Configuration**:
    - pon ese dominio en **Site URL**;
    - en **Redirect URLs**, agrega `https://<dominio>/restablecer` y `https://<dominio>/restablecer?invitacion=1`.
    Sin esto no funcionan las invitaciones ni la recuperación de contraseña en producción.
@@ -67,9 +86,9 @@ Para que las invitaciones lleguen a cualquier correo. Gmail no ofrece contraseñ
 se usa Brevo (gratis, 300 correos/día).
 - [x] Cuenta de Brevo creada y remitente Gmail verificado.
 - [ ] Verificar el teléfono en Brevo (sin eso no envía).
-- [ ] Brevo → **Configuración → SMTP y API → SMTP**: copiar el **Login** y generar una **clave SMTP** (no pegarla en
+- [x] Brevo → **Configuración → SMTP y API → SMTP**: copiar el **Login** y generar una **clave SMTP** (no pegarla en
   chats ni en el código).
-- [ ] Supabase → **Authentication → Emails → SMTP Settings** → Enable Custom SMTP: Sender email = el Gmail verificado,
+- [x] Supabase → **Authentication → Emails → SMTP Settings** → Enable Custom SMTP: Sender email = el Gmail verificado,
   Sender name `PuntualiX`, Host `smtp-relay.brevo.com`, Port `587`, Username = Login de Brevo, Password = clave SMTP.
 - [ ] Supabase → **Authentication → Rate Limits**: subir el envío de correos a ~30 por hora.
 - [ ] Probar: registrar un aprendiz con `puntualix+aprendiz1@gmail.com`. Revisar Spam (remitente gratuito).
