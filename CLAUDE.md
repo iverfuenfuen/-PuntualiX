@@ -65,7 +65,7 @@ React 19 · TypeScript 7 · Vite 8 · Tailwind CSS 4 (`@theme` en `src/styles/in
 (`createBrowserRouter`, rutas `lazy`) · react-hook-form + zod · Recharts · lucide-react · Supabase JS ·
 oxlint · PGlite para probar el SQL localmente. Node ≥ 20.
 
-Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:db` (38 pruebas SQL/RLS) ·
+Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:db` (40 pruebas SQL/RLS) ·
 `docs:diccionario` · `db:aplicar` (usa `.env.supabase.local`, nunca se sube).
 
 ## Convenciones
@@ -158,7 +158,7 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   Prototipo). En Gestión de usuarios el administrador ya no puede registrar aprendices (el selector de rol no ofrece
   "Aprendiz").
 - Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
-  modales sin métricas). El rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`.
+  modales sin métricas). En el admin, el rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`. **Decisión del usuario (2026-11-24):** HU02.4 también la tiene el instructor **líder** de la ficha, sobre sus aprendices (detalle de la ficha del instructor; la BD lo exige desde la migración `09_acceso_aprendiz_lider.sql`, que el usuario debe aplicar en Supabase).
 - En Bash, NO usar comillas invertidas dentro de `node -e "..."`: bash las ejecuta como comandos. Para editar
   documentación usar la herramienta Edit, o un script escrito a un archivo.
 - Herramientas útiles: `lib/useCarga.ts` (estados de carga), `lib/resultado.ts` (`traducirErrorBD` con mensajes
