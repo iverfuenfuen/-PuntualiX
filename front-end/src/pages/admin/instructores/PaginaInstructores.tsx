@@ -28,8 +28,8 @@ import { ETIQUETA_DOCUMENTO } from '@/features/perfil/servicioPerfil'
 import { ModalRegistrarUsuario } from '@/features/usuarios/ModalRegistrarUsuario'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje } from '@/lib/utilidades'
-import { META_CUMPLIMIENTO, NIVEL_CUMPLIMIENTO, nivelCumplimiento, tonoCumplimiento, type NivelCumplimiento } from './presentacion'
-import { listarInstructores, type InstructorResumen } from './servicioInstructores'
+import { META_CUMPLIMIENTO, NIVEL_CUMPLIMIENTO, nivelCumplimiento, tonoCumplimiento, type NivelCumplimiento } from '@/features/instructores/presentacion'
+import { listarInstructores, type InstructorResumen } from '@/features/instructores/servicioInstructores'
 
 type Vista = 'todos' | NivelCumplimiento
 type Modo = 'tabla' | 'tarjetas'

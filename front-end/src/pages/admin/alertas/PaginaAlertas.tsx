@@ -8,9 +8,9 @@ import { obtenerCatalogos } from '@/features/catalogos/servicioCatalogos'
 import { useCarga } from '@/lib/useCarga'
 import { cn } from '@/lib/utilidades'
 import { ETIQUETA_PRIORIDAD, opcionesDe, type PrioridadAlerta } from '@/types/dominio'
-import { ModalDetalleAlerta } from './ModalDetalleAlerta'
-import { fechaHora, TONO_PRIORIDAD } from './presentacion'
-import { listarAlertasFicha, listarUmbrales, marcarNotificacionesLeidas, type AlertaFicha } from './servicioAlertas'
+import { ModalDetalleAlerta } from '@/features/alertas/ModalDetalleAlerta'
+import { fechaHora, TONO_PRIORIDAD } from '@/features/alertas/presentacion'
+import { listarAlertasFicha, listarUmbrales, marcarNotificacionesLeidas, type AlertaFicha } from '@/features/alertas/servicioAlertas'
 
 const POR_PAGINA = 10
 const FILTROS = ['q', 'sede', 'prioridad', 'ficha', 'desde', 'hasta'] as const

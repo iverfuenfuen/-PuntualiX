@@ -14,8 +14,8 @@ import {
   type Jornada,
   type Modalidad,
 } from '@/types/dominio'
-import { esquemaActualizarFicha, esquemaRegistrarFicha, type FormularioFicha } from './esquemas'
-import { actualizarFicha, asignarVocero, registrarFicha, type Catalogos, type DetalleFicha } from './servicioFichas'
+import { esquemaActualizarFicha, esquemaRegistrarFicha, type FormularioFicha } from '@/features/fichas/esquemas'
+import { actualizarFicha, asignarVocero, registrarFicha, type Catalogos, type DetalleFicha } from '@/features/fichas/servicioFichas'
 
 /** Se monta solo mientras está abierto: cada apertura parte de los datos actuales de la ficha. */
 type PropsModalFicha = {

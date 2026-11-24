@@ -8,8 +8,8 @@ import { fechaISOaTexto } from '@/features/fichas/presentacion'
 import { useCarga } from '@/lib/useCarga'
 import type { Resultado } from '@/lib/resultado'
 import { ETIQUETA_ROL, type Rol } from '@/types/dominio'
-import { armarReporte, descargarReporteCSV, type ContenidoReporte } from './armadoReportes'
-import { obtenerReporte, type Reporte } from './servicioReportes'
+import { armarReporte, descargarReporteCSV, type ContenidoReporte } from '@/features/reportes/armadoReportes'
+import { obtenerReporte, type Reporte } from '@/features/reportes/servicioReportes'
 
 async function cargar(id: number): Promise<Resultado<{ reporte: Reporte; contenido: ContenidoReporte } | null>> {
   const r = await obtenerReporte(id)

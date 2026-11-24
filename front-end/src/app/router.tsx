@@ -2,11 +2,11 @@ import { createBrowserRouter, Outlet, type RouteObject } from 'react-router'
 import { BellRing } from 'lucide-react'
 import { AppLayout } from '@/components/layout/AppLayout'
 import { MENU_USUARIO, NAVEGACION, RUTA_ALERTAS, type EnlaceNavegacion } from '@/config/navegacion'
-import { PaginaLogin } from '@/features/auth/PaginaLogin'
-import { PaginaRecuperar } from '@/features/auth/PaginaRecuperar'
-import { PaginaRestablecer } from '@/features/auth/PaginaRestablecer'
-import { EnConstruccion } from '@/pages/EnConstruccion'
-import { NoEncontrada } from '@/pages/NoEncontrada'
+import { PaginaLogin } from '@/pages/auth/PaginaLogin'
+import { PaginaRecuperar } from '@/pages/auth/PaginaRecuperar'
+import { PaginaRestablecer } from '@/pages/auth/PaginaRestablecer'
+import { EnConstruccion } from '@/pages/comun/EnConstruccion'
+import { NoEncontrada } from '@/pages/comun/NoEncontrada'
 import { RUTA_INICIO_ROL, type Rol } from '@/types/dominio'
 import { RedireccionInicio, RutaProtegida } from './RutaProtegida'
 import { SesionSupabaseProvider } from './SesionSupabaseProvider'
@@ -19,43 +19,43 @@ const ETAPA_POR_RUTA: Record<string, number> = {}
 const ETAPA_POR_ROL: Record<Rol, number> = { administrador: 4, instructor: 6, aprendiz: 7 }
 
 /** Pantallas ya construidas: se cargan bajo demanda (división del código por ruta, RNF1) */
-const cargarPerfil = async () => ({ Component: (await import('@/features/perfil/PaginaPerfil')).PaginaPerfil })
+const cargarPerfil = async () => ({ Component: (await import('@/pages/comun/PaginaPerfil')).PaginaPerfil })
 const PANTALLAS: Record<string, RouteObject['lazy']> = {
   '/admin/perfil': cargarPerfil,
   '/instructor/perfil': cargarPerfil,
   '/aprendiz/perfil': cargarPerfil,
   // Etapa 3 — Instructores y Usuarios (Admin)
-  '/admin/instructores': async () => ({ Component: (await import('@/features/instructores/PaginaInstructores')).PaginaInstructores }),
-  '/admin/usuarios': async () => ({ Component: (await import('@/features/usuarios/PaginaUsuarios')).PaginaUsuarios }),
+  '/admin/instructores': async () => ({ Component: (await import('@/pages/admin/instructores/PaginaInstructores')).PaginaInstructores }),
+  '/admin/usuarios': async () => ({ Component: (await import('@/pages/admin/usuarios/PaginaUsuarios')).PaginaUsuarios }),
   // Etapa 5 — Estadísticas y reportes (Admin)
-  '/admin/estadisticas': async () => ({ Component: (await import('@/features/estadisticas/PaginaEstadisticas')).PaginaEstadisticas }),
-  '/admin/reportes': async () => ({ Component: (await import('@/features/reportes/PaginaReportes')).PaginaReportes }),
+  '/admin/estadisticas': async () => ({ Component: (await import('@/pages/admin/estadisticas/PaginaEstadisticas')).PaginaEstadisticas }),
+  '/admin/reportes': async () => ({ Component: (await import('@/pages/admin/reportes/PaginaReportes')).PaginaReportes }),
   // Etapa 4 — Dashboard, alertas con umbrales y bitácora (Admin)
-  '/admin': async () => ({ Component: (await import('@/features/dashboard/PaginaDashboard')).PaginaDashboard }),
-  '/admin/alertas': async () => ({ Component: (await import('@/features/alertas/PaginaAlertas')).PaginaAlertas }),
-  '/admin/alertas/umbrales': async () => ({ Component: (await import('@/features/alertas/PaginaUmbrales')).PaginaUmbrales }),
-  '/admin/bitacora': async () => ({ Component: (await import('@/features/bitacora/PaginaBitacora')).PaginaBitacora }),
+  '/admin': async () => ({ Component: (await import('@/pages/admin/dashboard/PaginaDashboard')).PaginaDashboard }),
+  '/admin/alertas': async () => ({ Component: (await import('@/pages/admin/alertas/PaginaAlertas')).PaginaAlertas }),
+  '/admin/alertas/umbrales': async () => ({ Component: (await import('@/pages/admin/alertas/PaginaUmbrales')).PaginaUmbrales }),
+  '/admin/bitacora': async () => ({ Component: (await import('@/pages/admin/bitacora/PaginaBitacora')).PaginaBitacora }),
   // Etapa 2 — Fichas (Admin)
-  '/admin/fichas': async () => ({ Component: (await import('@/features/fichas/PaginaFichas')).PaginaFichas }),
+  '/admin/fichas': async () => ({ Component: (await import('@/pages/admin/fichas/PaginaFichas')).PaginaFichas }),
 }
 
 /** Pantallas que no aparecen en el menú (detalles, formularios). La ruta es relativa a la del rol. */
 const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
   administrador: [
-    { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/features/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
-    { path: 'instructores/:id', lazy: async () => ({ Component: (await import('@/features/instructores/PaginaPerfilInstructor')).PaginaPerfilInstructor }) },
+    { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/pages/admin/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
+    { path: 'instructores/:id', lazy: async () => ({ Component: (await import('@/pages/admin/instructores/PaginaPerfilInstructor')).PaginaPerfilInstructor }) },
     // Etapa 5 — Historial de reportes de una ficha o de un instructor (VersionAntigua: "Ver reportes")
     {
       path: 'fichas/:id/reportes',
       lazy: async () => {
-        const { PaginaHistorialReportes } = await import('@/features/reportes/PaginaHistorialReportes')
+        const { PaginaHistorialReportes } = await import('@/pages/admin/reportes/PaginaHistorialReportes')
         return { Component: () => <PaginaHistorialReportes ambito="ficha" /> }
       },
     },
     {
       path: 'instructores/:id/reportes',
       lazy: async () => {
-        const { PaginaHistorialReportes } = await import('@/features/reportes/PaginaHistorialReportes')
+        const { PaginaHistorialReportes } = await import('@/pages/admin/reportes/PaginaHistorialReportes')
         return { Component: () => <PaginaHistorialReportes ambito="instructor" /> }
       },
     },
@@ -66,7 +66,7 @@ const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
 
 /** Pantallas sin navbar ni pie (hojas imprimibles). La ruta es relativa a la del rol. */
 const RUTAS_SIN_LAYOUT: Record<Rol, RouteObject[]> = {
-  administrador: [{ path: 'reportes/:id', lazy: async () => ({ Component: (await import('@/features/reportes/PaginaHojaReporte')).PaginaHojaReporte }) }],
+  administrador: [{ path: 'reportes/:id', lazy: async () => ({ Component: (await import('@/pages/comun/PaginaHojaReporte')).PaginaHojaReporte }) }],
   instructor: [],
   aprendiz: [],
 }

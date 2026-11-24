@@ -9,8 +9,8 @@ import type { Catalogos } from '@/features/catalogos/servicioCatalogos'
 import { ETIQUETA_DOCUMENTO } from '@/features/perfil/servicioPerfil'
 import { fechaCorta } from '@/lib/utilidades'
 import { ETIQUETA_ROL, opcionesDe, type Rol } from '@/types/dominio'
-import { esquemaEdicionUsuario, type FormularioEdicionUsuario } from './esquemas'
-import { actualizarUsuario, cambiarRol, type Usuario } from './servicioUsuarios'
+import { esquemaEdicionUsuario, type FormularioEdicionUsuario } from '@/features/usuarios/esquemas'
+import { actualizarUsuario, cambiarRol, type Usuario } from '@/features/usuarios/servicioUsuarios'
 
 interface PropsDetalle {
   usuario: Usuario

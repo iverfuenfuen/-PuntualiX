@@ -20,7 +20,7 @@ import {
   obtenerPerfilCompleto,
   type DatosPersonales,
   type PerfilCompleto,
-} from './servicioPerfil'
+} from '@/features/perfil/servicioPerfil'
 
 type Seccion = 'datos' | 'seguridad'
 

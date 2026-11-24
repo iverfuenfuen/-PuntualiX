@@ -24,9 +24,9 @@ import { descargarCSV } from '@/lib/csv'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje } from '@/lib/utilidades'
 import { ETIQUETA_ESTADO_FICHA, ETIQUETA_JORNADA, ETIQUETA_MODALIDAD, ETIQUETA_NIVEL, opcionesDe } from '@/types/dominio'
-import { ModalFormularioFicha } from './ModalFormularioFicha'
-import { estadoVisualFicha, fichaEnRiesgo } from './presentacion'
-import { listarFichas, obtenerCatalogos, type Catalogos, type FichaResumen } from './servicioFichas'
+import { ModalFormularioFicha } from '@/pages/admin/fichas/ModalFormularioFicha'
+import { estadoVisualFicha, fichaEnRiesgo } from '@/features/fichas/presentacion'
+import { listarFichas, obtenerCatalogos, type Catalogos, type FichaResumen } from '@/features/fichas/servicioFichas'
 
 type Vista = 'todas' | 'activas' | 'riesgo' | 'inactivas'
 const POR_PAGINA = 10

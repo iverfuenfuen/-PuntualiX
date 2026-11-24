@@ -7,12 +7,12 @@ import { useSesion } from '@/app/sesionContexto'
 import { PantallaCargando } from '@/app/RutaProtegida'
 import { Button, Input, Modal } from '@/components/ui'
 import { RUTA_INICIO_ROL } from '@/types/dominio'
-import { AuthLayout } from './AuthLayout'
-import { Aviso } from './Aviso'
-import { CampoContrasena } from './CampoContrasena'
-import { esquemaLogin, type DatosLogin } from './esquemas'
-import { MENSAJES } from './mensajes'
-import { iniciarSesion } from './servicioAuth'
+import { AuthLayout } from '@/pages/auth/AuthLayout'
+import { Aviso } from '@/features/auth/Aviso'
+import { CampoContrasena } from '@/features/auth/CampoContrasena'
+import { esquemaLogin, type DatosLogin } from '@/features/auth/esquemas'
+import { MENSAJES } from '@/features/auth/mensajes'
+import { iniciarSesion } from '@/features/auth/servicioAuth'
 
 interface EstadoNavegacion {
   desde?: string

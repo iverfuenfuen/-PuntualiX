@@ -1,6 +1,6 @@
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { porcentaje } from '@/lib/utilidades'
-import { META_CUMPLIMIENTO, type PuntoMensual } from './presentacion'
+import { META_CUMPLIMIENTO, type PuntoMensual } from '@/features/instructores/presentacion'
 
 /**
  * Cumplimiento mes a mes (una sola serie: el título la nombra, sin leyenda).

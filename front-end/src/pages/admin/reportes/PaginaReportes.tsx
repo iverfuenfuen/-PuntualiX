@@ -11,9 +11,9 @@ import { listarFichas } from '@/features/fichas/servicioFichas'
 import { listarInstructores } from '@/features/instructores/servicioInstructores'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje, tiempoRelativo } from '@/lib/utilidades'
-import { PanelGenerar, type PestanaReporte } from './PanelGenerar'
-import { listarReportes, type Reporte } from './servicioReportes'
-import { TablaReportes } from './TablaReportes'
+import { PanelGenerar, type PestanaReporte } from '@/features/reportes/PanelGenerar'
+import { listarReportes, type Reporte } from '@/features/reportes/servicioReportes'
+import { TablaReportes } from '@/features/reportes/TablaReportes'
 
 const TIPOS_FILTRO = [
   { valor: 'ficha', etiqueta: 'Ficha de formación' },

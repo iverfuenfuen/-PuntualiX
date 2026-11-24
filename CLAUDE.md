@@ -70,8 +70,11 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 
 ## Convenciones
 - Código, nombres y textos en **español** (`PaginaLogin`, `servicioAuth`, `cargando`…). Alias `@/` → `src/`.
-- **Un módulo por caso de uso** en `src/features/<modulo>/`: páginas `Pagina*.tsx`, `esquemas.ts` (zod),
-  `mensajes.ts` y `servicio<Modulo>.ts`.
+- **Pantallas separadas por rol** (decisión del usuario 2026-11-24): `src/pages/auth`, `src/pages/admin/<modulo>`,
+  `src/pages/instructor/<modulo>`, `src/pages/aprendiz/<modulo>` y `src/pages/comun` (pantallas de varios roles)
+  guardan las `Pagina*.tsx` y los modales de un solo rol.
+- **Lógica por módulo** en `src/features/<modulo>/`: `servicio<Modulo>.ts`, `presentacion.ts`, `esquemas.ts` (zod),
+  `mensajes.ts` y los componentes que usan dos o más roles (p. ej. `SeccionesDetalle`, `TablaReportes`).
 - **Solo los archivos `servicio*.ts` llaman a Supabase** (cliente único en `src/lib/supabase.ts`). Los
   componentes nunca importan `supabase` directamente.
 - UI reutilizable en `src/components/ui` (exportada desde `index.ts`) y estructura en `src/components/layout`.

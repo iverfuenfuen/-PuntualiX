@@ -7,11 +7,11 @@ import { Aviso } from '@/features/auth/Aviso'
 import { useCarga } from '@/lib/useCarga'
 import { porcentaje } from '@/lib/utilidades'
 import { ETIQUETA_ESTADO_MATRICULA, ETIQUETA_JORNADA, ETIQUETA_MODALIDAD, ETIQUETA_NIVEL, opcionesDe, type EstadoMatricula } from '@/types/dominio'
-import { ModalAsignarInstructor } from './ModalAsignarInstructor'
-import { ModalFormularioFicha } from './ModalFormularioFicha'
-import { ModalMatricularAprendiz } from './ModalMatricularAprendiz'
-import { estadoVisualFicha, fechaISOaTexto, riesgoAprendiz } from './presentacion'
-import { InformacionGeneral, ListaAprendices, ListaCompetencias, ListaInstructores, PanelLateral } from './SeccionesDetalle'
+import { ModalAsignarInstructor } from '@/pages/admin/fichas/ModalAsignarInstructor'
+import { ModalFormularioFicha } from '@/pages/admin/fichas/ModalFormularioFicha'
+import { ModalMatricularAprendiz } from '@/features/fichas/ModalMatricularAprendiz'
+import { estadoVisualFicha, fechaISOaTexto, riesgoAprendiz } from '@/features/fichas/presentacion'
+import { InformacionGeneral, ListaAprendices, ListaCompetencias, ListaInstructores, PanelLateral } from '@/features/fichas/SeccionesDetalle'
 import {
   cambiarEstadoFicha,
   cambiarEstadoMatricula,
@@ -21,7 +21,7 @@ import {
   type AprendizFicha,
   type AsignacionInstructor,
   type DetalleFicha,
-} from './servicioFichas'
+} from '@/features/fichas/servicioFichas'
 
 type Seccion = 'general' | 'instructores' | 'aprendices' | 'competencias'
 type Dialogo =

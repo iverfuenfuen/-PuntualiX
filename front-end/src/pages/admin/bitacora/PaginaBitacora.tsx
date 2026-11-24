@@ -10,9 +10,9 @@ import { descargarCSV } from '@/lib/csv'
 import { useCarga } from '@/lib/useCarga'
 import { cn, porcentaje } from '@/lib/utilidades'
 import { ETIQUETA_ACCION, ETIQUETA_MODULO, ETIQUETA_RESULTADO, ETIQUETA_ROL, opcionesDe } from '@/types/dominio'
-import { ModalDetalleEvento } from './ModalDetalleEvento'
-import { diaEvento, fechaColombia, fechaCompleta, horaEvento, resumenEvento, TONO_RESULTADO, tituloEvento } from './presentacion'
-import { contarAsistencias, contarResultados, eventosParaExportar, listarEventos, type EventoBitacora, type FiltrosBitacora } from './servicioBitacora'
+import { ModalDetalleEvento } from '@/features/bitacora/ModalDetalleEvento'
+import { diaEvento, fechaColombia, fechaCompleta, horaEvento, resumenEvento, TONO_RESULTADO, tituloEvento } from '@/features/bitacora/presentacion'
+import { contarAsistencias, contarResultados, eventosParaExportar, listarEventos, type EventoBitacora, type FiltrosBitacora } from '@/features/bitacora/servicioBitacora'
 
 const POR_PAGINA = 8
 const CLAVES = ['q', 'sede', 'modulo', 'resultado', 'accion', 'rol', 'desde', 'hasta'] as const

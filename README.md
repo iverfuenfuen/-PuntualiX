@@ -66,22 +66,28 @@ front-end/
 │   │                       Pagination, Modal, ModalConfirmacion, Input/Select/Textarea, ProgressBar,
 │   │                       EmptyState, EstadoError, Spinner, AvatarIniciales
 │   ├── config/navegacion.ts menú principal, campana y menú de usuario de cada rol
-│   ├── features/           un módulo por caso de uso: páginas, modales, esquemas zod y su
-│   │                       servicio<Modulo>.ts (ÚNICO lugar que consulta Supabase)
-│   │   ├── auth/           login, recuperar y restablecer contraseña              [Etapa 1]
-│   │   ├── perfil/         Mi perfil y cambio de contraseña                       [Etapa 1]
-│   │   ├── fichas/         listado, detalle, registrar/actualizar, asignar, matricular [Etapa 2]
-│   │   ├── instructores/   panel (tabla/tarjetas), perfil, cumplimiento mes a mes     [Etapa 3]
-│   │   ├── usuarios/       gestión de usuarios, registro por invitación, roles        [Etapa 3]
-│   │   ├── dashboard/      dashboard del administrador (RF21)                         [Etapa 4]
-│   │   ├── alertas/        alertas de ficha (HU09.3) y umbrales (RF17)                [Etapa 4]
-│   │   ├── bitacora/       auditoría con filtros en servidor, detalle y exportación   [Etapa 4]
-│   │   ├── estadisticas/   estadísticas por corte, comparación y comparativas (RF14) [Etapa 5]
-│   │   ├── reportes/       generar, historial y hojas imprimibles (RF18, RF20)       [Etapa 5]
+│   ├── features/           lógica de cada módulo: servicio<Modulo>.ts (ÚNICO lugar que consulta
+│   │                       Supabase), presentacion.ts, esquemas zod y componentes de varios roles
+│   │   ├── auth/           servicio de sesión, Aviso, campos de contraseña           [Etapa 1]
+│   │   ├── perfil/         datos personales y cambio de contraseña                  [Etapa 1]
+│   │   ├── fichas/         fichas, matrícula, secciones del detalle                 [Etapa 2]
+│   │   ├── instructores/   resumen y cumplimiento de instructores                   [Etapa 3]
+│   │   ├── usuarios/       usuarios, invitación (ModalRegistrarUsuario)             [Etapa 3]
+│   │   ├── dashboard/      datos y gráficas del dashboard (RF21)                    [Etapa 4]
+│   │   ├── alertas/        alertas, umbrales (RF17) y detalle de alerta             [Etapa 4]
+│   │   ├── bitacora/       auditoría con filtros en servidor y detalle de evento    [Etapa 4]
+│   │   ├── estadisticas/   cálculos por corte, comparación, dona (RF14)             [Etapa 5]
+│   │   ├── reportes/       armado, generación, panel y tabla de reportes (RF18)     [Etapa 5]
 │   │   └── catalogos/      sedes, áreas, ambientes y programas (compartido)
 │   ├── lib/                supabase.ts (cliente único) · utilidades.ts · resultado.ts (errores de BD)
 │   │                       · useCarga.ts (cargando/error/recargar) · csv.ts (exportar)
-│   ├── pages/              Inicio, Diagnóstico, EnConstruccion, NoEncontrada, dev/CatalogoComponentes
+│   ├── pages/              pantallas separadas por rol
+│   │   ├── auth/           login, recuperar y restablecer contraseña, AuthLayout
+│   │   ├── admin/          dashboard, fichas, instructores, usuarios, alertas, bitácora,
+│   │   │                   estadísticas y reportes del administrador
+│   │   ├── instructor/     módulo Instructor                                         [Etapa 6]
+│   │   ├── comun/          Mi perfil, hoja de reporte, EnConstruccion, NoEncontrada
+│   │   └── dev/            Diagnóstico y catálogo de componentes
 │   ├── styles/             index.css (tokens de identidad) y fonts.css
 │   └── types/              database.types.ts (generado desde Supabase)
 └── supabase/
