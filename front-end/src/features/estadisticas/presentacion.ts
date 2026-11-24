@@ -134,9 +134,12 @@ export function resumenCorte(d: DatosEstadisticas, c: Corte, hoy: string): Resum
 }
 
 // ---------------------------------------------------------------------
-// Dimensiones: ficha, sede, área, programa, jornada, competencia
+// Dimensiones: ficha, sede, área, programa, jornada, competencia, instructor
 // ---------------------------------------------------------------------
-export type Dimension = 'ficha' | 'sede' | 'area' | 'programa' | 'jornada' | 'competencia'
+export type Dimension = 'ficha' | 'sede' | 'area' | 'programa' | 'jornada' | 'competencia' | 'instructor'
+/** Dimensiones que agrupan fichas completas (las únicas donde aplica la deserción) */
+type DimensionFicha = Exclude<Dimension, 'competencia' | 'instructor'>
+const esDimensionFicha = (dim: Dimension): dim is DimensionFicha => dim !== 'competencia' && dim !== 'instructor'
 export type Estadistica = 'asistencia' | 'registro' | 'desercion'
 
 export const ETIQUETA_DIMENSION: Record<Dimension, string> = {
@@ -146,6 +149,7 @@ export const ETIQUETA_DIMENSION: Record<Dimension, string> = {
   programa: 'Programa',
   jornada: 'Jornada',
   competencia: 'Competencia',
+  instructor: 'Instructor',
 }
 export const ETIQUETA_DIMENSION_PLURAL: Record<Dimension, string> = {
   ficha: 'Fichas',
@@ -154,6 +158,7 @@ export const ETIQUETA_DIMENSION_PLURAL: Record<Dimension, string> = {
   programa: 'Programas',
   jornada: 'Jornadas',
   competencia: 'Competencias',
+  instructor: 'Instructores',
 }
 export const ETIQUETA_ESTADISTICA: Record<Estadistica, string> = { asistencia: 'Asistencia', registro: 'Registro de asistencia (cumplimiento)', desercion: 'Deserción' }
 /** En deserción un valor menor es mejor */
@@ -173,7 +178,7 @@ export const cumpleFiltros = (f: FichaResumen, filtros: FiltrosFicha) =>
   (!filtros.jornada || f.jornada === filtros.jornada)
 
 /** Clave y nombre del elemento al que pertenece una ficha en cada dimensión */
-function grupoDeFicha(f: FichaResumen, dim: Exclude<Dimension, 'competencia'>): [string, string] {
+function grupoDeFicha(f: FichaResumen, dim: DimensionFicha): [string, string] {
   switch (dim) {
     case 'ficha':
       return [String(f.id), `${f.numero} — ${f.programa}`]
@@ -194,7 +199,7 @@ export interface Elemento {
   fichas: FichaResumen[]
   distribucion: Distribucion
   registro: Registro
-  /** Por competencia no aplica (las matrículas son de la ficha): queda en null */
+  /** Por competencia o instructor no aplica (las matrículas son de la ficha): queda en null */
   desercion: Desercion | null
 }
 
@@ -211,10 +216,14 @@ export function elementos(d: DatosEstadisticas, c: Corte, dim: Dimension, filtro
     if (!g) grupos.set(clave, (g = { nombre, fichas: new Set(), asistencias: [], sesiones: [], matriculas: [] }))
     return g
   }
-  const claveDe = (fichaId: number, competenciaId: number): [string, string] =>
-    dim === 'competencia' ? [String(competenciaId), d.competencias.get(competenciaId) ?? `Competencia ${competenciaId}`] : grupoDeFicha(porId.get(fichaId)!, dim)
+  const claveDe = (x: { fichaId: number; competenciaId: number; instructorId: string }): [string, string] =>
+    dim === 'competencia'
+      ? [String(x.competenciaId), d.competencias.get(x.competenciaId) ?? `Competencia ${x.competenciaId}`]
+      : dim === 'instructor'
+        ? [x.instructorId, d.instructores.get(x.instructorId) ?? 'Instructor']
+        : grupoDeFicha(porId.get(x.fichaId)!, dim)
 
-  if (dim !== 'competencia') {
+  if (esDimensionFicha(dim)) {
     for (const f of fichas.filter((x) => x.estado === 'activa')) grupo(...grupoDeFicha(f, dim)).fichas.add(f)
     for (const m of d.matriculas) {
       const f = porId.get(m.fichaId)
@@ -222,12 +231,12 @@ export function elementos(d: DatosEstadisticas, c: Corte, dim: Dimension, filtro
     }
   }
   for (const a of asistencias) {
-    const g = grupo(...claveDe(a.fichaId, a.competenciaId))
+    const g = grupo(...claveDe(a))
     g.asistencias.push(a)
     g.fichas.add(porId.get(a.fichaId)!)
   }
   for (const s of sesiones) {
-    const g = grupo(...claveDe(s.fichaId, s.competenciaId))
+    const g = grupo(...claveDe(s))
     g.sesiones.push(s)
     g.fichas.add(porId.get(s.fichaId)!)
   }
@@ -239,7 +248,7 @@ export function elementos(d: DatosEstadisticas, c: Corte, dim: Dimension, filtro
       fichas: [...g.fichas],
       distribucion: distribucion(g.asistencias),
       registro: registro(g.sesiones, hoy),
-      desercion: dim === 'competencia' ? null : desercion(g.matriculas, c),
+      desercion: esDimensionFicha(dim) ? desercion(g.matriculas, c) : null,
     }))
     .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { numeric: true }))
 }
@@ -290,7 +299,7 @@ export function nivelElemento(v: number | null, est: Estadistica = 'asistencia')
 }
 
 /** Comparativa global (por ficha, sede, área, programa o jornada) del indicador elegido, con la tendencia frente al corte anterior */
-export function comparativa(d: DatosEstadisticas, c: Corte, dim: Exclude<Dimension, 'competencia'>, hoy: string, est: Estadistica = 'asistencia') {
+export function comparativa(d: DatosEstadisticas, c: Corte, dim: DimensionFicha, hoy: string, est: Estadistica = 'asistencia') {
   const sinFiltros = { sede: '', area: '', programa: '', jornada: '' }
   const previos = new Map(elementos(d, corteAnterior(c), dim, sinFiltros, hoy).map((e) => [e.clave, valorElemento(e, est)]))
   return elementos(d, c, dim, sinFiltros, hoy)

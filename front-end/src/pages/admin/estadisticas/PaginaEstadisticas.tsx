@@ -120,7 +120,7 @@ interface PropsContenido {
 }
 
 type IndicadorGlobal = 'asistencia' | 'registro'
-type DimensionDesercion = Exclude<Dimension, 'competencia'>
+type DimensionDesercion = Exclude<Dimension, 'competencia' | 'instructor'>
 const DIMENSIONES_DESERCION: DimensionDesercion[] = ['ficha', 'sede', 'area', 'programa', 'jornada']
 const DIMS_GLOBAL = ['sede', 'area', 'programa', 'jornada'] as const
 const SIN_FILTROS = { sede: '', area: '', programa: '', jornada: '' }
