@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { BookOpen, History, Mail, Phone, Search, ShieldCheck, Star, TriangleAlert, UserCog, UserMinus, UserPlus, UsersRound } from 'lucide-react'
+import { BookOpen, History, Mail, Phone, Power, Search, ShieldCheck, Star, TriangleAlert, UserCog, UserMinus, UserPlus, UsersRound } from 'lucide-react'
 import { AvatarIniciales, Badge, Button, Card, CardHeader, EmptyState, Input, ProgressBar } from '@/components/ui'
 import { ETIQUETA_DOCUMENTO } from '@/features/perfil/servicioPerfil'
 import { cn, porcentaje, tiempoRelativo } from '@/lib/utilidades'
@@ -146,11 +146,16 @@ export function ListaInstructores({ detalle, onAsignar, onQuitar, editable }: Pr
 interface PropsAprendices {
   detalle: DetalleFicha
   onMatricular: () => void
-  onCambiarEstado: (aprendiz: AprendizFicha) => void
+  /** Solo administrador: estado de permanencia (aplazado, retirado…) */
+  onCambiarEstado?: (aprendiz: AprendizFicha) => void
   editable: boolean
+  /** Instructor — HU03.5/HU03.6: historial de asistencia del aprendiz */
+  onVerHistorial?: (aprendiz: AprendizFicha) => void
+  /** Instructor — HU02.4: activar o desactivar el acceso a la plataforma */
+  onCambiarAcceso?: (aprendiz: AprendizFicha) => void
 }
 
-export function ListaAprendices({ detalle, onMatricular, onCambiarEstado, editable }: PropsAprendices) {
+export function ListaAprendices({ detalle, onMatricular, onCambiarEstado, editable, onVerHistorial, onCambiarAcceso }: PropsAprendices) {
   const [busqueda, setBusqueda] = useState('')
   const texto = normalizar(busqueda.trim())
   const lista = detalle.aprendices
@@ -239,7 +244,17 @@ export function ListaAprendices({ detalle, onMatricular, onCambiarEstado, editab
                           <Phone className="size-4" aria-hidden />
                         </a>
                       )}
-                      {editable && (
+                      {onVerHistorial && (
+                        <Button variante="secundario" tamano="sm" icono={<History className="size-3.5" aria-hidden />} onClick={() => onVerHistorial(a)}>
+                          Historial
+                        </Button>
+                      )}
+                      {onCambiarAcceso && (
+                        <Button variante="fantasma" tamano="sm" icono={<Power className="size-3.5" aria-hidden />} onClick={() => onCambiarAcceso(a)}>
+                          {a.cuentaActiva ? 'Desactivar acceso' : 'Activar acceso'}
+                        </Button>
+                      )}
+                      {editable && onCambiarEstado && (
                         <Button variante="secundario" tamano="sm" icono={<UserCog className="size-3.5" aria-hidden />} onClick={() => onCambiarEstado(a)}>
                           Estado
                         </Button>

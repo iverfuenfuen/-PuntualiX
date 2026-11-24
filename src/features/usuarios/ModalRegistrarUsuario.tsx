@@ -18,6 +18,8 @@ interface PropsRegistrar {
   rolInicial?: Rol
   rolFijo?: boolean
   documentoInicial?: { tipo: TipoDocumento; numero: string }
+  /** HU02.2 (instructor): el aprendiz queda matriculado en esta ficha; la sede se toma de la ficha */
+  fichaId?: number
 }
 
 const CODIGO_HU: Record<Rol, string> = { administrador: 'HU02.3', instructor: 'HU02.1', aprendiz: 'HU02.2' }
@@ -27,7 +29,7 @@ const CODIGO_HU: Record<Rol, string> = { administrador: 'HU02.3', instructor: 'H
  * La cuenta se crea por INVITACIÓN: el usuario recibe un correo y elige su contraseña.
  * Se monta solo mientras está abierto.
  */
-export function ModalRegistrarUsuario({ onCerrar, onRegistrado, rolInicial = 'instructor', rolFijo, documentoInicial }: PropsRegistrar) {
+export function ModalRegistrarUsuario({ onCerrar, onRegistrado, rolInicial = 'instructor', rolFijo, documentoInicial, fichaId }: PropsRegistrar) {
   const idFormulario = useId()
   const catalogos = useCarga(obtenerCatalogos, [])
   const [errorServidor, setErrorServidor] = useState<string | null>(null)
@@ -70,6 +72,7 @@ export function ModalRegistrarUsuario({ onCerrar, onRegistrado, rolInicial = 'in
         v.rol === 'instructor'
           ? { areaId: v.areaId ? Number(v.areaId) : null, especialidad: v.especialidad || null, fechaIngreso: v.fechaIngreso || null }
           : undefined,
+      fichaId,
     })
     if (!r.ok) return setErrorServidor(r.mensaje)
     onRegistrado({ ...r.datos, nombres: v.nombres.trim(), apellidos: v.apellidos.trim() })
@@ -137,7 +140,7 @@ export function ModalRegistrarUsuario({ onCerrar, onRegistrado, rolInicial = 'in
                 {...register('correo')}
               />
               <Input etiqueta="Teléfono" type="tel" placeholder="Ej: 321 987 6543" error={errors.telefono?.message} {...register('telefono')} />
-              <Select etiqueta="Sede" placeholder="Sin sede asignada" opciones={opcionesSede} {...register('sedeId')} />
+              {fichaId == null && <Select etiqueta="Sede" placeholder="Sin sede asignada" opciones={opcionesSede} {...register('sedeId')} />}
             </div>
 
             {rol === 'instructor' && (
@@ -160,7 +163,7 @@ export function ModalRegistrarUsuario({ onCerrar, onRegistrado, rolInicial = 'in
                 ['Invitación segura', 'La persona crea su propia contraseña desde el correo; nadie más la conoce.'],
                 [
                   'Después del registro',
-                  rol === 'aprendiz' ? 'Podrá matricularse en una ficha.' : rol === 'instructor' ? 'Podrá asignarse a una o varias fichas.' : 'Tendrá acceso completo a la administración.',
+                  rol === 'aprendiz' ? (fichaId != null ? 'Quedará matriculado en esta ficha.' : 'Podrá matricularse en una ficha.') : rol === 'instructor' ? 'Podrá asignarse a una o varias fichas.' : 'Tendrá acceso completo a la administración.',
                 ],
               ].map(([titulo, texto]) => (
                 <li key={titulo} className="flex gap-2">

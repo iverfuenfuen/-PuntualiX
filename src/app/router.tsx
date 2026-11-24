@@ -37,6 +37,8 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
   '/admin/bitacora': async () => ({ Component: (await import('@/pages/admin/bitacora/PaginaBitacora')).PaginaBitacora }),
   // Etapa 2 — Fichas (Admin)
   '/admin/fichas': async () => ({ Component: (await import('@/pages/admin/fichas/PaginaFichas')).PaginaFichas }),
+  // Etapa 6 — Módulo Instructor
+  '/instructor/fichas': async () => ({ Component: (await import('@/pages/instructor/fichas/PaginaFichas')).PaginaFichas }),
 }
 
 /** Pantallas que no aparecen en el menú (detalles, formularios). La ruta es relativa a la del rol. */
@@ -60,7 +62,11 @@ const RUTAS_ADICIONALES: Record<Rol, RouteObject[]> = {
       },
     },
   ],
-  instructor: [],
+  instructor: [
+    { path: 'fichas/registrar', lazy: async () => ({ Component: (await import('@/pages/instructor/fichas/PaginaRegistrarAprendiz')).PaginaRegistrarAprendiz }) },
+    { path: 'fichas/:id', lazy: async () => ({ Component: (await import('@/pages/instructor/fichas/PaginaDetalleFicha')).PaginaDetalleFicha }) },
+    { path: 'fichas/:id/aprendices/:aprendizId', lazy: async () => ({ Component: (await import('@/pages/instructor/fichas/PaginaHistorialAprendiz')).PaginaHistorialAprendiz }) },
+  ],
   aprendiz: [],
 }
 

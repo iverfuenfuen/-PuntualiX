@@ -14,6 +14,8 @@ interface PropsMatricular {
   detalle: DetalleFicha
   onCerrar: () => void
   onGuardado: (mensaje: string) => void
+  /** Instructor (HU02.2): al registrar una cuenta nueva, la Edge Function la matricula en esta ficha */
+  porInstructor?: boolean
 }
 
 /**
@@ -22,7 +24,7 @@ interface PropsMatricular {
  * Si el documento no tiene cuenta, se registra aquí mismo con invitación por correo (Edge Function, Etapa 3)
  * y se vuelve a buscar automáticamente.
  */
-export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: PropsMatricular) {
+export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado, porInstructor }: PropsMatricular) {
   const { ficha, aprendices, capacidadAmbiente } = detalle
   const idBusqueda = useId()
   const [encontrado, setEncontrado] = useState<AprendizEncontrado | null>(null)
@@ -54,7 +56,9 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: Props
   const bloqueo = !encontrado
     ? null
     : !encontrado.activo
-      ? 'La cuenta de este aprendiz está inactiva. Debe reactivarse en Gestión de usuarios antes de matricularlo.'
+      ? porInstructor
+        ? 'La cuenta de este aprendiz está inactiva. Debe reactivarse antes de matricularlo: desde la ficha donde estuvo matriculado o por el administrador.'
+        : 'La cuenta de este aprendiz está inactiva. Debe reactivarse en Gestión de usuarios antes de matricularlo.'
       : encontrado.fichaActiva?.id === ficha.id
         ? 'El aprendiz ya está matriculado en esta ficha.'
         : encontrado.fichaActiva
@@ -198,9 +202,11 @@ export function ModalMatricularAprendiz({ detalle, onCerrar, onGuardado }: Props
           rolInicial="aprendiz"
           rolFijo
           documentoInicial={noRegistrado}
+          fichaId={porInstructor ? ficha.id : undefined}
           onCerrar={() => setRegistrando(false)}
-          onRegistrado={() => {
+          onRegistrado={(u) => {
             setRegistrando(false)
+            if (porInstructor) return onGuardado(`${u.nombres} ${u.apellidos} quedó registrado y matriculado en la ficha ${ficha.numero}. Recibirá una invitación por correo.`)
             // La cuenta ya existe: se busca de nuevo para pasar al paso 2 (datos de la matrícula)
             void consultar(getValues())
           }}

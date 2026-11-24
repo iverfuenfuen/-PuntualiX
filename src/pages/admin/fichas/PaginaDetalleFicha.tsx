@@ -2,25 +2,24 @@ import { useState } from 'react'
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router'
 import { BarChart3, CalendarCheck, FileSearch, PencilLine, RotateCcw, Siren, TriangleAlert, UsersRound } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { Badge, Button, Card, clasesBoton, EmptyState, EstadoError, KpiCard, ModalConfirmacion, Select, Spinner, Tabs, type Pestana } from '@/components/ui'
+import { Button, Card, clasesBoton, EmptyState, EstadoError, KpiCard, ModalConfirmacion, Spinner, Tabs, type Pestana } from '@/components/ui'
 import { Aviso } from '@/features/auth/Aviso'
 import { useCarga } from '@/lib/useCarga'
 import { porcentaje } from '@/lib/utilidades'
-import { ETIQUETA_ESTADO_MATRICULA, ETIQUETA_JORNADA, ETIQUETA_MODALIDAD, ETIQUETA_NIVEL, opcionesDe, type EstadoMatricula } from '@/types/dominio'
 import { ModalAsignarInstructor } from '@/pages/admin/fichas/ModalAsignarInstructor'
 import { ModalFormularioFicha } from '@/pages/admin/fichas/ModalFormularioFicha'
 import { ModalMatricularAprendiz } from '@/features/fichas/ModalMatricularAprendiz'
-import { estadoVisualFicha, fechaISOaTexto, riesgoAprendiz } from '@/features/fichas/presentacion'
+import { riesgoAprendiz } from '@/features/fichas/presentacion'
+import { EncabezadoFicha } from '@/features/fichas/EncabezadoFicha'
+import { ModalEstadoMatricula } from '@/features/fichas/ModalEstadoMatricula'
 import { InformacionGeneral, ListaAprendices, ListaCompetencias, ListaInstructores, PanelLateral } from '@/features/fichas/SeccionesDetalle'
 import {
   cambiarEstadoFicha,
-  cambiarEstadoMatricula,
   obtenerCatalogos,
   obtenerDetalleFicha,
   quitarAsignacion,
   type AprendizFicha,
   type AsignacionInstructor,
-  type DetalleFicha,
 } from '@/features/fichas/servicioFichas'
 
 type Seccion = 'general' | 'instructores' | 'aprendices' | 'competencias'
@@ -265,76 +264,5 @@ export function PaginaDetalleFicha() {
         <ModalEstadoMatricula aprendiz={dialogo.aprendiz} onCerrar={() => setDialogo(null)} onGuardado={terminar} />
       )}
     </>
-  )
-}
-
-/**
- * Banner de la ficha: SOLO su identidad (estado, sede, número, programa) y los 4 datos de contexto.
- * Cada dato tiene un único lugar: los indicadores van en las tarjetas KPI y los datos administrativos
- * en la pestaña Información general (evita la repetición que tenía VersionAntigua).
- */
-function EncabezadoFicha({ detalle }: { detalle: DetalleFicha }) {
-  const { ficha } = detalle
-  const estado = estadoVisualFicha(ficha)
-  const chips: Array<[string, string]> = [
-    ['Jornada', ETIQUETA_JORNADA[ficha.jornada]],
-    ['Modalidad', `${ETIQUETA_NIVEL[ficha.nivel]} ${ETIQUETA_MODALIDAD[ficha.modalidad].toLowerCase()}`],
-    ['Ciclo lectivo', `${fechaISOaTexto(ficha.fechaInicio)} – ${fechaISOaTexto(ficha.fechaFin)}`],
-    ['Instructor líder', ficha.instructorLider ?? 'Sin asignar'],
-  ]
-
-  return (
-    <section className="relative space-y-3 overflow-hidden rounded-2xl bg-primario-oscuro p-6 text-white shadow-sm sm:p-7">
-      <div className="pointer-events-none absolute -top-16 -right-16 size-72 rounded-full bg-white/5 blur-2xl" aria-hidden />
-      <div className="relative flex flex-wrap items-center gap-2 text-xs">
-        <Badge tono={estado.tono} punto className="bg-white/90">
-          {estado.texto}
-        </Badge>
-        <span className="rounded-md bg-black/20 px-2 py-0.5 font-semibold">Sede {ficha.sede}</span>
-      </div>
-      <h1 className="relative text-2xl font-bold text-white sm:text-3xl">
-        Ficha {ficha.numero} · {ficha.programa}
-      </h1>
-      <dl className="relative grid gap-2 pt-1 sm:grid-cols-2 xl:grid-cols-4">
-        {chips.map(([etiqueta, valor]) => (
-          <div key={etiqueta} className="rounded-lg border border-white/15 bg-white/10 px-3 py-2">
-            <dt className="text-[11px] font-semibold tracking-wide text-white/70 uppercase">{etiqueta}</dt>
-            <dd className="text-sm font-semibold text-white">{valor}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
-  )
-}
-
-const ESTADOS_MATRICULA = opcionesDe(ETIQUETA_ESTADO_MATRICULA)
-
-/** Cambia el estado de permanencia de un aprendiz en la ficha (aplazado, retirado, desertor, certificado). */
-function ModalEstadoMatricula({ aprendiz, onCerrar, onGuardado }: { aprendiz: AprendizFicha; onCerrar: () => void; onGuardado: (mensaje: string) => void }) {
-  const [estado, setEstado] = useState<EstadoMatricula>(aprendiz.estado)
-  return (
-    <ModalConfirmacion
-      abierto
-      onCerrar={onCerrar}
-      titulo="Estado de la matrícula"
-      textoConfirmar="Guardar estado"
-      onConfirmar={async () => {
-        if (estado === aprendiz.estado) return onCerrar()
-        const r = await cambiarEstadoMatricula(aprendiz.matriculaId, estado)
-        if (!r.ok) return r.mensaje
-        onGuardado(`El estado de ${aprendiz.nombres} ${aprendiz.apellidos} cambió a "${ETIQUETA_ESTADO_MATRICULA[estado]}".`)
-      }}
-    >
-      <p>
-        Aprendiz: <strong className="text-texto-principal">{aprendiz.nombres} {aprendiz.apellidos}</strong>
-      </p>
-      <Select etiqueta="Nuevo estado" opciones={ESTADOS_MATRICULA} value={estado} onChange={(e) => setEstado(e.target.value as EstadoMatricula)} />
-      {estado !== 'matriculado' && aprendiz.vocero !== 'ninguno' && (
-        <p className="flex items-center gap-2 font-semibold text-texto-principal">
-          <TriangleAlert className="size-4 text-advertencia" aria-hidden /> Perderá la vocería de la ficha.
-        </p>
-      )}
-      {estado !== 'matriculado' && <p className="text-xs">Su historial de asistencia se conserva.</p>}
-    </ModalConfirmacion>
   )
 }

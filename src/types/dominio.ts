@@ -178,3 +178,12 @@ export const ETIQUETA_ESTADO_REPORTE: Record<EstadoReporte, string> = { generand
 export function opcionesDe<T extends string>(etiquetas: Record<T, string>): Array<{ valor: T; etiqueta: string }> {
   return (Object.entries(etiquetas) as Array<[T, string]>).map(([valor, etiqueta]) => ({ valor, etiqueta }))
 }
+
+// ---------------------------------------------------------------------
+// Asistencia (RF08) — Etapa 6
+// ---------------------------------------------------------------------
+export type EstadoAsistencia = 'presente' | 'ausente' | 'justificada'
+
+/** Estados de VersionAntigua (asistencia.html): Presente / Ausente / Justificada */
+export const ETIQUETA_ESTADO_ASISTENCIA: Record<EstadoAsistencia, string> = { presente: 'Presente', ausente: 'Ausente', justificada: 'Justificada' }
+export const TONO_ESTADO_ASISTENCIA: Record<EstadoAsistencia, Tono> = { presente: 'exito', ausente: 'critico', justificada: 'informacion' }
