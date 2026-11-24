@@ -17,11 +17,16 @@ export function AppLayout() {
       >
         Saltar al contenido
       </a>
-      <Navbar usuario={usuario} notificacionesSinLeer={notificacionesSinLeer} onCerrarSesion={cerrarSesion} />
+      {/* Al imprimir ("Descargar como PDF") solo sale el contenido de la pantalla */}
+      <div className="contents print:hidden">
+        <Navbar usuario={usuario} notificacionesSinLeer={notificacionesSinLeer} onCerrarSesion={cerrarSesion} />
+      </div>
       <main id="contenido" className="mx-auto w-full max-w-[1440px] flex-1 space-y-6 px-4 pt-6 pb-12 sm:px-6 lg:px-8">
         <Outlet />
       </main>
-      <Footer />
+      <div className="print:hidden">
+        <Footer />
+      </div>
     </div>
   )
 }
