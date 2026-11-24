@@ -76,6 +76,8 @@ front-end/
 │   │   ├── dashboard/      dashboard del administrador (RF21)                         [Etapa 4]
 │   │   ├── alertas/        alertas de ficha (HU09.3) y umbrales (RF17)                [Etapa 4]
 │   │   ├── bitacora/       auditoría con filtros en servidor, detalle y exportación   [Etapa 4]
+│   │   ├── estadisticas/   estadísticas por corte, comparación y comparativas (RF14) [Etapa 5]
+│   │   ├── reportes/       generar, historial y hojas imprimibles (RF18, RF20)       [Etapa 5]
 │   │   └── catalogos/      sedes, áreas, ambientes y programas (compartido)
 │   ├── lib/                supabase.ts (cliente único) · utilidades.ts · resultado.ts (errores de BD)
 │   │                       · useCarga.ts (cargando/error/recargar) · csv.ts (exportar)
@@ -114,7 +116,7 @@ front-end/
 | 2 | Fichas (Admin): listado, detalle con pestañas, registrar, actualizar, asignar instructor, matricular | ✅ Lista para pruebas |
 | 3 | Usuarios e instructores (Admin): panel, perfil, registro, cumplimiento | ✅ Completa (Edge Function desplegada e invitación probada) |
 | 4 | Dashboard, alertas con umbrales y bitácora (Admin) | ✅ Lista para pruebas |
-| 5 | Estadísticas, reportes e historial | ⏳ |
+| 5 | Estadísticas, reportes e historial (Admin) | ✅ Lista para pruebas |
 | 6 | Módulo Instructor (11 pantallas) | ⏳ |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
 | 8 | Página pública (RF01), revisión de accesibilidad y diseño responsivo, despliegue | ⏳ |
@@ -122,6 +124,60 @@ front-end/
 ---
 
 ## Registro de Cambios (Changelog)
+
+### [0.6.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 5 — Estadísticas y Reportes del administrador
+
+Planificada en modo plan con el inventario completo de las 3 pantallas del Prototipo y las 7 de VersionAntigua, cruzado
+con los casos de uso del administrador (HU04.1, HU06.3, RF14, RF15, RF18, RF20, RF21).
+
+**Decisiones del usuario**
+- **Sin librerías nuevas.** El PDF es la hoja de reporte imprimible de VersionAntigua ("Imprimir → Guardar como PDF")
+  y Excel se cubre con CSV (`lib/csv.ts`).
+- **Selector de corte semestral** (2026-II, 2026-I…) en Estadísticas: cada cifra se calcula para el corte y se compara
+  con el anterior (RF20).
+- **Solo totales por ficha:** ningún reporte ni estadística lista aprendices. Se omitió el reporte "Alertas &
+  Deserción" del Prototipo.
+- **Historial con parámetros:** la tabla `reportes` guarda tipo, ficha o instructor, periodo y filtros. Ver o
+  descargar vuelve a armar el reporte (sin Storage).
+
+**Estadísticas (`/admin/estadisticas`)**: Prototipo + `VersionAntigua/Admin/estadisticas/estadisticas.html`.
+- Banner verde con el selector de corte.
+- 4 indicadores con variación: asistencia promedio, deserción, cumplimiento de instructores y fichas monitoreadas.
+- "Estadísticas y comparación": modo individual (dona, desglose y datos clave) y modo comparación de 2 a 4 elementos
+  (tarjetas, resumen con promedio, mayor, menor y brecha, y diagnóstico automático).
+  - Se puede consultar por ficha, sede, área, programa, jornada o competencia, con "Más filtros".
+- Acciones de gestión (PDF, CSV y "Generar reporte detallado").
+- Comparativa global por sede, área, programa y jornada con tendencia.
+- Deserción por programa y cumplimiento de instructores por nivel.
+
+**Reportes (`/admin/reportes`)**: Prototipo + `VersionAntigua/Admin/reportes/reportes.html`.
+- 4 indicadores:
+  - reportes del mes, comparados con el mes anterior;
+  - fichas con reporte;
+  - instructores con reporte;
+  - último reporte.
+- "Generar nuevo reporte" con pestañas Ficha, Instructor y Estadísticas:
+  - fechas, más filtros y búsqueda;
+  - acciones Generar, Descargar PDF y CSV.
+- Historial con filtros, ver y descargar.
+- **Hojas imprimibles** (`/admin/reportes/:id`, sin navbar) con la estructura de `reporte-ficha-ejemplo.html` y
+  `reporte-instructor-ejemplo.html`: datos, resumen y tablas.
+  - La hoja de ficha incluye la asistencia por competencia (HU06.3 y RF15, en totales).
+- **Historial por ficha y por instructor** (`historialReportesFicha/Instructor.html` + Prototipo pantalla 3), al que
+  se llega con el botón "Ver reportes" del detalle de la ficha y del perfil del instructor.
+
+**Un solo lugar por dato**
+- Los tableros de deserción y cumplimiento no repiten el % que ya muestran los indicadores.
+- La dona de cumplimiento muestra el número de instructores.
+- El filtro "Todos" del historial no repite el total, que ya está en "Total emitidos".
+
+**Omitido por no estar documentado o por no tener datos en la BD**
+- Juicios evaluativos, "Emitir alertas a vocero", comités, "Exportar del ciclo (ZIP)" y "Guía de exportación".
+- Horas de formación ejecutadas y tipos de consolidado del Prototipo que dependen de datos de aprendices.
+
+**Otros cambios**
+- `AppLayout`: el navbar y el pie se ocultan al imprimir.
+- `servicioEstadisticas`: filtro opcional por ficha o instructor para los reportes.
 
 ### [0.5.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 4 — Dashboard, alertas y bitácora
 

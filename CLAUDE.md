@@ -23,6 +23,10 @@ Frontend final en React + Supabase que combine:
 
 ## Estado
 (Actualizar al terminar cada módulo: qué está hecho, qué sigue.)
+- Hecho: Etapas 0–5 del administrador (ver tabla "Estado de avance"). Pendiente la prueba manual de las Etapas 2, 4 y 5.
+- Sigue: Etapa 6 (módulo Instructor), planificada primero en modo plan con inventario de Prototipo + VersionAntigua.
+- Decisiones de la Etapa 5: sin librerías (PDF = hoja imprimible, Excel = CSV), corte semestral, solo totales por
+  ficha, historial de reportes con parámetros (sin Storage).
 
 # CLAUDE.md — Contexto de PuntualiX 2.0
 
@@ -118,8 +122,8 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 2 | Fichas (Admin): `/admin/fichas` y `/admin/fichas/:id` con registrar, actualizar, desactivar, asignar instructor y matricular | ✅ código · ⏳ prueba manual del usuario |
 | 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ función desplegada (2026-11-23) e invitación probada de punta a punta |
 | 4 | Dashboard (`/admin`), alertas con umbrales (`/admin/alertas`, `/admin/alertas/umbrales`), bitácora (`/admin/bitacora`) | ✅ código · ⏳ prueba manual del usuario |
-| 5 | Estadísticas (`/admin/estadisticas`), reportes e historial (`/admin/reportes`) | ⏳ siguiente: empezar aquí |
-| 6 | Módulo Instructor (11 pantallas) | ⏳ |
+| 5 | Estadísticas (`/admin/estadisticas`), reportes (`/admin/reportes`, `/admin/reportes/:id`) e historial por ficha/instructor | ✅ código · ⏳ prueba manual del usuario |
+| 6 | Módulo Instructor (11 pantallas) | ⏳ siguiente: planificar en modo plan |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
 | 8 | Página pública (RF01), accesibilidad, responsive, despliegue | ⏳ |
 
