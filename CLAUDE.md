@@ -147,6 +147,9 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   `juan.perez@puntualix.com` (aprendiz). Sus correos no son reales.
 - **Forma de trabajo:** las conversaciones de desarrollo son solo para código. Las tareas operativas (desplegar,
   configurar Supabase/SMTP, claves, pruebas manuales guiadas) se hacen en otro chat para ahorrar tokens.
+  **Decisión del usuario (2026-11-24):** esas tareas, con su contexto e instrucciones paso a paso, viven en
+  [PENDIENTES_USUARIO.md](PENDIENTES_USUARIO.md). Mantenerlo al día: cuando el usuario confirme que terminó una tarea,
+  quitarla; cuando un cambio genere una nueva (migración, despliegue, prueba), agregarla.
 - Pendiente: carga masiva de aprendices (Excel/CSV) reutilizando `invitar-usuario`. Etapa 3 también propone para la
   migración 09: rol formativo del instructor, tipo de contrato y dedicación semanal. Etapa 4 propone `bitacora.ip` y
   `bitacora.agente_usuario` (el Prototipo muestra IP y navegador en el detalle del evento).
