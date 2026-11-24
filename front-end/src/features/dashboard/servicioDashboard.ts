@@ -1,59 +1,106 @@
-import type { Resultado } from '@/lib/resultado'
-import { listarAlertas, type Alerta } from '@/features/alertas/servicioAlertas'
+import { supabase } from '@/lib/supabase'
+import { traducirErrorBD, type Resultado } from '@/lib/resultado'
+import { listarAlertasFicha, type AlertaFicha } from '@/features/alertas/servicioAlertas'
 import { eventosRecientes, type EventoBitacora } from '@/features/bitacora/servicioBitacora'
-import { fichaEnRiesgo } from '@/features/fichas/presentacion'
 import { listarFichas, type FichaResumen } from '@/features/fichas/servicioFichas'
-import { listarInstructores } from '@/features/instructores/servicioInstructores'
-import { META_CUMPLIMIENTO } from '@/features/instructores/presentacion'
 
 /**
- * Dashboard del administrador (RF14, RF16, RF21). No consulta tablas propias: reutiliza los servicios de cada módulo
- * para que cada cifra se calcule igual que en su pantalla de detalle (una sola fuente de verdad).
+ * RF21 — Dashboard del administrador (estructura de VersionAntigua/Admin/dashboard.html). El administrador solo trabaja
+ * con FICHAS y sus porcentajes: no se consulta nada por aprendiz. Lo que ya existe en otro módulo se reutiliza de su
+ * servicio (fichas, alertas de ficha, bitácora) para que cada cifra se calcule igual en todas partes.
  */
 
-export interface ResumenAdmin {
-  fichasActivas: number
-  fichasEnRiesgo: number
-  /** Promedio de asistencia de las fichas activas con registros */
-  asistenciaGeneral: number | null
-  /** Promedio del cumplimiento de los instructores activos (mismo cálculo que /admin/instructores) */
-  cumplimientoInstructores: number | null
-  instructoresBajoMeta: number
-  alertasAbiertas: Alerta[]
-  /** Fichas activas que alcanzan algún umbral, de mayor a menor inasistencia */
-  fichasAtencion: FichaResumen[]
+export type EstadoAsistencia = 'presente' | 'ausente' | 'justificada'
+export type EstadoSesion = 'programada' | 'ejecutada' | 'cancelada'
+
+export interface SesionPeriodo {
+  fecha: string
+  estado: EstadoSesion
+}
+
+export interface AsistenciaPeriodo {
+  fecha: string
+  estado: EstadoAsistencia
+}
+
+/** Estado actual de la plataforma (no depende del mes elegido) */
+export interface ResumenActual {
+  fichas: FichaResumen[]
+  /** Fecha de registro de cada ficha (para "respecto al mes anterior") */
+  registroFichas: string[]
+  alertas: AlertaFicha[]
   actividad: EventoBitacora[]
+  /** Todos los registros de asistencia de las fichas, por estado ("Desempeño de las fichas") */
+  totales: Record<EstadoAsistencia, number>
 }
 
-const promedio = (valores: Array<number | null>) => {
-  const v = valores.filter((x): x is number => x != null)
-  return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null
+/** Sesiones y asistencias del mes elegido y del anterior (para la variación) */
+export interface DatosPeriodo {
+  sesiones: SesionPeriodo[]
+  asistencias: AsistenciaPeriodo[]
 }
 
-export async function obtenerResumenAdmin(): Promise<Resultado<ResumenAdmin>> {
-  const [fichas, instructores, alertas, actividad] = await Promise.all([listarFichas(), listarInstructores(), listarAlertas({ soloAbiertas: true }), eventosRecientes(6)])
+const contarAsistencias = (estado: EstadoAsistencia) => supabase.from('asistencias').select('id', { count: 'exact', head: true }).eq('estado', estado)
+
+export async function obtenerResumenActual(): Promise<Resultado<ResumenActual>> {
+  const [fichas, alertas, actividad, registro, presentes, justificadas, ausentes] = await Promise.all([
+    listarFichas(),
+    listarAlertasFicha(),
+    eventosRecientes(3),
+    supabase.from('fichas').select('created_at'),
+    contarAsistencias('presente'),
+    contarAsistencias('justificada'),
+    contarAsistencias('ausente'),
+  ])
   if (!fichas.ok) return fichas
-  if (!instructores.ok) return instructores
   if (!alertas.ok) return alertas
   if (!actividad.ok) return actividad
-
-  const activas = fichas.datos.filter((f) => f.estado === 'activa')
-  const instructoresActivos = instructores.datos.filter((i) => i.activo)
-
+  const error = registro.error ?? presentes.error ?? justificadas.error ?? ausentes.error
+  if (error) return { ok: false, mensaje: traducirErrorBD(error) }
   return {
     ok: true,
     datos: {
-      fichasActivas: activas.length,
-      fichasEnRiesgo: activas.filter(fichaEnRiesgo).length,
-      asistenciaGeneral: promedio(activas.map((f) => f.porcentajeAsistencia)),
-      cumplimientoInstructores: promedio(instructoresActivos.map((i) => i.cumplimiento)),
-      instructoresBajoMeta: instructoresActivos.filter((i) => i.cumplimiento != null && i.cumplimiento < META_CUMPLIMIENTO).length,
-      alertasAbiertas: alertas.datos,
-      fichasAtencion: activas
-        .filter((f) => f.nivelRiesgo != null)
-        .sort((a, b) => (b.porcentajeInasistencia ?? 0) - (a.porcentajeInasistencia ?? 0))
-        .slice(0, 6),
+      fichas: fichas.datos,
+      registroFichas: (registro.data as Array<{ created_at: string }>).map((f) => f.created_at),
+      alertas: alertas.datos,
       actividad: actividad.datos,
+      totales: { presente: presentes.count ?? 0, justificada: justificadas.count ?? 0, ausente: ausentes.count ?? 0 },
     },
   }
+}
+
+const BLOQUE = 1000 // límite de filas por respuesta de Supabase
+
+/** `desde` y `hasta` en formato YYYY-MM-DD (ambos incluidos) */
+export async function obtenerDatosPeriodo(desde: string, hasta: string): Promise<Resultado<DatosPeriodo>> {
+  const sesiones: SesionPeriodo[] = []
+  for (let inicio = 0; ; inicio += BLOQUE) {
+    const { data, error } = await supabase
+      .from('sesiones')
+      .select('id, fecha, estado')
+      .gte('fecha', desde)
+      .lte('fecha', hasta)
+      .order('id')
+      .range(inicio, inicio + BLOQUE - 1)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    sesiones.push(...(data as SesionPeriodo[]))
+    if (data.length < BLOQUE) break
+  }
+
+  type FilaAsistencia = { id: number; estado: EstadoAsistencia; sesiones: { fecha: string } }
+  const asistencias: AsistenciaPeriodo[] = []
+  for (let inicio = 0; ; inicio += BLOQUE) {
+    const { data, error } = await supabase
+      .from('asistencias')
+      .select('id, estado, sesiones!inner(fecha)')
+      .gte('sesiones.fecha', desde)
+      .lte('sesiones.fecha', hasta)
+      .order('id')
+      .range(inicio, inicio + BLOQUE - 1)
+    if (error) return { ok: false, mensaje: traducirErrorBD(error) }
+    asistencias.push(...(data as unknown as FilaAsistencia[]).map((a) => ({ fecha: a.sesiones.fecha, estado: a.estado })))
+    if (data.length < BLOQUE) break
+  }
+
+  return { ok: true, datos: { sesiones, asistencias } }
 }

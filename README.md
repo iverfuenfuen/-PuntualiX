@@ -73,8 +73,8 @@ front-end/
 │   │   ├── fichas/         listado, detalle, registrar/actualizar, asignar, matricular [Etapa 2]
 │   │   ├── instructores/   panel (tabla/tarjetas), perfil, cumplimiento mes a mes     [Etapa 3]
 │   │   ├── usuarios/       gestión de usuarios, registro por invitación, roles        [Etapa 3]
-│   │   ├── dashboard/      resumen del administrador (reutiliza los demás servicios)  [Etapa 4]
-│   │   ├── alertas/        centro de alertas, seguimiento y umbrales (RF16, RF17)     [Etapa 4]
+│   │   ├── dashboard/      dashboard del administrador (RF21)                         [Etapa 4]
+│   │   ├── alertas/        alertas de ficha (HU09.3) y umbrales (RF17)                [Etapa 4]
 │   │   ├── bitacora/       auditoría con filtros en servidor, detalle y exportación   [Etapa 4]
 │   │   └── catalogos/      sedes, áreas, ambientes y programas (compartido)
 │   ├── lib/                supabase.ts (cliente único) · utilidades.ts · resultado.ts (errores de BD)
@@ -125,50 +125,45 @@ front-end/
 
 ### [0.5.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 4 — Dashboard, alertas y bitácora
 
-**Tomado de `Prototipo/`**
-- *Bitácora de actividades y auditoría*: KPI (total, exitosas con % de efectividad, alertas preventivas, errores con
-  % de fallas), búsqueda, filtros, "vistas rápidas", tabla con fecha y hora, responsable con avatar, módulo y acción,
-  detalle y resultado, fila resaltada en los errores, exportación y botón "Actualizar".
-- *Detalle del evento de auditoría (HU11.3)*: banda de resultado, "Responsable y contexto" y "Operación y registro
-  afectado".
+**Corrección del usuario (rehecha):** la primera versión recortaba el dashboard e improvisaba funciones fuera del rol.
+Según los casos de uso, el administrador **solo gestiona fichas y sus porcentajes**: no ve ni gestiona aprendices, no
+atiende alertas individuales (HU09.1, HU09.2 y HU12.1 son del instructor y del aprendiz) y solo recibe las alertas de
+ficha (HU09.3). Cada pantalla sigue ahora lo que ya estaba hecho, sin agregar funciones no documentadas.
 
-**Rescatado de `VersionAntigua/`** (el Prototipo no tiene dashboard ni alertas)
-- *Dashboard*: saludo, KPI de fichas, asistencia, cumplimiento de instructores y alertas por prioridad, "Alertas
-  recientes", fichas con su riesgo y "Actividad reciente" con enlaces a cada módulo.
-- *Alertas*: KPI por prioridad, filtros por sede, prioridad y ficha, tabla con prioridad, descripción, instructor
-  líder y fecha, y el panel de detalle con límite configurado y porcentaje detectado.
-- *Bitácora*: filtros por módulo, rol, resultado y rango de fechas; detalle con id de evento.
+**Dashboard (`/admin`, RF21)**: mismo orden y bloques que `VersionAntigua/Admin/dashboard.html`:
+- Saludo con selector de mes dentro del **banner verde del Prototipo** (`PageHeader`, con "Periodo 2026-II activo").
+- 5 indicadores: fichas registradas y cumplimiento de instructores ("respecto al mes anterior"), asistencias por fichas
+  (promedio general) y alertas de prioridad media y alta (fichas cerca y sobre el límite).
+- Desempeño de las fichas (dona con justificado, inasistencia y total de registros), alertas recientes y riesgo de
+  deserción por ficha (barras de las fichas en riesgo moderado y crítico).
+- Fichas asignadas activas (ficha, programa, aprendices, asistencia promedio, tipo de riesgo) y actividad reciente.
+- Estadísticas generales del mes (sesiones programadas, asistencias, inasistencias, justificadas, sin justificar) con
+  la tendencia de asistencia dibujada como la "Evolución semanal" del Prototipo (barras por semana y meta del 80 %).
 
-**Nuevo y mejoras**
-- **Seguimiento de alertas**: iniciar seguimiento, marcar como atendida o descartar; queda registrado quién la cerró y
-  cuándo. Las alertas de "ficha sin líder" llevan directo a asignar el instructor.
-- **Umbrales (RF17)**: edición de las tres prioridades con validación (0 < % ≤ 100 y baja < media < alta entre los
-  activos), escala visual y vista previa de cuántas fichas quedarían en cada nivel antes de guardar.
-- Al abrir el centro de alertas, las notificaciones propias se marcan como leídas y la campana se actualiza.
-- **Bitácora legible**: el evento técnico (tabla + JSON antes/después) se traduce a "Modificación · Ficha" con el
-  registro afectado ("Ficha 301002") y los campos que cambiaron; el detalle muestra la tabla Campo / Antes / Después.
-- La bitácora filtra y pagina **en el servidor** (puede crecer sin límite); la búsqueda encuentra también por nombre
-  del responsable y espera 400 ms a que se deje de escribir. La exportación CSV (hasta 3.000 eventos) queda
-  registrada como descarga (RF19).
-- El dashboard **no tiene consultas propias**: reutiliza los servicios de Fichas, Instructores, Alertas y Bitácora,
-  así cada cifra se calcula igual que en su pantalla.
+**Alertas (`/admin/alertas`, RF16, HU09.3)**: copia de `VersionAntigua/Admin/alertas/alertas.html`: indicadores
+(alertas activas, prioridad alta, media y baja), filtros por sede, prioridad, ficha y fechas, búsqueda por ficha, tabla
+(prioridad, descripción, ficha, instructor líder, fecha de generación) y detalle de **solo lectura** con el límite
+configurado y el porcentaje detectado. Solo alertas de ficha. Al entrar, la campana marca las notificaciones como leídas.
 
-**Información repetida corregida (regla "un solo lugar por dato")**
-- Bitácora del Prototipo: los mismos conteos aparecían en los KPI, en los chips de "vistas rápidas" (Incidentes (8))
-  y en el selector de estado. Ahora los KPI son la única cifra; las vistas rápidas son solo rangos de fecha.
-- Alertas de VersionAntigua: "Alertas activas 34" repetía la suma de las prioridades. Ahora los KPI cuentan las
-  alertas abiertas **por prioridad** y las pestañas, **por estado**.
-- Dashboard de VersionAntigua: dos tarjetas de alertas (media y alta) más el panel de alertas con su insignia.
-  Ahora hay una sola tarjeta con el desglose y el panel lista cuáles son, sin volver a contarlas.
-- "Estadísticas generales" y "Tendencia de asistencia" del dashboard antiguo pasan al módulo de Estadísticas
-  (Etapa 5), para no tener dos versiones de las mismas cifras.
+**Umbrales (`/admin/alertas/umbrales`, RF17)**: no existe pantalla en el Prototipo ni en VersionAntigua; es un
+formulario simple con los campos de `umbrales_alerta` (porcentaje, descripción y activo por prioridad). Se valida
+0 < % ≤ 100 y baja < media < alta entre los activos, para que la BD no asigne una prioridad menor a una inasistencia mayor.
+
+**Bitácora (`/admin/bitacora`, RF19, HU11.1–HU11.5)**: fiel al Prototipo: "Exportar CSV / Excel" y "Actualizar
+registro", indicadores (total, exitosas con % de efectividad, alertas preventivas, errores con tasa de fallas),
+búsqueda, filtros de sede, módulo y estado, vistas rápidas (Todas, Solo asistencias, Incidentes, Hoy) con el rango
+activo, tabla de eventos y detalle del evento (HU11.3). Por HU11.4 y VersionAntigua se agregan tipo de operación, rol y
+rango de fechas. El evento técnico se traduce a texto legible ("Modificación · Ficha", campos antes y después). La
+bitácora se filtra y pagina en el servidor; la exportación queda registrada como descarga.
+
+**Un solo lugar por dato**
+- Bitácora: "Incidentes" no repite el conteo de "Errores / incidentes"; "Todas" no repite el total.
+- Dashboard: la dona muestra el acumulado de todas las fichas y "Estadísticas generales" solo el mes elegido.
 
 **Decisiones y pendientes**
-- El detalle del evento no muestra dirección IP, navegador ni sistema operativo (Prototipo): la tabla `bitacora` no
-  los guarda. Propuesta para el back-end (migración 09): columnas `ip` y `agente_usuario`.
-- Los eventos automáticos guardan un detalle técnico ("update en fichas"); la interfaz lo traduce a partir de los
-  datos. "Descargar comprobante (PDF)" queda para la Etapa 5 (reportes).
-- Las alertas cerradas no se reabren: si la situación se repite, la BD genera una alerta nueva.
+- El detalle del evento no muestra IP ni navegador (Prototipo): la tabla `bitacora` no los guarda. Propuesta para la
+  migración 09: columnas `ip` y `agente_usuario`. "Descargar comprobante (PDF)" queda para la Etapa 5 (reportes).
+- Las alertas no cambian de estado desde el administrador: ningún caso de uso lo pide.
 
 ### [0.4.0] — 2026-11-23 · Sesión 3 (cont.): Etapa 3 — Instructores y Usuarios
 

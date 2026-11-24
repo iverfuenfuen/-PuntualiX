@@ -1,3 +1,26 @@
+# PuntualiX: eje central de la refactorización
+
+## Objetivo (no negociable)
+Frontend final en React + Supabase que combine:
+- UI/UX y estructura de componentes de /prototipo
+- Lógica de negocio y flujos de /VersionAntigua (no se pierde nada)
+- Identidad visual del Manual de Identidad Corporativa
+
+## Reglas estrictas
+- /prototipo y /VersionAntigua son SOLO LECTURA. Nunca editar ni borrar.
+- Colores, fuentes (Poppins/Nunito) y logos salen SOLO del manual. Única adición: el verde nuevo del navbar y footer, como token propio.
+- No cambiar el stack, no instalar librerías nuevas, no reestructurar carpetas sin pedir permiso.
+- Todas las llamadas a Supabase van en /src/services. Nunca usar la service_role key.
+- No modificar el esquema de Supabase: si falta algo, proponerlo y esperar.
+
+## Alcance de cada tarea
+- Hacer SOLO lo que se pidió. Sin refactors extra, sin "mejoras" no solicitadas, sin tocar archivos no relacionados.
+- Si ves algo que mejorar fuera del alcance, anótalo al final y no lo hagas.
+- Ante la duda, preguntar antes de actuar.
+
+## Estado
+(Actualizar al terminar cada módulo: qué está hecho, qué sigue.)
+
 # CLAUDE.md — Contexto de PuntualiX 2.0
 
 Guía para retomar el trabajo en cualquier computador sin depender de conversaciones anteriores.
@@ -6,6 +29,18 @@ Leer junto con [README.md](README.md) (instalación, arquitectura y **Changelog*
 ## Proyecto
 Plataforma SENA de gestión académica y control de asistencia (programa ADSO, ficha 3267541).
 Roles: **administrador**, **instructor**, **aprendiz**.
+
+## Reglas de construcción (corrección del usuario en la Etapa 4 — OBLIGATORIAS)
+- Es una **refactorización** de Prototipo + VersionAntigua para sacar una versión mejor: **no improvisar**. Antes de
+  hacer una pantalla, inventariar TODOS los bloques de la versión antigua y del Prototipo y conservarlos (fusionados sin
+  repetir datos). No quitar bloques ni inventar funciones, textos o acciones que no estén en esas fuentes o en los
+  casos de uso (`docs/Casos de usos.docx`).
+- Cada función debe corresponder al **rol** según los casos de uso. El **administrador solo gestiona fichas y sus
+  porcentajes**, instructores (HU02.1, HU12.2, HU12.4), roles y acceso (HU02.3, HU02.4), alertas de ficha (HU09.3),
+  umbrales (RF17), bitácora (HU11) y estadísticas y reportes de ficha. **No** ve ni gestiona aprendices individualmente:
+  las alertas por aprendiz (HU09.1, HU09.2, HU12.1) y el registro de aprendices (HU02.2) son del instructor.
+- Toda pantalla principal usa el banner verde `components/layout/PageHeader` (como Fichas e Instructores), salvo que el
+  Prototipo de esa pantalla tenga otro encabezado (p. ej. Bitácora).
 
 ## Carpetas
 | Carpeta | Rol | Regla |
@@ -107,8 +142,12 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   `bitacora.agente_usuario` (el Prototipo muestra IP y navegador en el detalle del evento).
 - Etapa 4: la bitácora se filtra y pagina en el servidor (`servicioBitacora.consulta`, síncrona a propósito: el
   constructor de supabase-js es *thenable* y una función async lo ejecutaría). `bitacora/presentacion.ts` traduce los
-  eventos técnicos a texto. El dashboard reutiliza los servicios de cada módulo; Etapa 5 debe llevar las
-  "Estadísticas generales" y la "Tendencia de asistencia" del dashboard antiguo, y el comprobante PDF del evento.
+  eventos técnicos a texto. El dashboard sigue el orden de `VersionAntigua/Admin/dashboard.html` y reutiliza los
+  servicios de cada módulo. Etapa 5 debe llevar el comprobante PDF del evento de la bitácora.
+- **Pendiente de decisión del usuario:** en las Etapas 2 y 3 quedaron funciones del administrador sobre aprendices
+  (registrar aprendices en Gestión de usuarios, matricular/registrar aprendiz y estado de matrícula en el detalle de
+  la ficha). El Prototipo tiene el modal "Matricular aprendiz HU02.2" para el admin, pero el caso de uso HU02.2 es del
+  instructor. Preguntar antes de quitarlas.
 - Regla de pantallas: **un solo lugar por dato** (encabezado = identidad, KPI = cifras, pestañas = distribución,
   modales sin métricas). El rol y el acceso de cualquier usuario se gestionan solo en `/admin/usuarios`.
 - En Bash, NO usar comillas invertidas dentro de `node -e "..."`: bash las ejecuta como comandos. Para editar
