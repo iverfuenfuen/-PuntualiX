@@ -15,12 +15,12 @@
 ## 1. Cómo arrancar en otro computador (la institución)
 1. **Traer el código.** Se clona con `git clone -b react-supabase https://github.com/iverfuenfuen/-PuntualiX.git Puntualix2.0`.
    - La rama `react-supabase` tiene el proyecto completo: `CLAUDE.md`, este archivo, `docs/`, `Prototipo/`,
-     `VersionAntigua/` y `front-end/`.
-   - La rama `main` tiene solo `front-end/`, para Vercel. **No** se desarrolla en `main`.
+     `VersionAntigua/` y `MiProyecto/`.
+   - La rama `main` tiene solo `MiProyecto/`, para Vercel. **No** se desarrolla en `main`.
    - Después de clonar, conviene renombrar el remoto: `git remote rename origin puntualix`, para que coincida con los
      comandos de CLAUDE.md.
-2. **Instalar:** `cd front-end` y luego `npm install`. Requiere Node 20 o superior.
-3. **Configurar `front-end/.env.local`** (no está en git) con dos variables:
+2. **Instalar:** `cd MiProyecto` y luego `npm install`. Requiere Node 20 o superior.
+3. **Configurar `MiProyecto/.env.local`** (no está en git) con dos variables:
    - `VITE_SUPABASE_URL=https://ckppdfnzgbnwrnqrzkdx.supabase.co`
    - `VITE_SUPABASE_ANON_KEY=<la anon key>`. Se copia del panel de Supabase, en Settings → API → anon public.
      **Nunca la `service_role`.**
@@ -39,7 +39,7 @@
   - `VersionAntigua/`: 33 pantallas HTML de los 3 roles, sin JavaScript. Aporta los flujos, los campos y los bloques.
   - La identidad visual sale del Manual de Identidad (`docs/Manual de identidad corporativo.docx`).
   - Los casos de uso están en `docs/Casos de usos.docx`. Los RF y RNF, en `docs/RF.docx` y `docs/RNF.docx`.
-- **Stack** (`front-end/`): React 19 · TypeScript · Vite 8 · Tailwind 4 (tokens en `src/styles/index.css`) ·
+- **Stack** (`MiProyecto/`): React 19 · TypeScript · Vite 8 · Tailwind 4 (tokens en `src/styles/index.css`) ·
   React Router 8 · react-hook-form + zod · Recharts · lucide-react · Supabase JS · oxlint · PGlite para las pruebas
   SQL.
 
@@ -161,16 +161,16 @@
 > **El profesor aprobó la opción 1:** Supabase como back-end, en una carpeta `back-end/` con SQL y PL/pgSQL más Edge
 > Functions en TypeScript.
 >
-> **Decisión del usuario:** se sigue trabajando todo en `front-end/` y la reorganización se deja para la **fase final
+> **Decisión del usuario:** se sigue trabajando todo en `MiProyecto/` y la reorganización se deja para la **fase final
 > de optimización y seguridad**. Esa fase incluye:
-> - `git mv front-end/supabase back-end/supabase`, con su propio `package.json` (scripts `test:db`,
+> - `git mv MiProyecto/supabase back-end/supabase`, con su propio `package.json` (scripts `test:db`,
 >   `db:aplicar`, `docs:diccionario` y `funciones:desplegar`) y un `README`;
 > - la migración 10, con RLS evaluadas una sola vez (`fn_mis_fichas()`, `(select fn_es_admin())`) y las RPC
 >   `fn_resumen_dashboard`, `fn_estadisticas` y `fn_registrar_asistencia`;
 > - los servicios del front-end llamando a esas RPC;
 > - el arreglo del filtro `.or` de la Edge Function;
-> - la publicación en `main` de `front-end/` + `back-end/` + README, armada con `read-tree --prefix` y
->   `commit-tree`. En Vercel, Root Directory = `front-end` o `MiProyecto`.
+> - la publicación en `main` de `MiProyecto/` + `back-end/` + README, armada con `read-tree --prefix` y
+>   `commit-tree`. En Vercel, Root Directory = `MiProyecto` o `MiProyecto`.
 >
 > El paso 6b ya se hizo con servicios del front-end. El texto que sigue es el análisis original.
 
@@ -179,7 +179,7 @@ El SENA pide **una carpeta `back-end/` escrita en un lenguaje de programación, 
 front-end**. El usuario lo va a **consultar con su instructor** antes de seguir.
 
 **Cómo está hoy:**
-- El back-end es `front-end/supabase/`:
+- El back-end es `MiProyecto/supabase/`:
   - el modelo, las reglas y los permisos, en SQL y PL/pgSQL (triggers y RLS), migraciones 01–09;
   - la Edge Function en TypeScript;
   - 40 pruebas.
@@ -188,7 +188,7 @@ front-end**. El usuario lo va a **consultar con su instructor** antes de seguir.
 
 **Opciones que se le presentaron al usuario (pendiente de decidir):**
 1. **Supabase como back-end en `back-end/`.**
-   - `front-end/supabase` pasa a `back-end/` y la lógica de cada módulo se mueve a Edge Functions (TypeScript): por
+   - `MiProyecto/supabase` pasa a `back-end/` y la lógica de cada módulo se mueve a Edge Functions (TypeScript): por
      ejemplo registrar asistencia, estadísticas y reportes.
    - El front-end solo las llama.
    - Mismo stack, sin servidor extra. Fue la opción recomendada.
@@ -206,10 +206,10 @@ front-end**. El usuario lo va a **consultar con su instructor** antes de seguir.
 **Lo que cambia según la respuesta:**
 - dónde va la lógica del 6b (`registrarAsistencia`);
 - la estructura de carpetas;
-- la forma de publicar en `-PuntualiX`. Hoy es un `subtree` de `front-end/`; habría que publicar `front-end/` y
+- la forma de publicar en `-PuntualiX`. Hoy es un `subtree` de `MiProyecto/`; habría que publicar `MiProyecto/` y
   `back-end/`.
 - **Mientras no haya respuesta, no empezar el 6b.**
-- **No mover** `front-end/supabase/` sin la decisión, porque rompería la publicación, los scripts y el despliegue de
+- **No mover** `MiProyecto/supabase/` sin la decisión, porque rompería la publicación, los scripts y el despliegue de
   la función.
 
 ### 6.1 También en espera de la misma respuesta (propuestas del 2026-11-24)
@@ -332,7 +332,7 @@ El usuario aprobó el plan; falta ajustarlo según la sección 6.
   - HU02.4 solo para el instructor líder, con la migración 09.
   - Estadísticas: comparar hasta 5, deserción y cumplimiento por dimensión, dimensión Instructor.
   - El detalle de ficha del instructor es una copia del admin con cambios ligeros.
-  - Publicación en `iverfuenfuen/-PuntualiX` (solo `front-end/`).
+  - Publicación en `iverfuenfuen/-PuntualiX` (solo `MiProyecto/`).
   - SMTP con Brevo.
   - Tareas operativas en `PENDIENTES_USUARIO.md`.
   - Back-end en espera de la respuesta del instructor.
@@ -341,12 +341,12 @@ El usuario aprobó el plan; falta ajustarlo según la sección 6.
 - **Supabase**
   - Proyecto `ckppdfnzgbnwrnqrzkdx`.
   - Migraciones **01–09 aplicadas**.
-  - Datos demo cargados (`front-end/supabase/datos_demo_fichas.sql`): 10 fichas `2901xxx`, 6 instructores demo y
+  - Datos demo cargados (`MiProyecto/supabase/datos_demo_fichas.sql`): 10 fichas `2901xxx`, 6 instructores demo y
     182 aprendices demo. Los usuarios demo no pueden iniciar sesión.
   - Edge Function `invitar-usuario` **desplegada**.
   - SMTP con **Brevo** funcionando. En Brevo hay que mantener desactivado el bloqueo de IP para las claves SMTP; si
     se activa, aparece el error `525 Unauthorized IP`.
-  - La `service_role` solo va en `front-end/.env.supabase.local`, que nunca se sube.
+  - La `service_role` solo va en `MiProyecto/.env.supabase.local`, que nunca se sube.
 - **Vercel:** proyecto `puntuali-x`, que importa `iverfuenfuen/-PuntualiX` (rama `main`), con el preset **Vite** y
   Root Directory en la raíz.
   - Variables `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`. Hubo un error porque la URL apuntaba a
@@ -356,8 +356,8 @@ El usuario aprobó el plan; falta ajustarlo según la sección 6.
   - Un solo repositorio: `iverfuenfuen/-PuntualiX` (remoto `puntualix`). El viejo `iverfuenfuen/Puntualix2.0`
     fue borrado.
     - Rama `react-supabase`: el proyecto completo. Se sube con `git push puntualix react-supabase`.
-    - Rama `main`: solo `front-end/`, para Vercel. Se publica con
-      `git subtree split --prefix=front-end -b solo-front-end react-supabase` y luego
+    - Rama `main`: solo `MiProyecto/`, para Vercel. Se publica con
+      `git subtree split --prefix=MiProyecto -b solo-front-end react-supabase` y luego
       `git push puntualix solo-front-end:main`.
   - La organización `puntualix-design` no se usa, porque la cuenta no tenía permiso (403).
 - **Usuarios de prueba:** `admin@puntualix.com`, `carlos.perez@puntualix.com` (instructor; es líder de 301002 y de

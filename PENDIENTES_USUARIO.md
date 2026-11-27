@@ -7,16 +7,16 @@
 > Última actualización: 2026-11-24 · rama `react-supabase`
 
 ## Contexto para el otro chat
-- Proyecto: PuntualiX 2.0, en `front-end/` (React, TypeScript y Supabase). Proyecto de Supabase: `ckppdfnzgbnwrnqrzkdx`.
-- La app usa solo la anon key (`front-end/.env.local`). La `service_role` nunca se pega en el código ni en el chat.
+- Proyecto: PuntualiX 2.0, en `MiProyecto/` (React, TypeScript y Supabase). Proyecto de Supabase: `ckppdfnzgbnwrnqrzkdx`.
+- La app usa solo la anon key (`MiProyecto/.env.local`). La `service_role` nunca se pega en el código ni en el chat.
 - El CLI de Supabase ya tiene la sesión iniciada en este equipo. Si pide login: `npx supabase login`.
-- Todos los comandos se ejecutan dentro de `front-end/`.
+- Todos los comandos se ejecutan dentro de `MiProyecto/`.
 
 ## Tareas, en este orden
 
 ### 0. Arreglar el despliegue en Vercel (en curso: el login falla)
 Decisión del usuario (2026-11-24): el código se publica en `https://github.com/iverfuenfuen/-PuntualiX`, **solo con el
-contenido de `front-end/`** y su historial. Ya está subido en `main`. El repositorio de la organización `puntualix-design`
+contenido de `MiProyecto/`** y su historial. Ya está subido en `main`. El repositorio de la organización `puntualix-design`
 no se usa porque la cuenta no tenía permiso, y el viejo `iverfuenfuen/Puntualix2.0` se deja como está.
 
 **Estado (2026-11-24):** el proyecto de Vercel `puntuali-x` ya existe y despliega con el preset **Vite** (no Create
@@ -24,14 +24,14 @@ React App). Al iniciar sesión aparece "No fue posible conectar con el servidor"
 `Failed to load resource: net::ERR_CONNECTION_REFUSED` a **`localhost:54321/auth/v1/token?grant_type=password`**.
 
 **Diagnóstico:** el build de Vercel quedó con `VITE_SUPABASE_URL` apuntando a un Supabase local (`localhost:54321`),
-no al proyecto en la nube. El archivo local `front-end/.env.local` está bien y apunta a
+no al proyecto en la nube. El archivo local `MiProyecto/.env.local` está bien y apunta a
 `https://ckppdfnzgbnwrnqrzkdx.supabase.co`. El código no se toca.
 
 **Pasos para arreglarlo:**
 1. En Vercel, abre el proyecto `puntuali-x` y ve a **Settings → Environment Variables**.
 2. Deja `VITE_SUPABASE_URL` exactamente en `https://ckppdfnzgbnwrnqrzkdx.supabase.co`, sin `/` final, sin comillas y
    sin espacios.
-3. Comprueba que `VITE_SUPABASE_ANON_KEY` sea la misma llave de `front-end/.env.local` (empieza con `eyJ`). Nunca pongas
+3. Comprueba que `VITE_SUPABASE_ANON_KEY` sea la misma llave de `MiProyecto/.env.local` (empieza con `eyJ`). Nunca pongas
    la `service_role`. En ambas variables marca Production, Preview y Development.
 4. Si hay variables que no se agregaron a mano (`SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_*`, `POSTGRES_*`), viene de la
    integración de Supabase en Vercel. Quítala en **Settings → Integrations**: la app no la usa.

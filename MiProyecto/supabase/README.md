@@ -79,7 +79,7 @@ En el menú izquierdo, abre **Authentication**:
    - La llave **anon** / **publishable**, que empieza por `eyJ...` o `sb_publishable_...`.
 
    > 🔒 **Nunca** copies la llave `service_role` / `secret` en el front-end: salta todos los permisos.
-3. En la carpeta `front-end/`, copia `.env.example` con el nombre `.env.local` y pega los valores:
+3. En la carpeta `MiProyecto/`, copia `.env.example` con el nombre `.env.local` y pega los valores:
    ```env
    VITE_SUPABASE_URL=https://xxxxxxxx.supabase.co
    VITE_SUPABASE_ANON_KEY=eyJhbGciOi...
@@ -89,7 +89,7 @@ En el menú izquierdo, abre **Authentication**:
 ## Paso 6 — Probar la conexión
 
 ```bash
-cd front-end
+cd MiProyecto
 npm install      # solo la primera vez
 npm run dev
 ```
@@ -162,7 +162,7 @@ la bitácora. Si algo falla después de crear la cuenta, la elimina para no deja
 
 ### Desplegarla (una sola vez, y cada vez que cambie el archivo)
 
-Desde la carpeta `front-end/`:
+Desde la carpeta `MiProyecto/`:
 
 ```bash
 npx supabase login                      # abre el navegador para autorizar (solo la primera vez)

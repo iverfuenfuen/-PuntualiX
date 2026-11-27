@@ -30,12 +30,12 @@ Frontend final en React + Supabase que combine:
   Pendiente la prueba manual de las Etapas 2, 4, 5 y 6a.
 - **Back-end (respuesta del profesor, 2026-11-27):** el profesor aprobó **Supabase como back-end**, con PL/pgSQL y
   Edge Functions en TypeScript dentro de una carpeta `back-end/`. **Decisión del usuario:** por ahora se sigue con todo
-  en `front-end/`. La carpeta `back-end/`, la optimización de velocidad (RPC y RLS) y el arreglo del filtro de la Edge
+  en `MiProyecto/`. La carpeta `back-end/`, la optimización de velocidad (RPC y RLS) y el arreglo del filtro de la Edge
   Function se hacen **al final**, en una fase de optimización y seguridad. El plan está en CONTEXTO_NUEVO_CHAT.md,
   sección 6.
 - 6b (Registro de asistencia, `/instructor/asistencia`) hecho. Sigue el 6c (Justificaciones y Aprendices en alerta).
-- Pendiente del usuario: renombrar la carpeta `front-end/` a `MiProyecto/` (pedido el 2026-11-27; se hace después
-  del 6b, en un commit aparte).
+- **Decisión del usuario (2026-11-27):** la carpeta del proyecto activo se llama **`MiProyecto/`** (antes `front-end/`).
+  Todo el código, los comandos (`cd MiProyecto`) y la publicación (`--prefix=MiProyecto`) usan ese nombre.
 - Decisiones de la Etapa 5: sin librerías (PDF = hoja imprimible, Excel = CSV), corte semestral, solo totales por
   ficha, historial de reportes con parámetros (sin Storage).
 
@@ -63,7 +63,7 @@ Roles: **administrador**, **instructor**, **aprendiz**.
 ## Carpetas
 | Carpeta | Rol | Regla |
 |---|---|---|
-| `front-end/` | Proyecto activo (React + TS + Supabase) | Aquí se escribe todo el código |
+| `MiProyecto/` | Proyecto activo (React + TS + Supabase) | Aquí se escribe todo el código |
 | `Prototipo/` | Referencia de UI/UX (17 pantallas HTML del Admin) | **Solo lectura** |
 | `VersionAntigua/` | Versión HTML/CSS original (33 pantallas): flujos, campos, permisos, recursos | **Solo lectura** |
 | `docs/` | `RF.docx`, `RNF.docx`, `Casos de usos.docx`, `Manual de identidad corporativo.docx` | Actualizar RF/RNF al cerrar módulos |
@@ -71,12 +71,12 @@ Roles: **administrador**, **instructor**, **aprendiz**.
 Nota: `VersionAntigua` no tiene lógica JS (solo login simulado). Las reglas de negocio se reconstruyeron
 desde formularios, filtros, mensajes de error y casos de uso, y viven en la BD (triggers + RLS).
 
-## Stack (`front-end/`)
+## Stack (`MiProyecto/`)
 React 19 · TypeScript 7 · Vite 8 · Tailwind CSS 4 (`@theme` en `src/styles/index.css`) · React Router 8
 (`createBrowserRouter`, rutas `lazy`) · react-hook-form + zod · Recharts · lucide-react · Supabase JS ·
 oxlint · PGlite para probar el SQL localmente. Node ≥ 20.
 
-Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:db` (40 pruebas SQL/RLS) ·
+Comandos (dentro de `MiProyecto/`): `npm run dev` · `build` · `lint` · `test:db` (40 pruebas SQL/RLS) ·
 `docs:diccionario` · `db:aplicar` (usa `.env.supabase.local`, nunca se sube).
 
 ## Convenciones
@@ -101,7 +101,7 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
   responsable del back-end (o como nueva migración numerada en `supabase/migrations/`, con su prueba).
 
 ## Identidad visual (regla estricta)
-- Única fuente de verdad: el **Manual de Identidad**. Los tokens están en `front-end/src/styles/index.css`.
+- Única fuente de verdad: el **Manual de Identidad**. Los tokens están en `MiProyecto/src/styles/index.css`.
   **Prohibido** escribir colores hex o fuentes sueltas en los componentes: usar `bg-primario`,
   `text-alerta-critica`, `font-titulos`, etc.
 - Poppins (500–800) para títulos y métricas; Nunito (400, 600) para contenido. Fuentes alojadas localmente.
@@ -113,24 +113,24 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 - Si el Prototipo contradice el Manual, gana el Manual y se consulta con el equipo.
 
 ## Supabase
-- El frontend usa **solo la anon key** (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` en `front-end/.env.local`).
+- El frontend usa **solo la anon key** (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` en `MiProyecto/.env.local`).
   La `service_role` solo vive en `.env.supabase.local` para `db:aplicar`; nunca se sube.
-- Esquema = contrato de datos: migraciones `01`–`09` en `front-end/supabase/migrations/` (21 tablas, 5 vistas,
+- Esquema = contrato de datos: migraciones `01`–`09` en `MiProyecto/supabase/migrations/` (21 tablas, 5 vistas,
   24 enums, triggers de negocio, RLS por rol, 4 buckets). Referencia rápida: `supabase/DICCIONARIO_DATOS.md`.
 - El rol se toma de `app_metadata` (no editable por el usuario). Crear usuarios desde la app requiere una
   Edge Function (Etapa 3). **Decisión del usuario (2026-11-23): las cuentas nuevas se crean por invitación por
   correo** (`inviteUserByEmail`); el usuario elige su contraseña y el administrador nunca la conoce.
-- Usuarios de prueba y guía de conexión: `front-end/supabase/README.md`.
+- Usuarios de prueba y guía de conexión: `MiProyecto/supabase/README.md`.
 
 ## Control de versiones
 - Repositorio único (2026-11-24): `https://github.com/iverfuenfuen/-PuntualiX` (remoto `puntualix`). El repositorio
   viejo `iverfuenfuen/Puntualix2.0` fue borrado por el usuario.
   - Rama `react-supabase`: el proyecto completo (front-end, docs, Prototipo, VersionAntigua, CLAUDE.md). Es la rama de
     trabajo: `git push puntualix react-supabase`.
-  - Rama `main`: solo `front-end/` en la raíz, que es lo que despliega Vercel.
+  - Rama `main`: solo `MiProyecto/` en la raíz, que es lo que despliega Vercel.
 - Commits pequeños y descriptivos por módulo. **Decisión del usuario (2026-11-24): por ahora los commits van SIN la línea
   `Co-Authored-By: Claude`**: el usuario no quiere que Claude figure como colaborador. Ya se quitó del historial.
-- **Publicación en Vercel (main):** `git subtree split --prefix=front-end -b solo-front-end react-supabase` y luego
+- **Publicación en Vercel (main):** `git subtree split --prefix=MiProyecto -b solo-front-end react-supabase` y luego
   `git push puntualix solo-front-end:main`. Publicar solo cuando el usuario lo pida.
 - **No** hacer push a `main` ni forzar cambios sin pedirlo. `Prototipo/` y `VersionAntigua/` no se modifican.
 - Al cerrar cada módulo: actualizar el Changelog del README (qué se tomó del Prototipo, qué se rescató de
@@ -152,13 +152,13 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 ## Pendientes conocidos
 - Paquete JS principal de ~715 kB: las páginas de auth y el layout aún se cargan de forma directa. Pasarlas a `lazy`.
 - `vercel.json` de la raíz aún redirige a `/frontend/HTML/InicioSesion.html` (versión antigua). El despliegue
-  nuevo usa `front-end/vercel.json` (Root Directory = `front-end` en Vercel). Revisar la raíz antes de desplegar.
+  nuevo usa `MiProyecto/vercel.json` (Root Directory = `MiProyecto` en Vercel). Revisar la raíz antes de desplegar.
 - `src/types/database.types.ts` es un marcador (`any`): las filas se tipan a mano en cada servicio y las consultas
   con relaciones se convierten con `as unknown as Fila[]`. Generarlo requiere `npx supabase login`.
 - Etapa 2 dejó para el back-end (migración 09 propuesta): `ficha_instructores.rol` (técnico/transversal),
   dedicación semanal y `fichas.descripcion`. El cupo se toma de `ambientes.capacidad`.
 - La Edge Function `supabase/functions/invitar-usuario` YA está desplegada (CLI con sesión iniciada en el equipo
-  del usuario). Si se modifica, redesplegar desde `front-end/` con
+  del usuario). Si se modifica, redesplegar desde `MiProyecto/` con
   `npx -p supabase@3.4.0 -p @supabase/cli-windows-x64@3.4.0 supabase functions deploy invitar-usuario --project-ref ckppdfnzgbnwrnqrzkdx`
   y elegir **Yes** (el aviso de Docker no importa). En Windows, `npx supabase` solo falla con "No matching Supabase CLI
   binary package found for win32-x64": npm no instala el binario opcional. Último despliegue: 2026-11-24.

@@ -12,7 +12,7 @@ Qué cambios revisar:
 Preguntas a responder:
 1. ¿Se tocó algo fuera del alcance pedido (archivos no relacionados, refactors o "mejoras" no solicitadas)?
 2. ¿Hay colores o fuentes fuera del Manual (hex sueltos como `#abc123` o `[#...]` en clases, fuentes distintas de
-   Poppins/Nunito)? Los colores deben usar los tokens de `front-end/src/styles/index.css`.
+   Poppins/Nunito)? Los colores deben usar los tokens de `MiProyecto/src/styles/index.css`.
 3. ¿Hay llamadas a Supabase fuera de los servicios? Solo los archivos `servicio*.ts` de `src/features/<modulo>/` y
    `src/lib/` pueden importar `@/lib/supabase`; ningún componente.
 4. ¿Se instaló algo nuevo (cambios en `package.json` o `package-lock.json`)?

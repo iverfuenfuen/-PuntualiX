@@ -9,7 +9,7 @@ deserción, estadísticas y reportes. Tiene tres roles: **Administrador**, **Ins
 
 ```
 Puntualix2.0/
-├── front-end/          ← PROYECTO ACTIVO (React + TypeScript + Supabase)
+├── MiProyecto/          ← PROYECTO ACTIVO (React + TypeScript + Supabase)
 ├── Prototipo/          ← Referencia de UI/UX (solo lectura): 17 pantallas HTML del rol Administrador
 ├── VersionAntigua/     ← Versión HTML/CSS original (solo lectura): flujos, campos, permisos y recursos gráficos
 └── docs/
@@ -24,15 +24,15 @@ Puntualix2.0/
 Requisitos: **Node.js 20 o superior** (probado con Node 24) y una cuenta en Supabase.
 
 ```bash
-cd front-end
+cd MiProyecto
 npm install
 cp .env.example .env.local     # completar con la URL y la anon key de Supabase
 npm run dev                    # http://localhost:5173
 ```
 
-Para crear la base de datos, sigue la guía paso a paso de [front-end/supabase/README.md](front-end/supabase/README.md).
+Para crear la base de datos, sigue la guía paso a paso de [MiProyecto/supabase/README.md](MiProyecto/supabase/README.md).
 
-| Comando (dentro de `front-end/`) | Qué hace |
+| Comando (dentro de `MiProyecto/`) | Qué hace |
 |---|---|
 | `npm run dev` | Servidor de desarrollo con recarga automática |
 | `npm run build` | Verifica los tipos y genera la versión de producción en `dist/` |
@@ -52,10 +52,10 @@ Para crear la base de datos, sigue la guía paso a paso de [front-end/supabase/R
 | Gráficas | Recharts | Estadísticas y dashboard |
 | Íconos | lucide-react | Reemplaza la mezcla de Font Awesome y Material Symbols |
 | Backend | Supabase: PostgreSQL, Auth, Storage y RLS | Base de datos, autenticación y archivos sin servidor propio |
-| Despliegue | Vercel (`front-end/vercel.json`) | Hosting estático con soporte para SPA |
+| Despliegue | Vercel (`MiProyecto/vercel.json`) | Hosting estático con soporte para SPA |
 
 ```
-front-end/
+MiProyecto/
 ├── public/                 favicon
 ├── src/
 │   ├── app/                router.tsx (rutas por rol) · sesionContexto.ts (contrato de sesión) · sesion.tsx (demo)
@@ -250,7 +250,7 @@ contraseña y el administrador nunca la conoce.
 **Nuevo y mejoras**
 - **Edge Function `invitar-usuario`**: crea la cuenta solo si quien llama es un administrador activo, valida los
   datos y la unicidad, envía la invitación, asigna el rol y los datos de instructor, deshace la cuenta si algo
-  falla y lo registra en la bitácora. Ver `front-end/supabase/README.md` → "Edge Function".
+  falla y lo registra en la bitácora. Ver `MiProyecto/supabase/README.md` → "Edge Function".
 - La pantalla `/restablecer` recibe la invitación: "Bienvenido a PuntualiX: crea tu contraseña".
 - **Matricular aprendiz** ahora registra e invita al aprendiz que no tiene cuenta (pendiente de la Etapa 2) y lo
   vuelve a buscar automáticamente.
@@ -454,7 +454,7 @@ contraseña y el administrador nunca la conoce.
 - `alerta-critica` pasa de `#D32F2F` a `#BE1F24` (rojo institucional del manual).
 
 **Nuevo**
-- Proyecto `front-end/` con Vite 8, React 19, TypeScript 7, Tailwind 4, Supabase JS, React Router,
+- Proyecto `MiProyecto/` con Vite 8, React 19, TypeScript 7, Tailwind 4, Supabase JS, React Router,
   react-hook-form, zod, Recharts y lucide-react. Alias de importación `@/`.
 - Base de datos Supabase:
   - **Estructura:** 21 tablas, 5 vistas de estadísticas, 24 tipos enumerados e índices.
@@ -471,7 +471,7 @@ contraseña y el administrador nunca la conoce.
   - **Almacenamiento:** 4 buckets con límites de tamaño y de tipo de archivo.
 - 38 pruebas automáticas del SQL (`npm run test:db`), todas en verde.
 - Diccionario de datos generado desde el esquema (`supabase/DICCIONARIO_DATOS.md`).
-- Guía de conexión con Supabase paso a paso (`front-end/supabase/README.md`).
+- Guía de conexión con Supabase paso a paso (`MiProyecto/supabase/README.md`).
 - Pantalla provisional de diagnóstico de conexión.
 - `docs/RNF.docx` creado: RNF1 a RNF6 con criterios medibles y **RNF7 (nuevo)**: usabilidad, accesibilidad e
   identidad visual.
