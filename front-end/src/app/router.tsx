@@ -39,6 +39,7 @@ const PANTALLAS: Record<string, RouteObject['lazy']> = {
   '/admin/fichas': async () => ({ Component: (await import('@/pages/admin/fichas/PaginaFichas')).PaginaFichas }),
   // Etapa 6 — Módulo Instructor
   '/instructor/fichas': async () => ({ Component: (await import('@/pages/instructor/fichas/PaginaFichas')).PaginaFichas }),
+  '/instructor/asistencia': async () => ({ Component: (await import('@/pages/instructor/asistencia/PaginaAsistencia')).PaginaAsistencia }),
 }
 
 /** Pantallas que no aparecen en el menú (detalles, formularios). La ruta es relativa a la del rol. */

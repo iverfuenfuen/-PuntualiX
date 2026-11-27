@@ -157,7 +157,24 @@
   - CSV con los 3 indicadores.
 - **Navbar:** 80 px de alto (`h-20`).
 
-## 6. PREGUNTA ABIERTA: back-end (bloquea el 6b)
+## 6. Back-end: RESPONDIDA (2026-11-27)
+> **El profesor aprobó la opción 1:** Supabase como back-end, en una carpeta `back-end/` con SQL y PL/pgSQL más Edge
+> Functions en TypeScript.
+>
+> **Decisión del usuario:** se sigue trabajando todo en `front-end/` y la reorganización se deja para la **fase final
+> de optimización y seguridad**. Esa fase incluye:
+> - `git mv front-end/supabase back-end/supabase`, con su propio `package.json` (scripts `test:db`,
+>   `db:aplicar`, `docs:diccionario` y `funciones:desplegar`) y un `README`;
+> - la migración 10, con RLS evaluadas una sola vez (`fn_mis_fichas()`, `(select fn_es_admin())`) y las RPC
+>   `fn_resumen_dashboard`, `fn_estadisticas` y `fn_registrar_asistencia`;
+> - los servicios del front-end llamando a esas RPC;
+> - el arreglo del filtro `.or` de la Edge Function;
+> - la publicación en `main` de `front-end/` + `back-end/` + README, armada con `read-tree --prefix` y
+>   `commit-tree`. En Vercel, Root Directory = `front-end` o `MiProyecto`.
+>
+> El paso 6b ya se hizo con servicios del front-end. El texto que sigue es el análisis original.
+
+### Análisis original de la pregunta
 El SENA pide **una carpeta `back-end/` escrita en un lenguaje de programación, para que la lógica no esté en el
 front-end**. El usuario lo va a **consultar con su instructor** antes de seguir.
 

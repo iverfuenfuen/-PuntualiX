@@ -14,17 +14,6 @@
 
 ## Tareas, en este orden
 
-### ★ Preguntar al instructor del SENA por el back-end (bloquea el desarrollo del paso 6b)
-El SENA pide una carpeta `back-end/` escrita en un lenguaje de programación, para que la lógica no quede en el
-front-end. Hay que preguntarle:
-1. ¿Sirve Supabase como back-end? Es la base PostgreSQL con las reglas en PL/pgSQL (triggers y RLS) más funciones en
-   TypeScript, todo dentro de `back-end/`. ¿O exige una API propia?
-2. Si exige una API: ¿en qué lenguaje? Puede ser Node.js con Express, Python, Java o PHP.
-3. ¿Pide una arquitectura concreta, como MVC, REST o capas?
-
-Lleva la respuesta al chat de desarrollo. Las opciones y lo que cambia cada una están en `CONTEXTO_NUEVO_CHAT.md`,
-sección 6.
-
 ### 0. Arreglar el despliegue en Vercel (en curso: el login falla)
 Decisión del usuario (2026-11-24): el código se publica en `https://github.com/iverfuenfuen/-PuntualiX`, **solo con el
 contenido de `front-end/`** y su historial. Ya está subido en `main`. El repositorio de la organización `puntualix-design`
@@ -84,6 +73,14 @@ Arranca la app con `npm run dev` y abre http://localhost:5173.
     - abrir el historial de un aprendiz;
     - desactivar y reactivar su acceso.
   - [ ] Ficha 2901101 (solo está asignado): el botón de acceso no debe aparecer.
+  - [ ] **Asistencia (paso 6b):** menú Asistencia →
+    1. Elige la ficha 2901102, una competencia y la fecha de hoy.
+    2. Marca a uno como Ausente y a otro como Justificada, con su motivo, y pulsa **Registrar asistencia**.
+    3. Vuelve a elegir la misma ficha, competencia y fecha: debe decir "Esta sesión ya tiene asistencia registrada",
+       con lo guardado. Cambia un estado y pulsa **Guardar cambios**.
+    4. Comprueba que el cambio aparece en el historial del aprendiz (Fichas → la ficha → Aprendices → Historial) y en
+       la Bitácora.
+    5. Prueba también que no deja elegir una fecha futura.
   - [ ] Registrar aprendiz con un correo real tuyo, en una ficha activa.
     - [x] Llega la invitación (probado en Vercel el 2026-11-24).
     - [ ] Abrir el enlace, crear la contraseña, entrar como el aprendiz y ver que aparece matriculado en la ficha.

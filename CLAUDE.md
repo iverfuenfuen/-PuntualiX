@@ -28,8 +28,14 @@ Frontend final en React + Supabase que combine:
 - Hecho: Etapas 0–5 del administrador, 6.0 (pantallas por rol) y 6a (fichas, detalle, historial y registrar aprendiz
   del instructor), además de las mejoras de Estadísticas (comparar 5, deserción, dimensión Instructor) y la migración 09.
   Pendiente la prueba manual de las Etapas 2, 4, 5 y 6a.
-- **En pausa:** el paso 6b (Registro de asistencia) está planificado y aprobado, pero espera la respuesta del instructor
-  del SENA sobre la carpeta `back-end/` (ver CONTEXTO_NUEVO_CHAT.md, sección 6). No empezar hasta tenerla.
+- **Back-end (respuesta del profesor, 2026-11-27):** el profesor aprobó **Supabase como back-end**, con PL/pgSQL y
+  Edge Functions en TypeScript dentro de una carpeta `back-end/`. **Decisión del usuario:** por ahora se sigue con todo
+  en `front-end/`. La carpeta `back-end/`, la optimización de velocidad (RPC y RLS) y el arreglo del filtro de la Edge
+  Function se hacen **al final**, en una fase de optimización y seguridad. El plan está en CONTEXTO_NUEVO_CHAT.md,
+  sección 6.
+- 6b (Registro de asistencia, `/instructor/asistencia`) hecho. Sigue el 6c (Justificaciones y Aprendices en alerta).
+- Pendiente del usuario: renombrar la carpeta `front-end/` a `MiProyecto/` (pedido el 2026-11-27; se hace después
+  del 6b, en un commit aparte).
 - Decisiones de la Etapa 5: sin librerías (PDF = hoja imprimible, Excel = CSV), corte semestral, solo totales por
   ficha, historial de reportes con parámetros (sin Storage).
 
@@ -139,7 +145,7 @@ Comandos (dentro de `front-end/`): `npm run dev` · `build` · `lint` · `test:d
 | 3 | Instructores (`/admin/instructores`, `/admin/instructores/:id`) y Usuarios (`/admin/usuarios`) + Edge Function `invitar-usuario` | ✅ función desplegada (2026-11-23) e invitación probada de punta a punta |
 | 4 | Dashboard (`/admin`), alertas con umbrales (`/admin/alertas`, `/admin/alertas/umbrales`), bitácora (`/admin/bitacora`) | ✅ código · ⏳ prueba manual del usuario |
 | 5 | Estadísticas (`/admin/estadisticas`), reportes (`/admin/reportes`, `/admin/reportes/:id`) e historial por ficha/instructor | ✅ código · ⏳ prueba manual del usuario |
-| 6 | Módulo Instructor (11 pantallas) | 🔄 6.0 y 6a ✅ · 6b ⏸️ en pausa (pregunta del back-end) · 6c–6f ⏳ |
+| 6 | Módulo Instructor (11 pantallas) | 🔄 6.0, 6a y 6b ✅ · 6c–6f ⏳ · back-end y optimización al final |
 | 7 | Módulo Aprendiz (4 pantallas) | ⏳ |
 | 8 | Página pública (RF01), accesibilidad, responsive, despliegue | ⏳ |
 
